@@ -50,11 +50,12 @@
   </style>
 </helmet>
 
-<div style="--a: {{accent}}; position: relative; display: flex; min-height: 100%; background: transparent;">
+<div style="--a: {{accent}}; position: relative; min-height: 100%; background: transparent;">
 
-  <!-- SIDEBAR -->
-  <div style="width: 244px; flex-shrink: 0; border-right: 1px solid rgba(255,255,255,.085); padding: 22px 0; display: flex; flex-direction: column; gap: 26px;">
-    <div style="display: flex; align-items: center; gap: 10px; padding: 0 20px;">
+  <!-- TOP BAR -->
+  <div style="display: flex; align-items: center; gap: 22px; padding: 0 26px; height: 68px; border-bottom: 1px solid rgba(255,255,255,.085);">
+
+    <div style="display: flex; align-items: center; gap: 10px; flex-shrink: 0;">
       <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
         <circle cx="13" cy="13" r="11.2" stroke="#DCE5E6" stroke-width="1.7"/>
         <path d="M9 18V9h4.6a3.1 3.1 0 0 1 0 6.2H9" stroke="#DCE5E6" stroke-width="1.7" stroke-linejoin="round"/>
@@ -62,15 +63,12 @@
       <span style="font-size: 17px; font-weight: 700; letter-spacing: -.015em;">PARCEL Fund</span>
     </div>
 
-    <div style="display: flex; flex-direction: column; gap: 2px; padding: 0 12px;">
-      <div class="mono" style="font-size: 10px; letter-spacing: .16em; color: #586264; padding: 0 8px 10px;">MAIN MENU</div>
+    <div style="display: flex; align-items: center; gap: 4px;">
       <sc-for list="{{nav}}" as="n" hint-placeholder-count="6">
         <button class="btn" onClick="{{n.pick}}" style="{{n.style}}">
-          <span style="display: flex; width: 18px; justify-content: center;">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="{{n.ink}}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <path d="{{n.icon}}"/>
-            </svg>
-          </span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="{{n.ink}}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="{{n.icon}}"/>
+          </svg>
           {{n.label}}
         </button>
       </sc-for>
@@ -78,30 +76,19 @@
 
     <div style="flex-grow: 1;"></div>
 
-    <div class="panel" style="margin: 0 16px; padding: 14px; border-color: rgba(255,255,255,.13);">
-      <div class="mono" style="font-size: 10px; letter-spacing: .14em; color: #586264;">RENT VAULT</div>
-      <div class="mono" style="font-size: 22px; margin-top: 8px; color: #DCE5E6;">$284.19</div>
-      <div style="font-size: 11.5px; color: #697577; margin-top: 2px;">claimable this week</div>
-      <button class="btn mono" style="width: 100%; height: 38px; margin-top: 12px; border-radius: 11px; background: {{accent}}; color: #07201F; font-size: 11.5px; font-weight: 600; letter-spacing: .1em;">CLAIM</button>
-    </div>
+    <button class="btn panel" style="display: flex; align-items: center; gap: 10px; padding: 8px 13px; flex-shrink: 0;">
+      <span class="mono" style="font-size: 11px; letter-spacing: .1em; color: #697577;">RENT</span>
+      <span class="mono" style="font-size: 13px; color: #DCE5E6;">$284.19</span>
+      <span class="mono" style="font-size: 11px; padding: 4px 9px; border-radius: 8px; background: {{accent}}; color: #07201F; font-weight: 600; letter-spacing: .06em;">CLAIM</span>
+    </button>
+
+    <button class="btn panel" style="display: flex; align-items: center; gap: 9px; padding: 9px 14px; background: rgba(255,255,255,.075); color: #DCE5E6; font-size: 13px; font-weight: 500; flex-shrink: 0;">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#91A0A2" stroke-width="1.8" stroke-linejoin="round">
+        <rect x="2.5" y="5.5" width="19" height="13" rx="2.5"/><path d="M16.5 12h3"/>
+      </svg>
+      Connect Wallet
+    </button>
   </div>
-
-  <!-- MAIN -->
-  <div style="flex-grow: 1; min-width: 0;">
-
-    <!-- TOP BAR -->
-    <div style="display: flex; align-items: center; gap: 12px; padding: 16px 26px; border-bottom: 1px solid rgba(255,255,255,.085);">
-      <div style="flex-grow: 1;"></div>
-      <div class="panel mono" style="display: flex; align-items: center; gap: 8px; padding: 8px 12px; font-size: 11.5px; color: #818F92;">
-        <span class="blip" style="width: 6px; height: 6px; border-radius: 50%; background: #6CC1C6;"></span>1,204 deeds live
-      </div>
-      <button class="btn panel" style="display: flex; align-items: center; gap: 9px; padding: 9px 14px; background: rgba(255,255,255,.075); color: #DCE5E6; font-size: 13px; font-weight: 500;">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#91A0A2" stroke-width="1.8" stroke-linejoin="round">
-          <rect x="2.5" y="5.5" width="19" height="13" rx="2.5"/><path d="M16.5 12h3"/>
-        </svg>
-        Connect Wallet
-      </button>
-    </div>
 
     <!-- LIVE PURCHASE TOASTS -->
     <div style="position: absolute; right: 26px; top: 88px; width: 340px; height: 82px; z-index: 5; pointer-events: none;">
@@ -450,7 +437,6 @@
     </div>
       </div>
     </sc-if>
-  </div>
 </div>
 </x-dc>
 
