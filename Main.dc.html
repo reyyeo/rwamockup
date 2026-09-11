@@ -161,16 +161,61 @@
 
     <sc-if value="{{isExplore}}" hint-placeholder-val="{{true}}">
       <div>
-      <!-- HEADLINE STATS -->
-      <div style="padding: 38px 26px 34px; border-bottom: 1px solid rgba(255,255,255,.085);">
-        <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));">
-          <sc-for list="{{bigStats}}" as="b" hint-placeholder-count="3">
-            <div style="padding: 0 40px; border-left: 1px solid {{b.edge}};">
-              <div class="mono" style="font-size: 10.5px; letter-spacing: .16em; color: #818F92;">{{b.label}}</div>
-              <div class="mono" style="font-size: 58px; line-height: 1.02; letter-spacing: -.045em; margin-top: 16px;">{{b.value}}</div>
-              <div style="font-size: 13px; color: #697577; margin-top: 12px;">{{b.sub}}</div>
+      <!-- HEADLINE STATS + YOUR POSITION -->
+      <div style="display: grid; grid-template-columns: 1.85fr 1fr; gap: 16px; padding: 26px 26px 30px;">
+
+        <!-- platform, as one instrument cluster -->
+        <div class="panel" style="position: relative; display: flex; align-items: stretch; padding: 24px 26px;">
+          <span style="position: absolute; top: 13px; left: 13px; width: 15px; height: 15px; border-left: 1.6px solid {{accent}}; border-top: 1.6px solid {{accent}}; border-top-left-radius: 5px;"></span>
+          <span style="position: absolute; bottom: 13px; right: 13px; width: 15px; height: 15px; border-right: 1.6px solid {{accent}}; border-bottom: 1.6px solid {{accent}}; border-bottom-right-radius: 5px;"></span>
+
+          <div style="display: flex; flex-direction: column; justify-content: center; padding-right: 34px;">
+            <div class="mono" style="font-size: 10px; letter-spacing: .17em; color: #818F92;">TOTAL INVESTMENT AMOUNT</div>
+            <div class="mono" style="font-size: 62px; line-height: 1; letter-spacing: -.05em; margin-top: 14px;">$86.2M</div>
+            <div style="font-size: 12.5px; color: #697577; margin-top: 12px;">capital committed across every villa raise</div>
+          </div>
+
+          <div style="width: 1px; background: rgba(255,255,255,.10);"></div>
+
+          <div style="display: flex; flex-direction: column; justify-content: center; gap: 20px; padding-left: 34px; min-width: 250px;">
+            <sc-for list="{{sideStats}}" as="b" hint-placeholder-count="2">
+              <div>
+                <div class="mono" style="font-size: 10px; letter-spacing: .15em; color: #818F92;">{{b.label}}</div>
+                <div class="mono" style="font-size: 30px; line-height: 1.05; letter-spacing: -.035em; margin-top: 8px;">{{b.value}}</div>
+                <div style="font-size: 11.5px; color: #697577; margin-top: 6px;">{{b.sub}}</div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <!-- the viewer's own position -->
+        <div class="panel" style="position: relative; padding: 24px 26px; overflow: hidden;">
+          <span style="position: absolute; inset: 0 0 auto 0; height: 2px; background: linear-gradient(90deg, {{accent}}, transparent 72%);"></span>
+
+          <div style="display: flex; align-items: center; gap: 9px;">
+            <span class="blip" style="width: 6px; height: 6px; border-radius: 50%; background: {{accent}};"></span>
+            <span class="mono" style="font-size: 10px; letter-spacing: .17em; color: {{accent}};">YOUR POSITION</span>
+            <span style="flex-grow: 1;"></span>
+            <span class="mono" style="font-size: 10.5px; color: #697577;">0x9F2A…C41D</span>
+          </div>
+
+          <div style="display: flex; gap: 30px; margin-top: 24px;">
+            <div>
+              <div class="mono" style="font-size: 40px; line-height: 1; letter-spacing: -.04em;">5</div>
+              <div class="mono" style="font-size: 10px; letter-spacing: .14em; color: #818F92; margin-top: 10px;">VILLAS OWNED</div>
             </div>
-          </sc-for>
+            <div style="width: 1px; background: rgba(255,255,255,.10);"></div>
+            <div>
+              <div class="mono" style="font-size: 40px; line-height: 1; letter-spacing: -.04em;">$1,284</div>
+              <div class="mono" style="font-size: 10px; letter-spacing: .14em; color: #818F92; margin-top: 10px;">DIVIDENDS EARNED</div>
+            </div>
+          </div>
+
+          <div style="display: flex; align-items: center; gap: 10px; margin-top: 24px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,.085);">
+            <span class="mono" style="font-size: 11.5px; color: #697577;">$284.19 claimable now</span>
+            <span style="flex-grow: 1;"></span>
+            <button class="btn mono" style="height: 36px; padding: 0 16px; border-radius: 11px; background: {{accent}}; color: #07201F; font-size: 11.5px; font-weight: 600; letter-spacing: .07em;">CLAIM</button>
+          </div>
         </div>
       </div>
 
@@ -541,7 +586,7 @@
 
 <script data-dc-script data-props='{
   "accent": {"editor": "color", "default": "#6CC1C6", "options": ["#6CC1C6", "#6F9FBC", "#9ACBCC", "#529DA3"], "section": "Theme"},
-  "$preview": {"width": 1440, "height": 2180}
+  "$preview": {"width": 1440, "height": 2140}
 }'>
 class Component extends DCLogic {
   constructor(props) {
@@ -649,10 +694,10 @@ class Component extends DCLogic {
     const nav = [
       { id: 'explore', label: 'Explore', icon: 'M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM15.5 8.5l-2 5-5 2 2-5z' },
       { id: 'market', label: 'Marketplace', icon: 'M3 9l1.6-4.5h14.8L21 9M3 9h18v11H3zM3 9a2.6 2.6 0 0 0 5 0 2.6 2.6 0 0 0 5 0 2.6 2.6 0 0 0 5 0M9.5 20v-6h5v6' },
-      { id: 'insights', label: 'Insights', icon: 'M4 20h16M7 20v-7M12 20V6M17 20v-10' },
       { id: 'trade', label: 'Trade', icon: 'M4 8h13M14 5l3 3-3 3M20 16H7M10 13l-3 3 3 3' },
+      { id: 'insights', label: 'Insights', icon: 'M4 20h16M7 20v-7M12 20V6M17 20v-10' },
       { id: 'earn', label: 'Earn', icon: 'M12 8.5c-4.4 0-8-1.2-8-2.8S7.6 3 12 3s8 1.2 8 2.7-3.6 2.8-8 2.8zM4 5.7v12.6C4 19.8 7.6 21 12 21s8-1.2 8-2.7V5.7M4 12c0 1.5 3.6 2.7 8 2.7s8-1.2 8-2.7' },
-      { id: 'dashboard', label: 'My Dashboard', icon: 'M4 4h7v6H4zM13 4h7v10h-7zM4 12h7v8H4zM13 16h7v4h-7z' },
+      { id: 'portfolio', label: 'Portfolio', icon: 'M4 4h7v6H4zM13 4h7v10h-7zM4 12h7v8H4zM13 16h7v4h-7z' },
       { id: 'list', label: 'List a property', icon: 'M4 20V9l7-5 7 5v4M8 20v-6h5v6M17 16v6M14 19h6' }
     ].map((n) => {
       const on = n.id === this.state.nav;
@@ -805,13 +850,9 @@ class Component extends DCLogic {
 
     return {
       accent, nav, presets, trending: trendingRail, featured, listings, tabs, filledSoon, leaders,
-      bigStats: [
-        { label: 'TOTAL DIVIDEND PAYOUTS', value: '$9.31M', sub: 'paid to holders since the first villa closed',
-          edge: 'transparent' },
-        { label: 'TOTAL UNIQUE INVESTORS', value: '34,939', sub: 'distinct wallets holding at least one villa token',
-          edge: 'rgba(255,255,255,.085)' },
-        { label: 'TOTAL INVESTMENT AMOUNT', value: '$86.2M', sub: 'capital committed across every villa raise',
-          edge: 'rgba(255,255,255,.085)' }
+      sideStats: [
+        { label: 'DIVIDENDS PAID OUT', value: '$9.31M', sub: 'to holders since the first villa closed' },
+        { label: 'UNIQUE INVESTORS', value: '34,939', sub: 'distinct wallets holding villa tokens' }
       ],
       isExplore: this.state.nav === 'explore',
       isMarket: this.state.nav === 'market',
