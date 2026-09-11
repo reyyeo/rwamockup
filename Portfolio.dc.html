@@ -9,12 +9,12 @@
 <helmet>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
   <style>
-    body { margin: 0; background:  radial-gradient(58% 44% at 14% 2%, rgba(124,92,255,.20) 0%, transparent 62%),
-      radial-gradient(52% 40% at 88% 6%, rgba(124,92,255,.20) 0%, transparent 62%),
+    body { margin: 0; background:  radial-gradient(58% 44% at 14% 2%, rgba(46,230,168,.20) 0%, transparent 62%),
+      radial-gradient(52% 40% at 88% 6%, rgba(46,230,168,.20) 0%, transparent 62%),
       radial-gradient(46% 42% at 66% 96%, rgba(59,227,126,.13) 0%, transparent 64%),
-      #08080B; background-attachment: fixed; color: #F2F2F5;
+      #08080B; background-attachment: fixed; color: #EAF2F0;
       font-family: 'Space Grotesk', 'Trebuchet MS', system-ui, sans-serif; }
-    a { color: #7C5CFF; text-decoration: none; } a:hover { color: #3BE37E; }
+    a { color: #2EE6A8; text-decoration: none; } a:hover { color: #2EE6A8; }
     .mono { font-family: 'IBM Plex Mono', 'DejaVu Sans Mono', ui-monospace, monospace; }
     .panel { background: rgba(255,255,255,.045); backdrop-filter: blur(26px) saturate(150%);
       -webkit-backdrop-filter: blur(26px) saturate(150%);
@@ -31,20 +31,20 @@
 
   <div style="display: flex; align-items: center; gap: 14px; padding: 18px 34px; border-bottom: 1px solid rgba(255,255,255,.085);">
     <span style="font-size: 17px; font-weight: 700; letter-spacing: -.015em;">Portfolio</span>
-    <span class="mono" style="font-size: 11.5px; color: #7C7C87; letter-spacing: .08em;">0x9F2A…C41D</span>
+    <span class="mono" style="font-size: 11.5px; color: #6E7B79; letter-spacing: .08em;">0x9F2A…C41D</span>
     <div style="flex-grow: 1;"></div>
-    <div class="panel mono" style="display: flex; align-items: center; gap: 8px; padding: 8px 12px; font-size: 11.5px; color: #8A8A93;">
-      <span class="blip" style="width: 6px; height: 6px; border-radius: 50%; background: #3BE37E;"></span>NEXT RENT SWEEP IN 2d 04h
+    <div class="panel mono" style="display: flex; align-items: center; gap: 8px; padding: 8px 12px; font-size: 11.5px; color: #8C9A97;">
+      <span class="blip" style="width: 6px; height: 6px; border-radius: 50%; background: #2EE6A8;"></span>NEXT RENT SWEEP IN 2d 04h
     </div>
   </div>
 
   <!-- top row -->
   <div style="display: grid; grid-template-columns: 1.45fr 1fr 1fr; gap: 16px; padding: 24px 34px 0;">
     <div class="panel" style="padding: 22px 24px 24px;">
-      <div class="mono" style="font-size: 10px; letter-spacing: .14em; color: #56565F;">PORTFOLIO VALUE</div>
+      <div class="mono" style="font-size: 10px; letter-spacing: .14em; color: #55625F;">PORTFOLIO VALUE</div>
       <div style="display: flex; align-items: baseline; gap: 14px; margin-top: 10px;">
         <span class="mono" style="font-size: 42px; letter-spacing: -.035em;">$68,412.90</span>
-        <span class="mono" style="font-size: 14px; color: #3BE37E;">+$4,118.22 · +6.4%</span>
+        <span class="mono" style="font-size: 14px; color: #2EE6A8;">+$4,118.22 · +6.4%</span>
       </div>
       <svg viewBox="0 0 640 120" width="100%" height="120" preserveAspectRatio="none" style="margin-top: 20px; display: block;">
         <defs>
@@ -64,16 +64,16 @@
     </div>
 
     <div class="panel" style="padding: 22px 24px; display: flex; flex-direction: column;">
-      <div class="mono" style="font-size: 10px; letter-spacing: .14em; color: #56565F;">RENT VAULT · CLAIMABLE</div>
-      <div class="mono" style="font-size: 38px; margin-top: 10px; letter-spacing: -.035em; color: #3BE37E;">{{claimable}}</div>
-      <div style="font-size: 13px; color: #8A8A93; margin-top: 6px;">{{claimSub}}</div>
+      <div class="mono" style="font-size: 10px; letter-spacing: .14em; color: #55625F;">RENT VAULT · CLAIMABLE</div>
+      <div class="mono" style="font-size: 38px; margin-top: 10px; letter-spacing: -.035em; color: #2EE6A8;">{{claimable}}</div>
+      <div style="font-size: 13px; color: #8C9A97; margin-top: 6px;">{{claimSub}}</div>
       <div style="flex-grow: 1;"></div>
-      <button class="btn" onClick="{{claim}}" style="width: 100%; height: 50px; margin-top: 20px; border-radius: 11px; background: {{claimBg}}; color: #0A0A0C; font-size: 14.5px; font-weight: 700;">{{claimLabel}}</button>
-      <div class="mono" style="font-size: 10.5px; color: #56565F; margin-top: 10px; letter-spacing: .05em;">SWEPT FRIDAYS 00:00 UTC · USDC ON BASE</div>
+      <button class="btn" onClick="{{claim}}" style="width: 100%; height: 50px; margin-top: 20px; border-radius: 11px; background: {{claimBg}}; color: #060A0A; font-size: 14.5px; font-weight: 700;">{{claimLabel}}</button>
+      <div class="mono" style="font-size: 10.5px; color: #55625F; margin-top: 10px; letter-spacing: .05em;">SWEPT FRIDAYS 00:00 UTC · USDC ON BASE</div>
     </div>
 
     <div class="panel" style="padding: 22px 24px;">
-      <div class="mono" style="font-size: 10px; letter-spacing: .14em; color: #56565F;">ALLOCATION</div>
+      <div class="mono" style="font-size: 10px; letter-spacing: .14em; color: #55625F;">ALLOCATION</div>
       <div style="display: flex; height: 10px; border-radius: 999px; overflow: hidden; margin-top: 16px;">
         <sc-for list="{{alloc}}" as="a" hint-placeholder-count="4">
           <div style="width: {{a.pct}}; background: {{a.color}};"></div>
@@ -83,7 +83,7 @@
         <sc-for list="{{alloc}}" as="a" hint-placeholder-count="4">
           <div style="display: flex; align-items: center; gap: 10px;">
             <span style="width: 9px; height: 9px; border-radius: 4px; background: {{a.color}};"></span>
-            <span style="font-size: 13px; color: #C6C6CE;">{{a.label}}</span>
+            <span style="font-size: 13px; color: #C4D2CF;">{{a.label}}</span>
             <span style="flex-grow: 1;"></span>
             <span class="mono" style="font-size: 13px;">{{a.pct}}</span>
           </div>
@@ -96,13 +96,13 @@
   <div class="panel" style="margin: 20px 34px 0;">
     <div style="display: flex; align-items: center; padding: 16px 22px; border-bottom: 1px solid rgba(255,255,255,.11);">
       <span style="font-size: 15px; font-weight: 700;">Holdings</span>
-      <span class="mono" style="font-size: 11.5px; color: #7C7C87; margin-left: 12px;">5 deeds · 4,918 tokens</span>
+      <span class="mono" style="font-size: 11.5px; color: #6E7B79; margin-left: 12px;">5 deeds · 4,918 tokens</span>
       <div style="flex-grow: 1;"></div>
-      <button class="btn mono" style="height: 34px; padding: 0 15px; border-radius: 11px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.11); color: #A6A6B0; font-size: 12px;">Export CSV</button>
+      <button class="btn mono" style="height: 34px; padding: 0 15px; border-radius: 11px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.11); color: #9DACA9; font-size: 12px;">Export CSV</button>
     </div>
     <div style="display: grid; grid-template-columns: 2.1fr 1fr 1fr 1fr 1.1fr 1fr; padding: 13px 22px; border-bottom: 1px solid rgba(255,255,255,.11);" class="mono">
       <sc-for list="{{cols}}" as="c" hint-placeholder-count="6">
-        <div style="font-size: 11px; letter-spacing: .12em; color: #7C7C87; text-align: {{c.align}};">{{c.label}}</div>
+        <div style="font-size: 11px; letter-spacing: .12em; color: #6E7B79; text-align: {{c.align}};">{{c.label}}</div>
       </sc-for>
     </div>
     <sc-for list="{{holdings}}" as="h" hint-placeholder-count="5">
@@ -111,14 +111,14 @@
           <span style="width: 34px; height: 34px; border-radius: 11px; background: {{h.swatch}}; border: 1px solid rgba(255,255,255,.13);"></span>
           <div>
             <div style="font-size: 14px; font-weight: 500;">{{h.name}}</div>
-            <div class="mono" style="font-size: 11px; color: #7C7C87; margin-top: 3px;">{{h.sym}}</div>
+            <div class="mono" style="font-size: 11px; color: #6E7B79; margin-top: 3px;">{{h.sym}}</div>
           </div>
         </div>
-        <div class="mono" style="font-size: 13px; text-align: right; color: #C6C6CE;">{{h.tokens}}</div>
-        <div class="mono" style="font-size: 13px; text-align: right; color: #C6C6CE;">{{h.share}}</div>
+        <div class="mono" style="font-size: 13px; text-align: right; color: #C4D2CF;">{{h.tokens}}</div>
+        <div class="mono" style="font-size: 13px; text-align: right; color: #C4D2CF;">{{h.share}}</div>
         <div class="mono" style="font-size: 13px; text-align: right;">{{h.value}}</div>
         <div class="mono" style="font-size: 13px; text-align: right; color: {{h.plColor}};">{{h.pl}}</div>
-        <div class="mono" style="font-size: 13px; text-align: right; color: #3BE37E;">{{h.rent}}</div>
+        <div class="mono" style="font-size: 13px; text-align: right; color: #2EE6A8;">{{h.rent}}</div>
       </div>
     </sc-for>
   </div>
@@ -126,7 +126,7 @@
 </x-dc>
 
 <script data-dc-script data-props='{
-  "accent": {"editor": "color", "default": "#7C5CFF", "options": ["#7C5CFF", "#FF3D8A", "#3BE37E", "#00D3FF"], "section": "Theme"},
+  "accent": {"editor": "color", "default": "#2EE6A8", "options": ["#2EE6A8", "#22D3EE", "#7DF2C8", "#12B98C"], "section": "Theme"},
   "$preview": {"width": 1440, "height": 960}
 }'>
 class Component extends DCLogic {
@@ -136,15 +136,15 @@ class Component extends DCLogic {
   }
 
   renderVals() {
-    const accent = this.props.accent ?? "#7C5CFF";
+    const accent = this.props.accent ?? '#2EE6A8';
 
     const ranges = ['1W', '1M', '3M', '1Y', 'ALL'].map((r) => ({
       label: r,
       pick: () => this.setState({ range: r }),
       style: 'height: 32px; padding: 0 15px; border-radius: 11px; font-size: 12px; letter-spacing: .06em;'
         + (r === this.state.range
-          ? ' background: ' + accent + '; border: 1px solid ' + accent + '; color: #0A0A0C; font-weight: 600;'
-          : ' background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.11); color: #A6A6B0;')
+          ? ' background: ' + accent + '; border: 1px solid ' + accent + '; color: #060A0A; font-weight: 600;'
+          : ' background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.11); color: #9DACA9;')
     }));
 
     const claimed = this.state.claimed;
@@ -155,12 +155,12 @@ class Component extends DCLogic {
       claimSub: claimed ? 'Claimed — $284.19 sent to your wallet' : 'from 5 deeds, 3 weeks accrued',
       claim: () => this.setState({ claimed: !claimed }),
       claimLabel: claimed ? '✓ Claimed' : 'Claim rent',
-      claimBg: claimed ? '#3BE37E' : '#F2F2F5',
+      claimBg: claimed ? '#2EE6A8' : '#EAF2F0',
 
       alloc: [
         { label: 'Industrial', pct: '46%', color: accent },
-        { label: 'Residential', pct: '28%', color: '#3BE37E' },
-        { label: 'Retail', pct: '17%', color: '#7C5CFF' },
+        { label: 'Residential', pct: '28%', color: '#2EE6A8' },
+        { label: 'Retail', pct: '17%', color: '#2EE6A8' },
         { label: 'Office', pct: '9%', color: 'rgba(255,255,255,.22)' }
       ],
       cols: [
@@ -170,15 +170,15 @@ class Component extends DCLogic {
       ],
       holdings: [
         { name: 'Ridgeline Logistics Park', sym: 'WHSE-ATX', tokens: '1,704', share: '0.446%', value: '$31,353.60',
-          pl: '+$2,214.40', plColor: '#3BE37E', rent: '$2,879.76', swatch: 'linear-gradient(140deg,#3A1228,#170A11)' },
+          pl: '+$2,214.40', plColor: '#2EE6A8', rent: '$2,879.76', swatch: 'linear-gradient(140deg,#123B36,#07201D)' },
         { name: 'Marés 14 Apartments', sym: 'RESI-LIS', tokens: '412', share: '0.211%', value: '$17,345.20',
-          pl: '+$1,088.80', plColor: '#3BE37E', rent: '$1,110.09', swatch: 'linear-gradient(140deg,#2A1020,#150A12)' },
+          pl: '+$1,088.80', plColor: '#2EE6A8', rent: '$1,110.09', swatch: 'linear-gradient(140deg,#123B36,#07201D)' },
         { name: 'Roma Norte Streetfront', sym: 'RETL-CDMX', tokens: '1,180', share: '0.612%', value: '$11,623.00',
-          pl: '+$944.00', plColor: '#3BE37E', rent: '$1,359.89', swatch: 'linear-gradient(140deg,#0E2419,#0B1710)' },
+          pl: '+$944.00', plColor: '#2EE6A8', rent: '$1,359.89', swatch: 'linear-gradient(140deg,#123B36,#07201D)' },
         { name: 'Quay Street Micro-Offices', sym: 'AUS4', tokens: '224', share: '0.058%', value: '$6,182.40',
-          pl: '−$318.08', plColor: '#FF6B6B', rent: '$482.23', swatch: 'linear-gradient(140deg,#1C4440,#0F2622)' },
+          pl: '−$318.08', plColor: '#8C9A97', rent: '$482.23', swatch: 'linear-gradient(140deg,#123B36,#07201D)' },
         { name: 'Maasvlakte Cold Storage', sym: 'WHSE-RTM', tokens: '128', share: '0.019%', value: '$1,888.00',
-          pl: '+$189.10', plColor: '#3BE37E', rent: '$194.46', swatch: 'linear-gradient(140deg,#13414F,#0C2430)' }
+          pl: '+$189.10', plColor: '#2EE6A8', rent: '$194.46', swatch: 'linear-gradient(140deg,#123B36,#07201D)' }
       ]
     };
   }
