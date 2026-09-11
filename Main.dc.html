@@ -149,7 +149,7 @@
 
               <div style="display: flex; align-items: baseline; gap: 8px; margin-top: 16px;">
                 <span class="mono" style="font-size: 28px; letter-spacing: -.03em;">{{t.buys}}</span>
-                <span class="mono" style="font-size: 12px; color: #818F92;">buys {{t.period}}</span>
+                <span class="mono" style="font-size: 12px; color: #818F92;">{{t.period}}</span>
               </div>
               <div class="mono" style="display: flex; align-items: center; gap: 7px; font-size: 12px; color: #818F92; margin-top: 9px;">
                 <svg class="eye" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="{{accent}}" stroke-width="1.8" stroke-linejoin="round">
@@ -559,8 +559,8 @@ class Component extends DCLogic {
         rank: '#' + (i + 1),
         rankBg: i === 0 ? accent : 'rgba(5,9,10,.78)',
         rankInk: i === 0 ? '#07201F' : '#B4C2C4',
-        buys: t.count.toLocaleString('en-US'),
-        period: 'in past 24h',
+        buys: '+' + t.count.toLocaleString('en-US'),
+        period: 'past 24h',
         interested: t.watchers.toLocaleString('en-US'),
         bg: 'linear-gradient(170deg, #123034 0%, #0C2124 52%, #060C0D 100%)',
         art: this.villa(t.sym.length * 977 + t.base, t.kind, accent)
