@@ -9,12 +9,12 @@
 <helmet>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
   <style>
-    body { margin: 0; background:  radial-gradient(62% 34% at 12% 1%, rgba(46,230,168,.22) 0%, transparent 62%),
-      radial-gradient(58% 30% at 92% 8%, rgba(46,230,168,.20) 0%, transparent 62%),
+    body { margin: 0; background:  radial-gradient(62% 34% at 12% 1%, rgba(121,194,168,.22) 0%, transparent 62%),
+      radial-gradient(58% 30% at 92% 8%, rgba(121,194,168,.20) 0%, transparent 62%),
       radial-gradient(56% 34% at 70% 99%, rgba(59,227,126,.13) 0%, transparent 64%),
-      #050508; background-attachment: fixed; color: #EAF2F0;
+      #050508; background-attachment: fixed; color: #DDE5E2;
       font-family: 'Space Grotesk', 'Trebuchet MS', system-ui, sans-serif; }
-    a { color: #2EE6A8; text-decoration: none; } a:hover { color: #2EE6A8; }
+    a { color: #79C2A8; text-decoration: none; } a:hover { color: #79C2A8; }
     .mono { font-family: 'IBM Plex Mono', 'DejaVu Sans Mono', ui-monospace, monospace; }
     .btn { cursor: pointer; border: none; font-family: inherit; }
     .rail { display: flex; gap: 14px; overflow-x: auto; scrollbar-width: none; padding-bottom: 4px; }
@@ -31,17 +31,17 @@
   <div style="display: flex; align-items: center; gap: 14px; padding: 0 22px;">
     <h1 style="margin: 0; font-size: 32px; font-weight: 700; letter-spacing: -.035em; line-height: 1.08;">Explore<br>Deeds</h1>
     <div style="flex-grow: 1;"></div>
-    <div style="width: 46px; height: 46px; border-radius: 50%; background: linear-gradient(140deg, #3A1228, #170A11); border: 2px solid {{accent}}; display: flex; align-items: center; justify-content: center;">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="{{accent}}" stroke-width="1.8" stroke-linejoin="round"><path d="M4 11 12 5l8 6v9H4z"/><path d="M10 20v-5h4v5"/></svg>
+    <div style="width: 46px; height: 46px; border-radius: 50%; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); display: flex; align-items: center; justify-content: center;">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#B6C3C0" stroke-width="1.8" stroke-linejoin="round"><path d="M4 11 12 5l8 6v9H4z"/><path d="M10 20v-5h4v5"/></svg>
     </div>
   </div>
 
   <!-- search -->
   <div style="margin: 22px 22px 0; display: flex; align-items: center; gap: 12px; height: 54px; padding: 0 18px; border-radius: 27px; border: 1px solid rgba(255,255,255,.13); background: rgba(255,255,255,.05);">
-    <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#6E7B79" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.6-3.6"/></svg>
-    <span style="font-size: 14.5px; color: #5E6B69;">Search city, ticker or sponsor</span>
+    <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#6A7674" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.6-3.6"/></svg>
+    <span style="font-size: 14.5px; color: #5C6866;">Search city, ticker or sponsor</span>
     <span style="flex-grow: 1;"></span>
-    <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="{{accent}}" stroke-width="1.9" stroke-linecap="round"><path d="M4 7h10M18 7h2M4 17h2M10 17h10"/><circle cx="16" cy="7" r="2.2"/><circle cx="8" cy="17" r="2.2"/></svg>
+    <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#93A19E" stroke-width="1.9" stroke-linecap="round"><path d="M4 7h10M18 7h2M4 17h2M10 17h10"/><circle cx="16" cy="7" r="2.2"/><circle cx="8" cy="17" r="2.2"/></svg>
   </div>
 
   <!-- tabs -->
@@ -55,8 +55,8 @@
   <div style="display: flex; align-items: center; padding: 26px 22px 14px;">
     <span style="font-size: 19px; font-weight: 700; letter-spacing: -.02em;">{{sectionTitle}}</span>
     <span style="flex-grow: 1;"></span>
-    <span style="display: flex; align-items: center; gap: 7px; font-size: 13.5px; color: {{accent}};">See all
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="{{accent}}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
+    <span style="display: flex; align-items: center; gap: 7px; font-size: 13.5px; color: #93A19E;">See all
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#93A19E" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
     </span>
   </div>
 
@@ -70,33 +70,33 @@
           </button>
           <svg viewBox="0 0 140 120" width="230" height="197" fill="none" style="position: absolute; bottom: 28px; left: 34px; opacity: .95;">
             <path d="M14 104V52l30-18 30 18v52z" stroke="{{c.line}}" stroke-width="2.2" stroke-linejoin="round"/>
-            <path d="M74 104V44l26-15 26 15v60z" stroke="#EAF2F0" stroke-opacity=".55" stroke-width="2.2" stroke-linejoin="round"/>
-            <path d="M26 104V86h12v18M50 104V86h12v18M86 104V84h12v20" stroke="#EAF2F0" stroke-opacity=".4" stroke-width="1.6"/>
-            <path d="M4 104h132" stroke="#EAF2F0" stroke-opacity=".75" stroke-width="2.2"/>
+            <path d="M74 104V44l26-15 26 15v60z" stroke="#DDE5E2" stroke-opacity=".55" stroke-width="2.2" stroke-linejoin="round"/>
+            <path d="M26 104V86h12v18M50 104V86h12v18M86 104V84h12v20" stroke="#DDE5E2" stroke-opacity=".4" stroke-width="1.6"/>
+            <path d="M4 104h132" stroke="#DDE5E2" stroke-opacity=".75" stroke-width="2.2"/>
           </svg>
           <div style="position: absolute; left: 0; right: 0; bottom: 0; height: 120px; background: linear-gradient(180deg, transparent, rgba(0,0,0,.88) 62%);"></div>
           <div style="position: absolute; left: 18px; right: 18px; bottom: 16px;">
             <div style="display: flex; align-items: flex-end;">
               <div>
                 <div style="font-size: 17px; font-weight: 700; letter-spacing: -.015em;">{{c.name}}</div>
-                <div class="mono" style="font-size: 11px; color: #9DACA9; margin-top: 4px; letter-spacing: .08em;">{{c.city}}</div>
+                <div class="mono" style="font-size: 11px; color: #93A19E; margin-top: 4px; letter-spacing: .08em;">{{c.city}}</div>
               </div>
               <div style="flex-grow: 1;"></div>
               <div style="text-align: right;">
-                <div class="mono" style="font-size: 10px; letter-spacing: .12em; color: #8C9A97;">CLOSES IN</div>
-                <div class="mono blip" style="font-size: 13px; color: {{accent}}; margin-top: 3px;">{{c.ends}}</div>
+                <div class="mono" style="font-size: 10px; letter-spacing: .12em; color: #83918E;">CLOSES IN</div>
+                <div class="mono blip" style="font-size: 13px; color: #B6C3C0; margin-top: 3px;">{{c.ends}}</div>
               </div>
             </div>
           </div>
         </div>
         <div style="display: flex; align-items: center; padding: 15px 18px 17px;">
           <div>
-            <div class="mono" style="font-size: 10px; letter-spacing: .12em; color: #5E6B69;">PRICE / TOKEN</div>
+            <div class="mono" style="font-size: 10px; letter-spacing: .12em; color: #5C6866;">PRICE / TOKEN</div>
             <div class="mono" style="font-size: 18px; margin-top: 4px;">{{c.price}}</div>
           </div>
           <div style="flex-grow: 1;"></div>
-          <button class="btn" style="display: flex; align-items: center; gap: 8px; height: 46px; padding: 0 20px; border-radius: 23px; background: #2EE6A8; color: #04211A; font-size: 14px; font-weight: 700;">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#04211A" stroke-width="2" stroke-linejoin="round"><path d="M4 6h15l-1.6 8H7.2z"/><circle cx="9" cy="19" r="1.5"/><circle cx="17" cy="19" r="1.5"/></svg>
+          <button class="btn" style="display: flex; align-items: center; gap: 8px; height: 46px; padding: 0 20px; border-radius: 23px; background: #79C2A8; color: #08201B; font-size: 14px; font-weight: 700;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#08201B" stroke-width="2" stroke-linejoin="round"><path d="M4 6h15l-1.6 8H7.2z"/><circle cx="9" cy="19" r="1.5"/><circle cx="17" cy="19" r="1.5"/></svg>
             Buy
           </button>
         </div>
@@ -108,7 +108,7 @@
   <div style="display: flex; align-items: center; padding: 28px 22px 14px;">
     <span style="font-size: 19px; font-weight: 700; letter-spacing: -.02em;">Top sponsors</span>
     <span style="flex-grow: 1;"></span>
-    <span class="mono" style="font-size: 15px; color: #5E6B69; letter-spacing: .2em;">•••</span>
+    <span class="mono" style="font-size: 15px; color: #5C6866; letter-spacing: .2em;">•••</span>
   </div>
 
   <div style="display: flex; flex-direction: column; gap: 16px; padding: 0 22px 26px;">
@@ -117,7 +117,7 @@
         <div style="width: 46px; height: 46px; border-radius: 14px; background: {{s.art}}; border: 1px solid rgba(255,255,255,.13);"></div>
         <div>
           <div style="font-size: 15px; font-weight: 500;">{{s.name}}</div>
-          <div class="mono" style="font-size: 11.5px; color: #6E7B79; margin-top: 3px;">{{s.meta}}</div>
+          <div class="mono" style="font-size: 11.5px; color: #6A7674; margin-top: 3px;">{{s.meta}}</div>
         </div>
         <div style="flex-grow: 1;"></div>
         <button class="btn mono" onClick="{{s.follow}}" style="{{s.style}}">{{s.cta}}</button>
@@ -139,7 +139,7 @@
 </x-dc>
 
 <script data-dc-script data-props='{
-  "accent": {"editor": "color", "default": "#2EE6A8", "options": ["#2EE6A8", "#22D3EE", "#7DF2C8", "#12B98C"], "section": "Theme"},
+  "accent": {"editor": "color", "default": "#79C2A8", "options": ["#79C2A8", "#6FA6B4", "#9AC9BC", "#5E9E8A"], "section": "Theme"},
   "$preview": {"width": 390, "height": 900}
 }'>
 class Component extends DCLogic {
@@ -149,7 +149,7 @@ class Component extends DCLogic {
   }
 
   renderVals() {
-    const accent = this.props.accent ?? '#2EE6A8';
+    const accent = this.props.accent ?? '#79C2A8';
 
     const tabs = [
       { id: 'closing', label: 'Closing soon', title: 'Closing soon' },
@@ -162,30 +162,30 @@ class Component extends DCLogic {
         pick: () => this.setState({ tab: t.id }),
         style: 'height: 40px; padding: 0 18px; border-radius: 20px; font-size: 13.5px; font-family: inherit;'
           + (on
-            ? ' background: ' + accent + '; color: #060A0A; font-weight: 600;'
-            : ' background: rgba(255,255,255,.06); color: #8C9A97;')
+            ? ' background: ' + accent + '; color: #08201B; font-weight: 600;'
+            : ' background: rgba(255,255,255,.06); color: #83918E;')
       };
     });
 
     const cards = [
       { id: 'WHSE', name: 'Ridgeline Park', city: 'AUSTIN, TX · 9.2% YIELD', price: '$18.40', ends: '1h 26m 32s',
-        line: accent, art: 'linear-gradient(160deg, #0C2E2A 0%, #08201E 58%, #050B0B 100%)' },
+        line: '#B6C3C0', art: 'linear-gradient(160deg, #16302B 0%, #0E211E 58%, #070C0C 100%)' },
       { id: 'RETL', name: 'Roma Norte', city: 'MEXICO CITY · 11.7% YIELD', price: '$9.85', ends: '6h 04m 11s',
-        line: '#2EE6A8', art: 'linear-gradient(160deg, #0C2E2A 0%, #08201E 58%, #050B0B 100%)' }
+        line: '#8FA09C', art: 'linear-gradient(160deg, #16302B 0%, #0E211E 58%, #070C0C 100%)' }
     ].map((c) => {
       const on = !!this.state.liked[c.id];
       return {
         ...c,
         watch: () => this.setState({ liked: { ...this.state.liked, [c.id]: !on } }),
         heartFill: on ? accent : 'none',
-        heartStroke: on ? accent : '#C4D2CF'
+        heartStroke: on ? accent : '#B6C3C0'
       };
     });
 
     const sponsors = [
-      { id: 'ridge', name: 'Ridgeline RE', meta: '14 deeds · $84M tokenized', art: 'linear-gradient(140deg,#123B36,#07201D)' },
-      { id: 'atlas', name: 'Atlas Iberia', meta: '9 deeds · $51M tokenized', art: 'linear-gradient(140deg,#123B36,#07201D)' },
-      { id: 'verde', name: 'Casa Verde', meta: '6 deeds · $23M tokenized', art: 'linear-gradient(140deg,#123B36,#07201D)' }
+      { id: 'ridge', name: 'Ridgeline RE', meta: '14 deeds · $84M tokenized', art: 'linear-gradient(140deg,#1B3A34,#0C201D)' },
+      { id: 'atlas', name: 'Atlas Iberia', meta: '9 deeds · $51M tokenized', art: 'linear-gradient(140deg,#1B3A34,#0C201D)' },
+      { id: 'verde', name: 'Casa Verde', meta: '6 deeds · $23M tokenized', art: 'linear-gradient(140deg,#1B3A34,#0C201D)' }
     ].map((s) => {
       const on = !!this.state.following[s.id];
       return {
@@ -194,8 +194,8 @@ class Component extends DCLogic {
         cta: on ? 'Following' : 'Follow',
         style: 'height: 38px; padding: 0 18px; border-radius: 19px; font-size: 12.5px; letter-spacing: .04em;'
           + (on
-            ? ' background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.15); color: #8C9A97;'
-            : ' background: #2EE6A8; border: 1px solid #2EE6A8; color: #04211A; font-weight: 600;')
+            ? ' background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.15); color: #83918E;'
+            : ' background: #79C2A8; border: 1px solid #79C2A8; color: #08201B; font-weight: 600;')
       };
     });
 
@@ -209,7 +209,7 @@ class Component extends DCLogic {
       return {
         ...n,
         pick: () => this.setState({ nav: n.id }),
-        ink: on ? '#060A0A' : '#5E6B69',
+        ink: on ? '#060A0A' : '#5C6866',
         bg: on ? accent : 'transparent'
       };
     });
