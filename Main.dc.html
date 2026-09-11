@@ -131,14 +131,16 @@
       <div style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 14px; margin-top: 20px;">
         <sc-for list="{{trending}}" as="t" hint-placeholder-count="5">
           <div class="card panel" style="overflow: hidden;">
-            <div class="scan" style="height: 108px; position: relative; background: {{t.art}};">
+            <div class="scan" style="height: 136px; position: relative; background: {{t.bg}};">
               <span class="mono" style="position: absolute; top: 10px; left: 10px; display: flex; align-items: center; justify-content: center; min-width: 26px; height: 26px; padding: 0 7px; border-radius: 9px; background: {{t.rankBg}}; color: {{t.rankInk}}; font-size: 12px; font-weight: 600;">{{t.rank}}</span>
               <span class="mono" style="position: absolute; top: 10px; right: 10px; font-size: 10px; letter-spacing: .1em; padding: 4px 8px; border-radius: 9px; background: rgba(5,9,10,.78); color: #B4C2C4;">{{t.sym}}</span>
-              <svg viewBox="0 0 120 70" width="150" height="88" fill="none" style="position: absolute; bottom: 0; right: 6px; opacity: .9;">
-                <path d="M18 60V32l22-13 22 13v28z" stroke="#B4C2C4" stroke-width="1.8" stroke-linejoin="round"/>
-                <path d="M62 60V26l18-11 18 11v34z" stroke="#8D9EA1" stroke-width="1.8" stroke-linejoin="round"/>
-                <path d="M28 60v-11h9v11M45 60v-11h8v11M72 60v-10h9v10" stroke="#8D9EA1" stroke-width="1.3" stroke-opacity=".7"/>
-                <path d="M6 60h108" stroke="#B4C2C4" stroke-width="1.8"/>
+<svg viewBox="0 0 300 180" width="100%" height="100%" preserveAspectRatio="xMidYMax slice" style="position: absolute; inset: 0;">
+                <sc-for list="{{t.art.rects}}" as="sh" hint-placeholder-count="30">
+                  <rect x="{{sh.x}}" y="{{sh.y}}" width="{{sh.w}}" height="{{sh.h}}" fill="{{sh.f}}" rx="{{sh.rx}}"></rect>
+                </sc-for>
+                <sc-for list="{{t.art.paths}}" as="ph" hint-placeholder-count="24">
+                  <path d="{{ph.d}}" fill="{{ph.f}}" stroke="{{ph.s}}" stroke-width="{{ph.sw}}" stroke-linecap="round" stroke-linejoin="round"></path>
+                </sc-for>
               </svg>
             </div>
             <div style="padding: 14px 15px 16px;">
@@ -193,29 +195,30 @@
         <div style="display: flex; gap: 18px;">
           <div class="scan" style="width: 196px; height: 196px; flex-shrink: 0; border-radius: 11px; background-color: #16161B; position: relative; overflow: hidden;">
             <div style="position: absolute; inset: 0; background: radial-gradient(120% 80% at 30% 0%, rgba(108,193,198,.35), transparent 62%);"></div>
-            <svg viewBox="0 0 120 120" width="196" height="196" fill="none" style="position: relative;">
-              <path d="M14 96V54l24-16 24 16v42z" stroke="#B4C2C4" stroke-width="2" stroke-linejoin="round"/>
-              <path d="M62 96V42l22-14 22 14v54z" stroke="#8D9EA1" stroke-width="2" stroke-linejoin="round"/>
-              <path d="M24 96v-16h12v16M44 96v-16h10v16M72 96v-14h12v14M92 96v-14h10v14" stroke="#DCE5E6" stroke-width="1.6" stroke-opacity=".55"/>
-              <path d="M8 96h106" stroke="#DCE5E6" stroke-width="2" stroke-opacity=".8"/>
-              <circle cx="84" cy="20" r="3.5" fill="{{accent}}"/>
-            </svg>
+<svg viewBox="0 0 300 180" width="100%" height="100%" preserveAspectRatio="xMidYMax slice" style="position: absolute; inset: 0;">
+                <sc-for list="{{featured.art.rects}}" as="sh" hint-placeholder-count="30">
+                  <rect x="{{sh.x}}" y="{{sh.y}}" width="{{sh.w}}" height="{{sh.h}}" fill="{{sh.f}}" rx="{{sh.rx}}"></rect>
+                </sc-for>
+                <sc-for list="{{featured.art.paths}}" as="ph" hint-placeholder-count="24">
+                  <path d="{{ph.d}}" fill="{{ph.f}}" stroke="{{ph.s}}" stroke-width="{{ph.sw}}" stroke-linecap="round" stroke-linejoin="round"></path>
+                </sc-for>
+              </svg>
           </div>
           <div style="flex-grow: 1; min-width: 0;">
             <div style="display: flex; align-items: center; gap: 10px;">
               <span class="mono" style="font-size: 10.5px; letter-spacing: .12em; padding: 4px 8px; border-radius: 11px; background: rgba(255,255,255,.07); color: #B4C2C4;">OPEN RAISE</span>
-              <span class="mono" style="font-size: 10.5px; letter-spacing: .12em; padding: 4px 8px; border-radius: 11px; background: rgba(255,255,255,.07); color: #B4C2C4;">5.9% NET YIELD</span>
+              <span class="mono" style="font-size: 10.5px; letter-spacing: .12em; padding: 4px 8px; border-radius: 11px; background: rgba(255,255,255,.07); color: #B4C2C4;">9.4% NET YIELD</span>
             </div>
-            <div style="font-size: 25px; font-weight: 700; margin-top: 12px; letter-spacing: -.02em;">Neuk&ouml;lln Courtyard Blocks</div>
-            <div class="mono" style="font-size: 12px; color: #818F92; margin-top: 6px; letter-spacing: .04em;">SPONSOR: <span style="color: #B4C2C4;">HOFGUT</span> &nbsp;·&nbsp; BERLIN, DE &nbsp;·&nbsp; 52 UNITS</div>
+            <div style="font-size: 25px; font-weight: 700; margin-top: 12px; letter-spacing: -.02em;">Villa Ombak</div>
+            <div class="mono" style="font-size: 12px; color: #818F92; margin-top: 6px; letter-spacing: .04em;">SPONSOR: <span style="color: #B4C2C4;">OMBAK&nbsp;LIVING</span> &nbsp;·&nbsp; CANGGU, BALI &nbsp;·&nbsp; 4 BED · PRIVATE POOL</div>
             <div style="display: flex; gap: 28px; margin-top: 18px;">
               <div>
                 <div class="mono" style="font-size: 10px; letter-spacing: .14em; color: #586264;">TOKEN PRICE</div>
-                <div class="mono" style="font-size: 20px; margin-top: 5px;">$31.20</div>
+                <div class="mono" style="font-size: 20px; margin-top: 5px;">$14.20</div>
               </div>
               <div>
                 <div class="mono" style="font-size: 10px; letter-spacing: .14em; color: #586264;">RAISED</div>
-                <div class="mono" style="font-size: 20px; margin-top: 5px;">$4.1M <span style="color: #697577; font-size: 13px;">/ 5.6M</span></div>
+                <div class="mono" style="font-size: 20px; margin-top: 5px;">$1.6M <span style="color: #697577; font-size: 13px;">/ 2.2M</span></div>
               </div>
             </div>
             <div style="height: 5px; border-radius: 999px; background: rgba(255,255,255,.11); margin-top: 14px; overflow: hidden;">
@@ -247,12 +250,16 @@
       <!-- two side cards -->
       <sc-for list="{{side}}" as="c" hint-placeholder-count="2">
         <div class="card panel" style="overflow: hidden;">
-          <div class="scan" style="height: 186px; position: relative; background: {{c.art}};">
+          <div class="scan" style="height: 186px; position: relative; background: {{c.bg}};">
             <span class="mono" style="position: absolute; top: 12px; right: 12px; font-size: 10.5px; letter-spacing: .1em; padding: 4px 8px; border-radius: 11px; background: rgba(10,10,12,.82); color: {{c.tagColor}};">{{c.tag}}</span>
-            <svg viewBox="0 0 120 120" width="120" height="120" fill="none" style="position: absolute; bottom: 0; right: 10px; opacity: .9;">
-              <path d="M20 104V46l28-18 28 18v58z" stroke="{{c.tagColor}}" stroke-width="2" stroke-linejoin="round"/>
-              <path d="M32 104V88h12v16M56 104V88h10v16" stroke="#DCE5E6" stroke-width="1.5" stroke-opacity=".5"/>
-            </svg>
+<svg viewBox="0 0 300 180" width="100%" height="100%" preserveAspectRatio="xMidYMax slice" style="position: absolute; inset: 0;">
+                <sc-for list="{{c.art.rects}}" as="sh" hint-placeholder-count="30">
+                  <rect x="{{sh.x}}" y="{{sh.y}}" width="{{sh.w}}" height="{{sh.h}}" fill="{{sh.f}}" rx="{{sh.rx}}"></rect>
+                </sc-for>
+                <sc-for list="{{c.art.paths}}" as="ph" hint-placeholder-count="24">
+                  <path d="{{ph.d}}" fill="{{ph.f}}" stroke="{{ph.s}}" stroke-width="{{ph.sw}}" stroke-linecap="round" stroke-linejoin="round"></path>
+                </sc-for>
+              </svg>
           </div>
           <div style="padding: 15px 16px 17px; border-top: 1px solid rgba(255,255,255,.11);">
             <div class="mono" style="font-size: 10.5px; letter-spacing: .12em; color: #586264;">SPONSOR: <span style="color: #B4C2C4;">{{c.sponsor}}</span></div>
@@ -309,6 +316,99 @@ class Component extends DCLogic {
     this.state = { nav: 'explore', amount: 500, sort: 0, live: true, range: '24H' };
   }
 
+  // Seeded Bali-villa elevation: open pavilions under steep alang-alang roofs,
+  // timber posts, a pool in front, palms. Returns flat shape data for one card.
+  villa(seed, kind, accent) {
+    let t = (seed >>> 0) || 7;
+    const rnd = () => {
+      t = (t + 0x6D2B79F5) >>> 0;
+      let x = Math.imul(t ^ (t >>> 15), 1 | t);
+      x = (x + Math.imul(x ^ (x >>> 7), 61 | x)) ^ x;
+      return ((x ^ (x >>> 14)) >>> 0) / 4294967296;
+    };
+    const ri = (a, b) => Math.floor(a + rnd() * (b - a + 0.999));
+    const rf = (a, b) => a + rnd() * (b - a);
+    const f1 = (v) => +v.toFixed(1);
+
+    const W = 300, H = 180, ground = H - 30;
+    const rects = [], paths = [];
+    const R = (x, y, w, h, f, rx) => rects.push({ x: f1(x), y: f1(y), w: f1(Math.max(w, .4)), h: f1(Math.max(h, .4)), f: f, rx: rx || 0 });
+    const P = (d, f, s, sw) => paths.push({ d: d, f: f || 'none', s: s || 'none', sw: sw || 0 });
+
+    const spec = {
+      villa:  { n: [2, 3], bw: [62, 88], bh: [26, 34], roof: [26, 34], pool: 1 },
+      resort: { n: [3, 4], bw: [46, 66], bh: [22, 30], roof: [22, 28], pool: 1 },
+      estate: { n: [2, 3], bw: [70, 96], bh: [28, 38], roof: [30, 38], pool: 1 },
+      land:   { n: [1, 1], bw: [54, 70], bh: [18, 24], roof: [20, 26], pool: 0 }
+    }[kind] || { n: [2, 3], bw: [62, 88], bh: [26, 34], roof: [26, 34], pool: 1 };
+
+    // terraced ground: rice-paddy steps behind the pavilions
+    for (let i = 0; i < 3; i++) R(0, ground - 4 - i * 7, W, 1, 'rgba(255,255,255,' + (0.05 + i * 0.015) + ')');
+
+    const n = ri(spec.n[0], spec.n[1]);
+    const ws = [];
+    let total = 0;
+    for (let i = 0; i < n; i++) { const w = rf(spec.bw[0], spec.bw[1]); ws.push(w); total += w; }
+    const gap = 9;
+    let x = (W - total - (n - 1) * gap) / 2;
+
+    for (let i = 0; i < n; i++) {
+      const bw = ws[i];
+      const bh = rf(spec.bh[0], spec.bh[1]);
+      const rh = rf(spec.roof[0], spec.roof[1]);
+      const lift = i === 1 ? rf(4, 10) : rf(0, 4);          // stagger the middle pavilion
+      const by = ground - lift - bh;
+      const eave = rf(7, 11);
+
+      R(x - 3, ground - lift - 3, bw + 6, 3.4, 'rgba(255,255,255,.16)', .6);          // stone plinth
+      R(x, by, bw, bh, 'rgba(210,236,238,.10)', .6);                                   // open interior
+      R(x + 2, by + bh * .34, bw - 4, bh * .58, 'rgba(226,244,245,.30)', .6);          // lit room behind posts
+
+      const posts = ri(3, 5);
+      for (let p = 0; p < posts; p++) R(x + 2 + ((bw - 6) / (posts - 1)) * p, by, 2.1, bh, 'rgba(255,255,255,.30)');
+
+      // steep alang-alang roof with deep eaves
+      const apex = by - rh, lx = x - eave, rx2 = x + bw + eave;
+      P('M' + f1(lx) + ' ' + f1(by + 1) + ' L' + f1(x + bw / 2) + ' ' + f1(apex) + ' L' + f1(rx2) + ' ' + f1(by + 1) + ' Z', 'rgba(255,255,255,.20)');
+      P('M' + f1(lx) + ' ' + f1(by + 1) + ' L' + f1(x + bw / 2) + ' ' + f1(apex) + ' L' + f1(x + bw / 2) + ' ' + f1(by + 1) + ' Z', 'rgba(255,255,255,.10)');
+      P('M' + f1(x + bw / 2) + ' ' + f1(apex) + ' L' + f1(x + bw / 2) + ' ' + f1(by + 1), 'none', 'rgba(255,255,255,.34)', 1);
+      for (let s = 1; s <= 3; s++) {                                                    // thatch courses
+        const yy = by + 1 - (rh / 4) * s, half = ((rx2 - lx) / 2) * (1 - s / 4.2);
+        P('M' + f1(x + bw / 2 - half) + ' ' + f1(yy) + ' L' + f1(x + bw / 2 + half) + ' ' + f1(yy), 'none', 'rgba(255,255,255,.13)', 1);
+      }
+      if (rnd() > .45) R(x + bw * .3, by + bh * .2, bw * .18, 2, accent, .6);           // a lit lantern
+      x += bw + gap;
+    }
+
+    // pool + loungers in the foreground
+    if (spec.pool) {
+      const pw = rf(W * .52, W * .72), px = (W - pw) / 2, py = ground + 6, ph = 15;
+      R(px, py, pw, ph, 'rgba(108,193,198,.30)', 2.4);
+      R(px, py, pw, 1.4, 'rgba(226,244,245,.42)', 1);
+      for (let i = 0; i < 3; i++) R(px + rf(6, pw * .6), py + 4 + i * 4, rf(10, 26), .9, 'rgba(226,244,245,.26)', .5);
+      R(px - 16, py + 2, 12, 2.4, 'rgba(255,255,255,.22)', .8);
+      R(px + pw + 4, py + 2, 12, 2.4, 'rgba(255,255,255,.22)', .8);
+    } else {
+      for (let i = 0; i < 5; i++) R(30 + i * 50, ground + 8 + (i % 2) * 5, 34, .9, 'rgba(226,244,245,.20)', .5);
+    }
+
+    // palms
+    const palms = ri(2, 3);
+    for (let i = 0; i < palms; i++) {
+      const pxx = i === 0 ? rf(10, 34) : rf(W - 48, W - 12);
+      const ph2 = rf(46, 74), lean = rf(-5, 5), topY = ground - ph2;
+      P('M' + f1(pxx) + ' ' + f1(ground) + ' Q' + f1(pxx + lean) + ' ' + f1(ground - ph2 * .55) + ' ' + f1(pxx + lean * 2) + ' ' + f1(topY), 'none', 'rgba(255,255,255,.34)', 1.6);
+      const tipX = pxx + lean * 2;
+      for (let fr = 0; fr < 5; fr++) {
+        const ang = -0.5 + fr * 0.5, len = rf(12, 19);
+        P('M' + f1(tipX) + ' ' + f1(topY) + ' Q' + f1(tipX + Math.cos(ang) * len * .6) + ' ' + f1(topY - 6) + ' ' + f1(tipX + Math.cos(ang) * len) + ' ' + f1(topY + Math.sin(Math.abs(ang)) * 7 + 2), 'none', 'rgba(255,255,255,.30)', 1.4);
+      }
+    }
+
+    R(0, ground, W, 1.4, 'rgba(255,255,255,.30)');
+    return { rects: rects, paths: paths };
+  }
+
   renderVals() {
     const accent = this.props.accent ?? '#6CC1C6';
     const amount = this.state.amount;
@@ -346,15 +446,15 @@ class Component extends DCLogic {
     const win = this.state.range;
     const mult = { '24H': 1, '7D': 6.2, '30D': 23.4 }[win];
     const trending = [
-      { sym: 'RETL-CDMX', name: 'Roma Norte', city: 'MEXICO CITY, MX', base: 412, delta: '+38%', price: '$9.85',
+      { sym: 'OMBAK', name: 'Villa Ombak', city: 'CANGGU · BATU BOLONG', kind: 'villa', base: 412, delta: '+38%', price: '$14.20',
         curve: [3, 5, 4, 8, 11, 9, 14, 18] },
-      { sym: 'WHSE-ATX', name: 'Ridgeline Park', city: 'AUSTIN, TX', base: 388, delta: '+21%', price: '$18.40',
+      { sym: 'KARANG', name: 'Karang Cliff', city: 'ULUWATU · BINGIN', kind: 'villa', base: 388, delta: '+21%', price: '$26.80',
         curve: [6, 7, 9, 8, 12, 11, 15, 16] },
-      { sym: 'RESI-LIS', name: 'Mar\u00e9s 14', city: 'LISBON, PT', base: 274, delta: '+12%', price: '$42.10',
+      { sym: 'UMASARI', name: 'Uma Sari Estate', city: 'UBUD · TEGALLALANG', kind: 'estate', base: 274, delta: '+12%', price: '$31.40',
         curve: [8, 7, 9, 10, 9, 12, 11, 13] },
-      { sym: 'WHSE-RTM', name: 'Maasvlakte Cold', city: 'ROTTERDAM, NL', base: 196, delta: '+6%', price: '$14.75',
+      { sym: 'BANYU', name: 'Banyu Pool Suites', city: 'SEMINYAK · PETITENGET', kind: 'resort', base: 196, delta: '+6%', price: '$19.75',
         curve: [5, 6, 5, 7, 6, 8, 7, 9] },
-      { sym: 'AUS4', name: 'Quay Street', city: 'SYDNEY, AU', base: 143, delta: '-4%', price: '$27.60',
+      { sym: 'SAWAH2', name: 'Sawah Dua Parcel', city: 'UBUD · NORTH RIDGE', kind: 'land', base: 143, delta: '-4%', price: '$8.60',
         curve: [9, 8, 7, 8, 6, 7, 5, 6] }
     ]
       .map((t) => ({ ...t, count: Math.round(t.base * mult) }))
@@ -370,19 +470,22 @@ class Component extends DCLogic {
           deltaInk: t.delta.charAt(0) === '-' ? '#818F92' : accent,
           sparkInk: t.delta.charAt(0) === '-' ? '#697577' : accent,
           spark: t.curve.map((v, j) => (j * (100 / (t.curve.length - 1))).toFixed(1) + ',' + (22 - (v / max) * 20).toFixed(1)).join(' '),
-          art: 'linear-gradient(160deg, #153030 0%, #0D2122 58%, #060B0C 100%)'
+          bg: 'linear-gradient(170deg, #123034 0%, #0C2124 52%, #060C0D 100%)',
+          art: this.villa(t.sym.length * 977 + t.base, t.kind, accent)
         };
       });
 
+    const featured = { art: this.villa(20261, 'villa', accent), bg: 'linear-gradient(170deg, #123034 0%, #0C2124 52%, #060C0D 100%)' };
+
     const events = [
-      { who: '0x9F2A…C41D', qty: '812', prop: 'Ridgeline Park', ago: '2s ago' },
-      { who: 'hbhDct.eth', qty: '1,450', prop: 'Roma Norte', ago: '9s ago' },
-      { who: '0x41B7…9E02', qty: '96', prop: 'Marés 14', ago: '14s ago' },
-      { who: 'vw3roy.eth', qty: '3,200', prop: 'Maasvlakte Cold', ago: '21s ago' },
-      { who: '0xD108…77A4', qty: '240', prop: 'Quay Street', ago: '33s ago' },
-      { who: 'casaverde.eth', qty: '5,000', prop: 'Roma Norte', ago: '41s ago' },
-      { who: '0x6C55…1B8F', qty: '118', prop: 'Neukölln Blocks', ago: '55s ago' },
-      { who: 'atlas-ib.eth', qty: '2,640', prop: 'Ridgeline Park', ago: '1m ago' }
+      { who: '0x9F2A…C41D', qty: '812', prop: 'Villa Ombak', ago: '2s ago' },
+      { who: 'hbhDct.eth', qty: '1,450', prop: 'Karang Cliff', ago: '9s ago' },
+      { who: '0x41B7…9E02', qty: '96', prop: 'Uma Sari Estate', ago: '14s ago' },
+      { who: 'vw3roy.eth', qty: '3,200', prop: 'Banyu Pool Suites', ago: '21s ago' },
+      { who: '0xD108…77A4', qty: '240', prop: 'Sawah Dua Parcel', ago: '33s ago' },
+      { who: 'casaverde.eth', qty: '5,000', prop: 'Karang Cliff', ago: '41s ago' },
+      { who: '0x6C55…1B8F', qty: '118', prop: 'Tanah Lembut', ago: '55s ago' },
+      { who: 'atlas-ib.eth', qty: '2,640', prop: 'Villa Ombak', ago: '1m ago' }
     ];
     const feed = events.concat(events);
 
@@ -396,15 +499,15 @@ class Component extends DCLogic {
     }));
 
     const sorts = ['Net yield', 'Newest', 'Price', 'Funded %'];
-    const tokenCount = Math.floor(amount / 31.2);
+    const tokenCount = Math.floor(amount / 14.2);
 
     return {
-      accent, nav, presets, ranges, trending,
+      accent, nav, presets, ranges, trending, featured,
       rangeLabel: { '24H': 'LAST 24 HOURS', '7D': 'LAST 7 DAYS', '30D': 'LAST 30 DAYS' }[this.state.range],
       amount: '$' + amount.toLocaleString('en-US') + '.00',
       amtInk: amount ? '#DCE5E6' : '#5B6769',
       tokens: tokenCount.toLocaleString('en-US'),
-      ownership: ((tokenCount / 179000) * 100).toFixed(3) + '%',
+      ownership: ((tokenCount / 155000) * 100).toFixed(3) + '%',
       sortLabel: sorts[this.state.sort],
       cycleSort: () => this.setState({ sort: (this.state.sort + 1) % sorts.length }),
       toggleLive: () => this.setState({ live: !this.state.live }),
@@ -414,24 +517,22 @@ class Component extends DCLogic {
 
       feed,
       side: [
-        { sym: 'RESILIS', name: 'Marés 14', sponsor: 'ATLAS IBERIA', tag: '10X DEMAND', tagColor: '#B4C2C4',
-          blurb: '38-unit residential block two streets off the Tagus, fully let, 4-year sponsor track record.',
-          raised: '$2.4M / 3.9M', pct: '62%',
-          art: 'linear-gradient(160deg, #2A1020 0%, #150A12 60%, #0D0D10 100%)' },
-        { sym: 'RETLMX', name: 'Roma Norte', sponsor: 'CASA VERDE', tag: 'CLOSING 48H', tagColor: '#B4C2C4',
-          blurb: 'Six retail bays on Álvaro Obregón. 11.7% net yield, the highest on the board this quarter.',
-          raised: '$1.8M / 1.9M', pct: '94%',
-          art: 'linear-gradient(160deg, #0E2419 0%, #0B1710 60%, #0D0D10 100%)' }
+        { sym: 'TANAH', name: 'Tanah Lembut', sponsor: 'BUMI GROUP', tag: 'HIGH DEMAND', tagColor: '#B4C2C4',
+          blurb: 'Five-bedroom compound two rice fields back from Pererenan beach. Booked 84 percent of nights last season.',
+          raised: '$1.9M / 2.6M', pct: '73%', art: this.villa(4471, 'estate', accent), bg: 'linear-gradient(170deg, #123034 0%, #0C2124 52%, #060C0D 100%)' },
+        { sym: 'BANYU', name: 'Banyu Pool Suites', sponsor: 'OMBAK LIVING', tag: 'CLOSING 48H', tagColor: '#B4C2C4',
+          blurb: 'Twelve pool suites off Petitenget, managed by the operator running three Seminyak properties.',
+          raised: '$3.4M / 3.6M', pct: '94%', art: this.villa(9902, 'resort', accent), bg: 'linear-gradient(170deg, #123034 0%, #0C2124 52%, #060C0D 100%)' }
       ],
       cols: ['PROPERTY', 'TYPE', 'SPONSOR', 'TOKEN PRICE', 'STATUS', 'LINKS'],
       rows: [
-        { name: 'Quay Street Micro-Offices', sym: 'AUS4', type: 'Office', sponsor: 'Harbourline', price: '$27.60',
+        { name: 'Karang Cliff Villas', sym: 'KARANG', type: 'Villa', sponsor: 'Karang Capital', price: '$26.80',
+          state: 'OPEN · 61% FUNDED', stateColor: '#91A0A2', swatch: 'linear-gradient(140deg,#1A3A3B,#0B201F)' },
+        { name: 'Uma Sari Estate', sym: 'UMASARI', type: 'Estate', sponsor: 'Sawah Partners', price: '$31.40',
           state: 'OPEN · 48% FUNDED', stateColor: '#91A0A2', swatch: 'linear-gradient(140deg,#1A3A3B,#0B201F)' },
-        { name: 'Neukölln Courtyard Blocks', sym: 'RESIBER', type: 'Residential', sponsor: 'Hofgut', price: '$31.20',
-          state: 'OPEN · 73% FUNDED', stateColor: '#91A0A2', swatch: 'linear-gradient(140deg,#1A3A3B,#0B201F)' },
-        { name: 'Maasvlakte Cold Storage', sym: 'WHSERTM', type: 'Industrial', sponsor: 'Delta Kern', price: '$14.75',
-          state: 'OPEN · 31% FUNDED', stateColor: '#91A0A2', swatch: 'linear-gradient(140deg,#1A3A3B,#0B201F)' },
-        { name: 'Ridgeline Logistics Park', sym: 'WHSEATX', type: 'Industrial', sponsor: 'Ridgeline RE', price: '$18.40',
+        { name: 'Sawah Dua Parcel', sym: 'SAWAH2', type: 'Land', sponsor: 'Sawah Partners', price: '$8.60',
+          state: 'OPEN · 22% FUNDED', stateColor: '#91A0A2', swatch: 'linear-gradient(140deg,#1A3A3B,#0B201F)' },
+        { name: 'Villa Ombak', sym: 'OMBAK', type: 'Villa', sponsor: 'Ombak Living', price: '$14.20',
           state: 'TRADING ON PARCEL DEX', stateColor: '#91A0A2', swatch: 'linear-gradient(140deg,#1A3A3B,#0B201F)' }
       ]
     };

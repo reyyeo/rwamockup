@@ -96,7 +96,7 @@
   <div class="panel" style="margin: 20px 34px 0;">
     <div style="display: flex; align-items: center; padding: 16px 22px; border-bottom: 1px solid rgba(255,255,255,.11);">
       <span style="font-size: 15px; font-weight: 700;">Holdings</span>
-      <span class="mono" style="font-size: 11.5px; color: #697577; margin-left: 12px;">5 deeds · 4,918 tokens</span>
+      <span class="mono" style="font-size: 11.5px; color: #697577; margin-left: 12px;">5 villas · 3,648 tokens</span>
       <div style="flex-grow: 1;"></div>
       <button class="btn mono" style="height: 34px; padding: 0 15px; border-radius: 11px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.11); color: #91A0A2; font-size: 12px;">Export CSV</button>
     </div>
@@ -152,34 +152,34 @@ class Component extends DCLogic {
     return {
       accent, ranges,
       claimable: claimed ? '$0.00' : '$284.19',
-      claimSub: claimed ? 'Claimed — $284.19 sent to your wallet' : 'from 5 deeds, 3 weeks accrued',
+      claimSub: claimed ? 'Claimed — $284.19 sent to your wallet' : 'from 5 villas, 3 weeks accrued',
       claim: () => this.setState({ claimed: !claimed }),
       claimInk: claimed ? '#DCE5E6' : '#07201F',
       claimLabel: claimed ? '✓ Claimed' : 'Claim rent',
       claimBg: claimed ? 'rgba(255,255,255,.16)' : '#6CC1C6',
 
       alloc: [
-        { label: 'Industrial', pct: '46%', color: accent },
-        { label: 'Residential', pct: '28%', color: 'rgba(255,255,255,.30)' },
-        { label: 'Retail', pct: '17%', color: 'rgba(255,255,255,.18)' },
-        { label: 'Office', pct: '9%', color: 'rgba(255,255,255,.10)' }
+        { label: 'Villas', pct: '46%', color: accent },
+        { label: 'Estates', pct: '28%', color: 'rgba(255,255,255,.30)' },
+        { label: 'Resorts', pct: '17%', color: 'rgba(255,255,255,.18)' },
+        { label: 'Land', pct: '9%', color: 'rgba(255,255,255,.10)' }
       ],
       cols: [
-        { label: 'DEED', align: 'left' }, { label: 'TOKENS', align: 'right' },
+        { label: 'PROPERTY', align: 'left' }, { label: 'TOKENS', align: 'right' },
         { label: 'SHARE', align: 'right' }, { label: 'VALUE', align: 'right' },
         { label: 'UNREALIZED', align: 'right' }, { label: 'RENT / YR', align: 'right' }
       ],
       holdings: [
-        { name: 'Ridgeline Logistics Park', sym: 'WHSE-ATX', tokens: '1,704', share: '0.446%', value: '$31,353.60',
-          pl: '+$2,214.40', plColor: '#B4C2C4', rent: '$2,879.76', swatch: 'linear-gradient(140deg,#1A3A3B,#0B201F)' },
-        { name: 'Marés 14 Apartments', sym: 'RESI-LIS', tokens: '412', share: '0.211%', value: '$17,345.20',
-          pl: '+$1,088.80', plColor: '#B4C2C4', rent: '$1,110.09', swatch: 'linear-gradient(140deg,#1A3A3B,#0B201F)' },
-        { name: 'Roma Norte Streetfront', sym: 'RETL-CDMX', tokens: '1,180', share: '0.612%', value: '$11,623.00',
-          pl: '+$944.00', plColor: '#B4C2C4', rent: '$1,359.89', swatch: 'linear-gradient(140deg,#1A3A3B,#0B201F)' },
-        { name: 'Quay Street Micro-Offices', sym: 'AUS4', tokens: '224', share: '0.058%', value: '$6,182.40',
-          pl: '−$318.08', plColor: '#818F92', rent: '$482.23', swatch: 'linear-gradient(140deg,#1A3A3B,#0B201F)' },
-        { name: 'Maasvlakte Cold Storage', sym: 'WHSE-RTM', tokens: '128', share: '0.019%', value: '$1,888.00',
-          pl: '+$189.10', plColor: '#B4C2C4', rent: '$194.46', swatch: 'linear-gradient(140deg,#1A3A3B,#0B201F)' }
+        { name: 'Villa Ombak', sym: 'OMBAK', tokens: '1,704', share: '1.099%', value: '$24,196.80',
+          pl: '+$2,214.40', plColor: '#B4C2C4', rent: '$2,266.32', swatch: 'linear-gradient(140deg,#1A3A3B,#0B201F)' },
+        { name: 'Karang Cliff Villas', sym: 'KARANG', tokens: '412', share: '0.294%', value: '$11,041.60',
+          pl: '+$1,088.80', plColor: '#B4C2C4', rent: '$1,020.94', swatch: 'linear-gradient(140deg,#1A3A3B,#0B201F)' },
+        { name: 'Uma Sari Estate', sym: 'UMASARI', tokens: '1,180', share: '0.612%', value: '$37,052.00',
+          pl: '+$944.00', plColor: '#B4C2C4', rent: '$2,548.80', swatch: 'linear-gradient(140deg,#1A3A3B,#0B201F)' },
+        { name: 'Banyu Pool Suites', sym: 'BANYU', tokens: '224', share: '0.058%', value: '$4,424.00',
+          pl: '−$318.08', plColor: '#818F92', rent: '$309.68', swatch: 'linear-gradient(140deg,#1A3A3B,#0B201F)' },
+        { name: 'Sawah Dua Parcel', sym: 'SAWAH2', tokens: '128', share: '0.019%', value: '$1,100.80',
+          pl: '+$189.10', plColor: '#B4C2C4', rent: '$0.00', swatch: 'linear-gradient(140deg,#1A3A3B,#0B201F)' }
       ]
     };
   }

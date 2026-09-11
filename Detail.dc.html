@@ -41,7 +41,7 @@
     <button class="btn panel" style="width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,.075);">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#DCE5E6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m14 5-7 7 7 7"/></svg>
     </button>
-    <span class="mono" style="font-size: 12px; letter-spacing: .1em; color: #697577;">EXPLORE / INDUSTRIAL / <span style="color: #DCE5E6;">WHSE-ATX</span></span>
+    <span class="mono" style="font-size: 12px; letter-spacing: .1em; color: #697577;">EXPLORE / VILLAS / <span style="color: #DCE5E6;">OMBAK</span></span>
     <div style="flex-grow: 1;"></div>
     <div class="panel mono" style="display: flex; align-items: center; gap: 8px; padding: 8px 12px; font-size: 11.5px; color: #818F92;">
       <span class="blip" style="width: 6px; height: 6px; border-radius: 50%; background: #6CC1C6;"></span>ORACLE SYNCED 9s AGO
@@ -59,21 +59,21 @@
 
       <div class="panel scan" style="height: 300px; position: relative; overflow: hidden; background: linear-gradient(160deg, #153030 0%, #0D2122 58%, #060B0C 100%);">
         <div style="position: absolute; inset: 0; background: radial-gradient(90% 70% at 76% 4%, rgba(255,255,255,.09), transparent 60%);"></div>
-        <svg viewBox="0 0 340 160" width="700" height="330" fill="none" style="position: absolute; bottom: -14px; left: 18px;">
-          <path d="M10 138V78l54-30 54 30v60z" stroke="#B4C2C4" stroke-width="1.8" stroke-linejoin="round"/>
-          <path d="M118 138V62l46-26 46 26v76z" stroke="#8D9EA1" stroke-width="1.8" stroke-linejoin="round"/>
-          <path d="M210 138V88l40-22 40 22v50z" stroke="#DCE5E6" stroke-opacity=".55" stroke-width="1.8" stroke-linejoin="round"/>
-          <path d="M26 138v-22h18v22M56 138v-22h16v22M88 138v-22h16v22M134 138v-26h20v26M168 138v-26h20v26M226 138v-18h16v18M258 138v-18h16v18" stroke="#DCE5E6" stroke-opacity=".4" stroke-width="1.3"/>
-          <path d="M0 138h340" stroke="#DCE5E6" stroke-opacity=".7" stroke-width="1.8"/>
-          <circle cx="164" cy="26" r="3" fill="{{accent}}"/><circle cx="64" cy="44" r="3" fill="#697577"/>
-        </svg>
+<svg viewBox="0 0 300 180" width="100%" height="100%" preserveAspectRatio="xMidYMax slice" style="position: absolute; inset: 0;">
+            <sc-for list="{{art.rects}}" as="sh" hint-placeholder-count="30">
+              <rect x="{{sh.x}}" y="{{sh.y}}" width="{{sh.w}}" height="{{sh.h}}" fill="{{sh.f}}" rx="{{sh.rx}}"></rect>
+            </sc-for>
+            <sc-for list="{{art.paths}}" as="ph" hint-placeholder-count="24">
+              <path d="{{ph.d}}" fill="{{ph.f}}" stroke="{{ph.s}}" stroke-width="{{ph.sw}}" stroke-linecap="round" stroke-linejoin="round"></path>
+            </sc-for>
+          </svg>
         <div style="position: absolute; top: 18px; left: 20px; display: flex; gap: 8px;">
-          <span class="mono" style="font-size: 10.5px; letter-spacing: .12em; padding: 5px 9px; border-radius: 11px; background: rgba(6,10,10,.82); color: #DCE5E6;">WHSE-ATX</span>
-          <span class="mono" style="font-size: 10.5px; letter-spacing: .12em; padding: 5px 9px; border-radius: 11px; background: rgba(6,10,10,.82); color: #B4C2C4;">DEED VERIFIED · TRAVIS CO.</span>
+          <span class="mono" style="font-size: 10.5px; letter-spacing: .12em; padding: 5px 9px; border-radius: 11px; background: rgba(6,10,10,.82); color: #DCE5E6;">OMBAK</span>
+          <span class="mono" style="font-size: 10.5px; letter-spacing: .12em; padding: 5px 9px; border-radius: 11px; background: rgba(6,10,10,.82); color: #B4C2C4;">TITLE VERIFIED · BADUNG REGENCY</span>
         </div>
         <div style="position: absolute; bottom: 20px; right: 22px; text-align: right;">
-          <div style="font-size: 34px; font-weight: 700; letter-spacing: -.03em;">Ridgeline Logistics Park</div>
-          <div class="mono" style="font-size: 12px; color: #91A0A2; margin-top: 6px; letter-spacing: .06em;">AUSTIN, TX · 214,000 SQ FT · BUILT 2019</div>
+          <div style="font-size: 34px; font-weight: 700; letter-spacing: -.03em;">Villa Ombak</div>
+          <div class="mono" style="font-size: 12px; color: #91A0A2; margin-top: 6px; letter-spacing: .06em;">CANGGU, BALI · 4 BED · 480 SQM · BUILT 2021</div>
         </div>
       </div>
 
@@ -98,7 +98,7 @@
           <sc-if value="{{isOverview}}" hint-placeholder-val="{{true}}">
             <div>
               <p style="margin: 0; font-size: 14.5px; line-height: 1.68; color: #A2B0B2; max-width: 720px; text-wrap: pretty;">
-                A four-building cross-dock park on the SH-130 corridor, leased to three regional 3PL tenants on triple-net terms through 2031. The deed sits in a Delaware series LLC; 382,000 WHSE-ATX tokens map 1:1 to membership units, and net operating income is swept to the rent vault every Friday at 00:00 UTC.
+                A four-bedroom open-pavilion villa a five-minute walk from Batu Bolong beach, let nightly through a Canggu operator with a 4.9 rating across 340 stays. The freehold title is held in a PT PMA; 155,000 OMBAK tokens map 1:1 to shares in it, and net rental income after management and tax is swept to the rent vault every Friday at 00:00 UTC.
               </p>
               <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 36px; margin-top: 22px; max-width: 720px;">
                 <sc-for list="{{facts}}" as="f" hint-placeholder-count="6">
@@ -138,7 +138,7 @@
                 </sc-for>
               </div>
               <div class="mono" style="font-size: 11.5px; color: #697577; margin-top: 18px; letter-spacing: .05em;">
-                NET RENT PER TOKEN, WEEKLY SWEEP · TRAILING 12 MONTHS · <span style="color: #DCE5E6;">$1.69 CUMULATIVE</span>
+                NET RENT PER TOKEN, WEEKLY SWEEP · TRAILING 12 MONTHS · <span style="color: #DCE5E6;">$1.33 CUMULATIVE</span>
               </div>
             </div>
           </sc-if>
@@ -169,7 +169,7 @@
       <div style="display: flex; align-items: baseline; justify-content: space-between; margin-top: 20px;">
         <div>
           <div class="mono" style="font-size: 10px; letter-spacing: .14em; color: #586264;">LAST PRICE</div>
-          <div class="mono" style="font-size: 30px; margin-top: 7px; letter-spacing: -.03em;">$18.40</div>
+          <div class="mono" style="font-size: 30px; margin-top: 7px; letter-spacing: -.03em;">$14.20</div>
         </div>
         <div class="mono" style="font-size: 13px; color: #DCE5E6;">+2.11% 24h</div>
       </div>
@@ -177,7 +177,7 @@
       <div style="margin-top: 24px;">
         <div style="display: flex; justify-content: space-between; align-items: baseline;">
           <span class="mono" style="font-size: 10px; letter-spacing: .14em; color: #586264;">TOKENS</span>
-          <span class="mono" style="font-size: 11.5px; color: #697577;">balance 0 · max 18,982</span>
+          <span class="mono" style="font-size: 11.5px; color: #697577;">balance 0 · max 7,690</span>
         </div>
         <div style="display: flex; align-items: center; gap: 10px; height: 54px; margin-top: 9px; padding: 0 8px 0 15px; border: 1px solid rgba(255,255,255,.15); border-radius: 11px; background: rgba(255,255,255,.035);">
           <span class="mono" style="font-size: 24px; letter-spacing: -.02em;">{{qty}}</span>
@@ -212,7 +212,7 @@
 
       <button class="btn" onClick="{{confirm}}" style="width: 100%; height: 52px; margin-top: 14px; border-radius: 11px; background: {{ctaBg}}; color: {{ctaInk}}; font-size: 15px; font-weight: 700;">{{ctaLabel}}</button>
       <div class="mono" style="font-size: 10.5px; color: #586264; margin-top: 11px; line-height: 1.6; letter-spacing: .04em;">
-        REG D 506(c) · ACCREDITED WALLETS ONLY · TRANSFERS LOCKED 12 MONTHS FROM MINT
+        OFFSHORE OFFERING · ACCREDITED WALLETS ONLY · TRANSFERS LOCKED 12 MONTHS FROM MINT
       </div>
     </div>
   </div>
@@ -229,6 +229,99 @@ class Component extends DCLogic {
     this.state = { tab: 'overview', side: 'buy', qty: 620, confirmed: false };
   }
 
+  // Seeded Bali-villa elevation: open pavilions under steep alang-alang roofs,
+  // timber posts, a pool in front, palms. Returns flat shape data for one card.
+  villa(seed, kind, accent) {
+    let t = (seed >>> 0) || 7;
+    const rnd = () => {
+      t = (t + 0x6D2B79F5) >>> 0;
+      let x = Math.imul(t ^ (t >>> 15), 1 | t);
+      x = (x + Math.imul(x ^ (x >>> 7), 61 | x)) ^ x;
+      return ((x ^ (x >>> 14)) >>> 0) / 4294967296;
+    };
+    const ri = (a, b) => Math.floor(a + rnd() * (b - a + 0.999));
+    const rf = (a, b) => a + rnd() * (b - a);
+    const f1 = (v) => +v.toFixed(1);
+
+    const W = 300, H = 180, ground = H - 30;
+    const rects = [], paths = [];
+    const R = (x, y, w, h, f, rx) => rects.push({ x: f1(x), y: f1(y), w: f1(Math.max(w, .4)), h: f1(Math.max(h, .4)), f: f, rx: rx || 0 });
+    const P = (d, f, s, sw) => paths.push({ d: d, f: f || 'none', s: s || 'none', sw: sw || 0 });
+
+    const spec = {
+      villa:  { n: [2, 3], bw: [62, 88], bh: [26, 34], roof: [26, 34], pool: 1 },
+      resort: { n: [3, 4], bw: [46, 66], bh: [22, 30], roof: [22, 28], pool: 1 },
+      estate: { n: [2, 3], bw: [70, 96], bh: [28, 38], roof: [30, 38], pool: 1 },
+      land:   { n: [1, 1], bw: [54, 70], bh: [18, 24], roof: [20, 26], pool: 0 }
+    }[kind] || { n: [2, 3], bw: [62, 88], bh: [26, 34], roof: [26, 34], pool: 1 };
+
+    // terraced ground: rice-paddy steps behind the pavilions
+    for (let i = 0; i < 3; i++) R(0, ground - 4 - i * 7, W, 1, 'rgba(255,255,255,' + (0.05 + i * 0.015) + ')');
+
+    const n = ri(spec.n[0], spec.n[1]);
+    const ws = [];
+    let total = 0;
+    for (let i = 0; i < n; i++) { const w = rf(spec.bw[0], spec.bw[1]); ws.push(w); total += w; }
+    const gap = 9;
+    let x = (W - total - (n - 1) * gap) / 2;
+
+    for (let i = 0; i < n; i++) {
+      const bw = ws[i];
+      const bh = rf(spec.bh[0], spec.bh[1]);
+      const rh = rf(spec.roof[0], spec.roof[1]);
+      const lift = i === 1 ? rf(4, 10) : rf(0, 4);          // stagger the middle pavilion
+      const by = ground - lift - bh;
+      const eave = rf(7, 11);
+
+      R(x - 3, ground - lift - 3, bw + 6, 3.4, 'rgba(255,255,255,.16)', .6);          // stone plinth
+      R(x, by, bw, bh, 'rgba(210,236,238,.10)', .6);                                   // open interior
+      R(x + 2, by + bh * .34, bw - 4, bh * .58, 'rgba(226,244,245,.30)', .6);          // lit room behind posts
+
+      const posts = ri(3, 5);
+      for (let p = 0; p < posts; p++) R(x + 2 + ((bw - 6) / (posts - 1)) * p, by, 2.1, bh, 'rgba(255,255,255,.30)');
+
+      // steep alang-alang roof with deep eaves
+      const apex = by - rh, lx = x - eave, rx2 = x + bw + eave;
+      P('M' + f1(lx) + ' ' + f1(by + 1) + ' L' + f1(x + bw / 2) + ' ' + f1(apex) + ' L' + f1(rx2) + ' ' + f1(by + 1) + ' Z', 'rgba(255,255,255,.20)');
+      P('M' + f1(lx) + ' ' + f1(by + 1) + ' L' + f1(x + bw / 2) + ' ' + f1(apex) + ' L' + f1(x + bw / 2) + ' ' + f1(by + 1) + ' Z', 'rgba(255,255,255,.10)');
+      P('M' + f1(x + bw / 2) + ' ' + f1(apex) + ' L' + f1(x + bw / 2) + ' ' + f1(by + 1), 'none', 'rgba(255,255,255,.34)', 1);
+      for (let s = 1; s <= 3; s++) {                                                    // thatch courses
+        const yy = by + 1 - (rh / 4) * s, half = ((rx2 - lx) / 2) * (1 - s / 4.2);
+        P('M' + f1(x + bw / 2 - half) + ' ' + f1(yy) + ' L' + f1(x + bw / 2 + half) + ' ' + f1(yy), 'none', 'rgba(255,255,255,.13)', 1);
+      }
+      if (rnd() > .45) R(x + bw * .3, by + bh * .2, bw * .18, 2, accent, .6);           // a lit lantern
+      x += bw + gap;
+    }
+
+    // pool + loungers in the foreground
+    if (spec.pool) {
+      const pw = rf(W * .52, W * .72), px = (W - pw) / 2, py = ground + 6, ph = 15;
+      R(px, py, pw, ph, 'rgba(108,193,198,.30)', 2.4);
+      R(px, py, pw, 1.4, 'rgba(226,244,245,.42)', 1);
+      for (let i = 0; i < 3; i++) R(px + rf(6, pw * .6), py + 4 + i * 4, rf(10, 26), .9, 'rgba(226,244,245,.26)', .5);
+      R(px - 16, py + 2, 12, 2.4, 'rgba(255,255,255,.22)', .8);
+      R(px + pw + 4, py + 2, 12, 2.4, 'rgba(255,255,255,.22)', .8);
+    } else {
+      for (let i = 0; i < 5; i++) R(30 + i * 50, ground + 8 + (i % 2) * 5, 34, .9, 'rgba(226,244,245,.20)', .5);
+    }
+
+    // palms
+    const palms = ri(2, 3);
+    for (let i = 0; i < palms; i++) {
+      const pxx = i === 0 ? rf(10, 34) : rf(W - 48, W - 12);
+      const ph2 = rf(46, 74), lean = rf(-5, 5), topY = ground - ph2;
+      P('M' + f1(pxx) + ' ' + f1(ground) + ' Q' + f1(pxx + lean) + ' ' + f1(ground - ph2 * .55) + ' ' + f1(pxx + lean * 2) + ' ' + f1(topY), 'none', 'rgba(255,255,255,.34)', 1.6);
+      const tipX = pxx + lean * 2;
+      for (let fr = 0; fr < 5; fr++) {
+        const ang = -0.5 + fr * 0.5, len = rf(12, 19);
+        P('M' + f1(tipX) + ' ' + f1(topY) + ' Q' + f1(tipX + Math.cos(ang) * len * .6) + ' ' + f1(topY - 6) + ' ' + f1(tipX + Math.cos(ang) * len) + ' ' + f1(topY + Math.sin(Math.abs(ang)) * 7 + 2), 'none', 'rgba(255,255,255,.30)', 1.4);
+      }
+    }
+
+    R(0, ground, W, 1.4, 'rgba(255,255,255,.30)');
+    return { rects: rects, paths: paths };
+  }
+
   pill(on, accent) {
     return 'height: 34px; padding: 0 15px; border-radius: 11px; font-size: 12px; letter-spacing: .06em;'
       + (on
@@ -238,7 +331,7 @@ class Component extends DCLogic {
 
   renderVals() {
     const accent = this.props.accent ?? '#6CC1C6';
-    const px = 18.4;
+    const px = 14.2;
     const qty = this.state.qty;
     const gross = qty * px;
     const fee = gross * 0.0075;
@@ -265,13 +358,13 @@ class Component extends DCLogic {
     }));
 
     const book = [
-      { px: '18.62', size: '1,940', total: '36,122', color: '#818F92', depth: '38%', wash: 'rgba(255,255,255,.04)' },
-      { px: '18.55', size: '820', total: '15,211', color: '#818F92', depth: '22%', wash: 'rgba(255,255,255,.04)' },
-      { px: '18.47', size: '410', total: '7,572', color: '#818F92', depth: '12%', wash: 'rgba(255,255,255,.04)' },
-      { px: '18.40', size: '— spread 0.08 —', total: '', color: '#DCE5E6', depth: '0%', wash: 'transparent' },
-      { px: '18.32', size: '2,610', total: '47,815', color: '#B4C2C4', depth: '52%', wash: 'rgba(255,255,255,.05)' },
-      { px: '18.24', size: '3,880', total: '70,771', color: '#B4C2C4', depth: '74%', wash: 'rgba(255,255,255,.05)' },
-      { px: '18.10', size: '5,120', total: '92,672', color: '#B4C2C4', depth: '96%', wash: 'rgba(255,255,255,.05)' }
+      { px: '14.62', size: '1,940', total: '36,122', color: '#818F92', depth: '38%', wash: 'rgba(255,255,255,.04)' },
+      { px: '14.44', size: '820', total: '15,211', color: '#818F92', depth: '22%', wash: 'rgba(255,255,255,.04)' },
+      { px: '14.31', size: '410', total: '7,572', color: '#818F92', depth: '12%', wash: 'rgba(255,255,255,.04)' },
+      { px: '14.20', size: '— spread 0.08 —', total: '', color: '#DCE5E6', depth: '0%', wash: 'transparent' },
+      { px: '14.08', size: '2,610', total: '47,815', color: '#B4C2C4', depth: '52%', wash: 'rgba(255,255,255,.05)' },
+      { px: '13.96', size: '3,880', total: '70,771', color: '#B4C2C4', depth: '74%', wash: 'rgba(255,255,255,.05)' },
+      { px: '13.82', size: '5,120', total: '92,672', color: '#B4C2C4', depth: '96%', wash: 'rgba(255,255,255,.05)' }
     ];
 
     const rent = [12, 14, 13, 15, 14, 16, 15, 13, 17, 16, 18, 17];
@@ -284,6 +377,7 @@ class Component extends DCLogic {
 
     return {
       accent, tabs, sides, presets, book, bars,
+      art: this.villa(20261, 'villa', accent),
       isOverview: this.state.tab === 'overview',
       isBook: this.state.tab === 'book',
       isRent: this.state.tab === 'rent',
@@ -301,32 +395,32 @@ class Component extends DCLogic {
       ctaInk: '#05090A',
 
       lines: [
-        { k: 'Ownership of deed', v: ((qty / 382000) * 100).toFixed(3) + '%', color: '#DCE5E6' },
-        { k: 'Est. rent / year', v: '$' + (qty * 1.69).toFixed(2), color: '#DCE5E6' },
+        { k: 'Ownership of deed', v: ((qty / 155000) * 100).toFixed(3) + '%', color: '#DCE5E6' },
+        { k: 'Est. rent / year', v: '$' + (qty * 1.33).toFixed(2), color: '#DCE5E6' },
         { k: 'Subtotal', v: '$' + gross.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }), color: '#DCE5E6' },
         { k: 'Protocol fee (0.75%)', v: '$' + fee.toFixed(2), color: '#818F92' }
       ],
       total: '$' + (gross + fee).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }),
 
       kpis: [
-        { label: 'NET YIELD', value: '9.2%', sub: 'paid weekly', color: '#DCE5E6' },
-        { label: 'TOKENS OUTSTANDING', value: '382,000', sub: '87% of raise sold', color: '#DCE5E6' },
-        { label: 'OCCUPANCY', value: '100%', sub: '3 tenants, NNN', color: '#DCE5E6' },
-        { label: 'HOLDERS', value: '1,482', sub: '+214 this month', color: '#DCE5E6' }
+        { label: 'NET YIELD', value: '9.4%', sub: 'paid weekly', color: '#DCE5E6' },
+        { label: 'TOKENS OUTSTANDING', value: '155,000', sub: '73% of raise sold', color: '#DCE5E6' },
+        { label: 'OCCUPANCY', value: '84%', sub: 'nightly, trailing 12m', color: '#DCE5E6' },
+        { label: 'HOLDERS', value: '968', sub: '+131 this month', color: '#DCE5E6' }
       ],
       facts: [
-        { k: 'Deed custodian', v: 'Travis Co. / Series LLC' },
+        { k: 'Title structure', v: 'Hak Milik via PT PMA' },
         { k: 'Token standard', v: 'ERC-20 (ERC-3643)' },
-        { k: 'WALT', v: '6.4 years' },
-        { k: 'Appraised value', v: '$7.04M' },
+        { k: 'Avg. nightly rate', v: '$412' },
+        { k: 'Appraised value', v: '$2.2M' },
         { k: 'Debt on asset', v: 'None' },
         { k: 'Rent sweep', v: 'Fridays 00:00 UTC' }
       ],
       docs: [
         { name: 'Offering circular & risk factors', meta: 'PDF · 2.4 MB' },
-        { name: 'Independent appraisal — CBRE, Mar 2026', meta: 'PDF · 8.1 MB' },
-        { name: 'Title insurance & deed of trust', meta: 'PDF · 1.2 MB' },
-        { name: 'Tenant rent roll (redacted)', meta: 'CSV · 44 KB' },
+        { name: 'Independent appraisal — Colliers Bali, Mar 2026', meta: 'PDF · 8.1 MB' },
+        { name: 'Notarial deed & PT PMA documents', meta: 'PDF · 1.2 MB' },
+        { name: 'Booking & occupancy history', meta: 'CSV · 44 KB' },
         { name: 'Token contract audit — Spearbit', meta: 'PDF · 900 KB' }
       ]
     };
