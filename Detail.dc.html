@@ -9,30 +9,36 @@
 <helmet>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
   <style>
-    body { margin: 0; background: #0A0A0C; color: #F2F2F5;
+    body { margin: 0; background:  radial-gradient(58% 44% at 14% 2%, rgba(124,92,255,.20) 0%, transparent 62%),
+      radial-gradient(52% 40% at 88% 6%, rgba(124,92,255,.20) 0%, transparent 62%),
+      radial-gradient(46% 42% at 66% 96%, rgba(59,227,126,.13) 0%, transparent 64%),
+      #08080B; background-attachment: fixed; color: #F2F2F5;
       font-family: 'Space Grotesk', 'Trebuchet MS', system-ui, sans-serif; }
-    a { color: #FF3D8A; text-decoration: none; } a:hover { color: #3BE37E; }
+    a { color: #7C5CFF; text-decoration: none; } a:hover { color: #3BE37E; }
     .mono { font-family: 'IBM Plex Mono', 'DejaVu Sans Mono', ui-monospace, monospace; }
-    .panel { background: #111114; border: 1px solid #232329; border-radius: 4px; }
+    .panel { background: rgba(255,255,255,.045); backdrop-filter: blur(26px) saturate(150%);
+      -webkit-backdrop-filter: blur(26px) saturate(150%);
+      border: 1px solid rgba(255,255,255,.10); border-radius: 18px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.10), 0 28px 60px -34px rgba(0,0,0,.9); }
     .btn { cursor: pointer; border: none; font-family: inherit; }
     .scan { background-image: repeating-linear-gradient(0deg, rgba(255,255,255,.045) 0 1px, transparent 1px 4px); }
     input[type=range] { -webkit-appearance: none; appearance: none; width: 100%; height: 4px;
-      border-radius: 999px; background: #26262C; outline: none; }
+      border-radius: 999px; background: rgba(255,255,255,.13); outline: none; }
     input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none;
-      width: 20px; height: 20px; border-radius: 3px; background: #F2F2F5; cursor: grab;
-      box-shadow: 0 0 0 4px rgba(255,61,138,.25); }
-    input[type=range]::-moz-range-thumb { width: 20px; height: 20px; border: none; border-radius: 3px;
-      background: #F2F2F5; cursor: grab; box-shadow: 0 0 0 4px rgba(255,61,138,.25); }
+      width: 20px; height: 20px; border-radius: 11px; background: #F2F2F5; cursor: grab;
+      box-shadow: 0 0 0 4px rgba(124,92,255,.25); }
+    input[type=range]::-moz-range-thumb { width: 20px; height: 20px; border: none; border-radius: 11px;
+      background: #F2F2F5; cursor: grab; box-shadow: 0 0 0 4px rgba(124,92,255,.25); }
     .blip { animation: blip 1.6s ease-in-out infinite; }
     @keyframes blip { 0%,100% { opacity: 1; } 50% { opacity: .25; } }
   </style>
 </helmet>
 
-<div style="--a: {{accent}}; padding: 0 0 40px; background: #0A0A0C;">
+<div style="--a: {{accent}}; padding: 0 0 40px; background: transparent;">
 
   <!-- breadcrumb bar -->
-  <div style="display: flex; align-items: center; gap: 14px; padding: 16px 34px; border-bottom: 1px solid #1C1C21;">
-    <button class="btn panel" style="width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; background: #17171B;">
+  <div style="display: flex; align-items: center; gap: 14px; padding: 16px 34px; border-bottom: 1px solid rgba(255,255,255,.085);">
+    <button class="btn panel" style="width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,.075);">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#F2F2F5" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m14 5-7 7 7 7"/></svg>
     </button>
     <span class="mono" style="font-size: 12px; letter-spacing: .1em; color: #7C7C87;">BOARD / INDUSTRIAL / <span style="color: #F2F2F5;">WHSE-ATX</span></span>
@@ -40,7 +46,7 @@
     <div class="panel mono" style="display: flex; align-items: center; gap: 8px; padding: 8px 12px; font-size: 11.5px; color: #8A8A93;">
       <span class="blip" style="width: 6px; height: 6px; border-radius: 50%; background: #3BE37E;"></span>ORACLE SYNCED 9s AGO
     </div>
-    <button class="btn panel" style="display: flex; align-items: center; gap: 9px; padding: 9px 14px; background: #17171B; color: #F2F2F5; font-size: 13px; font-weight: 500;">
+    <button class="btn panel" style="display: flex; align-items: center; gap: 9px; padding: 9px 14px; background: rgba(255,255,255,.075); color: #F2F2F5; font-size: 13px; font-weight: 500;">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="{{accent}}" stroke-width="1.8" stroke-linejoin="round"><rect x="2.5" y="5.5" width="19" height="13" rx="2.5"/><path d="M16.5 12h3"/></svg>
       0x9F2A…C41D
     </button>
@@ -52,7 +58,7 @@
     <div style="display: flex; flex-direction: column; gap: 20px; min-width: 0;">
 
       <div class="panel scan" style="height: 300px; position: relative; overflow: hidden; background: linear-gradient(160deg, #2B0F1E 0%, #140A10 55%, #0C0C0F 100%);">
-        <div style="position: absolute; inset: 0; background: radial-gradient(90% 70% at 76% 4%, rgba(255,61,138,.30), transparent 60%);"></div>
+        <div style="position: absolute; inset: 0; background: radial-gradient(90% 70% at 76% 4%, rgba(124,92,255,.30), transparent 60%);"></div>
         <svg viewBox="0 0 340 160" width="700" height="330" fill="none" style="position: absolute; bottom: -14px; left: 18px;">
           <path d="M10 138V78l54-30 54 30v60z" stroke="{{accent}}" stroke-width="1.8" stroke-linejoin="round"/>
           <path d="M118 138V62l46-26 46 26v76z" stroke="#3BE37E" stroke-width="1.8" stroke-linejoin="round"/>
@@ -62,8 +68,8 @@
           <circle cx="164" cy="26" r="3" fill="#3BE37E"/><circle cx="64" cy="44" r="3" fill="{{accent}}"/>
         </svg>
         <div style="position: absolute; top: 18px; left: 20px; display: flex; gap: 8px;">
-          <span class="mono" style="font-size: 10.5px; letter-spacing: .12em; padding: 5px 9px; border-radius: 3px; background: rgba(10,10,12,.82); color: {{accent}};">WHSE-ATX</span>
-          <span class="mono" style="font-size: 10.5px; letter-spacing: .12em; padding: 5px 9px; border-radius: 3px; background: rgba(10,10,12,.82); color: #3BE37E;">DEED VERIFIED · TRAVIS CO.</span>
+          <span class="mono" style="font-size: 10.5px; letter-spacing: .12em; padding: 5px 9px; border-radius: 11px; background: rgba(10,10,12,.82); color: {{accent}};">WHSE-ATX</span>
+          <span class="mono" style="font-size: 10.5px; letter-spacing: .12em; padding: 5px 9px; border-radius: 11px; background: rgba(10,10,12,.82); color: #3BE37E;">DEED VERIFIED · TRAVIS CO.</span>
         </div>
         <div style="position: absolute; bottom: 20px; right: 22px; text-align: right;">
           <div style="font-size: 34px; font-weight: 700; letter-spacing: -.03em;">Ridgeline Logistics Park</div>
@@ -96,7 +102,7 @@
               </p>
               <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 36px; margin-top: 22px; max-width: 720px;">
                 <sc-for list="{{facts}}" as="f" hint-placeholder-count="6">
-                  <div style="display: flex; justify-content: space-between; padding-bottom: 10px; border-bottom: 1px solid #1E1E24;">
+                  <div style="display: flex; justify-content: space-between; padding-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,.085);">
                     <span style="font-size: 13px; color: #8A8A93;">{{f.k}}</span>
                     <span class="mono" style="font-size: 13px; color: #F2F2F5;">{{f.v}}</span>
                   </div>
@@ -126,7 +132,7 @@
               <div style="display: flex; align-items: flex-end; gap: 10px; height: 148px;">
                 <sc-for list="{{bars}}" as="b" hint-placeholder-count="12">
                   <div style="flex-grow: 1; display: flex; flex-direction: column; align-items: center; gap: 9px;">
-                    <div style="width: 100%; height: {{b.h}}; border-radius: 2px; background: {{b.fill}};"></div>
+                    <div style="width: 100%; height: {{b.h}}; border-radius: 4px; background: {{b.fill}};"></div>
                     <span class="mono" style="font-size: 10px; color: #56565F;">{{b.m}}</span>
                   </div>
                 </sc-for>
@@ -139,7 +145,7 @@
           <sc-if value="{{isDocs}}" hint-placeholder-val="{{false}}">
             <div style="display: flex; flex-direction: column; gap: 10px;">
               <sc-for list="{{docs}}" as="d" hint-placeholder-count="5">
-                <div style="display: flex; align-items: center; gap: 14px; padding: 13px 15px; border: 1px solid #1E1E24; border-radius: 3px; background: #0E0E11;">
+                <div style="display: flex; align-items: center; gap: 14px; padding: 13px 15px; border: 1px solid rgba(255,255,255,.085); border-radius: 11px; background: rgba(255,255,255,.035);">
                   <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="{{accent}}" stroke-width="1.7" stroke-linejoin="round"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/></svg>
                   <span style="font-size: 13.5px;">{{d.name}}</span>
                   <span style="flex-grow: 1;"></span>
@@ -153,7 +159,7 @@
     </div>
 
     <!-- RIGHT: BUY PANEL -->
-    <div class="panel" style="padding: 20px; align-self: start; border-color: {{accent}}; box-shadow: 0 0 0 1px rgba(255,61,138,.12), 0 40px 90px -50px {{accent}};">
+    <div class="panel" style="padding: 20px; align-self: start; border-color: {{accent}}; box-shadow: 0 0 0 1px rgba(124,92,255,.12), 0 40px 90px -50px {{accent}};">
       <div style="display: flex; gap: 6px;">
         <sc-for list="{{sides}}" as="s" hint-placeholder-count="2">
           <button class="btn mono" onClick="{{s.pick}}" style="{{s.style}}">{{s.label}}</button>
@@ -173,11 +179,11 @@
           <span class="mono" style="font-size: 10px; letter-spacing: .14em; color: #56565F;">TOKENS</span>
           <span class="mono" style="font-size: 11.5px; color: #7C7C87;">balance 0 · max 18,982</span>
         </div>
-        <div style="display: flex; align-items: center; gap: 10px; height: 54px; margin-top: 9px; padding: 0 8px 0 15px; border: 1px solid #2C2C33; border-radius: 3px; background: #0D0D10;">
+        <div style="display: flex; align-items: center; gap: 10px; height: 54px; margin-top: 9px; padding: 0 8px 0 15px; border: 1px solid rgba(255,255,255,.15); border-radius: 11px; background: rgba(255,255,255,.035);">
           <span class="mono" style="font-size: 24px; letter-spacing: -.02em;">{{qty}}</span>
           <span style="flex-grow: 1;"></span>
-          <button class="btn mono" onClick="{{dec}}" style="width: 38px; height: 38px; border-radius: 3px; background: #17171B; border: 1px solid #2C2C33; color: #F2F2F5; font-size: 17px;">–</button>
-          <button class="btn mono" onClick="{{inc}}" style="width: 38px; height: 38px; border-radius: 3px; background: #17171B; border: 1px solid #2C2C33; color: #F2F2F5; font-size: 17px;">+</button>
+          <button class="btn mono" onClick="{{dec}}" style="width: 38px; height: 38px; border-radius: 11px; background: rgba(255,255,255,.075); border: 1px solid rgba(255,255,255,.15); color: #F2F2F5; font-size: 17px;">–</button>
+          <button class="btn mono" onClick="{{inc}}" style="width: 38px; height: 38px; border-radius: 11px; background: rgba(255,255,255,.075); border: 1px solid rgba(255,255,255,.15); color: #F2F2F5; font-size: 17px;">+</button>
         </div>
         <input type="range" min="1" max="6000" step="1" value="{{qtyRaw}}" onChange="{{slide}}" style="margin-top: 18px;">
         <div style="display: flex; gap: 8px; margin-top: 14px;">
@@ -187,7 +193,7 @@
         </div>
       </div>
 
-      <div style="margin-top: 22px; padding-top: 18px; border-top: 1px solid #232329; display: flex; flex-direction: column; gap: 11px;">
+      <div style="margin-top: 22px; padding-top: 18px; border-top: 1px solid rgba(255,255,255,.11); display: flex; flex-direction: column; gap: 11px;">
         <sc-for list="{{lines}}" as="l" hint-placeholder-count="4">
           <div style="display: flex; justify-content: space-between;">
             <span style="font-size: 13px; color: #8A8A93;">{{l.k}}</span>
@@ -196,7 +202,7 @@
         </sc-for>
       </div>
 
-      <div style="margin-top: 18px; padding: 15px; border-radius: 3px; background: #0D0D10; border: 1px solid #232329;">
+      <div style="margin-top: 18px; padding: 15px; border-radius: 11px; background: rgba(255,255,255,.035); border: 1px solid rgba(255,255,255,.11);">
         <div style="display: flex; justify-content: space-between; align-items: baseline;">
           <span class="mono" style="font-size: 10px; letter-spacing: .14em; color: #56565F;">YOU PAY</span>
           <span class="mono" style="font-size: 26px; letter-spacing: -.03em;">{{total}}</span>
@@ -204,7 +210,7 @@
         <div class="mono" style="font-size: 11.5px; color: #7C7C87; margin-top: 6px;">USDC on Base · gas ≈ $0.004</div>
       </div>
 
-      <button class="btn" onClick="{{confirm}}" style="width: 100%; height: 52px; margin-top: 14px; border-radius: 3px; background: {{ctaBg}}; color: {{ctaInk}}; font-size: 15px; font-weight: 700;">{{ctaLabel}}</button>
+      <button class="btn" onClick="{{confirm}}" style="width: 100%; height: 52px; margin-top: 14px; border-radius: 11px; background: {{ctaBg}}; color: {{ctaInk}}; font-size: 15px; font-weight: 700;">{{ctaLabel}}</button>
       <div class="mono" style="font-size: 10.5px; color: #56565F; margin-top: 11px; line-height: 1.6; letter-spacing: .04em;">
         REG D 506(c) · ACCREDITED WALLETS ONLY · TRANSFERS LOCKED 12 MONTHS FROM MINT
       </div>
@@ -214,7 +220,7 @@
 </x-dc>
 
 <script data-dc-script data-props='{
-  "accent": {"editor": "color", "default": "#FF3D8A", "options": ["#FF3D8A", "#3BE37E", "#7C5CFF", "#00D3FF"], "section": "Theme"},
+  "accent": {"editor": "color", "default": "#7C5CFF", "options": ["#7C5CFF", "#FF3D8A", "#3BE37E", "#00D3FF"], "section": "Theme"},
   "$preview": {"width": 1440, "height": 1180}
 }'>
 class Component extends DCLogic {
@@ -224,14 +230,14 @@ class Component extends DCLogic {
   }
 
   pill(on, accent) {
-    return 'height: 34px; padding: 0 15px; border-radius: 3px; font-size: 12px; letter-spacing: .06em;'
+    return 'height: 34px; padding: 0 15px; border-radius: 11px; font-size: 12px; letter-spacing: .06em;'
       + (on
         ? ' background: ' + accent + '; border: 1px solid ' + accent + '; color: #0A0A0C; font-weight: 600;'
-        : ' background: #16161B; border: 1px solid #232329; color: #A6A6B0;');
+        : ' background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.11); color: #A6A6B0;');
   }
 
   renderVals() {
-    const accent = this.props.accent ?? '#FF3D8A';
+    const accent = this.props.accent ?? "#7C5CFF";
     const px = 18.4;
     const qty = this.state.qty;
     const gross = qty * px;

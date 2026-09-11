@@ -1,13 +1,59 @@
 {
   "artboards": [
-    { "file": "Main.dc.html", "x": 0, "y": 0, "w": 1440, "h": 1320, "title": "Board — marketplace", "is_interactive": true },
-    { "file": "Detail.dc.html", "x": 1600, "y": 0, "w": 1440, "h": 1180, "title": "Deed detail & buy", "is_interactive": true },
-    { "file": "Portfolio.dc.html", "x": 0, "y": 1480, "w": 1440, "h": 960, "title": "Portfolio & rent vault", "is_interactive": true },
-    { "file": "Mobile.dc.html", "x": 1600, "y": 1480, "w": 390, "h": 900, "title": "Mobile — explore", "is_interactive": true }
+    {
+      "file": "Main.dc.html",
+      "x": 0,
+      "y": 0,
+      "w": 1440,
+      "h": 1620,
+      "title": "Board \u2014 marketplace",
+      "is_interactive": true
+    },
+    {
+      "file": "Detail.dc.html",
+      "x": 1600,
+      "y": 0,
+      "w": 1440,
+      "h": 1180,
+      "title": "Deed detail & buy",
+      "is_interactive": true
+    },
+    {
+      "file": "Portfolio.dc.html",
+      "x": 0,
+      "y": 1780,
+      "w": 1440,
+      "h": 960,
+      "title": "Portfolio & rent vault",
+      "is_interactive": true
+    },
+    {
+      "file": "Mobile.dc.html",
+      "x": 1600,
+      "y": 1780,
+      "w": 390,
+      "h": 900,
+      "title": "Mobile \u2014 explore",
+      "is_interactive": true
+    }
   ],
   "annotations": [
-    { "id": "note-brief", "x": 0, "y": -190, "w": 620, "text": "PARCEL Fund — fractional real-estate token marketplace\nDark / neon-arcade direction: near-black #0A0A0C, magenta #FF3D8A primary, mint #3BE37E for yield + rent, violet and amber as secondary pops. Space Grotesk display, IBM Plex Mono for every number.\n\nEverything is clickable: filter tabs, quick-buy presets, the token slider, tab switching, watchlists, claim rent. The accent color is a tweak chip above each artboard." },
-    { "id": "note-numbers", "x": 1600, "y": -190, "w": 560, "text": "All prices, yields, addresses and sponsor names are sample data for feeling out the flow — swap them before this goes anywhere real. The Reg D / 12-month lockup line on the buy panel is a placeholder too: your counsel decides the actual offering language." }
+    {
+      "id": "note-brief",
+      "x": 0,
+      "y": -190,
+      "w": 620,
+      "text": "PARCEL Fund \u2014 fractional real-estate token marketplace\nGlass + electric violet: translucent blurred cards over an ambient violet/pink/mint wash on near-black. Space Grotesk display (uppercase hero), IBM Plex Mono on every number. Mint green always means yield or rent; pink is the secondary pop.\n\nEverything is clickable: filter tabs, quick-buy presets, the token slider, tab switching, watchlists, claim rent. The accent color is a tweak chip above each artboard \u2014 violet, pink, mint or cyan."
+    },
+    {
+      "id": "note-numbers",
+      "x": 1600,
+      "y": -190,
+      "w": 560,
+      "text": "All prices, yields, addresses and sponsor names are sample data for feeling out the flow \u2014 swap them before this goes anywhere real. The Reg D / 12-month lockup line on the buy panel is a placeholder too: your counsel decides the actual offering language."
+    }
   ],
-  "launch": { "view": "canvas" }
+  "launch": {
+    "view": "canvas"
+  }
 }

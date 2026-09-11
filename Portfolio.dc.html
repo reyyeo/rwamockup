@@ -9,21 +9,27 @@
 <helmet>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
   <style>
-    body { margin: 0; background: #0A0A0C; color: #F2F2F5;
+    body { margin: 0; background:  radial-gradient(58% 44% at 14% 2%, rgba(124,92,255,.20) 0%, transparent 62%),
+      radial-gradient(52% 40% at 88% 6%, rgba(124,92,255,.20) 0%, transparent 62%),
+      radial-gradient(46% 42% at 66% 96%, rgba(59,227,126,.13) 0%, transparent 64%),
+      #08080B; background-attachment: fixed; color: #F2F2F5;
       font-family: 'Space Grotesk', 'Trebuchet MS', system-ui, sans-serif; }
-    a { color: #FF3D8A; text-decoration: none; } a:hover { color: #3BE37E; }
+    a { color: #7C5CFF; text-decoration: none; } a:hover { color: #3BE37E; }
     .mono { font-family: 'IBM Plex Mono', 'DejaVu Sans Mono', ui-monospace, monospace; }
-    .panel { background: #111114; border: 1px solid #232329; border-radius: 4px; }
+    .panel { background: rgba(255,255,255,.045); backdrop-filter: blur(26px) saturate(150%);
+      -webkit-backdrop-filter: blur(26px) saturate(150%);
+      border: 1px solid rgba(255,255,255,.10); border-radius: 18px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.10), 0 28px 60px -34px rgba(0,0,0,.9); }
     .btn { cursor: pointer; border: none; font-family: inherit; }
-    .row:hover { background: #141418; }
+    .row:hover { background: rgba(255,255,255,.045); }
     .blip { animation: blip 1.6s ease-in-out infinite; }
     @keyframes blip { 0%,100% { opacity: 1; } 50% { opacity: .25; } }
   </style>
 </helmet>
 
-<div style="--a: {{accent}}; padding: 0 0 40px; background: #0A0A0C;">
+<div style="--a: {{accent}}; padding: 0 0 40px; background: transparent;">
 
-  <div style="display: flex; align-items: center; gap: 14px; padding: 18px 34px; border-bottom: 1px solid #1C1C21;">
+  <div style="display: flex; align-items: center; gap: 14px; padding: 18px 34px; border-bottom: 1px solid rgba(255,255,255,.085);">
     <span style="font-size: 17px; font-weight: 700; letter-spacing: -.015em;">Portfolio</span>
     <span class="mono" style="font-size: 11.5px; color: #7C7C87; letter-spacing: .08em;">0x9F2A…C41D</span>
     <div style="flex-grow: 1;"></div>
@@ -62,7 +68,7 @@
       <div class="mono" style="font-size: 38px; margin-top: 10px; letter-spacing: -.035em; color: #3BE37E;">{{claimable}}</div>
       <div style="font-size: 13px; color: #8A8A93; margin-top: 6px;">{{claimSub}}</div>
       <div style="flex-grow: 1;"></div>
-      <button class="btn" onClick="{{claim}}" style="width: 100%; height: 50px; margin-top: 20px; border-radius: 3px; background: {{claimBg}}; color: #0A0A0C; font-size: 14.5px; font-weight: 700;">{{claimLabel}}</button>
+      <button class="btn" onClick="{{claim}}" style="width: 100%; height: 50px; margin-top: 20px; border-radius: 11px; background: {{claimBg}}; color: #0A0A0C; font-size: 14.5px; font-weight: 700;">{{claimLabel}}</button>
       <div class="mono" style="font-size: 10.5px; color: #56565F; margin-top: 10px; letter-spacing: .05em;">SWEPT FRIDAYS 00:00 UTC · USDC ON BASE</div>
     </div>
 
@@ -76,7 +82,7 @@
       <div style="display: flex; flex-direction: column; gap: 13px; margin-top: 20px;">
         <sc-for list="{{alloc}}" as="a" hint-placeholder-count="4">
           <div style="display: flex; align-items: center; gap: 10px;">
-            <span style="width: 9px; height: 9px; border-radius: 2px; background: {{a.color}};"></span>
+            <span style="width: 9px; height: 9px; border-radius: 4px; background: {{a.color}};"></span>
             <span style="font-size: 13px; color: #C6C6CE;">{{a.label}}</span>
             <span style="flex-grow: 1;"></span>
             <span class="mono" style="font-size: 13px;">{{a.pct}}</span>
@@ -88,21 +94,21 @@
 
   <!-- holdings -->
   <div class="panel" style="margin: 20px 34px 0;">
-    <div style="display: flex; align-items: center; padding: 16px 22px; border-bottom: 1px solid #232329;">
+    <div style="display: flex; align-items: center; padding: 16px 22px; border-bottom: 1px solid rgba(255,255,255,.11);">
       <span style="font-size: 15px; font-weight: 700;">Holdings</span>
       <span class="mono" style="font-size: 11.5px; color: #7C7C87; margin-left: 12px;">5 deeds · 4,918 tokens</span>
       <div style="flex-grow: 1;"></div>
-      <button class="btn mono" style="height: 34px; padding: 0 15px; border-radius: 3px; background: #16161B; border: 1px solid #232329; color: #A6A6B0; font-size: 12px;">Export CSV</button>
+      <button class="btn mono" style="height: 34px; padding: 0 15px; border-radius: 11px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.11); color: #A6A6B0; font-size: 12px;">Export CSV</button>
     </div>
-    <div style="display: grid; grid-template-columns: 2.1fr 1fr 1fr 1fr 1.1fr 1fr; padding: 13px 22px; border-bottom: 1px solid #232329;" class="mono">
+    <div style="display: grid; grid-template-columns: 2.1fr 1fr 1fr 1fr 1.1fr 1fr; padding: 13px 22px; border-bottom: 1px solid rgba(255,255,255,.11);" class="mono">
       <sc-for list="{{cols}}" as="c" hint-placeholder-count="6">
         <div style="font-size: 11px; letter-spacing: .12em; color: #7C7C87; text-align: {{c.align}};">{{c.label}}</div>
       </sc-for>
     </div>
     <sc-for list="{{holdings}}" as="h" hint-placeholder-count="5">
-      <div class="row" style="display: grid; grid-template-columns: 2.1fr 1fr 1fr 1fr 1.1fr 1fr; align-items: center; padding: 15px 22px; border-bottom: 1px solid #1A1A1F;">
+      <div class="row" style="display: grid; grid-template-columns: 2.1fr 1fr 1fr 1fr 1.1fr 1fr; align-items: center; padding: 15px 22px; border-bottom: 1px solid rgba(255,255,255,.07);">
         <div style="display: flex; align-items: center; gap: 13px;">
-          <span style="width: 34px; height: 34px; border-radius: 3px; background: {{h.swatch}}; border: 1px solid #26262C;"></span>
+          <span style="width: 34px; height: 34px; border-radius: 11px; background: {{h.swatch}}; border: 1px solid rgba(255,255,255,.13);"></span>
           <div>
             <div style="font-size: 14px; font-weight: 500;">{{h.name}}</div>
             <div class="mono" style="font-size: 11px; color: #7C7C87; margin-top: 3px;">{{h.sym}}</div>
@@ -120,7 +126,7 @@
 </x-dc>
 
 <script data-dc-script data-props='{
-  "accent": {"editor": "color", "default": "#FF3D8A", "options": ["#FF3D8A", "#3BE37E", "#7C5CFF", "#00D3FF"], "section": "Theme"},
+  "accent": {"editor": "color", "default": "#7C5CFF", "options": ["#7C5CFF", "#FF3D8A", "#3BE37E", "#00D3FF"], "section": "Theme"},
   "$preview": {"width": 1440, "height": 960}
 }'>
 class Component extends DCLogic {
@@ -130,15 +136,15 @@ class Component extends DCLogic {
   }
 
   renderVals() {
-    const accent = this.props.accent ?? '#FF3D8A';
+    const accent = this.props.accent ?? "#7C5CFF";
 
     const ranges = ['1W', '1M', '3M', '1Y', 'ALL'].map((r) => ({
       label: r,
       pick: () => this.setState({ range: r }),
-      style: 'height: 32px; padding: 0 15px; border-radius: 3px; font-size: 12px; letter-spacing: .06em;'
+      style: 'height: 32px; padding: 0 15px; border-radius: 11px; font-size: 12px; letter-spacing: .06em;'
         + (r === this.state.range
           ? ' background: ' + accent + '; border: 1px solid ' + accent + '; color: #0A0A0C; font-weight: 600;'
-          : ' background: #16161B; border: 1px solid #232329; color: #A6A6B0;')
+          : ' background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.11); color: #A6A6B0;')
     }));
 
     const claimed = this.state.claimed;
@@ -155,7 +161,7 @@ class Component extends DCLogic {
         { label: 'Industrial', pct: '46%', color: accent },
         { label: 'Residential', pct: '28%', color: '#3BE37E' },
         { label: 'Retail', pct: '17%', color: '#7C5CFF' },
-        { label: 'Office', pct: '9%', color: '#3A3A42' }
+        { label: 'Office', pct: '9%', color: 'rgba(255,255,255,.22)' }
       ],
       cols: [
         { label: 'DEED', align: 'left' }, { label: 'TOKENS', align: 'right' },
