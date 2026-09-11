@@ -28,6 +28,9 @@
     @keyframes blip { 0%,100% { opacity: 1; } 50% { opacity: .25; } }
     .tick { animation: slide 24s linear infinite; }
     @keyframes slide { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    .feed { animation: feedrun 54s linear infinite; }
+    .feed:hover { animation-play-state: paused; }
+    @keyframes feedrun { from { transform: translateX(0); } to { transform: translateX(-50%); } }
     .scan { background-image: repeating-linear-gradient(0deg, rgba(255,255,255,.045) 0 1px, transparent 1px 4px); }
   </style>
 </helmet>
@@ -73,13 +76,6 @@
 
     <!-- TOP BAR -->
     <div style="display: flex; align-items: center; gap: 12px; padding: 16px 26px; border-bottom: 1px solid rgba(255,255,255,.085);">
-      <sc-for list="{{activity}}" as="a" hint-placeholder-count="2">
-        <div class="panel" style="display: flex; align-items: center; gap: 11px; padding: 8px 13px; border-color: {{a.edge}}; background: {{a.bg}};">
-          <span style="width: 22px; height: 22px; border-radius: 11px; background: {{a.dot}};"></span>
-          <span style="font-size: 12.5px; font-weight: 500;">{{a.who}}</span>
-          <span class="mono" style="font-size: 11.5px; color: #818F92;">{{a.what}}</span>
-        </div>
-      </sc-for>
       <div style="flex-grow: 1;"></div>
       <div class="panel mono" style="display: flex; align-items: center; gap: 8px; padding: 8px 12px; font-size: 11.5px; color: #818F92;">
         <span class="blip" style="width: 6px; height: 6px; border-radius: 50%; background: #6CC1C6;"></span>1,204 deeds live
@@ -92,81 +88,78 @@
       </button>
     </div>
 
-    <!-- HERO -->
-    <div style="display: grid; grid-template-columns: 1.15fr 1fr; gap: 30px; align-items: center; padding: 46px 26px 34px;">
-      <div>
-        <h1 style="margin: 0; font-size: 74px; line-height: .92; letter-spacing: -.045em; font-weight: 700; text-transform: uppercase; text-wrap: pretty;">
-          Own the<br><span style="color: {{accent}};">block.</span><br>Earn the rent.
-        </h1>
-        <p style="margin: 24px 0 0; font-size: 15.5px; line-height: 1.65; color: #91A0A2; max-width: 420px;">
-          Every building on PARCEL is one fungible token. Buy any slice, trade it any second, and net rent lands in your wallet every Friday.
-        </p>
-        <div style="display: flex; gap: 12px; margin-top: 30px;">
-          <button class="btn" style="display: flex; align-items: center; gap: 10px; height: 52px; padding: 0 24px; border-radius: 14px; background: {{accent}}; color: #07201F; font-size: 14.5px; font-weight: 700; box-shadow: 0 14px 34px -20px rgba(108,193,198,.5);">
-            Explore deeds
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#07201F" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8.5 7H17v8.5"/></svg>
-          </button>
-          <button class="btn panel" style="display: flex; align-items: center; gap: 10px; height: 52px; padding: 0 24px; color: #DCE5E6; font-size: 14.5px; font-weight: 600;">
-            Tokenize a property
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#91A0A2" stroke-width="2" stroke-linejoin="round"><path d="M13 2 5 13h6l-1 9 8-11h-6z"/></svg>
-          </button>
-        </div>
+    <!-- LIVE PURCHASE FEED -->
+    <div style="display: flex; align-items: center; gap: 0; border-bottom: 1px solid rgba(255,255,255,.085); background: rgba(255,255,255,.025);">
+      <div class="mono" style="display: flex; align-items: center; gap: 8px; flex-shrink: 0; padding: 0 16px 0 26px; height: 42px; font-size: 10.5px; letter-spacing: .14em; color: {{accent}}; border-right: 1px solid rgba(255,255,255,.085);">
+        <span class="blip" style="width: 6px; height: 6px; border-radius: 50%; background: {{accent}};"></span>LIVE
       </div>
-      <div style="position: relative; height: 340px;">
-        <div style="position: absolute; inset: 6% 4%; border-radius: 28px; background: radial-gradient(58% 58% at 52% 42%, rgba(255,255,255,.10), transparent 68%); filter: blur(14px);"></div>
-        <svg viewBox="0 0 300 190" width="100%" height="340" fill="none" style="position: relative;">
-          <path d="M22 170V88l46-26 46 26v82z" stroke="#B4C2C4" stroke-width="2.4" stroke-linejoin="round"/>
-          <path d="M114 170V64l40-23 40 23v106z" stroke="#8D9EA1" stroke-width="2.4" stroke-linejoin="round"/>
-          <path d="M194 170V104l42-24 42 24v66z" stroke="#DCE5E6" stroke-opacity=".55" stroke-width="2.4" stroke-linejoin="round"/>
-          <path d="M38 170v-24h16v24M62 170v-24h14v24M86 170v-24h14v24M128 170v-30h18v30M158 170v-30h18v30M210 170v-22h16v22M240 170v-22h16v22" stroke="#DCE5E6" stroke-opacity=".38" stroke-width="1.6"/>
-          <path d="M6 170h288" stroke="#DCE5E6" stroke-opacity=".75" stroke-width="2.4"/>
-          <circle cx="154" cy="30" r="4" fill="{{accent}}"/><circle cx="68" cy="54" r="4" fill="#697577"/>
-        </svg>
+      <div style="flex-grow: 1; min-width: 0; overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 3%, #000 94%, transparent); mask-image: linear-gradient(90deg, transparent, #000 3%, #000 94%, transparent);">
+        <div class="feed" style="display: flex; align-items: center; gap: 0; width: max-content;">
+          <sc-for list="{{feed}}" as="e" hint-placeholder-count="16">
+            <span class="mono" style="display: flex; align-items: center; gap: 8px; padding: 0 18px; height: 42px; font-size: 12px; white-space: nowrap;">
+              <span style="color: #B4C2C4;">{{e.who}}</span>
+              <span style="color: #697577;">bought</span>
+              <span style="color: #DCE5E6;">{{e.qty}}</span>
+              <span style="color: #697577;">shares of</span>
+              <span style="color: {{accent}};">{{e.prop}}</span>
+              <span style="color: #586264;">·</span>
+              <span style="color: #586264;">{{e.ago}}</span>
+            </span>
+          </sc-for>
+        </div>
       </div>
     </div>
 
-    <!-- LIVE RAISE + STAT TILES -->
-    <div style="display: grid; grid-template-columns: 1.08fr 1fr; gap: 16px; padding: 0 26px 26px;">
-      <div class="panel" style="display: flex; gap: 20px; padding: 20px;">
-        <div style="width: 168px; height: 168px; flex-shrink: 0; border-radius: 14px; background: rgba(255,255,255,.04); position: relative; overflow: hidden;">
-          <svg viewBox="0 0 120 120" width="168" height="168" fill="none">
-            <path d="M16 100V56l28-17 28 17v44z" stroke="#B4C2C4" stroke-width="2.2" stroke-linejoin="round"/>
-            <path d="M72 100V48l22-13 22 13v52z" stroke="#8D9EA1" stroke-width="2.2" stroke-linejoin="round"/>
-            <path d="M28 100V86h12v14M50 100V86h10v14M84 100V84h12v16" stroke="#8D9EA1" stroke-opacity=".45" stroke-width="1.5"/>
-            <path d="M6 100h108" stroke="#B4C2C4" stroke-width="2.2"/>
-          </svg>
+    <!-- TRENDING NOW -->
+    <div style="padding: 30px 26px 24px;">
+      <div style="display: flex; align-items: flex-end; gap: 16px;">
+        <div>
+          <h1 style="margin: 0; font-size: 30px; font-weight: 700; letter-spacing: -.03em;">Trending now</h1>
+          <div class="mono" style="display: flex; align-items: center; gap: 9px; font-size: 11.5px; color: #818F92; margin-top: 8px; letter-spacing: .07em;">
+            <span class="blip" style="width: 6px; height: 6px; border-radius: 50%; background: {{accent}};"></span>
+            RANKED BY PURCHASES · {{rangeLabel}} · UPDATED 12s AGO
+          </div>
         </div>
-        <div style="flex-grow: 1; min-width: 0; display: flex; flex-direction: column;">
-          <div class="mono" style="display: flex; align-items: center; gap: 8px; font-size: 10.5px; letter-spacing: .14em; color: #91A0A2;">
-            <span class="blip" style="width: 7px; height: 7px; border-radius: 50%; background: #07201F;"></span>LIVE RAISE · 87% FUNDED
-          </div>
-          <div style="font-size: 26px; font-weight: 700; margin-top: 12px; letter-spacing: -.025em; color: #DCE5E6;">Ridgeline Logistics Park</div>
-          <div class="mono" style="font-size: 11.5px; color: #818F92; margin-top: 6px; letter-spacing: .07em;">AUSTIN, TX · 214,000 SQ FT · 9.2% NET YIELD</div>
-          <div style="flex-grow: 1;"></div>
-          <div style="display: flex; align-items: flex-end; gap: 20px; margin-top: 18px;">
-            <div>
-              <div class="mono" style="font-size: 10.5px; letter-spacing: .13em; color: #818F92;">PRICE / TOKEN</div>
-              <div class="mono" style="font-size: 30px; color: #DCE5E6; letter-spacing: -.03em; margin-top: 4px;">$18.40</div>
-            </div>
-            <div class="mono" style="display: flex; align-items: center; gap: 8px; padding-bottom: 8px; font-size: 12.5px; color: #91A0A2;">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#91A0A2" stroke-width="1.9"><circle cx="12" cy="12" r="9"/><path d="M12 7v5.4l3.4 2"/></svg>
-              CLOSES 02h 15m 42s
-            </div>
-            <div style="flex-grow: 1;"></div>
-            <button class="btn" style="height: 46px; padding: 0 22px; border-radius: 14px; background: {{accent}}; color: #07201F; font-size: 14px; font-weight: 700;">Buy tokens</button>
-          </div>
+        <div style="flex-grow: 1;"></div>
+        <div style="display: flex; gap: 8px;">
+          <sc-for list="{{ranges}}" as="r" hint-placeholder-count="3">
+            <button class="btn mono" onClick="{{r.pick}}" style="{{r.style}}">{{r.label}}</button>
+          </sc-for>
         </div>
       </div>
 
-      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px;">
-        <sc-for list="{{stats}}" as="s" hint-placeholder-count="4">
-          <div class="panel" style="display: flex; align-items: center; gap: 14px; padding: 18px 18px;">
-            <span style="width: 44px; height: 44px; flex-shrink: 0; border-radius: 13px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.11); display: flex; align-items: center; justify-content: center;">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#91A0A2" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="{{s.icon}}"/></svg>
-            </span>
-            <div style="min-width: 0;">
-              <div style="font-size: 12.5px; color: #818F92;">{{s.label}}</div>
-              <div class="mono" style="font-size: 22px; margin-top: 5px; letter-spacing: -.025em; color: {{s.color}};">{{s.value}}</div>
+      <div style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 14px; margin-top: 20px;">
+        <sc-for list="{{trending}}" as="t" hint-placeholder-count="5">
+          <div class="card panel" style="overflow: hidden;">
+            <div class="scan" style="height: 108px; position: relative; background: {{t.art}};">
+              <span class="mono" style="position: absolute; top: 10px; left: 10px; display: flex; align-items: center; justify-content: center; min-width: 26px; height: 26px; padding: 0 7px; border-radius: 9px; background: {{t.rankBg}}; color: {{t.rankInk}}; font-size: 12px; font-weight: 600;">{{t.rank}}</span>
+              <span class="mono" style="position: absolute; top: 10px; right: 10px; font-size: 10px; letter-spacing: .1em; padding: 4px 8px; border-radius: 9px; background: rgba(5,9,10,.78); color: #B4C2C4;">{{t.sym}}</span>
+              <svg viewBox="0 0 120 70" width="150" height="88" fill="none" style="position: absolute; bottom: 0; right: 6px; opacity: .9;">
+                <path d="M18 60V32l22-13 22 13v28z" stroke="#B4C2C4" stroke-width="1.8" stroke-linejoin="round"/>
+                <path d="M62 60V26l18-11 18 11v34z" stroke="#8D9EA1" stroke-width="1.8" stroke-linejoin="round"/>
+                <path d="M28 60v-11h9v11M45 60v-11h8v11M72 60v-10h9v10" stroke="#8D9EA1" stroke-width="1.3" stroke-opacity=".7"/>
+                <path d="M6 60h108" stroke="#B4C2C4" stroke-width="1.8"/>
+              </svg>
+            </div>
+            <div style="padding: 14px 15px 16px;">
+              <div style="font-size: 14.5px; font-weight: 600; letter-spacing: -.01em;">{{t.name}}</div>
+              <div class="mono" style="font-size: 10.5px; color: #697577; margin-top: 5px; letter-spacing: .07em;">{{t.city}}</div>
+
+              <div style="display: flex; align-items: flex-end; gap: 9px; margin-top: 14px;">
+                <span class="mono" style="font-size: 26px; letter-spacing: -.03em;">{{t.buys}}</span>
+                <span class="mono" style="font-size: 11px; color: #818F92; padding-bottom: 5px;">buys</span>
+                <span style="flex-grow: 1;"></span>
+                <span class="mono" style="font-size: 11.5px; color: {{t.deltaInk}}; padding-bottom: 5px;">{{t.delta}}</span>
+              </div>
+
+              <svg viewBox="0 0 100 24" width="100%" height="24" preserveAspectRatio="none" style="margin-top: 10px; display: block;">
+                <polyline points="{{t.spark}}" fill="none" stroke="{{t.sparkInk}}" stroke-width="1.6" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
+              </svg>
+
+              <div style="display: flex; justify-content: space-between; align-items: baseline; margin-top: 14px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,.07);">
+                <span class="mono" style="font-size: 10px; letter-spacing: .12em; color: #586264;">PRICE</span>
+                <span class="mono" style="font-size: 14px;">{{t.price}}</span>
+              </div>
             </div>
           </div>
         </sc-for>
@@ -308,12 +301,12 @@
 
 <script data-dc-script data-props='{
   "accent": {"editor": "color", "default": "#6CC1C6", "options": ["#6CC1C6", "#6F9FBC", "#9ACBCC", "#529DA3"], "section": "Theme"},
-  "$preview": {"width": 1440, "height": 1620}
+  "$preview": {"width": 1440, "height": 1500}
 }'>
 class Component extends DCLogic {
   constructor(props) {
     super(props);
-    this.state = { nav: 'explore', amount: 500, sort: 0, live: true };
+    this.state = { nav: 'explore', amount: 500, sort: 0, live: true, range: '24H' };
   }
 
   renderVals() {
@@ -341,6 +334,58 @@ class Component extends DCLogic {
       };
     });
 
+    const ranges = ['24H', '7D', '30D'].map((r) => ({
+      label: r,
+      pick: () => this.setState({ range: r }),
+      style: 'height: 34px; padding: 0 15px; border-radius: 11px; font-size: 12px; letter-spacing: .07em;'
+        + (r === this.state.range
+          ? ' background: ' + accent + '; border: 1px solid ' + accent + '; color: #07201F; font-weight: 600;'
+          : ' background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.11); color: #A2B0B2;')
+    }));
+
+    const win = this.state.range;
+    const mult = { '24H': 1, '7D': 6.2, '30D': 23.4 }[win];
+    const trending = [
+      { sym: 'RETL-CDMX', name: 'Roma Norte', city: 'MEXICO CITY, MX', base: 412, delta: '+38%', price: '$9.85',
+        curve: [3, 5, 4, 8, 11, 9, 14, 18] },
+      { sym: 'WHSE-ATX', name: 'Ridgeline Park', city: 'AUSTIN, TX', base: 388, delta: '+21%', price: '$18.40',
+        curve: [6, 7, 9, 8, 12, 11, 15, 16] },
+      { sym: 'RESI-LIS', name: 'Mar\u00e9s 14', city: 'LISBON, PT', base: 274, delta: '+12%', price: '$42.10',
+        curve: [8, 7, 9, 10, 9, 12, 11, 13] },
+      { sym: 'WHSE-RTM', name: 'Maasvlakte Cold', city: 'ROTTERDAM, NL', base: 196, delta: '+6%', price: '$14.75',
+        curve: [5, 6, 5, 7, 6, 8, 7, 9] },
+      { sym: 'AUS4', name: 'Quay Street', city: 'SYDNEY, AU', base: 143, delta: '-4%', price: '$27.60',
+        curve: [9, 8, 7, 8, 6, 7, 5, 6] }
+    ]
+      .map((t) => ({ ...t, count: Math.round(t.base * mult) }))
+      .sort((x, y) => y.count - x.count)
+      .map((t, i) => {
+        const max = Math.max(...t.curve);
+        return {
+          ...t,
+          rank: '#' + (i + 1),
+          rankBg: i === 0 ? accent : 'rgba(5,9,10,.78)',
+          rankInk: i === 0 ? '#07201F' : '#B4C2C4',
+          buys: t.count.toLocaleString('en-US'),
+          deltaInk: t.delta.charAt(0) === '-' ? '#818F92' : accent,
+          sparkInk: t.delta.charAt(0) === '-' ? '#697577' : accent,
+          spark: t.curve.map((v, j) => (j * (100 / (t.curve.length - 1))).toFixed(1) + ',' + (22 - (v / max) * 20).toFixed(1)).join(' '),
+          art: 'linear-gradient(160deg, #153030 0%, #0D2122 58%, #060B0C 100%)'
+        };
+      });
+
+    const events = [
+      { who: '0x9F2A…C41D', qty: '812', prop: 'Ridgeline Park', ago: '2s ago' },
+      { who: 'hbhDct.eth', qty: '1,450', prop: 'Roma Norte', ago: '9s ago' },
+      { who: '0x41B7…9E02', qty: '96', prop: 'Marés 14', ago: '14s ago' },
+      { who: 'vw3roy.eth', qty: '3,200', prop: 'Maasvlakte Cold', ago: '21s ago' },
+      { who: '0xD108…77A4', qty: '240', prop: 'Quay Street', ago: '33s ago' },
+      { who: 'casaverde.eth', qty: '5,000', prop: 'Roma Norte', ago: '41s ago' },
+      { who: '0x6C55…1B8F', qty: '118', prop: 'Neukölln Blocks', ago: '55s ago' },
+      { who: 'atlas-ib.eth', qty: '2,640', prop: 'Ridgeline Park', ago: '1m ago' }
+    ];
+    const feed = events.concat(events);
+
     const presets = [100, 500, 2500, 10000].map((v) => ({
       label: v >= 1000 ? '$' + (v / 1000) + 'k' : '$' + v,
       pick: () => this.setState({ amount: v }),
@@ -354,7 +399,8 @@ class Component extends DCLogic {
     const tokenCount = Math.floor(amount / 31.2);
 
     return {
-      accent, nav, presets,
+      accent, nav, presets, ranges, trending,
+      rangeLabel: { '24H': 'LAST 24 HOURS', '7D': 'LAST 7 DAYS', '30D': 'LAST 30 DAYS' }[this.state.range],
       amount: '$' + amount.toLocaleString('en-US') + '.00',
       amtInk: amount ? '#DCE5E6' : '#5B6769',
       tokens: tokenCount.toLocaleString('en-US'),
@@ -366,16 +412,7 @@ class Component extends DCLogic {
       liveFill: this.state.live ? accent : 'transparent',
       liveTick: this.state.live ? '#05090A' : 'transparent',
 
-      activity: [
-        { who: 'hbhDct', what: 'bought 812 WHSE-ATX', dot: 'rgba(255,255,255,.14)', bg: 'rgba(255,255,255,.04)', edge: 'rgba(255,255,255,.10)' },
-        { who: 'Vw3Roy', what: 'listed Roma Norte · 05/29', dot: 'rgba(255,255,255,.14)', bg: 'rgba(255,255,255,.04)', edge: 'rgba(255,255,255,.10)' }
-      ],
-      stats: [
-        { value: '1,204', label: 'Tokenized deeds', color: '#DCE5E6', icon: 'M4 11 12 5l8 6v9H4zM10 20v-5h4v5' },
-        { value: '$412.8M', label: 'Total value locked', color: '#DCE5E6', icon: 'M5 4h14v16l-7-3.5L5 20z' },
-        { value: '$9.31M', label: 'Rent distributed', color: '#DCE5E6', icon: 'M12 3v18M16.5 7.5c-.8-1.4-2.4-2-4.5-2-2.5 0-4 1-4 2.8 0 4 8.5 2 8.5 6 0 1.9-1.7 3-4.5 3-2.2 0-3.8-.7-4.6-2.2' },
-        { value: '34,939', label: 'Token holders', color: '#DCE5E6', icon: 'M9 11a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7zM2.5 20c1.2-3 3.7-4.5 6.5-4.5s5.3 1.5 6.5 4.5M16.5 5.2a3.5 3.5 0 0 1 0 6.6M18 15.8c2 .7 3.3 2.1 4 4.2' }
-      ],
+      feed,
       side: [
         { sym: 'RESILIS', name: 'Marés 14', sponsor: 'ATLAS IBERIA', tag: '10X DEMAND', tagColor: '#B4C2C4',
           blurb: '38-unit residential block two streets off the Tagus, fully let, 4-year sponsor track record.',

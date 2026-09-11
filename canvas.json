@@ -5,8 +5,8 @@
       "x": 0,
       "y": 0,
       "w": 1440,
-      "h": 1620,
-      "title": "Board \u2014 marketplace",
+      "h": 1500,
+      "title": "Explore \u2014 trending now",
       "is_interactive": true
     },
     {
@@ -43,7 +43,7 @@
       "x": 0,
       "y": -190,
       "w": 620,
-      "text": "PARCEL Fund \u2014 fractional real-estate token marketplace\nMuted turquoise #6CC1C6, used sparingly: primary buttons, active tabs and presets, selected nav, progress fills, status dots. Everything else \u2014 numbers, icons, charts, building art, tags \u2014 is a neutral grey ramp on near-black, so the accent reads as emphasis rather than wallpaper. Glass panels, soft shadows, no hard glow. Space Grotesk display, IBM Plex Mono on every number.\n\nEverything is clickable: filter tabs, quick-buy presets, the token slider, tab switching, watchlists, claim rent."
+      "text": "PARCEL Fund \u2014 fractional real-estate token marketplace\nMuted turquoise #6CC1C6, used sparingly: primary buttons, active tabs and presets, selected nav, progress fills, status dots. Everything else is a neutral grey ramp on near-black. Glass panels, soft shadows, no hard glow. Space Grotesk display, IBM Plex Mono on every number.\n\nExplore opens on Trending now \u2014 properties ranked by purchase count, with a 24H / 7D / 30D switch that re-sorts the board, and a live purchase feed running under the top bar (hover pauses it).\n\nEverything is clickable: the trending window, filter tabs, quick-buy presets, the token slider, tab switching, watchlists, claim rent."
     },
     {
       "id": "note-numbers",
