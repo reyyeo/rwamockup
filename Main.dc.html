@@ -238,19 +238,55 @@
       </div>
     </div>
 
-    <!-- NEW IN -->
+    <!-- BE EARLY -->
     <div style="padding: 6px 26px 26px;">
       <div style="display: flex; align-items: flex-end; gap: 14px;">
         <div>
-          <h2 style="margin: 0; font-size: 22px; font-weight: 700; letter-spacing: -.025em;">New in</h2>
+          <h2 style="margin: 0; font-size: 22px; font-weight: 700; letter-spacing: -.025em;">Be early</h2>
           <div class="mono" style="font-size: 11px; color: #818F92; margin-top: 7px; letter-spacing: .07em;">JUST LISTED · TITLE AND APPRAISAL VERIFIED BEFORE GOING LIVE</div>
         </div>
         <div style="flex-grow: 1;"></div>
         <span class="mono" style="font-size: 11.5px; color: #697577; letter-spacing: .06em;">VIEW ALL</span>
       </div>
 
-      <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin-top: 18px;">
-        <sc-for list="{{newIn}}" as="c" hint-placeholder-count="4">
+      <div style="display: grid; grid-template-columns: 1.7fr 1fr 1fr; gap: 16px; margin-top: 18px; align-items: start;">
+
+        <!-- lead -->
+        <div class="card panel" style="overflow: hidden;">
+          <div class="scan" style="height: 250px; position: relative; background: {{earlyLead.bg}};">
+            <svg viewBox="0 0 300 180" width="100%" height="100%" preserveAspectRatio="xMidYMax slice" style="position: absolute; inset: 0;">
+              <sc-for list="{{earlyLead.art.rects}}" as="sh" hint-placeholder-count="30">
+                <rect x="{{sh.x}}" y="{{sh.y}}" width="{{sh.w}}" height="{{sh.h}}" fill="{{sh.f}}" rx="{{sh.rx}}"></rect>
+              </sc-for>
+              <sc-for list="{{earlyLead.art.paths}}" as="ph" hint-placeholder-count="24">
+                <path d="{{ph.d}}" fill="{{ph.f}}" stroke="{{ph.s}}" stroke-width="{{ph.sw}}" stroke-linecap="round" stroke-linejoin="round"></path>
+              </sc-for>
+            </svg>
+            <span class="mono" style="position: absolute; top: 14px; left: 14px; display: flex; align-items: center; gap: 7px; font-size: 10.5px; letter-spacing: .11em; padding: 6px 11px; border-radius: 10px; background: rgba(5,9,10,.78); color: {{earlyLead.agoInk}};">
+              <span class="blip" style="width: 5px; height: 5px; border-radius: 50%; background: {{earlyLead.dotInk}};"></span>{{earlyLead.type}} · FIRST 24 HOURS
+            </span>
+          </div>
+          <div style="padding: 20px 22px 22px;">
+            <div style="font-size: 22px; font-weight: 700; letter-spacing: -.022em;">{{earlyLead.name}}</div>
+            <div class="mono" style="font-size: 11px; color: #697577; margin-top: 7px; letter-spacing: .07em;">{{earlyLead.city}}</div>
+            <div class="mono" style="font-size: 12px; color: {{earlyLead.agoInk}}; margin-top: 14px;">{{earlyLead.ago}}</div>
+            <div style="display: flex; align-items: flex-end; gap: 30px; margin-top: 18px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,.07);">
+              <div>
+                <div class="mono" style="font-size: 10px; letter-spacing: .13em; color: #586264;">PRICE / TOKEN</div>
+                <div class="mono" style="font-size: 24px; margin-top: 6px; letter-spacing: -.025em;">{{earlyLead.price}}</div>
+              </div>
+              <div>
+                <div class="mono" style="font-size: 10px; letter-spacing: .13em; color: #586264;">FUNDED</div>
+                <div class="mono" style="font-size: 24px; margin-top: 6px; letter-spacing: -.025em;">{{earlyLead.pct}}</div>
+              </div>
+              <div style="flex-grow: 1;"></div>
+              <button class="btn mono" style="height: 46px; padding: 0 22px; border-radius: 11px; background: {{accent}}; color: #07201F; font-size: 12.5px; font-weight: 600; letter-spacing: .05em;">BUY TOKENS</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- supporting -->
+        <sc-for list="{{earlyRest}}" as="c" hint-placeholder-count="2">
           <div class="card panel" style="overflow: hidden;">
             <div class="scan" style="height: 118px; position: relative; background: {{c.bg}};">
               <svg viewBox="0 0 300 180" width="100%" height="100%" preserveAspectRatio="xMidYMax slice" style="position: absolute; inset: 0;">
@@ -489,7 +525,7 @@
 
 <script data-dc-script data-props='{
   "accent": {"editor": "color", "default": "#6CC1C6", "options": ["#6CC1C6", "#6F9FBC", "#9ACBCC", "#529DA3"], "section": "Theme"},
-  "$preview": {"width": 1440, "height": 2000}
+  "$preview": {"width": 1440, "height": 1980}
 }'>
 class Component extends DCLogic {
   constructor(props) {
@@ -692,7 +728,7 @@ class Component extends DCLogic {
       }));
 
     const listedAgo = { SAWAH2: '2h', TANAH: '9h', UMASARI: '1d', KARANG: '3d', BANYU: '6d', OMBAK: '2w' };
-    const freshOrder = ['SAWAH2', 'TANAH', 'UMASARI', 'KARANG'];
+    const freshOrder = ['SAWAH2', 'TANAH', 'UMASARI'];
     const newIn = freshOrder.map((sym) => {
       const c = all.find((x) => x.sym === sym);
       const ago = listedAgo[sym];
@@ -725,7 +761,8 @@ class Component extends DCLogic {
     const tokenCount = Math.floor(amount / 14.2);
 
     return {
-      accent, nav, presets, trending, featured, listings, tabs, filledSoon, newIn,
+      accent, nav, presets, trending, featured, listings, tabs, filledSoon,
+      earlyLead: newIn[0], earlyRest: newIn.slice(1),
       bigStats: [
         { label: 'TOTAL DIVIDEND PAYOUTS', value: '$9.31M', sub: 'paid to holders since the first villa closed',
           edge: 'transparent' },
