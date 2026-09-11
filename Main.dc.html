@@ -24,6 +24,12 @@
     .card { transition: border-color .16s ease, box-shadow .16s ease; }
     .card:hover { border-color: var(--a); box-shadow: 0 0 0 1px var(--a), 0 24px 60px -30px var(--a); }
     .row:hover { background: rgba(255,255,255,.045); }
+    .rail-wrap { overflow: hidden;
+      -webkit-mask-image: linear-gradient(90deg, transparent, #000 2.5%, #000 97.5%, transparent);
+      mask-image: linear-gradient(90deg, transparent, #000 2.5%, #000 97.5%, transparent); }
+    .rail { display: flex; gap: 14px; width: max-content; animation: railrun 52s linear infinite; }
+    .rail-wrap:hover .rail { animation-play-state: paused; }
+    @keyframes railrun { from { transform: translateX(0); } to { transform: translateX(-50%); } }
     .navitem { position: relative; }
     .navmenu { position: absolute; top: 100%; left: 0; padding-top: 9px; min-width: 232px; z-index: 30;
       opacity: 0; visibility: hidden; transform: translateY(-5px);
@@ -180,9 +186,10 @@
         </div>
       </div>
 
-      <div style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 14px; margin-top: 20px;">
-        <sc-for list="{{trending}}" as="t" hint-placeholder-count="5">
-          <div class="card panel" style="overflow: hidden;">
+      <div class="rail-wrap" style="margin-top: 20px;">
+        <div class="rail">
+        <sc-for list="{{trending}}" as="t" hint-placeholder-count="8">
+          <div class="card panel" style="width: 268px; flex-shrink: 0; overflow: hidden;">
             <div class="scan" style="height: 136px; position: relative; background: {{t.bg}};">
               <span class="mono" style="position: absolute; top: 10px; left: 10px; display: flex; align-items: center; justify-content: center; min-width: 26px; height: 26px; padding: 0 7px; border-radius: 9px; background: {{t.rankBg}}; color: {{t.rankInk}}; font-size: 12px; font-weight: 600;">{{t.rank}}</span>
               <span class="mono" style="position: absolute; top: 10px; right: 10px; font-size: 10px; letter-spacing: .1em; padding: 4px 8px; border-radius: 9px; background: rgba(5,9,10,.78); color: #B4C2C4;">{{t.sym}}</span>
@@ -213,6 +220,7 @@
             </div>
           </div>
         </sc-for>
+        </div>
       </div>
     </div>
 
@@ -256,6 +264,61 @@
                 <span style="color: #818F92;"> left</span>
               </div>
             </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+
+    <!-- LEADERBOARD -->
+    <div style="padding: 6px 26px 28px;">
+      <div style="display: flex; align-items: flex-end; gap: 14px;">
+        <div>
+          <h2 style="margin: 0; font-size: 22px; font-weight: 700; letter-spacing: -.025em;">Movers</h2>
+          <div class="mono" style="font-size: 11px; color: #818F92; margin-top: 7px; letter-spacing: .07em;">TOP 8 VILLA TOKENS BY 24H PRICE CHANGE · SECONDARY MARKET</div>
+        </div>
+        <div style="flex-grow: 1;"></div>
+        <span class="mono" style="font-size: 11.5px; color: #697577; letter-spacing: .06em;">VIEW ALL TOKENS</span>
+      </div>
+
+      <div class="panel" style="margin-top: 18px;">
+        <div class="mono" style="display: grid; grid-template-columns: 48px 2.2fr 1fr 1.5fr 1fr 1fr; padding: 13px 20px; border-bottom: 1px solid rgba(255,255,255,.11);">
+          <div style="font-size: 10.5px; letter-spacing: .12em; color: #697577;">#</div>
+          <div style="font-size: 10.5px; letter-spacing: .12em; color: #697577;">TOKEN</div>
+          <div style="font-size: 10.5px; letter-spacing: .12em; color: #697577; text-align: right;">PRICE</div>
+          <div style="font-size: 10.5px; letter-spacing: .12em; color: #697577; text-align: right;">24H CHANGE</div>
+          <div style="font-size: 10.5px; letter-spacing: .12em; color: #697577; text-align: right;">24H VOLUME</div>
+          <div style="font-size: 10.5px; letter-spacing: .12em; color: #697577; text-align: right;">HOLDERS</div>
+        </div>
+
+        <sc-for list="{{leaders}}" as="r" hint-placeholder-count="8">
+          <div class="row" style="display: grid; grid-template-columns: 48px 2.2fr 1fr 1.5fr 1fr 1fr; align-items: center; padding: 13px 20px; border-bottom: 1px solid rgba(255,255,255,.07);">
+            <div class="mono" style="font-size: 12.5px; color: #586264;">{{r.rank}}</div>
+
+            <div style="display: flex; align-items: center; gap: 12px; min-width: 0;">
+              <span class="scan" style="width: 34px; height: 34px; flex-shrink: 0; border-radius: 10px; position: relative; overflow: hidden; background: linear-gradient(170deg, #123034 0%, #0C2124 52%, #060C0D 100%);">
+                <svg viewBox="0 0 300 180" width="100%" height="100%" preserveAspectRatio="xMidYMax slice" style="position: absolute; inset: 0;">
+                  <sc-for list="{{r.art.rects}}" as="sh" hint-placeholder-count="30">
+                    <rect x="{{sh.x}}" y="{{sh.y}}" width="{{sh.w}}" height="{{sh.h}}" fill="{{sh.f}}" rx="{{sh.rx}}"></rect>
+                  </sc-for>
+                </svg>
+              </span>
+              <div style="min-width: 0;">
+                <div style="font-size: 14px; font-weight: 500; letter-spacing: -.005em;">{{r.name}}</div>
+                <div class="mono" style="font-size: 10.5px; color: #697577; margin-top: 3px;">{{r.sym}}</div>
+              </div>
+            </div>
+
+            <div class="mono" style="font-size: 13.5px; text-align: right;">{{r.price}}</div>
+
+            <div style="display: flex; align-items: center; justify-content: flex-end; gap: 12px;">
+              <span style="width: 76px; height: 4px; border-radius: 999px; background: rgba(255,255,255,.07); overflow: hidden;">
+                <span style="display: block; height: 100%; width: {{r.barW}}; border-radius: 999px; background: {{r.barInk}};"></span>
+              </span>
+              <span class="mono" style="font-size: 13.5px; color: {{r.changeInk}}; min-width: 56px; text-align: right;">{{r.change}}</span>
+            </div>
+
+            <div class="mono" style="font-size: 13px; color: #B4C2C4; text-align: right;">{{r.vol}}</div>
+            <div class="mono" style="font-size: 13px; color: #B4C2C4; text-align: right;">{{r.holders}}</div>
           </div>
         </sc-for>
       </div>
@@ -478,7 +541,7 @@
 
 <script data-dc-script data-props='{
   "accent": {"editor": "color", "default": "#6CC1C6", "options": ["#6CC1C6", "#6F9FBC", "#9ACBCC", "#529DA3"], "section": "Theme"},
-  "$preview": {"width": 1440, "height": 1640}
+  "$preview": {"width": 1440, "height": 2180}
 }'>
 class Component extends DCLogic {
   constructor(props) {
@@ -618,7 +681,10 @@ class Component extends DCLogic {
       { sym: 'KARANG', name: 'Karang Cliff', city: 'ULUWATU · BINGIN', kind: 'villa', base: 388, watch: 2210 },
       { sym: 'UMASARI', name: 'Uma Sari Estate', city: 'UBUD · TEGALLALANG', kind: 'estate', base: 274, watch: 1120 },
       { sym: 'BANYU', name: 'Banyu Pool Suites', city: 'SEMINYAK · PETITENGET', kind: 'resort', base: 196, watch: 1465 },
-      { sym: 'SAWAH2', name: 'Sawah Dua Parcel', city: 'UBUD · NORTH RIDGE', kind: 'land', base: 143, watch: 690 }
+      { sym: 'SAWAH2', name: 'Sawah Dua Parcel', city: 'UBUD · NORTH RIDGE', kind: 'land', base: 143, watch: 690 },
+      { sym: 'TANAH', name: 'Tanah Lembut', city: 'PERERENAN · RICE FIELDS', kind: 'estate', base: 233, watch: 1290 },
+      { sym: 'BUKIT', name: 'Bukit Teduh Villas', city: 'JIMBARAN · BUKIT', kind: 'villa', base: 311, watch: 1580 },
+      { sym: 'MUNDUK', name: 'Munduk Ridge Lodge', city: 'MUNDUK · NORTH BALI', kind: 'resort', base: 168, watch: 820 }
     ]
       .map((t) => ({ ...t, count: t.base, watchers: t.watch }))
       .sort((x, y) => y.count - x.count)
@@ -633,6 +699,7 @@ class Component extends DCLogic {
         bg: 'linear-gradient(170deg, #123034 0%, #0C2124 52%, #060C0D 100%)',
         art: this.villa(t.sym.length * 977 + t.base, t.kind, accent)
       }));
+    const trendingRail = trending.concat(trending);
 
     const featured = { art: this.villa(20261, 'villa', accent), bg: 'linear-gradient(170deg, #123034 0%, #0C2124 52%, #060C0D 100%)' };
 
@@ -674,7 +741,11 @@ class Component extends DCLogic {
       { sym: 'TANAH', name: 'Tanah Lembut', city: 'PERERENAN · RICE FIELDS', kind: 'estate', type: 'ESTATE',
         price: '$22.90', apy: '8.8%', pct: '73%', left: '30,400 tokens' },
       { sym: 'SAWAH2', name: 'Sawah Dua Parcel', city: 'UBUD · NORTH RIDGE', kind: 'land', type: 'LAND',
-        price: '$8.60', apy: '—', pct: '22%', left: '182,900 tokens' }
+        price: '$8.60', apy: '—', pct: '22%', left: '182,900 tokens' },
+      { sym: 'BUKIT', name: 'Bukit Teduh Villas', city: 'JIMBARAN · BUKIT', kind: 'villa', type: 'VILLA',
+        price: '$17.35', apy: '8.4%', pct: '55%', left: '62,300 tokens' },
+      { sym: 'MUNDUK', name: 'Munduk Ridge Lodge', city: 'MUNDUK · NORTH BALI', kind: 'resort', type: 'RESORT',
+        price: '$12.10', apy: '9.9%', pct: '38%', left: '118,700 tokens' }
     ];
     const filledSoon = all
       .map((c) => ({ ...c, pctNum: parseInt(c.pct, 10) }))
@@ -687,6 +758,34 @@ class Component extends DCLogic {
         art: this.villa(c.sym.length * 613 + c.price.length * 71, c.kind, accent),
         bg: 'linear-gradient(170deg, #123034 0%, #0C2124 52%, #060C0D 100%)'
       }));
+
+    const moves = {
+      OMBAK: { chg: 5.6, vol: '$412k', holders: '1,482' },
+      KARANG: { chg: 12.4, vol: '$688k', holders: '2,104' },
+      UMASARI: { chg: -2.1, vol: '$196k', holders: '944' },
+      BANYU: { chg: 8.1, vol: '$523k', holders: '1,317' },
+      TANAH: { chg: 1.4, vol: '$88k', holders: '612' },
+      SAWAH2: { chg: -4.6, vol: '$41k', holders: '288' },
+      BUKIT: { chg: 3.2, vol: '$274k', holders: '1,046' },
+      MUNDUK: { chg: -0.8, vol: '$132k', holders: '735' }
+    };
+    const leaders = all
+      .map((c) => {
+        const m = moves[c.sym];
+        const up = m.chg >= 0;
+        return {
+          ...c, ...m,
+          up: up,
+          art: this.villa(c.sym.length * 613 + c.price.length * 71, c.kind, accent),
+          change: (up ? '+' : '') + m.chg.toFixed(1) + '%',
+          changeInk: up ? accent : '#818F92',
+          barW: Math.round((Math.abs(m.chg) / 12.4) * 100) + '%',
+          barInk: up ? accent : 'rgba(255,255,255,.22)'
+        };
+      })
+      .sort((x, y) => y.chg - x.chg)
+      .slice(0, 8)
+      .map((c, i) => ({ ...c, rank: String(i + 1).padStart(2, '0') }));
 
     const listings = all
       .filter((c) => tab === 'all' || c.kind === tab)
@@ -705,7 +804,7 @@ class Component extends DCLogic {
     const tokenCount = Math.floor(amount / 14.2);
 
     return {
-      accent, nav, presets, trending, featured, listings, tabs, filledSoon,
+      accent, nav, presets, trending: trendingRail, featured, listings, tabs, filledSoon, leaders,
       bigStats: [
         { label: 'TOTAL DIVIDEND PAYOUTS', value: '$9.31M', sub: 'paid to holders since the first villa closed',
           edge: 'transparent' },
