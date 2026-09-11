@@ -32,7 +32,7 @@
     @keyframes blip { 0%,100% { opacity: 1; } 50% { opacity: .25; } }
     .tick { animation: slide 24s linear infinite; }
     @keyframes slide { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-    .toast { position: absolute; left: 0; bottom: 0; width: 340px; opacity: 0;
+    .toast { position: absolute; right: 0; top: 0; width: 340px; opacity: 0;
       animation: pop 13s cubic-bezier(.22,1,.36,1) infinite; }
     .toast:nth-child(1) { animation-delay: 0s; }
     .toast:nth-child(2) { animation-delay: 2.6s; }
@@ -40,11 +40,11 @@
     .toast:nth-child(4) { animation-delay: 7.8s; }
     .toast:nth-child(5) { animation-delay: 10.4s; }
     @keyframes pop {
-      0%   { opacity: 0; transform: translateY(16px) scale(.94); }
-      3%   { opacity: 1; transform: translateY(0) scale(1); }
-      16%  { opacity: 1; transform: translateY(0) scale(1); }
-      20%  { opacity: 0; transform: translateY(-10px) scale(.98); }
-      100% { opacity: 0; transform: translateY(-10px) scale(.98); }
+      0%   { opacity: 0; transform: translateX(26px) scale(.94); }
+      3%   { opacity: 1; transform: translateX(0) scale(1); }
+      16%  { opacity: 1; transform: translateX(0) scale(1); }
+      20%  { opacity: 0; transform: translateX(26px) scale(.98); }
+      100% { opacity: 0; transform: translateX(26px) scale(.98); }
     }
     .scan { background-image: repeating-linear-gradient(0deg, rgba(255,255,255,.045) 0 1px, transparent 1px 4px); }
   </style>
@@ -104,7 +104,7 @@
     </div>
 
     <!-- LIVE PURCHASE TOASTS -->
-    <div style="position: absolute; left: 26px; bottom: 26px; width: 340px; height: 82px; z-index: 5; pointer-events: none;">
+    <div style="position: absolute; right: 26px; top: 88px; width: 340px; height: 82px; z-index: 5; pointer-events: none;">
       <sc-for list="{{feed}}" as="e" hint-placeholder-count="5">
         <div class="toast panel" style="display: flex; align-items: center; gap: 13px; padding: 13px 15px; background: rgba(12,20,21,.78); backdrop-filter: blur(30px) saturate(150%); -webkit-backdrop-filter: blur(30px) saturate(150%);">
           <span style="position: relative; width: 38px; height: 38px; flex-shrink: 0; border-radius: 11px; background: linear-gradient(170deg, #163231 0%, #0B1E1F 100%); border: 1px solid rgba(255,255,255,.10); display: flex; align-items: center; justify-content: center;">
