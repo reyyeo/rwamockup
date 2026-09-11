@@ -209,6 +209,48 @@
       </div>
     </div>
 
+    <!-- NEW IN -->
+    <div style="padding: 6px 26px 26px;">
+      <div style="display: flex; align-items: flex-end; gap: 14px;">
+        <div>
+          <h2 style="margin: 0; font-size: 22px; font-weight: 700; letter-spacing: -.025em;">New in</h2>
+          <div class="mono" style="font-size: 11px; color: #818F92; margin-top: 7px; letter-spacing: .07em;">JUST LISTED · TITLE AND APPRAISAL VERIFIED BEFORE GOING LIVE</div>
+        </div>
+        <div style="flex-grow: 1;"></div>
+        <span class="mono" style="font-size: 11.5px; color: #697577; letter-spacing: .06em;">VIEW ALL</span>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin-top: 18px;">
+        <sc-for list="{{newIn}}" as="c" hint-placeholder-count="4">
+          <div class="card panel" style="overflow: hidden;">
+            <div class="scan" style="height: 118px; position: relative; background: {{c.bg}};">
+              <svg viewBox="0 0 300 180" width="100%" height="100%" preserveAspectRatio="xMidYMax slice" style="position: absolute; inset: 0;">
+                <sc-for list="{{c.art.rects}}" as="sh" hint-placeholder-count="30">
+                  <rect x="{{sh.x}}" y="{{sh.y}}" width="{{sh.w}}" height="{{sh.h}}" fill="{{sh.f}}" rx="{{sh.rx}}"></rect>
+                </sc-for>
+                <sc-for list="{{c.art.paths}}" as="ph" hint-placeholder-count="24">
+                  <path d="{{ph.d}}" fill="{{ph.f}}" stroke="{{ph.s}}" stroke-width="{{ph.sw}}" stroke-linecap="round" stroke-linejoin="round"></path>
+                </sc-for>
+              </svg>
+              <span class="mono" style="position: absolute; top: 10px; left: 10px; display: flex; align-items: center; gap: 6px; font-size: 10px; letter-spacing: .1em; padding: 5px 9px; border-radius: 9px; background: rgba(5,9,10,.78); color: {{c.agoInk}};">
+                <span style="width: 5px; height: 5px; border-radius: 50%; background: {{c.dotInk}};"></span>{{c.type}}
+              </span>
+            </div>
+            <div style="padding: 13px 15px 15px;">
+              <div style="font-size: 14px; font-weight: 600; letter-spacing: -.01em;">{{c.name}}</div>
+              <div class="mono" style="font-size: 10px; color: #697577; margin-top: 5px; letter-spacing: .07em;">{{c.city}}</div>
+              <div class="mono" style="font-size: 11px; color: {{c.agoInk}}; margin-top: 10px;">{{c.ago}}</div>
+              <div style="display: flex; align-items: baseline; gap: 8px; margin-top: 12px; padding-top: 11px; border-top: 1px solid rgba(255,255,255,.07);">
+                <span class="mono" style="font-size: 16px;">{{c.price}}</span>
+                <span style="flex-grow: 1;"></span>
+                <span class="mono" style="font-size: 11.5px; color: #818F92;">{{c.yieldLabel}}</span>
+              </div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+
     <!-- FEATURE ROW -->
     <div style="display: grid; grid-template-columns: 1.52fr 1fr 1fr; gap: 16px; padding: 0 26px 22px; align-items: start;">
 
@@ -418,7 +460,7 @@
 
 <script data-dc-script data-props='{
   "accent": {"editor": "color", "default": "#6CC1C6", "options": ["#6CC1C6", "#6F9FBC", "#9ACBCC", "#529DA3"], "section": "Theme"},
-  "$preview": {"width": 1440, "height": 1500}
+  "$preview": {"width": 1440, "height": 1780}
 }'>
 class Component extends DCLogic {
   constructor(props) {
@@ -620,6 +662,23 @@ class Component extends DCLogic {
         bg: 'linear-gradient(170deg, #123034 0%, #0C2124 52%, #060C0D 100%)'
       }));
 
+    const listedAgo = { SAWAH2: '2h', TANAH: '9h', UMASARI: '1d', KARANG: '3d', BANYU: '6d', OMBAK: '2w' };
+    const freshOrder = ['SAWAH2', 'TANAH', 'UMASARI', 'KARANG'];
+    const newIn = freshOrder.map((sym) => {
+      const c = all.find((x) => x.sym === sym);
+      const ago = listedAgo[sym];
+      const fresh = ago.indexOf('h') > -1;
+      return {
+        ...c,
+        ago: 'Listed ' + ago + ' ago',
+        yieldLabel: c.apy === '—' ? 'land, no yield' : c.apy + ' yield',
+        agoInk: fresh ? accent : '#818F92',
+        dotInk: fresh ? accent : 'rgba(255,255,255,.22)',
+        art: this.villa(c.sym.length * 613 + c.price.length * 71, c.kind, accent),
+        bg: 'linear-gradient(170deg, #123034 0%, #0C2124 52%, #060C0D 100%)'
+      };
+    });
+
     const listings = all
       .filter((c) => tab === 'all' || c.kind === tab)
       .map((c) => ({ ...c, bg: 'linear-gradient(170deg, #123034 0%, #0C2124 52%, #060C0D 100%)', art: this.villa(c.sym.length * 613 + c.price.length * 71, c.kind, accent) }));
@@ -637,7 +696,7 @@ class Component extends DCLogic {
     const tokenCount = Math.floor(amount / 14.2);
 
     return {
-      accent, nav, presets, trending, featured, listings, tabs, filledSoon,
+      accent, nav, presets, trending, featured, listings, tabs, filledSoon, newIn,
       isExplore: this.state.nav === 'explore',
       isMarket: this.state.nav === 'market',
       count: listings.length,
