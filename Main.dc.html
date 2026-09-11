@@ -9,27 +9,37 @@
 <helmet>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
   <style>
-    body { margin: 0; background:  radial-gradient(58% 44% at 14% 2%, rgba(108,193,198,.20) 0%, transparent 62%),
-      radial-gradient(52% 40% at 88% 6%, rgba(108,193,198,.20) 0%, transparent 62%),
-      radial-gradient(46% 42% at 66% 96%, rgba(59,227,126,.13) 0%, transparent 64%),
-      #08080B; background-attachment: fixed; color: #DCE5E6;
+    body { margin: 0; background:  radial-gradient(58% 44% at 14% 2%, rgba(108,193,198,.11) 0%, transparent 62%),
+      radial-gradient(52% 40% at 88% 6%, rgba(111,166,180,.09) 0%, transparent 62%),
+      radial-gradient(46% 42% at 66% 96%, rgba(108,193,198,.07) 0%, transparent 64%),
+      #05090A; background-attachment: fixed; color: #DCE5E6;
       font-family: 'Space Grotesk', 'Trebuchet MS', system-ui, sans-serif; }
     a { color: #6CC1C6; text-decoration: none; } a:hover { color: #6CC1C6; }
     .mono { font-family: 'IBM Plex Mono', 'DejaVu Sans Mono', ui-monospace, monospace; }
     .panel { background: rgba(255,255,255,.045); backdrop-filter: blur(26px) saturate(150%);
       -webkit-backdrop-filter: blur(26px) saturate(150%);
-      border: 1px solid rgba(255,255,255,.10); border-radius: 18px;
+      border: 1px solid rgba(255,255,255,.11); border-radius: 18px;
       box-shadow: inset 0 1px 0 rgba(255,255,255,.10), 0 28px 60px -34px rgba(0,0,0,.9); }
     .btn { cursor: pointer; border: none; font-family: inherit; }
     .card { transition: border-color .16s ease, box-shadow .16s ease; }
-    .card:hover { border-color: var(--a); box-shadow: 0 0 0 1px var(--a), 0 24px 60px -30px var(--a); }
+    .card:hover { border-color: rgba(108,193,198,.40);
+      box-shadow: 0 0 0 1px rgba(108,193,198,.34), 0 22px 52px -38px rgba(108,193,198,.35); }
     .row:hover { background: rgba(255,255,255,.045); }
+    .blip { animation: blip 1.6s ease-in-out infinite; }
+    @keyframes blip { 0%, 100% { opacity: 1; } 50% { opacity: .25; } }
+    .scan { background-image: repeating-linear-gradient(0deg, rgba(255,255,255,.045) 0 1px, transparent 1px 4px); }
+    .eye { animation: eyepulse 2.4s ease-in-out infinite; transform-origin: center; }
+    .eye-pupil { animation: pupil 2.4s ease-in-out infinite; transform-origin: center; }
+    @keyframes eyepulse { 0%, 100% { opacity: 1; } 50% { opacity: .45; } }
+    @keyframes pupil { 0%, 100% { r: 2.6px; } 50% { r: 3.4px; } }
+
     .rail-wrap { overflow: hidden;
       -webkit-mask-image: linear-gradient(90deg, transparent, #000 2.5%, #000 97.5%, transparent);
       mask-image: linear-gradient(90deg, transparent, #000 2.5%, #000 97.5%, transparent); }
     .rail { display: flex; gap: 14px; width: max-content; animation: railrun 52s linear infinite; }
     .rail-wrap:hover .rail { animation-play-state: paused; }
     @keyframes railrun { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
     .navitem { position: relative; }
     .navmenu { position: absolute; top: 100%; left: 0; padding-top: 9px; min-width: 232px; z-index: 30;
       opacity: 0; visibility: hidden; transform: translateY(-5px);
@@ -39,29 +49,79 @@
       border: none; border-radius: 11px; background: transparent; font-family: inherit; font-size: 13px;
       color: #B4C2C4; cursor: pointer; text-align: left; }
     .navlink:hover { background: rgba(255,255,255,.07); color: #DCE5E6; }
-    .blip { animation: blip 1.6s ease-in-out infinite; }
-    .eye { animation: eyepulse 2.4s ease-in-out infinite; transform-origin: center; }
-    .eye-pupil { animation: pupil 2.4s ease-in-out infinite; transform-origin: center; }
-    @keyframes eyepulse { 0%, 100% { opacity: 1; } 50% { opacity: .45; } }
-    @keyframes pupil { 0%, 100% { r: 2.6px; } 50% { r: 3.4px; } }
-    @keyframes blip { 0%,100% { opacity: 1; } 50% { opacity: .25; } }
-    .tick { animation: slide 24s linear infinite; }
-    @keyframes slide { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-    .toast { position: absolute; right: 0; top: 0; width: 340px; opacity: 0;
-      animation: pop 13s cubic-bezier(.22,1,.36,1) infinite; }
-    .toast:nth-child(1) { animation-delay: 0s; }
-    .toast:nth-child(2) { animation-delay: 2.6s; }
-    .toast:nth-child(3) { animation-delay: 5.2s; }
-    .toast:nth-child(4) { animation-delay: 7.8s; }
-    .toast:nth-child(5) { animation-delay: 10.4s; }
-    @keyframes pop {
-      0%   { opacity: 0; transform: translateX(26px) scale(.94); }
-      3%   { opacity: 1; transform: translateX(0) scale(1); }
-      16%  { opacity: 1; transform: translateX(0) scale(1); }
-      20%  { opacity: 0; transform: translateX(26px) scale(.98); }
-      100% { opacity: 0; transform: translateX(26px) scale(.98); }
+
+    .vfeed-wrap { height: 102px; overflow: hidden;
+      -webkit-mask-image: linear-gradient(180deg, transparent, #000 9%, #000 91%, transparent);
+      mask-image: linear-gradient(180deg, transparent, #000 9%, #000 91%, transparent); }
+    .vfeed { animation: vfeedpush 26s cubic-bezier(.32,1,.36,1) infinite; }
+    .vfeed-wrap:hover .vfeed { animation-play-state: paused; }
+    .vrow { display: flex; align-items: center; gap: 7px; height: 34px;
+      padding: 0 20px; font-size: 12px; white-space: nowrap; }
+    @keyframes vfeedpush {
+      0% { transform: translateY(0px); }
+      10% { transform: translateY(0px); }
+      12.5% { transform: translateY(-34px); }
+      22.5% { transform: translateY(-34px); }
+      25% { transform: translateY(-68px); }
+      35% { transform: translateY(-68px); }
+      37.5% { transform: translateY(-102px); }
+      47.5% { transform: translateY(-102px); }
+      50% { transform: translateY(-136px); }
+      60% { transform: translateY(-136px); }
+      62.5% { transform: translateY(-170px); }
+      72.5% { transform: translateY(-170px); }
+      75% { transform: translateY(-204px); }
+      85% { transform: translateY(-204px); }
+      87.5% { transform: translateY(-238px); }
+      97.5% { transform: translateY(-238px); }
+      100% { transform: translateY(-272px); }
     }
-    .scan { background-image: repeating-linear-gradient(0deg, rgba(255,255,255,.045) 0 1px, transparent 1px 4px); }
+
+    .tickw { display: block; overflow: hidden; }
+    .tickw-lg { height: 66px; }
+    .tickw-sm { height: 32px; }
+    .tick-lg { display: block; animation: ticklg 26s cubic-bezier(.32,1,.36,1) infinite; }
+    .tick-sm { display: block; animation: ticksm 26s cubic-bezier(.32,1,.36,1) infinite; }
+    .tl-lg { display: block; height: 66px; line-height: 66px; }
+    .tl-sm { display: block; height: 32px; line-height: 32px; }
+    @keyframes ticklg {
+      0% { transform: translateY(0px); }
+      10% { transform: translateY(0px); }
+      12.5% { transform: translateY(-66px); }
+      22.5% { transform: translateY(-66px); }
+      25% { transform: translateY(-132px); }
+      35% { transform: translateY(-132px); }
+      37.5% { transform: translateY(-198px); }
+      47.5% { transform: translateY(-198px); }
+      50% { transform: translateY(-264px); }
+      60% { transform: translateY(-264px); }
+      62.5% { transform: translateY(-330px); }
+      72.5% { transform: translateY(-330px); }
+      75% { transform: translateY(-396px); }
+      85% { transform: translateY(-396px); }
+      87.5% { transform: translateY(-462px); }
+      97.5% { transform: translateY(-462px); }
+      100% { transform: translateY(-528px); }
+    }
+    @keyframes ticksm {
+      0% { transform: translateY(0px); }
+      10% { transform: translateY(0px); }
+      12.5% { transform: translateY(-32px); }
+      22.5% { transform: translateY(-32px); }
+      25% { transform: translateY(-64px); }
+      35% { transform: translateY(-64px); }
+      37.5% { transform: translateY(-96px); }
+      47.5% { transform: translateY(-96px); }
+      50% { transform: translateY(-128px); }
+      60% { transform: translateY(-128px); }
+      62.5% { transform: translateY(-160px); }
+      72.5% { transform: translateY(-160px); }
+      75% { transform: translateY(-192px); }
+      85% { transform: translateY(-192px); }
+      87.5% { transform: translateY(-224px); }
+      97.5% { transform: translateY(-224px); }
+      100% { transform: translateY(-256px); }
+    }
   </style>
 </helmet>
 
@@ -132,33 +192,6 @@
     </button>
   </div>
 
-    <!-- LIVE PURCHASE TOASTS -->
-    <div style="position: absolute; right: 26px; top: 88px; width: 340px; height: 82px; z-index: 5; pointer-events: none;">
-      <sc-for list="{{feed}}" as="e" hint-placeholder-count="5">
-        <div class="toast panel" style="display: flex; align-items: center; gap: 13px; padding: 13px 15px; background: rgba(12,20,21,.78); backdrop-filter: blur(30px) saturate(150%); -webkit-backdrop-filter: blur(30px) saturate(150%);">
-          <span style="position: relative; width: 38px; height: 38px; flex-shrink: 0; border-radius: 11px; background: linear-gradient(170deg, #163231 0%, #0B1E1F 100%); border: 1px solid rgba(255,255,255,.10); display: flex; align-items: center; justify-content: center;">
-            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="{{accent}}" stroke-width="1.7" stroke-linejoin="round">
-              <path d="M3 11 12 4l9 7"/><path d="M5.5 10v9h13v-9"/><path d="M10 19v-5h4v5"/>
-            </svg>
-          </span>
-          <div style="flex-grow: 1; min-width: 0;">
-            <div style="font-size: 13px; letter-spacing: -.005em;">
-              <span class="mono" style="color: #B4C2C4;">{{e.who}}</span>
-              <span style="color: #818F92;"> bought </span>
-              <span class="mono" style="color: #DCE5E6;">{{e.qty}}</span>
-              <span style="color: #818F92;"> shares</span>
-            </div>
-            <div class="mono" style="display: flex; align-items: center; gap: 7px; font-size: 11px; margin-top: 5px;">
-              <span style="color: {{accent}};">{{e.prop}}</span>
-              <span style="color: #586264;">·</span>
-              <span style="color: #586264;">{{e.ago}}</span>
-            </div>
-          </div>
-          <span class="blip" style="width: 6px; height: 6px; flex-shrink: 0; border-radius: 50%; background: {{accent}};"></span>
-        </div>
-      </sc-for>
-    </div>
-
     <sc-if value="{{isExplore}}" hint-placeholder-val="{{true}}">
       <div>
       <!-- HEADLINE STATS + YOUR POSITION -->
@@ -171,7 +204,13 @@
 
           <div style="display: flex; flex-direction: column; justify-content: center; padding-right: 34px;">
             <div class="mono" style="font-size: 10px; letter-spacing: .17em; color: #818F92;">TOTAL INVESTMENT AMOUNT</div>
-            <div class="mono" style="font-size: 62px; line-height: 1; letter-spacing: -.05em; margin-top: 14px;">$86.2M</div>
+            <span class="tickw tickw-lg mono" style="font-size: 62px; letter-spacing: -.05em; margin-top: 14px;">
+              <span class="tick-lg">
+                <sc-for list="{{investTicks}}" as="t" hint-placeholder-count="9">
+                  <span class="tl-lg">{{t}}</span>
+                </sc-for>
+              </span>
+            </span>
             <div style="font-size: 12.5px; color: #697577; margin-top: 12px;">capital committed across every villa raise</div>
           </div>
 
@@ -181,15 +220,27 @@
             <sc-for list="{{sideStats}}" as="b" hint-placeholder-count="2">
               <div>
                 <div class="mono" style="font-size: 10px; letter-spacing: .15em; color: #818F92;">{{b.label}}</div>
-                <div class="mono" style="font-size: 30px; line-height: 1.05; letter-spacing: -.035em; margin-top: 8px;">{{b.value}}</div>
+                <sc-if value="{{b.ticks}}" hint-placeholder-val="{{false}}">
+                  <span class="tickw tickw-sm mono" style="font-size: 30px; letter-spacing: -.035em; margin-top: 8px;">
+                    <span class="tick-sm">
+                      <sc-for list="{{b.ticks}}" as="t" hint-placeholder-count="9">
+                        <span class="tl-sm">{{t}}</span>
+                      </sc-for>
+                    </span>
+                  </span>
+                </sc-if>
+                <sc-if value="{{b.still}}" hint-placeholder-val="{{true}}">
+                  <div class="mono" style="font-size: 30px; line-height: 1.05; letter-spacing: -.035em; margin-top: 8px;">{{b.value}}</div>
+                </sc-if>
                 <div style="font-size: 11.5px; color: #697577; margin-top: 6px;">{{b.sub}}</div>
               </div>
             </sc-for>
           </div>
         </div>
 
-        <!-- the viewer's own position -->
-        <div class="panel" style="position: relative; padding: 24px 26px; overflow: hidden;">
+        <!-- the viewer's own position, with live buys beneath -->
+        <div style="display: flex; flex-direction: column; gap: 16px;">
+        <div class="panel" style="position: relative; padding: 22px 24px; overflow: hidden;">
           <span style="position: absolute; inset: 0 0 auto 0; height: 2px; background: linear-gradient(90deg, {{accent}}, transparent 72%);"></span>
 
           <div style="display: flex; align-items: center; gap: 9px;">
@@ -199,23 +250,43 @@
             <span class="mono" style="font-size: 10.5px; color: #697577;">0x9F2A…C41D</span>
           </div>
 
-          <div style="display: flex; gap: 30px; margin-top: 24px;">
+          <div style="display: flex; gap: 26px; margin-top: 18px;">
             <div>
-              <div class="mono" style="font-size: 40px; line-height: 1; letter-spacing: -.04em;">5</div>
-              <div class="mono" style="font-size: 10px; letter-spacing: .14em; color: #818F92; margin-top: 10px;">VILLAS OWNED</div>
+              <div class="mono" style="font-size: 34px; line-height: 1; letter-spacing: -.04em;">5</div>
+              <div class="mono" style="font-size: 10px; letter-spacing: .14em; color: #818F92; margin-top: 9px;">VILLAS OWNED</div>
             </div>
             <div style="width: 1px; background: rgba(255,255,255,.10);"></div>
             <div>
-              <div class="mono" style="font-size: 40px; line-height: 1; letter-spacing: -.04em;">$1,284</div>
-              <div class="mono" style="font-size: 10px; letter-spacing: .14em; color: #818F92; margin-top: 10px;">DIVIDENDS EARNED</div>
+              <div class="mono" style="font-size: 34px; line-height: 1; letter-spacing: -.04em;">$1,284</div>
+              <div class="mono" style="font-size: 10px; letter-spacing: .14em; color: #818F92; margin-top: 9px;">DIVIDENDS EARNED</div>
+            </div>
+            <div style="flex-grow: 1;"></div>
+            <button class="btn mono" style="align-self: flex-end; height: 34px; padding: 0 15px; border-radius: 11px; background: {{accent}}; color: #07201F; font-size: 11px; font-weight: 600; letter-spacing: .07em;">CLAIM</button>
+          </div>
+        </div>
+
+        <!-- live buys -->
+        <div class="panel" style="flex-grow: 1; display: flex; flex-direction: column; padding: 16px 0 16px; overflow: hidden;">
+          <div style="display: flex; align-items: center; gap: 9px; padding: 0 20px 12px;">
+            <span class="blip" style="width: 6px; height: 6px; border-radius: 50%; background: {{accent}};"></span>
+            <span class="mono" style="font-size: 10px; letter-spacing: .17em; color: {{accent}};">LIVE BUYS</span>
+            <span style="flex-grow: 1;"></span>
+            <span class="mono" style="font-size: 10.5px; color: #697577;">1,204 villas live</span>
+          </div>
+          <div class="vfeed-wrap">
+            <div class="vfeed">
+              <sc-for list="{{feed}}" as="e" hint-placeholder-count="10">
+                <div class="vrow">
+                  <span class="mono" style="color: #B4C2C4;">{{e.who}}</span>
+                  <span style="color: #697577;">bought</span>
+                  <span class="mono" style="color: #DCE5E6;">{{e.qty}}</span>
+                  <span style="flex-grow: 1;"></span>
+                  <span class="mono" style="color: {{accent}}; font-size: 11.5px;">{{e.prop}}</span>
+                </div>
+              </sc-for>
             </div>
           </div>
-
-          <div style="display: flex; align-items: center; gap: 10px; margin-top: 24px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,.085);">
-            <span class="mono" style="font-size: 11.5px; color: #697577;">$284.19 claimable now</span>
-            <span style="flex-grow: 1;"></span>
-            <button class="btn mono" style="height: 36px; padding: 0 16px; border-radius: 11px; background: {{accent}}; color: #07201F; font-size: 11.5px; font-weight: 600; letter-spacing: .07em;">CLAIM</button>
-          </div>
+        </div>
         </div>
       </div>
 
@@ -758,7 +829,11 @@ class Component extends DCLogic {
       { who: '0x6C55…1B8F', qty: '118', prop: 'Tanah Lembut', ago: '55s ago' },
       { who: 'atlas-ib.eth', qty: '2,640', prop: 'Villa Ombak', ago: '1m ago' }
     ];
-    const feed = events.slice(0, 5);
+    const feed = events.concat(events);
+
+    // the headline figures step once per feed row, then wrap with it
+    const invest = ['$86.21M', '$86.23M', '$86.24M', '$86.26M', '$86.27M', '$86.29M', '$86.31M', '$86.32M', '$86.21M'];
+    const investors = ['34,939', '34,940', '34,941', '34,942', '34,943', '34,944', '34,945', '34,946', '34,939'];
 
     const tab = this.state.tab;
     const tabs = [
@@ -850,9 +925,10 @@ class Component extends DCLogic {
 
     return {
       accent, nav, presets, trending: trendingRail, featured, listings, tabs, filledSoon, leaders,
+      investTicks: invest,
       sideStats: [
-        { label: 'DIVIDENDS PAID OUT', value: '$9.31M', sub: 'to holders since the first villa closed' },
-        { label: 'UNIQUE INVESTORS', value: '34,939', sub: 'distinct wallets holding villa tokens' }
+        { label: 'DIVIDENDS PAID OUT', value: '$9.31M', sub: 'to holders since the first villa closed', still: true },
+        { label: 'UNIQUE INVESTORS', sub: 'distinct wallets holding villa tokens', ticks: investors }
       ],
       isExplore: this.state.nav === 'explore',
       isMarket: this.state.nav === 'market',
