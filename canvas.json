@@ -5,7 +5,7 @@
       "x": 0,
       "y": 0,
       "w": 1440,
-      "h": 1780,
+      "h": 2000,
       "title": "Explore & Marketplace",
       "is_interactive": true
     },
@@ -21,7 +21,7 @@
     {
       "file": "Portfolio.dc.html",
       "x": 0,
-      "y": 1780,
+      "y": 2160,
       "w": 1440,
       "h": 960,
       "title": "Portfolio & rent vault",
@@ -30,7 +30,7 @@
     {
       "file": "Mobile.dc.html",
       "x": 1600,
-      "y": 1780,
+      "y": 2160,
       "w": 390,
       "h": 900,
       "title": "Mobile \u2014 explore",
@@ -43,7 +43,7 @@
       "x": 0,
       "y": -190,
       "w": 620,
-      "text": "PARCEL Fund \u2014 fractional Bali villa marketplace\nMuted turquoise #6CC1C6 used sparingly: primary buttons, active tabs, selected nav, progress fills, status dots. Everything else is a neutral grey ramp on near-black. Glass panels, soft shadows.\n\nProperty artwork is generated, not photographed: a seeded generator draws each villa's elevation \u2014 open pavilions under steep alang-alang roofs, timber posts, lit interiors, pool and palms \u2014 so every listing gets its own building. Change a listing's seed or type (villa / resort / estate / land) and it redraws.\n\nExplore is the featured view: 24H Trending (ranked by purchases over the last 24h), then Filled soon (closest to fully funded), then New in (just listed), then the featured listing with quick buy. Marketplace is every listing \u2014 type filters, card grid and table. The sidebar switches between them; a live purchase feed runs under the top bar on both (hover pauses it)."
+      "text": "PARCEL Fund \u2014 fractional Bali villa marketplace\nMuted turquoise #6CC1C6 used sparingly: primary buttons, active tabs, selected nav, progress fills, status dots. Everything else is a neutral grey ramp on near-black. Glass panels, soft shadows.\n\nProperty artwork is generated, not photographed: a seeded generator draws each villa's elevation \u2014 open pavilions under steep alang-alang roofs, timber posts, lit interiors, pool and palms \u2014 so every listing gets its own building. Change a listing's seed or type (villa / resort / estate / land) and it redraws.\n\nExplore opens on three headline figures \u2014 dividends paid, investors, trading volume \u2014 set large on bare background rather than in cards, to break the card rhythm. Then 24H Trending (ranked by purchases over the last 24h), then Filled soon (closest to fully funded), then New in (just listed), then the featured listing with quick buy. Marketplace is every listing \u2014 type filters, card grid and table. The sidebar switches between them; a live purchase feed runs under the top bar on both (hover pauses it)."
     },
     {
       "id": "note-numbers",

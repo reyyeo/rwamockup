@@ -132,6 +132,19 @@
 
     <sc-if value="{{isExplore}}" hint-placeholder-val="{{true}}">
       <div>
+      <!-- HEADLINE STATS -->
+      <div style="padding: 38px 26px 34px; border-bottom: 1px solid rgba(255,255,255,.085);">
+        <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));">
+          <sc-for list="{{bigStats}}" as="b" hint-placeholder-count="3">
+            <div style="padding: 0 40px; border-left: 1px solid {{b.edge}};">
+              <div class="mono" style="font-size: 10.5px; letter-spacing: .16em; color: #818F92;">{{b.label}}</div>
+              <div class="mono" style="font-size: 58px; line-height: 1.02; letter-spacing: -.045em; margin-top: 16px;">{{b.value}}</div>
+              <div style="font-size: 13px; color: #697577; margin-top: 12px;">{{b.sub}}</div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+
     <!-- TRENDING NOW -->
     <div style="padding: 30px 26px 24px;">
       <div style="display: flex; align-items: flex-end; gap: 16px;">
@@ -476,7 +489,7 @@
 
 <script data-dc-script data-props='{
   "accent": {"editor": "color", "default": "#6CC1C6", "options": ["#6CC1C6", "#6F9FBC", "#9ACBCC", "#529DA3"], "section": "Theme"},
-  "$preview": {"width": 1440, "height": 1780}
+  "$preview": {"width": 1440, "height": 2000}
 }'>
 class Component extends DCLogic {
   constructor(props) {
@@ -713,6 +726,14 @@ class Component extends DCLogic {
 
     return {
       accent, nav, presets, trending, featured, listings, tabs, filledSoon, newIn,
+      bigStats: [
+        { label: 'TOTAL DIVIDEND PAYOUTS', value: '$9.31M', sub: 'paid to holders since the first villa closed',
+          edge: 'transparent' },
+        { label: 'TOTAL INVESTORS', value: '34,939', sub: 'wallets holding at least one villa token',
+          edge: 'rgba(255,255,255,.085)' },
+        { label: 'TOTAL TRADING VOLUME', value: '$128.4M', sub: 'all-time, primary raises and secondary trades',
+          edge: 'rgba(255,255,255,.085)' }
+      ],
       isExplore: this.state.nav === 'explore',
       isMarket: this.state.nav === 'market',
       count: listings.length,
