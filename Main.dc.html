@@ -32,14 +32,25 @@
     @keyframes blip { 0%,100% { opacity: 1; } 50% { opacity: .25; } }
     .tick { animation: slide 24s linear infinite; }
     @keyframes slide { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-    .feed { animation: feedrun 54s linear infinite; }
-    .feed:hover { animation-play-state: paused; }
-    @keyframes feedrun { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    .toast { position: absolute; left: 0; bottom: 0; width: 340px; opacity: 0;
+      animation: pop 13s cubic-bezier(.22,1,.36,1) infinite; }
+    .toast:nth-child(1) { animation-delay: 0s; }
+    .toast:nth-child(2) { animation-delay: 2.6s; }
+    .toast:nth-child(3) { animation-delay: 5.2s; }
+    .toast:nth-child(4) { animation-delay: 7.8s; }
+    .toast:nth-child(5) { animation-delay: 10.4s; }
+    @keyframes pop {
+      0%   { opacity: 0; transform: translateY(16px) scale(.94); }
+      3%   { opacity: 1; transform: translateY(0) scale(1); }
+      16%  { opacity: 1; transform: translateY(0) scale(1); }
+      20%  { opacity: 0; transform: translateY(-10px) scale(.98); }
+      100% { opacity: 0; transform: translateY(-10px) scale(.98); }
+    }
     .scan { background-image: repeating-linear-gradient(0deg, rgba(255,255,255,.045) 0 1px, transparent 1px 4px); }
   </style>
 </helmet>
 
-<div style="--a: {{accent}}; display: flex; min-height: 100%; background: transparent;">
+<div style="--a: {{accent}}; position: relative; display: flex; min-height: 100%; background: transparent;">
 
   <!-- SIDEBAR -->
   <div style="width: 244px; flex-shrink: 0; border-right: 1px solid rgba(255,255,255,.085); padding: 22px 0; display: flex; flex-direction: column; gap: 26px;">
@@ -92,26 +103,31 @@
       </button>
     </div>
 
-    <!-- LIVE PURCHASE FEED -->
-    <div style="display: flex; align-items: center; gap: 0; border-bottom: 1px solid rgba(255,255,255,.085); background: rgba(255,255,255,.025);">
-      <div class="mono" style="display: flex; align-items: center; gap: 8px; flex-shrink: 0; padding: 0 16px 0 26px; height: 42px; font-size: 10.5px; letter-spacing: .14em; color: {{accent}}; border-right: 1px solid rgba(255,255,255,.085);">
-        <span class="blip" style="width: 6px; height: 6px; border-radius: 50%; background: {{accent}};"></span>LIVE
-      </div>
-      <div style="flex-grow: 1; min-width: 0; overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 3%, #000 94%, transparent); mask-image: linear-gradient(90deg, transparent, #000 3%, #000 94%, transparent);">
-        <div class="feed" style="display: flex; align-items: center; gap: 0; width: max-content;">
-          <sc-for list="{{feed}}" as="e" hint-placeholder-count="16">
-            <span class="mono" style="display: flex; align-items: center; gap: 8px; padding: 0 18px; height: 42px; font-size: 12px; white-space: nowrap;">
-              <span style="color: #B4C2C4;">{{e.who}}</span>
-              <span style="color: #697577;">bought</span>
-              <span style="color: #DCE5E6;">{{e.qty}}</span>
-              <span style="color: #697577;">shares of</span>
+    <!-- LIVE PURCHASE TOASTS -->
+    <div style="position: absolute; left: 26px; bottom: 26px; width: 340px; height: 82px; z-index: 5; pointer-events: none;">
+      <sc-for list="{{feed}}" as="e" hint-placeholder-count="5">
+        <div class="toast panel" style="display: flex; align-items: center; gap: 13px; padding: 13px 15px; background: rgba(12,20,21,.78); backdrop-filter: blur(30px) saturate(150%); -webkit-backdrop-filter: blur(30px) saturate(150%);">
+          <span style="position: relative; width: 38px; height: 38px; flex-shrink: 0; border-radius: 11px; background: linear-gradient(170deg, #163231 0%, #0B1E1F 100%); border: 1px solid rgba(255,255,255,.10); display: flex; align-items: center; justify-content: center;">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="{{accent}}" stroke-width="1.7" stroke-linejoin="round">
+              <path d="M3 11 12 4l9 7"/><path d="M5.5 10v9h13v-9"/><path d="M10 19v-5h4v5"/>
+            </svg>
+          </span>
+          <div style="flex-grow: 1; min-width: 0;">
+            <div style="font-size: 13px; letter-spacing: -.005em;">
+              <span class="mono" style="color: #B4C2C4;">{{e.who}}</span>
+              <span style="color: #818F92;"> bought </span>
+              <span class="mono" style="color: #DCE5E6;">{{e.qty}}</span>
+              <span style="color: #818F92;"> shares</span>
+            </div>
+            <div class="mono" style="display: flex; align-items: center; gap: 7px; font-size: 11px; margin-top: 5px;">
               <span style="color: {{accent}};">{{e.prop}}</span>
               <span style="color: #586264;">·</span>
               <span style="color: #586264;">{{e.ago}}</span>
-            </span>
-          </sc-for>
+            </div>
+          </div>
+          <span class="blip" style="width: 6px; height: 6px; flex-shrink: 0; border-radius: 50%; background: {{accent}};"></span>
         </div>
-      </div>
+      </sc-for>
     </div>
 
     <sc-if value="{{isExplore}}" hint-placeholder-val="{{true}}">
@@ -620,7 +636,7 @@ class Component extends DCLogic {
       { who: '0x6C55…1B8F', qty: '118', prop: 'Tanah Lembut', ago: '55s ago' },
       { who: 'atlas-ib.eth', qty: '2,640', prop: 'Villa Ombak', ago: '1m ago' }
     ];
-    const feed = events.concat(events);
+    const feed = events.slice(0, 5);
 
     const tab = this.state.tab;
     const tabs = [
