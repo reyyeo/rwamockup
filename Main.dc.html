@@ -24,6 +24,15 @@
     .card { transition: border-color .16s ease, box-shadow .16s ease; }
     .card:hover { border-color: var(--a); box-shadow: 0 0 0 1px var(--a), 0 24px 60px -30px var(--a); }
     .row:hover { background: rgba(255,255,255,.045); }
+    .navitem { position: relative; }
+    .navmenu { position: absolute; top: 100%; left: 0; padding-top: 9px; min-width: 232px; z-index: 30;
+      opacity: 0; visibility: hidden; transform: translateY(-5px);
+      transition: opacity .16s ease, transform .16s ease, visibility .16s; }
+    .navitem:hover .navmenu { opacity: 1; visibility: visible; transform: translateY(0); }
+    .navlink { display: flex; align-items: center; gap: 11px; width: 100%; padding: 11px 13px;
+      border: none; border-radius: 11px; background: transparent; font-family: inherit; font-size: 13px;
+      color: #B4C2C4; cursor: pointer; text-align: left; }
+    .navlink:hover { background: rgba(255,255,255,.07); color: #DCE5E6; }
     .blip { animation: blip 1.6s ease-in-out infinite; }
     .eye { animation: eyepulse 2.4s ease-in-out infinite; transform-origin: center; }
     .eye-pupil { animation: pupil 2.4s ease-in-out infinite; transform-origin: center; }
@@ -53,7 +62,7 @@
 <div style="--a: {{accent}}; position: relative; min-height: 100%; background: transparent;">
 
   <!-- TOP BAR -->
-  <div style="display: flex; align-items: center; gap: 22px; padding: 0 26px; height: 68px; border-bottom: 1px solid rgba(255,255,255,.085);">
+  <div style="position: relative; z-index: 20; display: flex; align-items: center; gap: 22px; padding: 0 26px; height: 68px; border-bottom: 1px solid rgba(255,255,255,.085);">
 
     <div style="display: flex; align-items: center; gap: 10px; flex-shrink: 0;">
       <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
@@ -65,12 +74,39 @@
 
     <div style="display: flex; align-items: center; gap: 4px;">
       <sc-for list="{{nav}}" as="n" hint-placeholder-count="6">
-        <button class="btn" onClick="{{n.pick}}" style="{{n.style}}">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="{{n.ink}}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="{{n.icon}}"/>
-          </svg>
-          {{n.label}}
-        </button>
+        <div class="navitem">
+          <button class="btn" onClick="{{n.pick}}" style="{{n.style}}">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="{{n.ink}}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="{{n.icon}}"/>
+            </svg>
+            {{n.label}}
+            <sc-if value="{{n.hasMenu}}" hint-placeholder-val="{{false}}">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="{{n.ink}}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 1px;">
+                <path d="m6 9 6 6 6-6"/>
+              </svg>
+            </sc-if>
+          </button>
+
+          <sc-if value="{{n.hasMenu}}" hint-placeholder-val="{{false}}">
+            <div class="navmenu">
+              <div class="panel" style="padding: 7px; background: rgba(12,20,21,.88); backdrop-filter: blur(30px) saturate(150%); -webkit-backdrop-filter: blur(30px) saturate(150%);">
+                <sc-for list="{{n.menu}}" as="m" hint-placeholder-count="2">
+                  <button class="navlink" onClick="{{n.pick}}">
+                    <span style="display: flex; width: 30px; height: 30px; flex-shrink: 0; align-items: center; justify-content: center; border-radius: 9px; background: rgba(255,255,255,.06);">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#91A0A2" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="{{m.icon}}"/>
+                      </svg>
+                    </span>
+                    <span>
+                      <span style="display: block;">{{m.label}}</span>
+                      <span class="mono" style="display: block; font-size: 10.5px; color: #697577; margin-top: 3px;">{{m.sub}}</span>
+                    </span>
+                  </button>
+                </sc-for>
+              </div>
+            </div>
+          </sc-if>
+        </div>
       </sc-for>
     </div>
 
@@ -557,8 +593,16 @@ class Component extends DCLogic {
       { id: 'list', label: 'List a property', icon: 'M4 20V9l7-5 7 5v4M8 20v-6h5v6M17 16v6M14 19h6' }
     ].map((n) => {
       const on = n.id === this.state.nav;
+      const menus = {
+        market: [
+          { label: 'All Properties', sub: 'EVERY OPEN LISTING', icon: 'M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z' },
+          { label: 'Property Managers', sub: 'OPERATORS AND SPONSORS', icon: 'M9 11a3.4 3.4 0 1 0 0-6.8A3.4 3.4 0 0 0 9 11zM2.5 20c1.2-3 3.7-4.5 6.5-4.5s5.3 1.5 6.5 4.5M16.4 5.3a3.4 3.4 0 0 1 0 6.4M18 15.9c2 .7 3.3 2.1 4 4.1' }
+        ]
+      };
       return {
         ...n,
+        hasMenu: !!menus[n.id],
+        menu: menus[n.id] || [],
         pick: () => this.setState({ nav: n.id }),
         ink: on ? accent : '#697577',
         style: 'display: flex; align-items: center; gap: 12px; width: 100%; text-align: left;'
