@@ -195,7 +195,7 @@
     <sc-if value="{{isExplore}}" hint-placeholder-val="{{true}}">
       <div>
       <!-- HEADLINE STATS + YOUR POSITION -->
-      <div style="display: grid; grid-template-columns: 1.85fr 1fr; gap: 16px; padding: 26px 26px 30px;">
+      <div style="display: grid; grid-template-columns: 2.45fr 1fr; gap: 16px; padding: 26px 26px 30px;">
 
         <!-- platform, as one instrument cluster -->
         <div class="panel" style="position: relative; display: flex; align-items: stretch; padding: 24px 26px;">
@@ -216,7 +216,7 @@
 
           <div style="width: 1px; background: rgba(255,255,255,.10);"></div>
 
-          <div style="display: flex; flex-direction: column; justify-content: center; gap: 20px; padding-left: 34px; min-width: 250px;">
+          <div style="display: flex; flex-direction: column; justify-content: center; gap: 20px; padding: 0 30px; min-width: 228px;">
             <sc-for list="{{sideStats}}" as="b" hint-placeholder-count="2">
               <div>
                 <div class="mono" style="font-size: 10px; letter-spacing: .15em; color: #818F92;">{{b.label}}</div>
@@ -236,11 +236,32 @@
               </div>
             </sc-for>
           </div>
+
+          <div style="width: 1px; background: rgba(255,255,255,.10);"></div>
+
+          <div style="flex-grow: 1; min-width: 0; display: flex; flex-direction: column; justify-content: center; padding-left: 30px;">
+            <div style="display: flex; align-items: center; gap: 9px; padding-bottom: 12px;">
+              <span class="blip" style="width: 6px; height: 6px; border-radius: 50%; background: {{accent}};"></span>
+              <span class="mono" style="font-size: 10px; letter-spacing: .17em; color: {{accent}};">LIVE BUYS</span>
+            </div>
+            <div class="vfeed-wrap">
+              <div class="vfeed">
+                <sc-for list="{{feed}}" as="e" hint-placeholder-count="10">
+                  <div class="vrow" style="padding: 0;">
+                    <span class="mono" style="color: #B4C2C4;">{{e.who}}</span>
+                    <span style="color: #697577;">bought</span>
+                    <span class="mono" style="color: #DCE5E6;">{{e.qty}}</span>
+                    <span style="flex-grow: 1;"></span>
+                    <span class="mono" style="color: {{accent}}; font-size: 11.5px;">{{e.prop}}</span>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <!-- the viewer's own position, with live buys beneath -->
-        <div style="display: flex; flex-direction: column; gap: 16px;">
-        <div class="panel" style="position: relative; padding: 22px 24px; overflow: hidden;">
+        <!-- the viewer's own position -->
+        <div class="panel" style="position: relative; padding: 24px 26px; overflow: hidden;">
           <span style="position: absolute; inset: 0 0 auto 0; height: 2px; background: linear-gradient(90deg, {{accent}}, transparent 72%);"></span>
 
           <div style="display: flex; align-items: center; gap: 9px;">
@@ -250,44 +271,25 @@
             <span class="mono" style="font-size: 10.5px; color: #697577;">0x9F2A…C41D</span>
           </div>
 
-          <div style="display: flex; gap: 26px; margin-top: 18px;">
+          <div style="display: flex; gap: 24px; margin-top: 20px;">
             <div>
-              <div class="mono" style="font-size: 34px; line-height: 1; letter-spacing: -.04em;">5</div>
+              <div class="mono" style="font-size: 36px; line-height: 1; letter-spacing: -.04em;">5</div>
               <div class="mono" style="font-size: 10px; letter-spacing: .14em; color: #818F92; margin-top: 9px;">VILLAS OWNED</div>
             </div>
             <div style="width: 1px; background: rgba(255,255,255,.10);"></div>
             <div>
-              <div class="mono" style="font-size: 34px; line-height: 1; letter-spacing: -.04em;">$1,284</div>
+              <div class="mono" style="font-size: 36px; line-height: 1; letter-spacing: -.04em;">$1,284</div>
               <div class="mono" style="font-size: 10px; letter-spacing: .14em; color: #818F92; margin-top: 9px;">DIVIDENDS EARNED</div>
             </div>
-            <div style="flex-grow: 1;"></div>
-            <button class="btn mono" style="align-self: flex-end; height: 34px; padding: 0 15px; border-radius: 11px; background: {{accent}}; color: #07201F; font-size: 11px; font-weight: 600; letter-spacing: .07em;">CLAIM</button>
+          </div>
+
+          <div style="display: flex; align-items: center; gap: 10px; margin-top: 22px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,.085);">
+            <span class="mono" style="font-size: 11.5px; color: #697577;">$284.19 claimable now</span>
+            <span style="flex-grow: 1;"></span>
+            <button class="btn mono" style="height: 36px; padding: 0 17px; border-radius: 11px; background: {{accent}}; color: #07201F; font-size: 11.5px; font-weight: 600; letter-spacing: .07em;">CLAIM</button>
           </div>
         </div>
 
-        <!-- live buys -->
-        <div class="panel" style="flex-grow: 1; display: flex; flex-direction: column; padding: 16px 0 16px; overflow: hidden;">
-          <div style="display: flex; align-items: center; gap: 9px; padding: 0 20px 12px;">
-            <span class="blip" style="width: 6px; height: 6px; border-radius: 50%; background: {{accent}};"></span>
-            <span class="mono" style="font-size: 10px; letter-spacing: .17em; color: {{accent}};">LIVE BUYS</span>
-            <span style="flex-grow: 1;"></span>
-            <span class="mono" style="font-size: 10.5px; color: #697577;">1,204 villas live</span>
-          </div>
-          <div class="vfeed-wrap">
-            <div class="vfeed">
-              <sc-for list="{{feed}}" as="e" hint-placeholder-count="10">
-                <div class="vrow">
-                  <span class="mono" style="color: #B4C2C4;">{{e.who}}</span>
-                  <span style="color: #697577;">bought</span>
-                  <span class="mono" style="color: #DCE5E6;">{{e.qty}}</span>
-                  <span style="flex-grow: 1;"></span>
-                  <span class="mono" style="color: {{accent}}; font-size: 11.5px;">{{e.prop}}</span>
-                </div>
-              </sc-for>
-            </div>
-          </div>
-        </div>
-        </div>
       </div>
 
     <!-- TRENDING NOW -->
@@ -539,6 +541,55 @@
       </sc-for>
     </div>
 
+    <!-- WHY US -->
+    <div style="padding: 10px 26px 34px;">
+      <div class="panel" style="position: relative; overflow: hidden; display: flex; align-items: stretch;">
+
+        <div style="flex-grow: 1; min-width: 0; padding: 38px 40px 36px; max-width: 760px;">
+          <div class="mono" style="font-size: 10.5px; letter-spacing: .18em; color: {{accent}};">WHY US?</div>
+          <h2 style="margin: 16px 0 0; font-size: 40px; line-height: 1.1; letter-spacing: -.035em; font-weight: 700; text-wrap: pretty;">
+            Become a real estate owner<br>without paying the full cost.
+          </h2>
+          <p style="margin: 16px 0 0; font-size: 14.5px; line-height: 1.65; color: #91A0A2; max-width: 520px;">
+            A Bali villa runs into the hundreds of thousands. A token of one starts at $8.60 — same title, same rent, split into shares you can buy and sell whenever you like.
+          </p>
+
+          <div style="display: flex; gap: 30px; margin-top: 28px;">
+            <sc-for list="{{whyUs}}" as="w" hint-placeholder-count="3">
+              <div style="display: flex; gap: 12px; max-width: 210px;">
+                <span style="display: flex; width: 34px; height: 34px; flex-shrink: 0; align-items: center; justify-content: center; border-radius: 10px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.10);">
+                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#91A0A2" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="{{w.icon}}"/>
+                  </svg>
+                </span>
+                <div>
+                  <div style="font-size: 13.5px; font-weight: 600;">{{w.title}}</div>
+                  <div style="font-size: 12px; line-height: 1.5; color: #697577; margin-top: 5px;">{{w.sub}}</div>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+
+          <div style="display: flex; align-items: center; gap: 14px; margin-top: 30px;">
+            <button class="btn mono" style="height: 48px; padding: 0 24px; border-radius: 12px; background: {{accent}}; color: #07201F; font-size: 13px; font-weight: 600; letter-spacing: .05em;">START FROM $8.60</button>
+            <span class="mono" style="font-size: 11.5px; color: #697577;">no minimum lock-in · settles on Base</span>
+          </div>
+        </div>
+
+        <div class="scan" style="width: 42%; flex-shrink: 0; position: relative; background: linear-gradient(170deg, #123034 0%, #0C2124 52%, #060C0D 100%);">
+          <svg viewBox="0 0 300 180" width="100%" height="100%" preserveAspectRatio="xMidYMax slice" style="position: absolute; inset: 0;">
+            <sc-for list="{{whyArt.rects}}" as="sh" hint-placeholder-count="30">
+              <rect x="{{sh.x}}" y="{{sh.y}}" width="{{sh.w}}" height="{{sh.h}}" fill="{{sh.f}}" rx="{{sh.rx}}"></rect>
+            </sc-for>
+            <sc-for list="{{whyArt.paths}}" as="ph" hint-placeholder-count="24">
+              <path d="{{ph.d}}" fill="{{ph.f}}" stroke="{{ph.s}}" stroke-width="{{ph.sw}}" stroke-linecap="round" stroke-linejoin="round"></path>
+            </sc-for>
+          </svg>
+          <div style="position: absolute; inset: 0; background: linear-gradient(90deg, rgba(5,9,10,.92), rgba(5,9,10,.25) 42%, transparent);"></div>
+        </div>
+      </div>
+    </div>
+
       </div>
     </sc-if>
 
@@ -657,7 +708,7 @@
 
 <script data-dc-script data-props='{
   "accent": {"editor": "color", "default": "#6CC1C6", "options": ["#6CC1C6", "#6F9FBC", "#9ACBCC", "#529DA3"], "section": "Theme"},
-  "$preview": {"width": 1440, "height": 2140}
+  "$preview": {"width": 1440, "height": 2460}
 }'>
 class Component extends DCLogic {
   constructor(props) {
@@ -925,6 +976,15 @@ class Component extends DCLogic {
 
     return {
       accent, nav, presets, trending: trendingRail, featured, listings, tabs, filledSoon, leaders,
+      whyArt: this.villa(7731, 'estate', accent),
+      whyUs: [
+        { title: 'Start at one token', sub: 'Buy $8.60 of a villa or $86,000 — the deed splits either way.',
+          icon: 'M12 3v18M16.5 7.5c-.8-1.4-2.4-2-4.5-2-2.5 0-4 1-4 2.8 0 4 8.5 2 8.5 6 0 1.9-1.7 3-4.5 3-2.2 0-3.8-.7-4.6-2.2' },
+        { title: 'Rent every Friday', sub: 'Net nightly income lands in your wallet weekly, not yearly.',
+          icon: 'M3 7h18v12H3zM3 11h18M8 15h4' },
+        { title: 'Leave when you want', sub: 'Sell your tokens on the DEX instead of waiting years for a sale.',
+          icon: 'M4 8h13M14 5l3 3-3 3M20 16H7M10 13l-3 3 3 3' }
+      ],
       investTicks: invest,
       sideStats: [
         { label: 'DIVIDENDS PAID OUT', value: '$9.31M', sub: 'to holders since the first villa closed', still: true },
