@@ -110,6 +110,8 @@
       </div>
     </div>
 
+    <sc-if value="{{isExplore}}" hint-placeholder-val="{{true}}">
+      <div>
     <!-- TRENDING NOW -->
     <div style="padding: 30px 26px 24px;">
       <div style="display: flex; align-items: flex-end; gap: 16px;">
@@ -168,23 +170,48 @@
       </div>
     </div>
 
-    <!-- SEARCH / FILTER -->
-    <div style="display: flex; gap: 12px; padding: 0 26px 20px;">
-      <div class="panel" style="flex-grow: 1; display: flex; align-items: center; gap: 10px; height: 46px; padding: 0 15px;">
-        <span style="color: #5B6769; font-size: 13.5px;">Search property, ticker, city or sponsor…</span>
-        <span style="flex-grow: 1;"></span>
-        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#818F92" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.6-3.6"/></svg>
+    <!-- FILLED SOON -->
+    <div style="padding: 6px 26px 26px;">
+      <div style="display: flex; align-items: flex-end; gap: 14px;">
+        <div>
+          <h2 style="margin: 0; font-size: 22px; font-weight: 700; letter-spacing: -.025em;">Filled soon</h2>
+          <div class="mono" style="font-size: 11px; color: #818F92; margin-top: 7px; letter-spacing: .07em;">CLOSEST TO FULLY FUNDED · LAST TOKENS AT THE OFFER PRICE</div>
+        </div>
+        <div style="flex-grow: 1;"></div>
+        <span class="mono" style="font-size: 11.5px; color: #697577; letter-spacing: .06em;">VIEW ALL</span>
       </div>
-      <button class="btn panel mono" onClick="{{cycleSort}}" style="display: flex; align-items: center; gap: 10px; height: 46px; padding: 0 16px; color: #DCE5E6; font-size: 12.5px;">
-        Sort · {{sortLabel}}
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#818F92" stroke-width="2.2" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg>
-      </button>
-      <button class="btn panel" onClick="{{toggleLive}}" style="display: flex; align-items: center; gap: 10px; height: 46px; padding: 0 16px; color: #DCE5E6; font-size: 13px;">
-        <span style="width: 17px; height: 17px; border-radius: 11px; display: flex; align-items: center; justify-content: center; border: 1.6px solid {{liveEdge}}; background: {{liveFill}};">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="{{liveTick}}" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7"/></svg>
-        </span>
-        Real-time prices
-      </button>
+
+      <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin-top: 18px;">
+        <sc-for list="{{filledSoon}}" as="c" hint-placeholder-count="4">
+          <div class="card panel" style="display: flex; gap: 13px; padding: 13px;">
+            <div class="scan" style="width: 74px; flex-shrink: 0; border-radius: 11px; position: relative; overflow: hidden; background: {{c.bg}};">
+              <svg viewBox="0 0 300 180" width="100%" height="100%" preserveAspectRatio="xMidYMax slice" style="position: absolute; inset: 0;">
+                <sc-for list="{{c.art.rects}}" as="sh" hint-placeholder-count="30">
+                  <rect x="{{sh.x}}" y="{{sh.y}}" width="{{sh.w}}" height="{{sh.h}}" fill="{{sh.f}}" rx="{{sh.rx}}"></rect>
+                </sc-for>
+                <sc-for list="{{c.art.paths}}" as="ph" hint-placeholder-count="24">
+                  <path d="{{ph.d}}" fill="{{ph.f}}" stroke="{{ph.s}}" stroke-width="{{ph.sw}}" stroke-linecap="round" stroke-linejoin="round"></path>
+                </sc-for>
+              </svg>
+            </div>
+            <div style="flex-grow: 1; min-width: 0; display: flex; flex-direction: column;">
+              <div style="font-size: 14px; font-weight: 600; letter-spacing: -.01em;">{{c.name}}</div>
+              <div class="mono" style="font-size: 10px; color: #697577; margin-top: 4px; letter-spacing: .07em;">{{c.city}}</div>
+              <div style="flex-grow: 1;"></div>
+              <div style="display: flex; align-items: baseline; gap: 7px; margin-top: 12px;">
+                <span class="mono" style="font-size: 20px; letter-spacing: -.025em;">{{c.pct}}</span>
+                <span class="mono" style="font-size: 10.5px; color: #818F92;">funded</span>
+                <span style="flex-grow: 1;"></span>
+                <span class="mono" style="font-size: 10.5px; color: {{c.urgent}};">{{c.closes}}</span>
+              </div>
+              <div style="height: 5px; border-radius: 999px; background: rgba(255,255,255,.09); margin-top: 8px; overflow: hidden;">
+                <div style="height: 100%; width: {{c.pct}}; background: {{c.barInk}};"></div>
+              </div>
+              <div class="mono" style="font-size: 10px; color: #586264; margin-top: 8px; letter-spacing: .06em;">{{c.left}} LEFT · {{c.price}}</div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
     </div>
 
     <!-- FEATURE ROW -->
@@ -277,6 +304,92 @@
       </sc-for>
     </div>
 
+      </div>
+    </sc-if>
+
+    <sc-if value="{{isMarket}}" hint-placeholder-val="{{false}}">
+      <div>
+    <!-- MARKETPLACE: ALL LISTINGS -->
+    <div style="display: flex; align-items: flex-end; gap: 16px; padding: 30px 26px 6px;">
+      <div>
+        <h1 style="margin: 0; font-size: 30px; font-weight: 700; letter-spacing: -.03em;">Marketplace</h1>
+        <div class="mono" style="font-size: 11.5px; color: #818F92; margin-top: 8px; letter-spacing: .07em;">EVERY OPEN LISTING · SETTLES ON BASE IN ~1.4s</div>
+      </div>
+    </div>
+
+    <div style="display: flex; gap: 9px; padding: 18px 26px 4px;">
+      <sc-for list="{{tabs}}" as="t" hint-placeholder-count="5">
+        <button class="btn mono" onClick="{{t.pick}}" style="{{t.style}}">{{t.label}}</button>
+      </sc-for>
+      <div style="flex-grow: 1;"></div>
+      <div class="mono" style="align-self: center; font-size: 11.5px; color: #697577; letter-spacing: .06em;">{{count}} LISTED</div>
+    </div>
+
+    <!-- SEARCH / FILTER -->
+    <div style="display: flex; gap: 12px; padding: 0 26px 20px;">
+      <div class="panel" style="flex-grow: 1; display: flex; align-items: center; gap: 10px; height: 46px; padding: 0 15px;">
+        <span style="color: #5B6769; font-size: 13.5px;">Search property, ticker, city or sponsor…</span>
+        <span style="flex-grow: 1;"></span>
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#818F92" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.6-3.6"/></svg>
+      </div>
+      <button class="btn panel mono" onClick="{{cycleSort}}" style="display: flex; align-items: center; gap: 10px; height: 46px; padding: 0 16px; color: #DCE5E6; font-size: 12.5px;">
+        Sort · {{sortLabel}}
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#818F92" stroke-width="2.2" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg>
+      </button>
+      <button class="btn panel" onClick="{{toggleLive}}" style="display: flex; align-items: center; gap: 10px; height: 46px; padding: 0 16px; color: #DCE5E6; font-size: 13px;">
+        <span style="width: 17px; height: 17px; border-radius: 11px; display: flex; align-items: center; justify-content: center; border: 1.6px solid {{liveEdge}}; background: {{liveFill}};">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="{{liveTick}}" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7"/></svg>
+        </span>
+        Real-time prices
+      </button>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; padding: 0 26px 24px;">
+      <sc-for list="{{listings}}" as="c" hint-placeholder-count="6">
+        <div class="card panel" style="overflow: hidden;">
+          <div class="scan" style="height: 176px; position: relative; background: {{c.bg}};">
+            <svg viewBox="0 0 300 180" width="100%" height="100%" preserveAspectRatio="xMidYMax slice" style="position: absolute; inset: 0;">
+              <sc-for list="{{c.art.rects}}" as="sh" hint-placeholder-count="30">
+                <rect x="{{sh.x}}" y="{{sh.y}}" width="{{sh.w}}" height="{{sh.h}}" fill="{{sh.f}}" rx="{{sh.rx}}"></rect>
+              </sc-for>
+              <sc-for list="{{c.art.paths}}" as="ph" hint-placeholder-count="24">
+                <path d="{{ph.d}}" fill="{{ph.f}}" stroke="{{ph.s}}" stroke-width="{{ph.sw}}" stroke-linecap="round" stroke-linejoin="round"></path>
+              </sc-for>
+            </svg>
+            <span class="mono" style="position: absolute; top: 12px; left: 12px; font-size: 10px; letter-spacing: .1em; padding: 5px 9px; border-radius: 9px; background: rgba(5,9,10,.78); color: #B4C2C4;">{{c.sym}}</span>
+            <span class="mono" style="position: absolute; top: 12px; right: 12px; font-size: 10px; letter-spacing: .1em; padding: 5px 9px; border-radius: 9px; background: rgba(5,9,10,.78); color: #B4C2C4;">{{c.type}}</span>
+          </div>
+          <div style="padding: 16px 17px 18px; border-top: 1px solid rgba(255,255,255,.085);">
+            <div style="font-size: 16px; font-weight: 600; letter-spacing: -.01em;">{{c.name}}</div>
+            <div class="mono" style="font-size: 10.5px; color: #697577; margin-top: 6px; letter-spacing: .07em;">{{c.city}}</div>
+            <div style="display: flex; gap: 26px; margin-top: 16px;">
+              <div>
+                <div class="mono" style="font-size: 10px; letter-spacing: .13em; color: #586264;">PRICE / TOKEN</div>
+                <div class="mono" style="font-size: 18px; margin-top: 5px;">{{c.price}}</div>
+              </div>
+              <div>
+                <div class="mono" style="font-size: 10px; letter-spacing: .13em; color: #586264;">NET YIELD</div>
+                <div class="mono" style="font-size: 18px; margin-top: 5px;">{{c.apy}}</div>
+              </div>
+            </div>
+            <div style="margin-top: 16px;">
+              <div style="display: flex; justify-content: space-between;" class="mono">
+                <span style="font-size: 11px; color: #818F92;">{{c.pct}} funded</span>
+                <span style="font-size: 11px; color: #697577;">{{c.left}} left</span>
+              </div>
+              <div style="height: 5px; border-radius: 999px; background: rgba(255,255,255,.09); margin-top: 8px; overflow: hidden;">
+                <div style="height: 100%; width: {{c.pct}}; background: {{accent}};"></div>
+              </div>
+            </div>
+            <div style="display: flex; gap: 10px; margin-top: 18px;">
+              <button class="btn mono" style="flex-grow: 1; height: 44px; border-radius: 11px; background: {{accent}}; color: #07201F; font-size: 12.5px; font-weight: 600; letter-spacing: .05em;">BUY TOKENS</button>
+              <button class="btn mono" style="height: 44px; padding: 0 16px; border-radius: 11px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.11); color: #DCE5E6; font-size: 12.5px;">Trade</button>
+            </div>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+
     <!-- TABLE -->
     <div class="panel" style="margin: 0 26px 30px;">
       <div style="display: grid; grid-template-columns: 2.3fr 1fr 1.1fr 1fr 1.3fr .7fr; padding: 14px 20px; border-bottom: 1px solid rgba(255,255,255,.11);" class="mono">
@@ -302,6 +415,8 @@
         </div>
       </sc-for>
     </div>
+      </div>
+    </sc-if>
   </div>
 </div>
 </x-dc>
@@ -313,7 +428,7 @@
 class Component extends DCLogic {
   constructor(props) {
     super(props);
-    this.state = { nav: 'explore', amount: 500, sort: 0, live: true, range: '24H' };
+    this.state = { nav: 'explore', amount: 500, sort: 0, live: true, range: '24H', tab: 'all' };
   }
 
   // Seeded Bali-villa elevation: open pavilions under steep alang-alang roofs,
@@ -415,6 +530,7 @@ class Component extends DCLogic {
 
     const nav = [
       { id: 'explore', label: 'Explore', icon: 'M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM15.5 8.5l-2 5-5 2 2-5z' },
+      { id: 'market', label: 'Marketplace', icon: 'M3 9l1.6-4.5h14.8L21 9M3 9h18v11H3zM3 9a2.6 2.6 0 0 0 5 0 2.6 2.6 0 0 0 5 0 2.6 2.6 0 0 0 5 0M9.5 20v-6h5v6' },
       { id: 'insights', label: 'Insights', icon: 'M4 20h16M7 20v-7M12 20V6M17 20v-10' },
       { id: 'trade', label: 'Trade', icon: 'M4 8h13M14 5l3 3-3 3M20 16H7M10 13l-3 3 3 3' },
       { id: 'earn', label: 'Earn', icon: 'M12 8.5c-4.4 0-8-1.2-8-2.8S7.6 3 12 3s8 1.2 8 2.7-3.6 2.8-8 2.8zM4 5.7v12.6C4 19.8 7.6 21 12 21s8-1.2 8-2.7V5.7M4 12c0 1.5 3.6 2.7 8 2.7s8-1.2 8-2.7' },
@@ -489,6 +605,52 @@ class Component extends DCLogic {
     ];
     const feed = events.concat(events);
 
+    const tab = this.state.tab;
+    const tabs = [
+      { id: 'all', label: 'All' }, { id: 'villa', label: 'Villas' },
+      { id: 'resort', label: 'Resorts' }, { id: 'estate', label: 'Estates' },
+      { id: 'land', label: 'Land' }
+    ].map((t) => ({
+      ...t,
+      pick: () => this.setState({ tab: t.id }),
+      style: 'height: 38px; padding: 0 17px; border-radius: 11px; font-size: 12.5px; letter-spacing: .04em; font-family: inherit;'
+        + (t.id === tab
+          ? ' background: ' + accent + '; border: 1px solid ' + accent + '; color: #07201F; font-weight: 600;'
+          : ' background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.11); color: #A2B0B2;')
+    }));
+
+    const all = [
+      { sym: 'OMBAK', name: 'Villa Ombak', city: 'CANGGU · BATU BOLONG', kind: 'villa', type: 'VILLA',
+        price: '$14.20', apy: '9.4%', pct: '73%', left: '41,850 tokens' },
+      { sym: 'KARANG', name: 'Karang Cliff Villas', city: 'ULUWATU · BINGIN', kind: 'villa', type: 'VILLA',
+        price: '$26.80', apy: '8.1%', pct: '61%', left: '54,600 tokens' },
+      { sym: 'UMASARI', name: 'Uma Sari Estate', city: 'UBUD · TEGALLALANG', kind: 'estate', type: 'ESTATE',
+        price: '$31.40', apy: '7.2%', pct: '48%', left: '96,200 tokens' },
+      { sym: 'BANYU', name: 'Banyu Pool Suites', city: 'SEMINYAK · PETITENGET', kind: 'resort', type: 'RESORT',
+        price: '$19.75', apy: '10.6%', pct: '94%', left: '8,140 tokens' },
+      { sym: 'TANAH', name: 'Tanah Lembut', city: 'PERERENAN · RICE FIELDS', kind: 'estate', type: 'ESTATE',
+        price: '$22.90', apy: '8.8%', pct: '73%', left: '30,400 tokens' },
+      { sym: 'SAWAH2', name: 'Sawah Dua Parcel', city: 'UBUD · NORTH RIDGE', kind: 'land', type: 'LAND',
+        price: '$8.60', apy: '—', pct: '22%', left: '182,900 tokens' }
+    ];
+    const closing = { OMBAK: '2d 04h', KARANG: '5d 11h', UMASARI: '8d 02h', BANYU: '11h 26m', TANAH: '3d 18h', SAWAH2: '21d 06h' };
+    const filledSoon = all
+      .map((c) => ({ ...c, pctNum: parseInt(c.pct, 10) }))
+      .sort((x, y) => y.pctNum - x.pctNum)
+      .slice(0, 4)
+      .map((c) => ({
+        ...c,
+        closes: closing[c.sym],
+        barInk: c.pctNum >= 90 ? accent : 'rgba(255,255,255,.34)',
+        urgent: c.pctNum >= 90 ? accent : '#818F92',
+        art: this.villa(c.sym.length * 613 + c.price.length * 71, c.kind, accent),
+        bg: 'linear-gradient(170deg, #123034 0%, #0C2124 52%, #060C0D 100%)'
+      }));
+
+    const listings = all
+      .filter((c) => tab === 'all' || c.kind === tab)
+      .map((c) => ({ ...c, bg: 'linear-gradient(170deg, #123034 0%, #0C2124 52%, #060C0D 100%)', art: this.villa(c.sym.length * 613 + c.price.length * 71, c.kind, accent) }));
+
     const presets = [100, 500, 2500, 10000].map((v) => ({
       label: v >= 1000 ? '$' + (v / 1000) + 'k' : '$' + v,
       pick: () => this.setState({ amount: v }),
@@ -502,7 +664,10 @@ class Component extends DCLogic {
     const tokenCount = Math.floor(amount / 14.2);
 
     return {
-      accent, nav, presets, ranges, trending, featured,
+      accent, nav, presets, ranges, trending, featured, listings, tabs, filledSoon,
+      isExplore: this.state.nav === 'explore',
+      isMarket: this.state.nav === 'market',
+      count: listings.length,
       rangeLabel: { '24H': 'LAST 24 HOURS', '7D': 'LAST 7 DAYS', '30D': 'LAST 30 DAYS' }[this.state.range],
       amount: '$' + amount.toLocaleString('en-US') + '.00',
       amtInk: amount ? '#DCE5E6' : '#5B6769',
