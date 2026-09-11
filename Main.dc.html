@@ -560,7 +560,7 @@ class Component extends DCLogic {
         rankBg: i === 0 ? accent : 'rgba(5,9,10,.78)',
         rankInk: i === 0 ? '#07201F' : '#B4C2C4',
         buys: '+' + t.count.toLocaleString('en-US'),
-        period: 'past 24h',
+        period: 'buyers',
         interested: t.watchers.toLocaleString('en-US'),
         bg: 'linear-gradient(170deg, #123034 0%, #0C2124 52%, #060C0D 100%)',
         art: this.villa(t.sym.length * 977 + t.base, t.kind, accent)
