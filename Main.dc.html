@@ -120,17 +120,11 @@
     <div style="padding: 30px 26px 24px;">
       <div style="display: flex; align-items: flex-end; gap: 16px;">
         <div>
-          <h1 style="margin: 0; font-size: 30px; font-weight: 700; letter-spacing: -.03em;">Trending now</h1>
+          <h1 style="margin: 0; font-size: 30px; font-weight: 700; letter-spacing: -.03em;">24H Trending</h1>
           <div class="mono" style="display: flex; align-items: center; gap: 9px; font-size: 11.5px; color: #818F92; margin-top: 8px; letter-spacing: .07em;">
             <span class="blip" style="width: 6px; height: 6px; border-radius: 50%; background: {{accent}};"></span>
-            RANKED BY PURCHASES · {{rangeLabel}} · UPDATED 12s AGO
+            RANKED BY PURCHASES · UPDATED 12s AGO
           </div>
-        </div>
-        <div style="flex-grow: 1;"></div>
-        <div style="display: flex; gap: 8px;">
-          <sc-for list="{{ranges}}" as="r" hint-placeholder-count="3">
-            <button class="btn mono" onClick="{{r.pick}}" style="{{r.style}}">{{r.label}}</button>
-          </sc-for>
         </div>
       </div>
 
@@ -429,7 +423,7 @@
 class Component extends DCLogic {
   constructor(props) {
     super(props);
-    this.state = { nav: 'explore', amount: 500, sort: 0, live: true, range: '24H', tab: 'all' };
+    this.state = { nav: 'explore', amount: 500, sort: 0, live: true, tab: 'all' };
   }
 
   // Seeded Bali-villa elevation: open pavilions under steep alang-alang roofs,
@@ -551,17 +545,6 @@ class Component extends DCLogic {
       };
     });
 
-    const ranges = ['24H', '7D', '30D'].map((r) => ({
-      label: r,
-      pick: () => this.setState({ range: r }),
-      style: 'height: 34px; padding: 0 15px; border-radius: 11px; font-size: 12px; letter-spacing: .07em;'
-        + (r === this.state.range
-          ? ' background: ' + accent + '; border: 1px solid ' + accent + '; color: #07201F; font-weight: 600;'
-          : ' background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.11); color: #A2B0B2;')
-    }));
-
-    const win = this.state.range;
-    const mult = { '24H': 1, '7D': 6.2, '30D': 23.4 }[win];
     const trending = [
       { sym: 'OMBAK', name: 'Villa Ombak', city: 'CANGGU · BATU BOLONG', kind: 'villa', base: 412, watch: 1840 },
       { sym: 'KARANG', name: 'Karang Cliff', city: 'ULUWATU · BINGIN', kind: 'villa', base: 388, watch: 2210 },
@@ -569,7 +552,7 @@ class Component extends DCLogic {
       { sym: 'BANYU', name: 'Banyu Pool Suites', city: 'SEMINYAK · PETITENGET', kind: 'resort', base: 196, watch: 1465 },
       { sym: 'SAWAH2', name: 'Sawah Dua Parcel', city: 'UBUD · NORTH RIDGE', kind: 'land', base: 143, watch: 690 }
     ]
-      .map((t) => ({ ...t, count: Math.round(t.base * mult), watchers: Math.round(t.watch * mult) }))
+      .map((t) => ({ ...t, count: t.base, watchers: t.watch }))
       .sort((x, y) => y.count - x.count)
       .map((t, i) => ({
         ...t,
@@ -577,7 +560,7 @@ class Component extends DCLogic {
         rankBg: i === 0 ? accent : 'rgba(5,9,10,.78)',
         rankInk: i === 0 ? '#07201F' : '#B4C2C4',
         buys: t.count.toLocaleString('en-US'),
-        period: { '24H': 'in past 24h', '7D': 'in past 7 days', '30D': 'in past 30 days' }[win],
+        period: 'in past 24h',
         interested: t.watchers.toLocaleString('en-US'),
         bg: 'linear-gradient(170deg, #123034 0%, #0C2124 52%, #060C0D 100%)',
         art: this.villa(t.sym.length * 977 + t.base, t.kind, accent)
@@ -654,11 +637,10 @@ class Component extends DCLogic {
     const tokenCount = Math.floor(amount / 14.2);
 
     return {
-      accent, nav, presets, ranges, trending, featured, listings, tabs, filledSoon,
+      accent, nav, presets, trending, featured, listings, tabs, filledSoon,
       isExplore: this.state.nav === 'explore',
       isMarket: this.state.nav === 'market',
       count: listings.length,
-      rangeLabel: { '24H': 'LAST 24 HOURS', '7D': 'LAST 7 DAYS', '30D': 'LAST 30 DAYS' }[this.state.range],
       amount: '$' + amount.toLocaleString('en-US') + '.00',
       amtInk: amount ? '#DCE5E6' : '#5B6769',
       tokens: tokenCount.toLocaleString('en-US'),
