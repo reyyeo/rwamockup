@@ -9,12 +9,12 @@
 <helmet>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
   <style>
-    body { margin: 0; background:  radial-gradient(58% 44% at 14% 2%, rgba(121,194,168,.20) 0%, transparent 62%),
-      radial-gradient(52% 40% at 88% 6%, rgba(121,194,168,.20) 0%, transparent 62%),
+    body { margin: 0; background:  radial-gradient(58% 44% at 14% 2%, rgba(108,193,198,.20) 0%, transparent 62%),
+      radial-gradient(52% 40% at 88% 6%, rgba(108,193,198,.20) 0%, transparent 62%),
       radial-gradient(46% 42% at 66% 96%, rgba(59,227,126,.13) 0%, transparent 64%),
-      #08080B; background-attachment: fixed; color: #DDE5E2;
+      #08080B; background-attachment: fixed; color: #DCE5E6;
       font-family: 'Space Grotesk', 'Trebuchet MS', system-ui, sans-serif; }
-    a { color: #79C2A8; text-decoration: none; } a:hover { color: #79C2A8; }
+    a { color: #6CC1C6; text-decoration: none; } a:hover { color: #6CC1C6; }
     .mono { font-family: 'IBM Plex Mono', 'DejaVu Sans Mono', ui-monospace, monospace; }
     .panel { background: rgba(255,255,255,.045); backdrop-filter: blur(26px) saturate(150%);
       -webkit-backdrop-filter: blur(26px) saturate(150%);
@@ -25,10 +25,10 @@
     input[type=range] { -webkit-appearance: none; appearance: none; width: 100%; height: 4px;
       border-radius: 999px; background: rgba(255,255,255,.13); outline: none; }
     input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none;
-      width: 20px; height: 20px; border-radius: 11px; background: #DDE5E2; cursor: grab;
-      box-shadow: 0 0 0 4px rgba(121,194,168,.16); }
+      width: 20px; height: 20px; border-radius: 11px; background: #DCE5E6; cursor: grab;
+      box-shadow: 0 0 0 4px rgba(108,193,198,.16); }
     input[type=range]::-moz-range-thumb { width: 20px; height: 20px; border: none; border-radius: 11px;
-      background: #DDE5E2; cursor: grab; box-shadow: 0 0 0 4px rgba(121,194,168,.16); }
+      background: #DCE5E6; cursor: grab; box-shadow: 0 0 0 4px rgba(108,193,198,.16); }
     .blip { animation: blip 1.6s ease-in-out infinite; }
     @keyframes blip { 0%,100% { opacity: 1; } 50% { opacity: .25; } }
   </style>
@@ -39,15 +39,15 @@
   <!-- breadcrumb bar -->
   <div style="display: flex; align-items: center; gap: 14px; padding: 16px 34px; border-bottom: 1px solid rgba(255,255,255,.085);">
     <button class="btn panel" style="width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,.075);">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#DDE5E2" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m14 5-7 7 7 7"/></svg>
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#DCE5E6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m14 5-7 7 7 7"/></svg>
     </button>
-    <span class="mono" style="font-size: 12px; letter-spacing: .1em; color: #6A7674;">EXPLORE / INDUSTRIAL / <span style="color: #DDE5E2;">WHSE-ATX</span></span>
+    <span class="mono" style="font-size: 12px; letter-spacing: .1em; color: #697577;">EXPLORE / INDUSTRIAL / <span style="color: #DCE5E6;">WHSE-ATX</span></span>
     <div style="flex-grow: 1;"></div>
-    <div class="panel mono" style="display: flex; align-items: center; gap: 8px; padding: 8px 12px; font-size: 11.5px; color: #83918E;">
-      <span class="blip" style="width: 6px; height: 6px; border-radius: 50%; background: #79C2A8;"></span>ORACLE SYNCED 9s AGO
+    <div class="panel mono" style="display: flex; align-items: center; gap: 8px; padding: 8px 12px; font-size: 11.5px; color: #818F92;">
+      <span class="blip" style="width: 6px; height: 6px; border-radius: 50%; background: #6CC1C6;"></span>ORACLE SYNCED 9s AGO
     </div>
-    <button class="btn panel" style="display: flex; align-items: center; gap: 9px; padding: 9px 14px; background: rgba(255,255,255,.075); color: #DDE5E2; font-size: 13px; font-weight: 500;">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#93A19E" stroke-width="1.8" stroke-linejoin="round"><rect x="2.5" y="5.5" width="19" height="13" rx="2.5"/><path d="M16.5 12h3"/></svg>
+    <button class="btn panel" style="display: flex; align-items: center; gap: 9px; padding: 9px 14px; background: rgba(255,255,255,.075); color: #DCE5E6; font-size: 13px; font-weight: 500;">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#91A0A2" stroke-width="1.8" stroke-linejoin="round"><rect x="2.5" y="5.5" width="19" height="13" rx="2.5"/><path d="M16.5 12h3"/></svg>
       0x9F2A…C41D
     </button>
   </div>
@@ -57,32 +57,32 @@
     <!-- LEFT -->
     <div style="display: flex; flex-direction: column; gap: 20px; min-width: 0;">
 
-      <div class="panel scan" style="height: 300px; position: relative; overflow: hidden; background: linear-gradient(160deg, #16302B 0%, #0E211E 58%, #070C0C 100%);">
+      <div class="panel scan" style="height: 300px; position: relative; overflow: hidden; background: linear-gradient(160deg, #153030 0%, #0D2122 58%, #060B0C 100%);">
         <div style="position: absolute; inset: 0; background: radial-gradient(90% 70% at 76% 4%, rgba(255,255,255,.09), transparent 60%);"></div>
         <svg viewBox="0 0 340 160" width="700" height="330" fill="none" style="position: absolute; bottom: -14px; left: 18px;">
-          <path d="M10 138V78l54-30 54 30v60z" stroke="#B6C3C0" stroke-width="1.8" stroke-linejoin="round"/>
-          <path d="M118 138V62l46-26 46 26v76z" stroke="#8FA09C" stroke-width="1.8" stroke-linejoin="round"/>
-          <path d="M210 138V88l40-22 40 22v50z" stroke="#DDE5E2" stroke-opacity=".55" stroke-width="1.8" stroke-linejoin="round"/>
-          <path d="M26 138v-22h18v22M56 138v-22h16v22M88 138v-22h16v22M134 138v-26h20v26M168 138v-26h20v26M226 138v-18h16v18M258 138v-18h16v18" stroke="#DDE5E2" stroke-opacity=".4" stroke-width="1.3"/>
-          <path d="M0 138h340" stroke="#DDE5E2" stroke-opacity=".7" stroke-width="1.8"/>
-          <circle cx="164" cy="26" r="3" fill="{{accent}}"/><circle cx="64" cy="44" r="3" fill="#6A7674"/>
+          <path d="M10 138V78l54-30 54 30v60z" stroke="#B4C2C4" stroke-width="1.8" stroke-linejoin="round"/>
+          <path d="M118 138V62l46-26 46 26v76z" stroke="#8D9EA1" stroke-width="1.8" stroke-linejoin="round"/>
+          <path d="M210 138V88l40-22 40 22v50z" stroke="#DCE5E6" stroke-opacity=".55" stroke-width="1.8" stroke-linejoin="round"/>
+          <path d="M26 138v-22h18v22M56 138v-22h16v22M88 138v-22h16v22M134 138v-26h20v26M168 138v-26h20v26M226 138v-18h16v18M258 138v-18h16v18" stroke="#DCE5E6" stroke-opacity=".4" stroke-width="1.3"/>
+          <path d="M0 138h340" stroke="#DCE5E6" stroke-opacity=".7" stroke-width="1.8"/>
+          <circle cx="164" cy="26" r="3" fill="{{accent}}"/><circle cx="64" cy="44" r="3" fill="#697577"/>
         </svg>
         <div style="position: absolute; top: 18px; left: 20px; display: flex; gap: 8px;">
-          <span class="mono" style="font-size: 10.5px; letter-spacing: .12em; padding: 5px 9px; border-radius: 11px; background: rgba(6,10,10,.82); color: #DDE5E2;">WHSE-ATX</span>
-          <span class="mono" style="font-size: 10.5px; letter-spacing: .12em; padding: 5px 9px; border-radius: 11px; background: rgba(6,10,10,.82); color: #B6C3C0;">DEED VERIFIED · TRAVIS CO.</span>
+          <span class="mono" style="font-size: 10.5px; letter-spacing: .12em; padding: 5px 9px; border-radius: 11px; background: rgba(6,10,10,.82); color: #DCE5E6;">WHSE-ATX</span>
+          <span class="mono" style="font-size: 10.5px; letter-spacing: .12em; padding: 5px 9px; border-radius: 11px; background: rgba(6,10,10,.82); color: #B4C2C4;">DEED VERIFIED · TRAVIS CO.</span>
         </div>
         <div style="position: absolute; bottom: 20px; right: 22px; text-align: right;">
           <div style="font-size: 34px; font-weight: 700; letter-spacing: -.03em;">Ridgeline Logistics Park</div>
-          <div class="mono" style="font-size: 12px; color: #93A19E; margin-top: 6px; letter-spacing: .06em;">AUSTIN, TX · 214,000 SQ FT · BUILT 2019</div>
+          <div class="mono" style="font-size: 12px; color: #91A0A2; margin-top: 6px; letter-spacing: .06em;">AUSTIN, TX · 214,000 SQ FT · BUILT 2019</div>
         </div>
       </div>
 
       <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px;">
         <sc-for list="{{kpis}}" as="k" hint-placeholder-count="4">
           <div class="panel" style="padding: 16px 16px 15px;">
-            <div class="mono" style="font-size: 10px; letter-spacing: .14em; color: #59635F;">{{k.label}}</div>
+            <div class="mono" style="font-size: 10px; letter-spacing: .14em; color: #586264;">{{k.label}}</div>
             <div class="mono" style="font-size: 22px; margin-top: 9px; letter-spacing: -.02em; color: {{k.color}};">{{k.value}}</div>
-            <div style="font-size: 11.5px; color: #6A7674; margin-top: 4px;">{{k.sub}}</div>
+            <div style="font-size: 11.5px; color: #697577; margin-top: 4px;">{{k.sub}}</div>
           </div>
         </sc-for>
       </div>
@@ -97,14 +97,14 @@
         <div style="margin-top: 20px; min-height: 214px;">
           <sc-if value="{{isOverview}}" hint-placeholder-val="{{true}}">
             <div>
-              <p style="margin: 0; font-size: 14.5px; line-height: 1.68; color: #A4B1AE; max-width: 720px; text-wrap: pretty;">
+              <p style="margin: 0; font-size: 14.5px; line-height: 1.68; color: #A2B0B2; max-width: 720px; text-wrap: pretty;">
                 A four-building cross-dock park on the SH-130 corridor, leased to three regional 3PL tenants on triple-net terms through 2031. The deed sits in a Delaware series LLC; 382,000 WHSE-ATX tokens map 1:1 to membership units, and net operating income is swept to the rent vault every Friday at 00:00 UTC.
               </p>
               <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 36px; margin-top: 22px; max-width: 720px;">
                 <sc-for list="{{facts}}" as="f" hint-placeholder-count="6">
                   <div style="display: flex; justify-content: space-between; padding-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,.085);">
-                    <span style="font-size: 13px; color: #83918E;">{{f.k}}</span>
-                    <span class="mono" style="font-size: 13px; color: #DDE5E2;">{{f.v}}</span>
+                    <span style="font-size: 13px; color: #818F92;">{{f.k}}</span>
+                    <span class="mono" style="font-size: 13px; color: #DCE5E6;">{{f.v}}</span>
                   </div>
                 </sc-for>
               </div>
@@ -113,16 +113,16 @@
           <sc-if value="{{isBook}}" hint-placeholder-val="{{false}}">
             <div>
               <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); padding-bottom: 10px;" class="mono">
-                <span style="font-size: 10.5px; letter-spacing: .12em; color: #59635F;">PRICE (USDC)</span>
-                <span style="font-size: 10.5px; letter-spacing: .12em; color: #59635F; text-align: right;">SIZE</span>
-                <span style="font-size: 10.5px; letter-spacing: .12em; color: #59635F; text-align: right;">TOTAL</span>
+                <span style="font-size: 10.5px; letter-spacing: .12em; color: #586264;">PRICE (USDC)</span>
+                <span style="font-size: 10.5px; letter-spacing: .12em; color: #586264; text-align: right;">SIZE</span>
+                <span style="font-size: 10.5px; letter-spacing: .12em; color: #586264; text-align: right;">TOTAL</span>
               </div>
               <sc-for list="{{book}}" as="o" hint-placeholder-count="7">
                 <div style="position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); padding: 7px 0;" class="mono">
                   <div style="position: absolute; right: 0; top: 0; bottom: 0; width: {{o.depth}}; background: {{o.wash}};"></div>
                   <span style="position: relative; font-size: 13px; color: {{o.color}};">{{o.px}}</span>
-                  <span style="position: relative; font-size: 13px; text-align: right; color: #B6C3C0;">{{o.size}}</span>
-                  <span style="position: relative; font-size: 13px; text-align: right; color: #6A7674;">{{o.total}}</span>
+                  <span style="position: relative; font-size: 13px; text-align: right; color: #B4C2C4;">{{o.size}}</span>
+                  <span style="position: relative; font-size: 13px; text-align: right; color: #697577;">{{o.total}}</span>
                 </div>
               </sc-for>
             </div>
@@ -133,12 +133,12 @@
                 <sc-for list="{{bars}}" as="b" hint-placeholder-count="12">
                   <div style="flex-grow: 1; display: flex; flex-direction: column; align-items: center; gap: 9px;">
                     <div style="width: 100%; height: {{b.h}}; border-radius: 4px; background: {{b.fill}};"></div>
-                    <span class="mono" style="font-size: 10px; color: #59635F;">{{b.m}}</span>
+                    <span class="mono" style="font-size: 10px; color: #586264;">{{b.m}}</span>
                   </div>
                 </sc-for>
               </div>
-              <div class="mono" style="font-size: 11.5px; color: #6A7674; margin-top: 18px; letter-spacing: .05em;">
-                NET RENT PER TOKEN, WEEKLY SWEEP · TRAILING 12 MONTHS · <span style="color: #DDE5E2;">$1.69 CUMULATIVE</span>
+              <div class="mono" style="font-size: 11.5px; color: #697577; margin-top: 18px; letter-spacing: .05em;">
+                NET RENT PER TOKEN, WEEKLY SWEEP · TRAILING 12 MONTHS · <span style="color: #DCE5E6;">$1.69 CUMULATIVE</span>
               </div>
             </div>
           </sc-if>
@@ -146,10 +146,10 @@
             <div style="display: flex; flex-direction: column; gap: 10px;">
               <sc-for list="{{docs}}" as="d" hint-placeholder-count="5">
                 <div style="display: flex; align-items: center; gap: 14px; padding: 13px 15px; border: 1px solid rgba(255,255,255,.085); border-radius: 11px; background: rgba(255,255,255,.035);">
-                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#93A19E" stroke-width="1.7" stroke-linejoin="round"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/></svg>
+                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#91A0A2" stroke-width="1.7" stroke-linejoin="round"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/></svg>
                   <span style="font-size: 13.5px;">{{d.name}}</span>
                   <span style="flex-grow: 1;"></span>
-                  <span class="mono" style="font-size: 11px; color: #59635F; letter-spacing: .08em;">{{d.meta}}</span>
+                  <span class="mono" style="font-size: 11px; color: #586264; letter-spacing: .08em;">{{d.meta}}</span>
                 </div>
               </sc-for>
             </div>
@@ -168,22 +168,22 @@
 
       <div style="display: flex; align-items: baseline; justify-content: space-between; margin-top: 20px;">
         <div>
-          <div class="mono" style="font-size: 10px; letter-spacing: .14em; color: #59635F;">LAST PRICE</div>
+          <div class="mono" style="font-size: 10px; letter-spacing: .14em; color: #586264;">LAST PRICE</div>
           <div class="mono" style="font-size: 30px; margin-top: 7px; letter-spacing: -.03em;">$18.40</div>
         </div>
-        <div class="mono" style="font-size: 13px; color: #DDE5E2;">+2.11% 24h</div>
+        <div class="mono" style="font-size: 13px; color: #DCE5E6;">+2.11% 24h</div>
       </div>
 
       <div style="margin-top: 24px;">
         <div style="display: flex; justify-content: space-between; align-items: baseline;">
-          <span class="mono" style="font-size: 10px; letter-spacing: .14em; color: #59635F;">TOKENS</span>
-          <span class="mono" style="font-size: 11.5px; color: #6A7674;">balance 0 · max 18,982</span>
+          <span class="mono" style="font-size: 10px; letter-spacing: .14em; color: #586264;">TOKENS</span>
+          <span class="mono" style="font-size: 11.5px; color: #697577;">balance 0 · max 18,982</span>
         </div>
         <div style="display: flex; align-items: center; gap: 10px; height: 54px; margin-top: 9px; padding: 0 8px 0 15px; border: 1px solid rgba(255,255,255,.15); border-radius: 11px; background: rgba(255,255,255,.035);">
           <span class="mono" style="font-size: 24px; letter-spacing: -.02em;">{{qty}}</span>
           <span style="flex-grow: 1;"></span>
-          <button class="btn mono" onClick="{{dec}}" style="width: 38px; height: 38px; border-radius: 11px; background: rgba(255,255,255,.075); border: 1px solid rgba(255,255,255,.15); color: #DDE5E2; font-size: 17px;">–</button>
-          <button class="btn mono" onClick="{{inc}}" style="width: 38px; height: 38px; border-radius: 11px; background: rgba(255,255,255,.075); border: 1px solid rgba(255,255,255,.15); color: #DDE5E2; font-size: 17px;">+</button>
+          <button class="btn mono" onClick="{{dec}}" style="width: 38px; height: 38px; border-radius: 11px; background: rgba(255,255,255,.075); border: 1px solid rgba(255,255,255,.15); color: #DCE5E6; font-size: 17px;">–</button>
+          <button class="btn mono" onClick="{{inc}}" style="width: 38px; height: 38px; border-radius: 11px; background: rgba(255,255,255,.075); border: 1px solid rgba(255,255,255,.15); color: #DCE5E6; font-size: 17px;">+</button>
         </div>
         <input type="range" min="1" max="6000" step="1" value="{{qtyRaw}}" onChange="{{slide}}" style="margin-top: 18px;">
         <div style="display: flex; gap: 8px; margin-top: 14px;">
@@ -196,7 +196,7 @@
       <div style="margin-top: 22px; padding-top: 18px; border-top: 1px solid rgba(255,255,255,.11); display: flex; flex-direction: column; gap: 11px;">
         <sc-for list="{{lines}}" as="l" hint-placeholder-count="4">
           <div style="display: flex; justify-content: space-between;">
-            <span style="font-size: 13px; color: #83918E;">{{l.k}}</span>
+            <span style="font-size: 13px; color: #818F92;">{{l.k}}</span>
             <span class="mono" style="font-size: 13.5px; color: {{l.color}};">{{l.v}}</span>
           </div>
         </sc-for>
@@ -204,14 +204,14 @@
 
       <div style="margin-top: 18px; padding: 15px; border-radius: 11px; background: rgba(255,255,255,.035); border: 1px solid rgba(255,255,255,.11);">
         <div style="display: flex; justify-content: space-between; align-items: baseline;">
-          <span class="mono" style="font-size: 10px; letter-spacing: .14em; color: #59635F;">YOU PAY</span>
+          <span class="mono" style="font-size: 10px; letter-spacing: .14em; color: #586264;">YOU PAY</span>
           <span class="mono" style="font-size: 26px; letter-spacing: -.03em;">{{total}}</span>
         </div>
-        <div class="mono" style="font-size: 11.5px; color: #6A7674; margin-top: 6px;">USDC on Base · gas ≈ $0.004</div>
+        <div class="mono" style="font-size: 11.5px; color: #697577; margin-top: 6px;">USDC on Base · gas ≈ $0.004</div>
       </div>
 
       <button class="btn" onClick="{{confirm}}" style="width: 100%; height: 52px; margin-top: 14px; border-radius: 11px; background: {{ctaBg}}; color: {{ctaInk}}; font-size: 15px; font-weight: 700;">{{ctaLabel}}</button>
-      <div class="mono" style="font-size: 10.5px; color: #59635F; margin-top: 11px; line-height: 1.6; letter-spacing: .04em;">
+      <div class="mono" style="font-size: 10.5px; color: #586264; margin-top: 11px; line-height: 1.6; letter-spacing: .04em;">
         REG D 506(c) · ACCREDITED WALLETS ONLY · TRANSFERS LOCKED 12 MONTHS FROM MINT
       </div>
     </div>
@@ -220,7 +220,7 @@
 </x-dc>
 
 <script data-dc-script data-props='{
-  "accent": {"editor": "color", "default": "#79C2A8", "options": ["#79C2A8", "#6FA6B4", "#9AC9BC", "#5E9E8A"], "section": "Theme"},
+  "accent": {"editor": "color", "default": "#6CC1C6", "options": ["#6CC1C6", "#6F9FBC", "#9ACBCC", "#529DA3"], "section": "Theme"},
   "$preview": {"width": 1440, "height": 1180}
 }'>
 class Component extends DCLogic {
@@ -232,12 +232,12 @@ class Component extends DCLogic {
   pill(on, accent) {
     return 'height: 34px; padding: 0 15px; border-radius: 11px; font-size: 12px; letter-spacing: .06em;'
       + (on
-        ? ' background: ' + accent + '; border: 1px solid ' + accent + '; color: #08201B; font-weight: 600;'
-        : ' background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.11); color: #93A19E;');
+        ? ' background: ' + accent + '; border: 1px solid ' + accent + '; color: #07201F; font-weight: 600;'
+        : ' background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.11); color: #91A0A2;');
   }
 
   renderVals() {
-    const accent = this.props.accent ?? '#79C2A8';
+    const accent = this.props.accent ?? '#6CC1C6';
     const px = 18.4;
     const qty = this.state.qty;
     const gross = qty * px;
@@ -255,7 +255,7 @@ class Component extends DCLogic {
     ].map((s) => ({
       ...s,
       pick: () => this.setState({ side: s.id, confirmed: false }),
-      style: 'flex-grow: 1; ' + this.pill(s.id === this.state.side, s.id === 'sell' ? '#83918E' : accent)
+      style: 'flex-grow: 1; ' + this.pill(s.id === this.state.side, s.id === 'sell' ? '#818F92' : accent)
     }));
 
     const presets = [250, 620, 1500, 6000].map((v) => ({
@@ -265,13 +265,13 @@ class Component extends DCLogic {
     }));
 
     const book = [
-      { px: '18.62', size: '1,940', total: '36,122', color: '#83918E', depth: '38%', wash: 'rgba(255,255,255,.04)' },
-      { px: '18.55', size: '820', total: '15,211', color: '#83918E', depth: '22%', wash: 'rgba(255,255,255,.04)' },
-      { px: '18.47', size: '410', total: '7,572', color: '#83918E', depth: '12%', wash: 'rgba(255,255,255,.04)' },
-      { px: '18.40', size: '— spread 0.08 —', total: '', color: '#DDE5E2', depth: '0%', wash: 'transparent' },
-      { px: '18.32', size: '2,610', total: '47,815', color: '#B6C3C0', depth: '52%', wash: 'rgba(255,255,255,.05)' },
-      { px: '18.24', size: '3,880', total: '70,771', color: '#B6C3C0', depth: '74%', wash: 'rgba(255,255,255,.05)' },
-      { px: '18.10', size: '5,120', total: '92,672', color: '#B6C3C0', depth: '96%', wash: 'rgba(255,255,255,.05)' }
+      { px: '18.62', size: '1,940', total: '36,122', color: '#818F92', depth: '38%', wash: 'rgba(255,255,255,.04)' },
+      { px: '18.55', size: '820', total: '15,211', color: '#818F92', depth: '22%', wash: 'rgba(255,255,255,.04)' },
+      { px: '18.47', size: '410', total: '7,572', color: '#818F92', depth: '12%', wash: 'rgba(255,255,255,.04)' },
+      { px: '18.40', size: '— spread 0.08 —', total: '', color: '#DCE5E6', depth: '0%', wash: 'transparent' },
+      { px: '18.32', size: '2,610', total: '47,815', color: '#B4C2C4', depth: '52%', wash: 'rgba(255,255,255,.05)' },
+      { px: '18.24', size: '3,880', total: '70,771', color: '#B4C2C4', depth: '74%', wash: 'rgba(255,255,255,.05)' },
+      { px: '18.10', size: '5,120', total: '92,672', color: '#B4C2C4', depth: '96%', wash: 'rgba(255,255,255,.05)' }
     ];
 
     const rent = [12, 14, 13, 15, 14, 16, 15, 13, 17, 16, 18, 17];
@@ -297,22 +297,22 @@ class Component extends DCLogic {
       confirm: () => this.setState({ confirmed: !this.state.confirmed }),
 
       ctaLabel: this.state.confirmed ? '✓ Signed — settling on Base' : 'Review purchase',
-      ctaBg: this.state.confirmed ? '#79C2A8' : '#DDE5E2',
-      ctaInk: '#060A0A',
+      ctaBg: this.state.confirmed ? '#6CC1C6' : '#DCE5E6',
+      ctaInk: '#05090A',
 
       lines: [
-        { k: 'Ownership of deed', v: ((qty / 382000) * 100).toFixed(3) + '%', color: '#DDE5E2' },
-        { k: 'Est. rent / year', v: '$' + (qty * 1.69).toFixed(2), color: '#DDE5E2' },
-        { k: 'Subtotal', v: '$' + gross.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }), color: '#DDE5E2' },
-        { k: 'Protocol fee (0.75%)', v: '$' + fee.toFixed(2), color: '#83918E' }
+        { k: 'Ownership of deed', v: ((qty / 382000) * 100).toFixed(3) + '%', color: '#DCE5E6' },
+        { k: 'Est. rent / year', v: '$' + (qty * 1.69).toFixed(2), color: '#DCE5E6' },
+        { k: 'Subtotal', v: '$' + gross.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }), color: '#DCE5E6' },
+        { k: 'Protocol fee (0.75%)', v: '$' + fee.toFixed(2), color: '#818F92' }
       ],
       total: '$' + (gross + fee).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }),
 
       kpis: [
-        { label: 'NET YIELD', value: '9.2%', sub: 'paid weekly', color: '#DDE5E2' },
-        { label: 'TOKENS OUTSTANDING', value: '382,000', sub: '87% of raise sold', color: '#DDE5E2' },
-        { label: 'OCCUPANCY', value: '100%', sub: '3 tenants, NNN', color: '#DDE5E2' },
-        { label: 'HOLDERS', value: '1,482', sub: '+214 this month', color: '#DDE5E2' }
+        { label: 'NET YIELD', value: '9.2%', sub: 'paid weekly', color: '#DCE5E6' },
+        { label: 'TOKENS OUTSTANDING', value: '382,000', sub: '87% of raise sold', color: '#DCE5E6' },
+        { label: 'OCCUPANCY', value: '100%', sub: '3 tenants, NNN', color: '#DCE5E6' },
+        { label: 'HOLDERS', value: '1,482', sub: '+214 this month', color: '#DCE5E6' }
       ],
       facts: [
         { k: 'Deed custodian', v: 'Travis Co. / Series LLC' },
