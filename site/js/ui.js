@@ -35,33 +35,69 @@ export function card(l) {
     </a>`;
 }
 
-// Rolling purchase feed under the top bar. Duplicated once so the CSS
-// translateX(-50%) loop is seamless.
+// Live purchase feed. The canvas shows three rows at a time, each new buy
+// pushing the stack up from the bottom, so the list is duplicated once and
+// stepped one row at a time by CSS.
 const BUYERS = ['0x9F2A…C41D', 'hbhDct.eth', '0x41B7…9E02', 'vw3roy.eth', '0xD108…77A4',
   'casaverde.eth', '0x6C55…1B8F', 'bukitcap.eth', 'sawahdao.eth', 'atlas-ib.eth'];
 
-export function ticker() {
-  const rows = LISTINGS.slice(0, 10).map((l, i) => {
+export function feed() {
+  const rows = LISTINGS.slice(0, 8).map((l, i) => {
     const qty = (((l.buys * 7) % 48) + 1) * 100;
-    return `<span><b>${BUYERS[i]}</b> bought ${qty.toLocaleString('en-US')} ${l.name}</span>`;
+    return `<div class="feed-row">
+        <b>${BUYERS[i]}</b><span>bought</span><i>${qty.toLocaleString('en-US')}</i>
+        <span class="feed-spacer"></span><em>${l.name}</em>
+      </div>`;
   }).join('');
-  return `<div class="ticker"><div class="ticker-rail">${rows}${rows}</div></div>`;
+  return `<div class="feed-col">
+      <div class="feed-head"><span class="dot"></span><span class="mono">LIVE BUYS</span></div>
+      <div class="feed-wrap"><div class="feed-rail">${rows}${rows}</div></div>
+    </div>`;
 }
 
+// Nav mirrors the design canvas. Trade, Insights, Earn and List a property
+// have no page yet, so they render as disabled rather than dead links.
+const NAV = [
+  { label: 'Explore', page: 'explore', href: 'index.html' },
+  { label: 'Marketplace', page: 'market', href: 'market.html', menu: [
+    { label: 'All Properties', sub: 'Every open listing', href: 'market.html' },
+    { label: 'Property Managers', sub: 'Operators and sponsors', href: 'market.html#sponsors' }
+  ] },
+  { label: 'Trade', page: 'trade' },
+  { label: 'Insights', page: 'insights' },
+  { label: 'Earn', page: 'earn' },
+  { label: 'Portfolio', page: 'portfolio', href: 'portfolio.html' },
+  { label: 'List a property', page: 'list' }
+];
+
 export function chrome(page) {
-  const on = (p) => (p === page ? ' aria-current="page"' : '');
+  const items = NAV.map((n) => {
+    const current = n.page === page ? ' aria-current="page"' : '';
+    if (!n.href) {
+      return `<span class="nav-soon" aria-disabled="true" title="Not in this mockup">${n.label}</span>`;
+    }
+    const link = `<a href="${n.href}"${current}>${n.label}${n.menu ? ' <svg class="chev" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>' : ''}</a>`;
+    if (!n.menu) return link;
+    const menu = n.menu.map((m) => `
+        <a class="navlink" href="${m.href}">
+          <span class="navlink-t">${m.label}</span>
+          <span class="navlink-s">${m.sub}</span>
+        </a>`).join('');
+    return `<div class="navitem">${link}<div class="navmenu"><div class="navmenu-card">${menu}</div></div></div>`;
+  }).join('');
+
   return `
     <header class="topbar">
       <a class="brand" href="index.html">PARCEL<span>.</span></a>
-      <nav class="nav">
-        <a href="index.html"${on('explore')}>Explore</a>
-        <a href="market.html"${on('market')}>Marketplace</a>
-        <a href="portfolio.html"${on('portfolio')}>Portfolio</a>
-      </nav>
+      <nav class="nav">${items}</nav>
       <div class="spacer"></div>
+      <a class="rent-chip" href="portfolio.html">
+        <span class="rent-label mono">RENT</span>
+        <span class="rent-v mono">$284.19</span>
+        <span class="rent-claim mono">CLAIM</span>
+      </a>
       <div class="wallet"><span class="dot"></span>0x9F2A…C41D</div>
-    </header>
-    ${ticker()}`;
+    </header>`;
 }
 
 export function footer() {
