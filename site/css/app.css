@@ -86,7 +86,10 @@ img { max-width: 100%; display: block; }
   font-family: var(--mono); font-size: 10.5px; color: var(--ink-4);
 }
 /* Screens the mockup does not build yet — visibly present, visibly inert. */
-.nav-soon { color: var(--ink-5); cursor: default; }
+.nav-soon {
+  padding: 8px 14px; border-radius: 10px; font-size: 13.5px;
+  color: var(--ink-5); cursor: default;
+}
 
 /* ---------- rent chip ---------- */
 .rent-chip {
@@ -409,7 +412,7 @@ footer {
 }
 
 /* ---------- filled soon: compact card ---------- */
-.card-compact { display: flex; gap: 13px; padding: 13px; }
+.card-compact { display: flex; flex-direction: row; gap: 13px; padding: 13px; }
 .compact-art {
   width: 74px; height: 100%; min-height: 108px; flex-shrink: 0;
   border-radius: 11px; object-fit: cover;
