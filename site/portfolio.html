@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PARCEL Fund — Portfolio</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏙️</text></svg>">
+<link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+<main>
+  <div class="sec">
+    <div><h2 style="font-size:30px">Portfolio</h2>
+      <div class="sub" style="padding-top:8px">0x9F2A…C41D</div></div>
+    <div class="spacer"></div>
+    <div class="sub">next rent sweep in 2d 04h</div>
+  </div>
+
+  <section class="stats">
+    <div class="panel stat-main">
+      <div class="label">Portfolio value</div>
+      <div class="big">$68,412.90</div>
+      <div class="muted up">+$4,118.22 · +6.4%</div>
+      <div class="label" style="margin-top:28px">Allocation</div>
+      <div class="alloc">
+        <i style="width:55%;background:var(--accent)"></i>
+        <i style="width:28%;background:rgba(255,255,255,.30)"></i>
+        <i style="width:17%;background:rgba(255,255,255,.18)"></i>
+      </div>
+      <div class="legend">
+        <span><i style="background:var(--accent)"></i>Villas 55%</span>
+        <span><i style="background:rgba(255,255,255,.30)"></i>Estates 28%</span>
+        <span><i style="background:rgba(255,255,255,.18)"></i>Resorts 17%</span>
+      </div>
+    </div>
+    <div class="panel pos">
+      <div class="label">Rent vault · claimable</div>
+      <div class="big" style="font-size:38px" id="claimable">$284.19</div>
+      <div class="muted" id="claimsub">from 5 villas, 3 weeks accrued</div>
+      <button class="btn btn-primary" style="width:100%;margin-top:20px" id="claim">Claim rent</button>
+      <div class="fineprint">Swept Fridays 00:00 UTC · USDC on Base</div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec"><h2>Holdings</h2><div class="sub">5 villas · 3,648 tokens</div>
+      <div class="spacer"></div>
+      <button class="btn btn-ghost btn-sm" id="csv">Export CSV</button></div>
+    <div class="panel table-wrap">
+      <table class="table">
+        <thead><tr><th>Property</th><th class="num">Tokens</th><th class="num">Share</th>
+          <th class="num">Value</th><th class="num">Unrealized</th><th class="num">Rent / yr</th></tr></thead>
+        <tbody id="holdings"></tbody>
+      </table>
+    </div>
+  </section>
+</main>
+<script type="module" src="js/portfolio.js"></script>
+</body>
+</html>

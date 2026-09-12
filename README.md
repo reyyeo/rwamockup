@@ -13,8 +13,11 @@ Live canvas: https://claude.ai/code/artifact/8faf9699-c44c-401f-bd89-8439bc0978f
 - `dist/index.html` — the published page: the canvas editor and the
   artboard sources bundled into one self-contained file. Generated on
   publish, not hand-edited.
-- `assets/villas/` — property photography, one file per listing symbol.
-  Empty until the generated set is committed.
+- `assets/villas/` — property photography, one file per listing symbol,
+  with untouched originals in `raw/`.
+- `site/` — the mockup as a working local website: four pages, plain
+  HTML/CSS/ES modules, no build step. `cd site && python3 -m http.server
+  8000`. See `site/README.md`.
 
 ## Artboards
 

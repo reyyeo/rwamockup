@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PARCEL Fund — Explore</title>
+<meta name="description" content="Fractional Bali villa marketplace — design mockup.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏙️</text></svg>">
+<link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+<main>
+  <!-- platform figures + the viewer's own position -->
+  <section class="stats">
+    <div class="panel stat-main">
+      <div class="label">Total investment amount</div>
+      <div class="big" id="invest">$86.21M</div>
+      <div class="muted">capital committed across every villa raise</div>
+      <div class="stat-row">
+        <div><div class="label">Dividends paid out</div><div class="v">$9.31M</div>
+          <div class="muted">to holders since the first villa closed</div></div>
+        <div><div class="label">Unique investors</div><div class="v" id="investors">34,939</div>
+          <div class="muted">distinct wallets holding villa tokens</div></div>
+      </div>
+    </div>
+    <div class="panel pos">
+      <div class="label">Your position</div>
+      <div class="stat-row" style="margin-top:16px">
+        <div><div class="v" style="font-size:28px">5</div><div class="muted">villas owned</div></div>
+        <div><div class="v" style="font-size:28px">$1,284</div><div class="muted">dividends earned</div></div>
+      </div>
+      <div class="claim">
+        <div><div class="v mono" style="font-size:20px">$284.19</div>
+          <div class="muted">claimable now</div></div>
+        <button class="btn btn-primary btn-sm" id="claim">CLAIM</button>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec"><h2>24H Trending</h2>
+      <div class="sub">ranked by purchases</div><div class="spacer"></div>
+      <a class="link" href="market.html">VIEW ALL →</a></div>
+    <div class="rail" id="trending"></div>
+  </section>
+
+  <section>
+    <div class="sec"><h2>Filled soon</h2>
+      <div class="sub">closest to fully funded</div></div>
+    <div class="grid" id="filled"></div>
+  </section>
+
+  <section>
+    <div class="sec"><h2>Movers</h2>
+      <div class="sub">top tokens by 24h price change · secondary market</div></div>
+    <div class="panel table-wrap">
+      <table class="table">
+        <thead><tr><th>#</th><th>Token</th><th class="num">Price</th><th class="num">24h change</th>
+          <th class="num">24h volume</th><th class="num">Holders</th></tr></thead>
+        <tbody id="movers"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec"><h2>Early bird sale</h2>
+      <div class="sub">first tokens at the launch price</div></div>
+    <div class="panel feature" id="feature"></div>
+  </section>
+
+  <section class="panel why">
+    <div class="why-body">
+      <div class="pill">WHY US?</div>
+      <h2 style="margin:18px 0 0;font-size:24px;letter-spacing:-.03em">Own a villa without buying one</h2>
+      <p style="color:var(--ink-3);line-height:1.7;margin:12px 0 0">
+        A Bali villa runs into the hundreds of thousands. A token of one starts at
+        $8.90 — same title, same rent, split into shares you can buy and sell whenever you like.</p>
+      <div class="why-list">
+        <div class="why-item"><div><div class="t">Start at one token</div>
+          <div class="s">Buy $8.90 of a villa or $89,000 — the deed splits either way.</div></div></div>
+        <div class="why-item"><div><div class="t">Rent every Friday</div>
+          <div class="s">Net nightly income lands in your wallet weekly, not yearly.</div></div></div>
+        <div class="why-item"><div><div class="t">Leave when you want</div>
+          <div class="s">Sell your tokens on the DEX instead of waiting years for a sale.</div></div></div>
+      </div>
+      <a class="btn btn-primary" style="margin-top:28px" href="market.html">START FROM $8.90</a>
+    </div>
+    <div class="why-art"><img src="img/TEGAL-lg.jpg" alt="" loading="lazy"></div>
+  </section>
+</main>
+<script type="module" src="js/explore.js"></script>
+</body>
+</html>
