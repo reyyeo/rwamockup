@@ -45,7 +45,7 @@ document.getElementById('filled').innerHTML =
         <div class="compact-foot">
           <div class="bar-row" style="align-items:baseline">
             <span><b class="pct">${l.pct}</b> funded</span>
-            <span>${l.left} left</span>
+            <span>${l.left.replace(' tokens', '')} left</span>
           </div>
           <div class="bar"><i style="width:${l.pct}"></i></div>
         </div>
