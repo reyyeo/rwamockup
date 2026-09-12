@@ -24,13 +24,13 @@
       <div class="label" style="margin-top:28px">Allocation</div>
       <div class="alloc">
         <i style="width:55%;background:var(--accent)"></i>
-        <i style="width:28%;background:rgba(255,255,255,.30)"></i>
-        <i style="width:17%;background:rgba(255,255,255,.18)"></i>
+        <i style="width:28%;background:rgba(15,30,31,.34)"></i>
+        <i style="width:17%;background:rgba(15,30,31,.16)"></i>
       </div>
       <div class="legend">
         <span><i style="background:var(--accent)"></i>Villas 55%</span>
-        <span><i style="background:rgba(255,255,255,.30)"></i>Estates 28%</span>
-        <span><i style="background:rgba(255,255,255,.18)"></i>Resorts 17%</span>
+        <span><i style="background:rgba(15,30,31,.34)"></i>Estates 28%</span>
+        <span><i style="background:rgba(15,30,31,.16)"></i>Resorts 17%</span>
       </div>
     </div>
     <div class="panel pos">
@@ -43,14 +43,31 @@
   </section>
 
   <section>
-    <div class="sec"><h2>Holdings</h2><div class="sub">5 villas · 3,648 tokens</div>
+    <div class="sec">
+      <div class="tabs" role="tablist">
+        <button class="chip" id="tab-holdings" role="tab" aria-pressed="true"
+                aria-controls="panel-holdings">Holdings</button>
+        <button class="chip" id="tab-tx" role="tab" aria-pressed="false"
+                aria-controls="panel-tx">Transaction History</button>
+      </div>
+      <div class="sub" id="tabsub">5 villas · 3,648 tokens</div>
       <div class="spacer"></div>
-      <button class="btn btn-ghost btn-sm" id="csv">Export CSV</button></div>
-    <div class="panel table-wrap">
+      <button class="btn btn-ghost btn-sm" id="csv">Export CSV</button>
+    </div>
+
+    <div class="panel table-wrap" id="panel-holdings" role="tabpanel" aria-labelledby="tab-holdings">
       <table class="table">
         <thead><tr><th>Property</th><th class="num">Tokens</th><th class="num">Share</th>
           <th class="num">Value</th><th class="num">Unrealized</th><th class="num">Rent / yr</th></tr></thead>
         <tbody id="holdings"></tbody>
+      </table>
+    </div>
+
+    <div class="panel table-wrap" id="panel-tx" role="tabpanel" aria-labelledby="tab-tx" hidden>
+      <table class="table">
+        <thead><tr><th>Date</th><th>Type</th><th>Property</th><th class="num">Tokens</th>
+          <th class="num">Amount</th><th class="num">Transaction</th></tr></thead>
+        <tbody id="tx"></tbody>
       </table>
     </div>
   </section>
