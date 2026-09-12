@@ -24,7 +24,10 @@
   --wash-2: rgba(15, 30, 31, 0.08);
   /* Pills sitting on photography stay dark whatever the theme — the art is
      full-bleed daylight and a light chip on it is unreadable. */
-  --scrim: var(--scrim);
+  --scrim: rgba(5, 9, 10, 0.78);
+  /* Ink for anything sitting on --scrim. The ramp above is for the light
+     page; on a dark pill it would be invisible. */
+  --on-scrim: #e8efef;
   --card-art: linear-gradient(170deg, #dfeaea 0%, #eef3f2 52%, #f5f7f6 100%);
   --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
   color-scheme: light;
@@ -175,17 +178,20 @@ main { max-width: 1440px; margin: 0 auto; padding: 0 26px 64px; }
 .panel {
   background: var(--panel); border: 1px solid var(--line); border-radius: 16px;
 }
-.stat-main { padding: 30px 30px 26px; display: flex; align-items: stretch; gap: 30px; }
-.stat-main > .stat-lead { min-width: 0; }
+.stat-main { padding: 30px 30px 26px; }
+/* Explore only: lead figure | stacked pair | live feed. Portfolio reuses
+   .stat-main as a plain stacked panel, so the split must not be global. */
+.stat-split { display: flex; align-items: stretch; gap: 30px; }
+.stat-split > .stat-lead { min-width: 0; }
 .label {
   font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.13em;
   color: var(--ink-5); text-transform: uppercase;
 }
 .big { font-family: var(--mono); font-size: 52px; letter-spacing: -0.02em; margin: 12px 0 6px; }
 .stat-row { display: flex; gap: 44px; margin-top: 26px; }
-.stat-main .stat-col { display: flex; flex-direction: column; justify-content: center;
+.stat-split .stat-col { display: flex; flex-direction: column; justify-content: center;
   gap: 22px; padding-left: 30px; border-left: 1px solid var(--line-soft); min-width: 210px; }
-.stat-main .stat-col .stat-row { margin-top: 0; flex-direction: column; gap: 22px; }
+.stat-split .stat-col .stat-row { margin-top: 0; flex-direction: column; gap: 22px; }
 .stat-row .v { font-family: var(--mono); font-size: 22px; margin-top: 6px; }
 .muted { color: var(--ink-4); font-size: 12px; margin-top: 5px; }
 
@@ -243,7 +249,7 @@ a.card:hover { border-color: rgba(12, 106, 113, 0.45); transform: translateY(-2p
   position: absolute; z-index: 2; top: 12px;
   font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em;
   padding: 5px 9px; border-radius: 9px;
-  background: var(--scrim); color: var(--ink-2);
+  background: var(--scrim); color: var(--on-scrim);
 }
 .tag-l { left: 12px; } .tag-r { right: 12px; }
 /* Yield reads as a property of the building, not a table cell — it sits on
@@ -398,7 +404,7 @@ footer {
 
 /* ---------- responsive ---------- */
 @media (max-width: 1080px) {
-  .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .grid, .grid-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .stats, .feature, .detail, .why { grid-template-columns: 1fr; }
   .facts { grid-template-columns: repeat(2, 1fr); }
   .feature-art, .why-art { min-height: 260px; }
@@ -406,6 +412,7 @@ footer {
 }
 @media (max-width: 720px) {
   main { padding: 0 16px 48px; }
+  .grid-4 { grid-template-columns: 1fr; }
   .topbar { gap: 14px; padding: 0 16px; height: 58px; }
   .nav { gap: 2px; }
   .nav a { padding: 7px 10px; font-size: 12.5px; }
@@ -439,6 +446,8 @@ footer {
 .compact-foot .pct { font-family: var(--mono); font-size: 18px; color: var(--ink); font-weight: 400; }
 .why-cta { display: flex; align-items: center; gap: 14px; margin-top: 28px; flex-wrap: wrap; }
 .why-note { font-size: 11.5px; color: var(--ink-4); }
+
+.grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 
 /* ---------- portfolio tabs + ledger ---------- */
 .tabs { display: flex; gap: 8px; }
