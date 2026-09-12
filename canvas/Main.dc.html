@@ -551,7 +551,7 @@
             Become a real estate owner<br>without paying the full cost.
           </h2>
           <p style="margin: 16px 0 0; font-size: 14.5px; line-height: 1.65; color: #91A0A2; max-width: 520px;">
-            A Bali villa runs into the hundreds of thousands. A token of one starts at $8.60 — same title, same rent, split into shares you can buy and sell whenever you like.
+            A Bali villa runs into the hundreds of thousands. A token of one starts at $8.90 — same title, same rent, split into shares you can buy and sell whenever you like.
           </p>
 
           <div style="display: flex; gap: 30px; margin-top: 28px;">
@@ -571,7 +571,7 @@
           </div>
 
           <div style="display: flex; align-items: center; gap: 14px; margin-top: 30px;">
-            <button class="btn mono" style="height: 48px; padding: 0 24px; border-radius: 12px; background: {{accent}}; color: #07201F; font-size: 13px; font-weight: 600; letter-spacing: .05em;">START FROM $8.60</button>
+            <button class="btn mono" style="height: 48px; padding: 0 24px; border-radius: 12px; background: {{accent}}; color: #07201F; font-size: 13px; font-weight: 600; letter-spacing: .05em;">START FROM $8.90</button>
             <span class="mono" style="font-size: 11.5px; color: #697577;">no minimum lock-in · settles on Base</span>
           </div>
         </div>
@@ -604,7 +604,7 @@
     </div>
 
     <div style="display: flex; gap: 9px; padding: 18px 26px 4px;">
-      <sc-for list="{{tabs}}" as="t" hint-placeholder-count="5">
+      <sc-for list="{{tabs}}" as="t" hint-placeholder-count="4">
         <button class="btn mono" onClick="{{t.pick}}" style="{{t.style}}">{{t.label}}</button>
       </sc-for>
       <div style="flex-grow: 1;"></div>
@@ -904,9 +904,9 @@ class Component extends DCLogic {
       { sym: 'PENEST', name: 'Penestanan Lofts', city: 'UBUD · PENESTANAN', kind: 'villa', type: 'VILLA',
         sponsor: 'Uma Sari Co.', price: '$10.90', apy: '8.2%', pct: '91%', left: '11,600 tokens',
         buys: 259, watchers: 1247, chg: 6.2, vol: '$233k', holders: '1,092' },
-      { sym: 'KELIKI', name: 'Keliki Ridge Parcel', city: 'UBUD · KELIKI', kind: 'land', type: 'LAND',
-        sponsor: 'Sawah Partners', price: '$8.60', apy: '—', pct: '22%', left: '182,900 tokens',
-        buys: 143, watchers: 690, chg: -4.6, vol: '$41k', holders: '288' },
+      { sym: 'KELIKI', name: 'Keliki Ridge House', city: 'UBUD · KELIKI', kind: 'villa', type: 'VILLA',
+        sponsor: 'Sawah Partners', price: '$12.40', apy: '7.8%', pct: '31%', left: '128,400 tokens',
+        buys: 143, watchers: 690, chg: -1.9, vol: '$58k', holders: '288' },
       { sym: 'SIDEMEN', name: 'Sidemen Terrace Lodge', city: 'SIDEMEN · KARANGASEM', kind: 'resort', type: 'RESORT',
         sponsor: 'Uma Sari Co.', price: '$9.40', apy: '9.6%', pct: '34%', left: '132,600 tokens',
         buys: 157, watchers: 764, chg: 0.9, vol: '$63k', holders: '421' },
@@ -956,7 +956,7 @@ class Component extends DCLogic {
       { who: '0x3E71…A0C9', qty: '2,100', prop: 'Berawa Pavilions', ago: '1m ago' },
       { who: 'atlas-ib.eth', qty: '2,640', prop: 'Banyu Pool Suites', ago: '2m ago' },
       { who: '0xB44D…2F16', qty: '175', prop: 'Amed Dive House', ago: '2m ago' },
-      { who: 'sawahdao.eth', qty: '4,800', prop: 'Keliki Ridge Parcel', ago: '3m ago' }
+      { who: 'sawahdao.eth', qty: '4,800', prop: 'Keliki Ridge House', ago: '3m ago' }
     ];
     const feed = events.concat(events);
 
@@ -967,8 +967,7 @@ class Component extends DCLogic {
     const tab = this.state.tab;
     const tabs = [
       { id: 'all', label: 'All' }, { id: 'villa', label: 'Villas' },
-      { id: 'resort', label: 'Resorts' }, { id: 'estate', label: 'Estates' },
-      { id: 'land', label: 'Land' }
+      { id: 'resort', label: 'Resorts' }, { id: 'estate', label: 'Estates' }
     ].map((t) => ({
       ...t,
       pick: () => this.setState({ tab: t.id }),
@@ -1041,7 +1040,7 @@ class Component extends DCLogic {
       accent, nav, presets, trending: trendingRail, featured, listings, tabs, filledSoon, leaders,
       whyArt: this.villa(7731, 'estate', accent),
       whyUs: [
-        { title: 'Start at one token', sub: 'Buy $8.60 of a villa or $86,000 — the deed splits either way.',
+        { title: 'Start at one token', sub: 'Buy $8.90 of a villa or $89,000 — the deed splits either way.',
           icon: 'M12 3v18M16.5 7.5c-.8-1.4-2.4-2-4.5-2-2.5 0-4 1-4 2.8 0 4 8.5 2 8.5 6 0 1.9-1.7 3-4.5 3-2.2 0-3.8-.7-4.6-2.2' },
         { title: 'Rent every Friday', sub: 'Net nightly income lands in your wallet weekly, not yearly.',
           icon: 'M3 7h18v12H3zM3 11h18M8 15h4' },
