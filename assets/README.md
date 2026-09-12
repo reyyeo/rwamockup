@@ -38,10 +38,13 @@ PENEST   KELIKI   SIDEMEN  AMED     MUNDUK   LEMBO    TANAH
 | Originals | any | as generated | PNG |
 
 Keep originals in `villas/raw/` and the web-sized version at
-`villas/<SYMBOL>.jpg`. The canvas embeds images as `data:` URIs — artifacts
+`villas/<SYMBOL>.jpg` — `raw/` is the source of truth, and the `.jpg`
+alongside it is what gets embedded. The canvas embeds images as `data:` URIs — artifacts
 block external image hosts at the CSP level, so nothing can be hotlinked —
 which means file size lands directly in page weight. The published page
-must stay under 16 MB; budget roughly 15 KB per card image.
+must stay under 16 MB. The current set runs ~34 KB per card at 640px q58
+— detailed photography doesn't compress to 15 KB without visible mush —
+which puts the published page at 3.7 MB.
 
 ## Provenance
 

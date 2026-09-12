@@ -33,8 +33,11 @@ so a new property is a single entry. Each carries price, net yield, funded
 percentage, tokens remaining, 24h buyers, watchers, price change, volume,
 holders and a sponsor.
 
-Property artwork is currently drawn by a seeded generator (`villa()`), not
-photographed — change a listing's symbol or type and the elevation redraws.
+Property imagery is generated (not photographed) exteriors, one per
+listing, embedded as `data:` URIs — artifacts block external image hosts,
+so nothing can be hotlinked. Originals live in `assets/villas/raw/`. The
+seeded elevation generator that stood in for photography has been
+removed.
 
 ## On the data
 
