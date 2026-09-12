@@ -1,0 +1,188 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+  <style>
+    body { margin: 0; background:  radial-gradient(58% 44% at 14% 2%, rgba(108,193,198,.20) 0%, transparent 62%),
+      radial-gradient(52% 40% at 88% 6%, rgba(108,193,198,.20) 0%, transparent 62%),
+      radial-gradient(46% 42% at 66% 96%, rgba(59,227,126,.13) 0%, transparent 64%),
+      #08080B; background-attachment: fixed; color: #DCE5E6;
+      font-family: 'Space Grotesk', 'Trebuchet MS', system-ui, sans-serif; }
+    a { color: #6CC1C6; text-decoration: none; } a:hover { color: #6CC1C6; }
+    .mono { font-family: 'IBM Plex Mono', 'DejaVu Sans Mono', ui-monospace, monospace; }
+    .panel { background: rgba(255,255,255,.045); backdrop-filter: blur(26px) saturate(150%);
+      -webkit-backdrop-filter: blur(26px) saturate(150%);
+      border: 1px solid rgba(255,255,255,.10); border-radius: 18px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.10), 0 28px 60px -34px rgba(0,0,0,.9); }
+    .btn { cursor: pointer; border: none; font-family: inherit; }
+    .row:hover { background: rgba(255,255,255,.045); }
+    .blip { animation: blip 1.6s ease-in-out infinite; }
+    @keyframes blip { 0%,100% { opacity: 1; } 50% { opacity: .25; } }
+  </style>
+</helmet>
+
+<div style="--a: {{accent}}; padding: 0 0 40px; background: transparent;">
+
+  <div style="display: flex; align-items: center; gap: 14px; padding: 18px 34px; border-bottom: 1px solid rgba(255,255,255,.085);">
+    <span style="font-size: 17px; font-weight: 700; letter-spacing: -.015em;">Portfolio</span>
+    <span class="mono" style="font-size: 11.5px; color: #697577; letter-spacing: .08em;">0x9F2A…C41D</span>
+    <div style="flex-grow: 1;"></div>
+    <div class="panel mono" style="display: flex; align-items: center; gap: 8px; padding: 8px 12px; font-size: 11.5px; color: #818F92;">
+      <span class="blip" style="width: 6px; height: 6px; border-radius: 50%; background: #6CC1C6;"></span>NEXT RENT SWEEP IN 2d 04h
+    </div>
+  </div>
+
+  <!-- top row -->
+  <div style="display: grid; grid-template-columns: 1.45fr 1fr 1fr; gap: 16px; padding: 24px 34px 0;">
+    <div class="panel" style="padding: 22px 24px 24px;">
+      <div class="mono" style="font-size: 10px; letter-spacing: .14em; color: #586264;">PORTFOLIO VALUE</div>
+      <div style="display: flex; align-items: baseline; gap: 14px; margin-top: 10px;">
+        <span class="mono" style="font-size: 42px; letter-spacing: -.035em;">$68,412.90</span>
+        <span class="mono" style="font-size: 14px; color: #DCE5E6;">+$4,118.22 · +6.4%</span>
+      </div>
+      <svg viewBox="0 0 640 120" width="100%" height="120" preserveAspectRatio="none" style="margin-top: 20px; display: block;">
+        <defs>
+          <linearGradient id="pf" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#FFFFFF" stop-opacity=".13"/>
+            <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+        <path d="M0 96 40 88 80 92 120 74 160 80 200 62 240 66 280 48 320 54 360 40 400 46 440 30 480 36 520 24 560 28 600 14 640 18 640 120 0 120z" fill="url(#pf)"/>
+        <path d="M0 96 40 88 80 92 120 74 160 80 200 62 240 66 280 48 320 54 360 40 400 46 440 30 480 36 520 24 560 28 600 14 640 18" fill="none" stroke="#B4C2C4" stroke-width="2.2" stroke-linejoin="round"/>
+      </svg>
+      <div style="display: flex; gap: 8px; margin-top: 16px;">
+        <sc-for list="{{ranges}}" as="r" hint-placeholder-count="5">
+          <button class="btn mono" onClick="{{r.pick}}" style="{{r.style}}">{{r.label}}</button>
+        </sc-for>
+      </div>
+    </div>
+
+    <div class="panel" style="padding: 22px 24px; display: flex; flex-direction: column;">
+      <div class="mono" style="font-size: 10px; letter-spacing: .14em; color: #586264;">RENT VAULT · CLAIMABLE</div>
+      <div class="mono" style="font-size: 38px; margin-top: 10px; letter-spacing: -.035em; color: #DCE5E6;">{{claimable}}</div>
+      <div style="font-size: 13px; color: #818F92; margin-top: 6px;">{{claimSub}}</div>
+      <div style="flex-grow: 1;"></div>
+      <button class="btn" onClick="{{claim}}" style="width: 100%; height: 50px; margin-top: 20px; border-radius: 11px; background: {{claimBg}}; color: {{claimInk}}; font-size: 14.5px; font-weight: 700;">{{claimLabel}}</button>
+      <div class="mono" style="font-size: 10.5px; color: #586264; margin-top: 10px; letter-spacing: .05em;">SWEPT FRIDAYS 00:00 UTC · USDC ON BASE</div>
+    </div>
+
+    <div class="panel" style="padding: 22px 24px;">
+      <div class="mono" style="font-size: 10px; letter-spacing: .14em; color: #586264;">ALLOCATION</div>
+      <div style="display: flex; height: 10px; border-radius: 999px; overflow: hidden; margin-top: 16px;">
+        <sc-for list="{{alloc}}" as="a" hint-placeholder-count="4">
+          <div style="width: {{a.pct}}; background: {{a.color}};"></div>
+        </sc-for>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 13px; margin-top: 20px;">
+        <sc-for list="{{alloc}}" as="a" hint-placeholder-count="4">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span style="width: 9px; height: 9px; border-radius: 4px; background: {{a.color}};"></span>
+            <span style="font-size: 13px; color: #B4C2C4;">{{a.label}}</span>
+            <span style="flex-grow: 1;"></span>
+            <span class="mono" style="font-size: 13px;">{{a.pct}}</span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+
+  <!-- holdings -->
+  <div class="panel" style="margin: 20px 34px 0;">
+    <div style="display: flex; align-items: center; padding: 16px 22px; border-bottom: 1px solid rgba(255,255,255,.11);">
+      <span style="font-size: 15px; font-weight: 700;">Holdings</span>
+      <span class="mono" style="font-size: 11.5px; color: #697577; margin-left: 12px;">5 villas · 3,648 tokens</span>
+      <div style="flex-grow: 1;"></div>
+      <button class="btn mono" style="height: 34px; padding: 0 15px; border-radius: 11px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.11); color: #91A0A2; font-size: 12px;">Export CSV</button>
+    </div>
+    <div style="display: grid; grid-template-columns: 2.1fr 1fr 1fr 1fr 1.1fr 1fr; padding: 13px 22px; border-bottom: 1px solid rgba(255,255,255,.11);" class="mono">
+      <sc-for list="{{cols}}" as="c" hint-placeholder-count="6">
+        <div style="font-size: 11px; letter-spacing: .12em; color: #697577; text-align: {{c.align}};">{{c.label}}</div>
+      </sc-for>
+    </div>
+    <sc-for list="{{holdings}}" as="h" hint-placeholder-count="5">
+      <div class="row" style="display: grid; grid-template-columns: 2.1fr 1fr 1fr 1fr 1.1fr 1fr; align-items: center; padding: 15px 22px; border-bottom: 1px solid rgba(255,255,255,.07);">
+        <div style="display: flex; align-items: center; gap: 13px;">
+          <span style="width: 34px; height: 34px; border-radius: 11px; background: {{h.swatch}}; border: 1px solid rgba(255,255,255,.13);"></span>
+          <div>
+            <div style="font-size: 14px; font-weight: 500;">{{h.name}}</div>
+            <div class="mono" style="font-size: 11px; color: #697577; margin-top: 3px;">{{h.sym}}</div>
+          </div>
+        </div>
+        <div class="mono" style="font-size: 13px; text-align: right; color: #B4C2C4;">{{h.tokens}}</div>
+        <div class="mono" style="font-size: 13px; text-align: right; color: #B4C2C4;">{{h.share}}</div>
+        <div class="mono" style="font-size: 13px; text-align: right;">{{h.value}}</div>
+        <div class="mono" style="font-size: 13px; text-align: right; color: {{h.plColor}};">{{h.pl}}</div>
+        <div class="mono" style="font-size: 13px; text-align: right; color: #B4C2C4;">{{h.rent}}</div>
+      </div>
+    </sc-for>
+  </div>
+</div>
+</x-dc>
+
+<script data-dc-script data-props='{
+  "accent": {"editor": "color", "default": "#6CC1C6", "options": ["#6CC1C6", "#6F9FBC", "#9ACBCC", "#529DA3"], "section": "Theme"},
+  "$preview": {"width": 1440, "height": 960}
+}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { range: '1Y', claimed: false };
+  }
+
+  renderVals() {
+    const accent = this.props.accent ?? '#6CC1C6';
+
+    const ranges = ['1W', '1M', '3M', '1Y', 'ALL'].map((r) => ({
+      label: r,
+      pick: () => this.setState({ range: r }),
+      style: 'height: 32px; padding: 0 15px; border-radius: 11px; font-size: 12px; letter-spacing: .06em;'
+        + (r === this.state.range
+          ? ' background: ' + accent + '; border: 1px solid ' + accent + '; color: #07201F; font-weight: 600;'
+          : ' background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.11); color: #91A0A2;')
+    }));
+
+    const claimed = this.state.claimed;
+
+    return {
+      accent, ranges,
+      claimable: claimed ? '$0.00' : '$284.19',
+      claimSub: claimed ? 'Claimed — $284.19 sent to your wallet' : 'from 5 villas, 3 weeks accrued',
+      claim: () => this.setState({ claimed: !claimed }),
+      claimInk: claimed ? '#DCE5E6' : '#07201F',
+      claimLabel: claimed ? '✓ Claimed' : 'Claim rent',
+      claimBg: claimed ? 'rgba(255,255,255,.16)' : '#6CC1C6',
+
+      alloc: [
+        { label: 'Villas', pct: '55%', color: accent },
+        { label: 'Estates', pct: '28%', color: 'rgba(255,255,255,.30)' },
+        { label: 'Resorts', pct: '17%', color: 'rgba(255,255,255,.18)' }
+      ],
+      cols: [
+        { label: 'PROPERTY', align: 'left' }, { label: 'TOKENS', align: 'right' },
+        { label: 'SHARE', align: 'right' }, { label: 'VALUE', align: 'right' },
+        { label: 'UNREALIZED', align: 'right' }, { label: 'RENT / YR', align: 'right' }
+      ],
+      holdings: [
+        { name: 'Villa Ombak', sym: 'OMBAK', tokens: '1,704', share: '1.099%', value: '$24,196.80',
+          pl: '+$2,214.40', plColor: '#B4C2C4', rent: '$2,266.32', swatch: 'linear-gradient(140deg,#1A3A3B,#0B201F)' },
+        { name: 'Karang Cliff Villas', sym: 'BINGIN', tokens: '412', share: '0.294%', value: '$11,041.60',
+          pl: '+$1,088.80', plColor: '#B4C2C4', rent: '$1,020.94', swatch: 'linear-gradient(140deg,#1A3A3B,#0B201F)' },
+        { name: 'Uma Sari Estate', sym: 'TEGAL', tokens: '1,180', share: '0.612%', value: '$37,052.00',
+          pl: '+$944.00', plColor: '#B4C2C4', rent: '$2,548.80', swatch: 'linear-gradient(140deg,#1A3A3B,#0B201F)' },
+        { name: 'Balangan Surf Lodge', sym: 'BALANG', tokens: '224', share: '0.058%', value: '$2,374.40',
+          pl: '+$208.32', plColor: '#B4C2C4', rent: '$258.80', swatch: 'linear-gradient(140deg,#1A3A3B,#0B201F)' },
+        { name: 'Keliki Ridge House', sym: 'KELIKI', tokens: '128', share: '0.019%', value: '$1,587.20',
+          pl: '−$30.72', plColor: '#818F92', rent: '$123.80', swatch: 'linear-gradient(140deg,#1A3A3B,#0B201F)' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PARCEL Fund — Marketplace</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏙️</text></svg>">
+<link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+<main>
+  <div class="sec">
+    <div>
+      <h2 style="font-size:30px">Marketplace</h2>
+      <div class="sub" style="padding-top:8px">every open listing · settles on Base in ~1.4s</div>
+    </div>
+    <div class="spacer"></div>
+    <div class="sub" id="count"></div>
+  </div>
+
+  <div class="chips" id="filters" style="margin-bottom:14px"></div>
+
+  <div class="chips" style="margin-bottom:22px">
+    <input id="search" class="chip" style="flex:1;min-width:220px;height:46px;color:var(--ink)"
+           placeholder="Search property, ticker, city or sponsor…">
+    <button class="chip" id="sort" style="height:46px">Sort · Net yield</button>
+  </div>
+
+  <div class="grid" id="grid"></div>
+  <p id="empty" class="sub" style="display:none;padding:40px 0;text-align:center">No listings match.</p>
+
+  <section>
+    <div class="sec"><h2>All listings</h2><div class="sub">status by sponsor</div></div>
+    <div class="panel table-wrap">
+      <table class="table">
+        <thead><tr><th>Property</th><th>Type</th><th>Sponsor</th>
+          <th class="num">Token price</th><th class="num">Status</th></tr></thead>
+        <tbody id="rows"></tbody>
+      </table>
+    </div>
+  </section>
+</main>
+<script type="module" src="js/market.js"></script>
+</body>
+</html>
