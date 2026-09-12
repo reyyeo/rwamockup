@@ -414,7 +414,7 @@ footer {
 /* ---------- filled soon: compact card ---------- */
 .card-compact { display: flex; flex-direction: row; gap: 13px; padding: 13px; }
 .compact-art {
-  width: 74px; height: 100%; min-height: 108px; flex-shrink: 0;
+  flex: 0 0 34%; min-width: 74px; height: 100%; min-height: 108px;
   border-radius: 11px; object-fit: cover;
 }
 .compact-body { flex: 1; min-width: 0; display: flex; flex-direction: column; }
@@ -423,8 +423,17 @@ footer {
   font-size: 10px; letter-spacing: 0.08em;
   background: rgba(108, 193, 198, 0.14); color: var(--accent);
 }
+/* four-up on wide screens, so the four listings fill one row instead of
+   orphaning a card. Scoped above the breakpoint so the responsive .grid
+   rules still take the column count down on narrow viewports. */
+@media (min-width: 1280px) {
+  #filled { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
 /* margin-top:auto keeps the bar on the baseline whatever the name wraps to */
 .compact-foot { margin-top: auto; padding-top: 12px; }
+/* the track stops short of the text column: a part-width bar reads as a
+   proportion, a full-width one reads as a rule under the card */
+.card-compact .bar { width: 62%; }
 .compact-foot .pct { font-family: var(--mono); font-size: 18px; color: var(--ink); font-weight: 400; }
 .why-cta { display: flex; align-items: center; gap: 14px; margin-top: 28px; flex-wrap: wrap; }
 .why-note { font-size: 11.5px; color: var(--ink-4); }
