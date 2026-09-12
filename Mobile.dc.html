@@ -62,20 +62,13 @@
 
   <!-- carousel -->
   <div class="rail" style="padding: 0 22px;">
-    <sc-for list="{{cards}}" as="c" hint-placeholder-count="2">
+    <sc-for list="{{cards}}" as="c" hint-placeholder-count="5">
       <div style="flex-shrink: 0; width: 296px; border-radius: 22px; overflow: hidden; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.085);">
         <div class="scan" style="height: 244px; position: relative; background: {{c.bg}};">
           <button class="btn" onClick="{{c.watch}}" style="position: absolute; top: 14px; right: 14px; width: 40px; height: 40px; border-radius: 50%; background: rgba(0,0,0,.5); display: flex; align-items: center; justify-content: center;">
             <svg width="18" height="18" viewBox="0 0 24 24" stroke-width="1.9" stroke="{{c.heartStroke}}" fill="{{c.heartFill}}" stroke-linejoin="round"><path d="M12 20.2 4.4 12.9a4.7 4.7 0 0 1 6.6-6.7l1 .9 1-.9a4.7 4.7 0 1 1 6.6 6.7z"/></svg>
           </button>
-<svg viewBox="0 0 300 180" width="100%" height="100%" preserveAspectRatio="xMidYMax slice" style="position: absolute; inset: 0;">
-            <sc-for list="{{c.art.rects}}" as="sh" hint-placeholder-count="30">
-              <rect x="{{sh.x}}" y="{{sh.y}}" width="{{sh.w}}" height="{{sh.h}}" fill="{{sh.f}}" rx="{{sh.rx}}"></rect>
-            </sc-for>
-            <sc-for list="{{c.art.paths}}" as="ph" hint-placeholder-count="24">
-              <path d="{{ph.d}}" fill="{{ph.f}}" stroke="{{ph.s}}" stroke-width="{{ph.sw}}" stroke-linecap="round" stroke-linejoin="round"></path>
-            </sc-for>
-          </svg>
+<img src="{{c.photo}}" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block;">
           <div style="position: absolute; left: 0; right: 0; bottom: 0; height: 120px; background: linear-gradient(180deg, transparent, rgba(0,0,0,.88) 62%);"></div>
           <div style="position: absolute; left: 18px; right: 18px; bottom: 16px;">
             <div style="display: flex; align-items: flex-end;">
@@ -114,7 +107,7 @@
   </div>
 
   <div style="display: flex; flex-direction: column; gap: 16px; padding: 0 22px 26px;">
-    <sc-for list="{{sponsors}}" as="s" hint-placeholder-count="2">
+    <sc-for list="{{sponsors}}" as="s" hint-placeholder-count="5">
       <div style="display: flex; align-items: center; gap: 14px;">
         <div style="width: 46px; height: 46px; border-radius: 14px; background: {{s.art}}; border: 1px solid rgba(255,255,255,.13);"></div>
         <div>
@@ -150,99 +143,6 @@ class Component extends DCLogic {
     this.state = { tab: 'closing', nav: 'home', liked: { OMBAK: true }, following: {} };
   }
 
-  // Seeded Bali-villa elevation: open pavilions under steep alang-alang roofs,
-  // timber posts, a pool in front, palms. Returns flat shape data for one card.
-  villa(seed, kind, accent) {
-    let t = (seed >>> 0) || 7;
-    const rnd = () => {
-      t = (t + 0x6D2B79F5) >>> 0;
-      let x = Math.imul(t ^ (t >>> 15), 1 | t);
-      x = (x + Math.imul(x ^ (x >>> 7), 61 | x)) ^ x;
-      return ((x ^ (x >>> 14)) >>> 0) / 4294967296;
-    };
-    const ri = (a, b) => Math.floor(a + rnd() * (b - a + 0.999));
-    const rf = (a, b) => a + rnd() * (b - a);
-    const f1 = (v) => +v.toFixed(1);
-
-    const W = 300, H = 180, ground = H - 30;
-    const rects = [], paths = [];
-    const R = (x, y, w, h, f, rx) => rects.push({ x: f1(x), y: f1(y), w: f1(Math.max(w, .4)), h: f1(Math.max(h, .4)), f: f, rx: rx || 0 });
-    const P = (d, f, s, sw) => paths.push({ d: d, f: f || 'none', s: s || 'none', sw: sw || 0 });
-
-    const spec = {
-      villa:  { n: [2, 3], bw: [62, 88], bh: [26, 34], roof: [26, 34], pool: 1 },
-      resort: { n: [3, 4], bw: [46, 66], bh: [22, 30], roof: [22, 28], pool: 1 },
-      estate: { n: [2, 3], bw: [70, 96], bh: [28, 38], roof: [30, 38], pool: 1 },
-      land:   { n: [1, 1], bw: [54, 70], bh: [18, 24], roof: [20, 26], pool: 0 }
-    }[kind] || { n: [2, 3], bw: [62, 88], bh: [26, 34], roof: [26, 34], pool: 1 };
-
-    // terraced ground: rice-paddy steps behind the pavilions
-    for (let i = 0; i < 3; i++) R(0, ground - 4 - i * 7, W, 1, 'rgba(255,255,255,' + (0.05 + i * 0.015) + ')');
-
-    const n = ri(spec.n[0], spec.n[1]);
-    const ws = [];
-    let total = 0;
-    for (let i = 0; i < n; i++) { const w = rf(spec.bw[0], spec.bw[1]); ws.push(w); total += w; }
-    const gap = 9;
-    let x = (W - total - (n - 1) * gap) / 2;
-
-    for (let i = 0; i < n; i++) {
-      const bw = ws[i];
-      const bh = rf(spec.bh[0], spec.bh[1]);
-      const rh = rf(spec.roof[0], spec.roof[1]);
-      const lift = i === 1 ? rf(4, 10) : rf(0, 4);          // stagger the middle pavilion
-      const by = ground - lift - bh;
-      const eave = rf(7, 11);
-
-      R(x - 3, ground - lift - 3, bw + 6, 3.4, 'rgba(255,255,255,.16)', .6);          // stone plinth
-      R(x, by, bw, bh, 'rgba(210,236,238,.10)', .6);                                   // open interior
-      R(x + 2, by + bh * .34, bw - 4, bh * .58, 'rgba(226,244,245,.30)', .6);          // lit room behind posts
-
-      const posts = ri(3, 5);
-      for (let p = 0; p < posts; p++) R(x + 2 + ((bw - 6) / (posts - 1)) * p, by, 2.1, bh, 'rgba(255,255,255,.30)');
-
-      // steep alang-alang roof with deep eaves
-      const apex = by - rh, lx = x - eave, rx2 = x + bw + eave;
-      P('M' + f1(lx) + ' ' + f1(by + 1) + ' L' + f1(x + bw / 2) + ' ' + f1(apex) + ' L' + f1(rx2) + ' ' + f1(by + 1) + ' Z', 'rgba(255,255,255,.20)');
-      P('M' + f1(lx) + ' ' + f1(by + 1) + ' L' + f1(x + bw / 2) + ' ' + f1(apex) + ' L' + f1(x + bw / 2) + ' ' + f1(by + 1) + ' Z', 'rgba(255,255,255,.10)');
-      P('M' + f1(x + bw / 2) + ' ' + f1(apex) + ' L' + f1(x + bw / 2) + ' ' + f1(by + 1), 'none', 'rgba(255,255,255,.34)', 1);
-      for (let s = 1; s <= 3; s++) {                                                    // thatch courses
-        const yy = by + 1 - (rh / 4) * s, half = ((rx2 - lx) / 2) * (1 - s / 4.2);
-        P('M' + f1(x + bw / 2 - half) + ' ' + f1(yy) + ' L' + f1(x + bw / 2 + half) + ' ' + f1(yy), 'none', 'rgba(255,255,255,.13)', 1);
-      }
-      if (rnd() > .45) R(x + bw * .3, by + bh * .2, bw * .18, 2, accent, .6);           // a lit lantern
-      x += bw + gap;
-    }
-
-    // pool + loungers in the foreground
-    if (spec.pool) {
-      const pw = rf(W * .52, W * .72), px = (W - pw) / 2, py = ground + 6, ph = 15;
-      R(px, py, pw, ph, 'rgba(108,193,198,.30)', 2.4);
-      R(px, py, pw, 1.4, 'rgba(226,244,245,.42)', 1);
-      for (let i = 0; i < 3; i++) R(px + rf(6, pw * .6), py + 4 + i * 4, rf(10, 26), .9, 'rgba(226,244,245,.26)', .5);
-      R(px - 16, py + 2, 12, 2.4, 'rgba(255,255,255,.22)', .8);
-      R(px + pw + 4, py + 2, 12, 2.4, 'rgba(255,255,255,.22)', .8);
-    } else {
-      for (let i = 0; i < 5; i++) R(30 + i * 50, ground + 8 + (i % 2) * 5, 34, .9, 'rgba(226,244,245,.20)', .5);
-    }
-
-    // palms
-    const palms = ri(2, 3);
-    for (let i = 0; i < palms; i++) {
-      const pxx = i === 0 ? rf(10, 34) : rf(W - 48, W - 12);
-      const ph2 = rf(46, 74), lean = rf(-5, 5), topY = ground - ph2;
-      P('M' + f1(pxx) + ' ' + f1(ground) + ' Q' + f1(pxx + lean) + ' ' + f1(ground - ph2 * .55) + ' ' + f1(pxx + lean * 2) + ' ' + f1(topY), 'none', 'rgba(255,255,255,.34)', 1.6);
-      const tipX = pxx + lean * 2;
-      for (let fr = 0; fr < 5; fr++) {
-        const ang = -0.5 + fr * 0.5, len = rf(12, 19);
-        P('M' + f1(tipX) + ' ' + f1(topY) + ' Q' + f1(tipX + Math.cos(ang) * len * .6) + ' ' + f1(topY - 6) + ' ' + f1(tipX + Math.cos(ang) * len) + ' ' + f1(topY + Math.sin(Math.abs(ang)) * 7 + 2), 'none', 'rgba(255,255,255,.30)', 1.4);
-      }
-    }
-
-    R(0, ground, W, 1.4, 'rgba(255,255,255,.30)');
-    return { rects: rects, paths: paths };
-  }
-
   renderVals() {
     const accent = this.props.accent ?? '#6CC1C6';
 
@@ -263,15 +163,21 @@ class Component extends DCLogic {
     });
 
     const cards = [
-      { id: 'OMBAK', name: 'Villa Ombak', city: 'CANGGU · 9.4% NET YIELD', price: '$14.20', ends: '1h 26m 32s',
+      { id: 'PETIT', name: 'Banyu Pool Suites', city: 'SEMINYAK · 10.6% NET YIELD', price: '$19.75', ends: '0h 41m 08s',
+        kind: 'resort', bg: 'linear-gradient(170deg, #123034 0%, #0C2124 52%, #060C0D 100%)' },
+      { id: 'PENEST', name: 'Penestanan Lofts', city: 'UBUD · 8.2% NET YIELD', price: '$10.90', ends: '1h 26m 32s',
         kind: 'villa', bg: 'linear-gradient(170deg, #123034 0%, #0C2124 52%, #060C0D 100%)' },
-      { id: 'KARANG', name: 'Karang Cliff', city: 'ULUWATU · 8.1% NET YIELD', price: '$26.80', ends: '6h 04m 11s',
-        kind: 'villa', bg: 'linear-gradient(170deg, #123034 0%, #0C2124 52%, #060C0D 100%)' }
+      { id: 'BALANG', name: 'Balangan Surf Lodge', city: 'ULUWATU · 10.9% NET YIELD', price: '$10.60', ends: '4h 12m 55s',
+        kind: 'resort', bg: 'linear-gradient(170deg, #123034 0%, #0C2124 52%, #060C0D 100%)' },
+      { id: 'OMBAK', name: 'Villa Ombak', city: 'CANGGU · 9.4% NET YIELD', price: '$14.20', ends: '6h 04m 11s',
+        kind: 'villa', bg: 'linear-gradient(170deg, #123034 0%, #0C2124 52%, #060C0D 100%)' },
+      { id: 'LEMBO', name: 'Lembongan Cliff Suites', city: 'NUSA LEMBONGAN · 10.4% NET YIELD', price: '$14.75', ends: '9h 38m 20s',
+        kind: 'resort', bg: 'linear-gradient(170deg, #123034 0%, #0C2124 52%, #060C0D 100%)' }
     ].map((c) => {
       const on = !!this.state.liked[c.id];
       return {
         ...c,
-        art: this.villa(c.id.length * 1301 + 17, c.kind, accent),
+        photo: PHOTO[c.id],
         watch: () => this.setState({ liked: { ...this.state.liked, [c.id]: !on } }),
         heartFill: on ? accent : 'none',
         heartStroke: on ? accent : '#B4C2C4'
@@ -279,9 +185,11 @@ class Component extends DCLogic {
     });
 
     const sponsors = [
-      { id: 'ombak', name: 'Ombak Living', meta: '14 villas · $84M tokenized', art: 'linear-gradient(140deg,#1A3A3B,#0B201F)' },
-      { id: 'bumi', name: 'Bumi Group', meta: '9 villas · $51M tokenized', art: 'linear-gradient(140deg,#1A3A3B,#0B201F)' },
-      { id: 'karang', name: 'Karang Capital', meta: '6 villas · $23M tokenized', art: 'linear-gradient(140deg,#1A3A3B,#0B201F)' }
+      { id: 'ombak', name: 'Ombak Living', meta: '5 villas · $84M tokenized', art: 'linear-gradient(140deg,#1A3A3B,#0B201F)' },
+      { id: 'karang', name: 'Karang Capital', meta: '5 villas · $63M tokenized', art: 'linear-gradient(140deg,#1A3A3B,#0B201F)' },
+      { id: 'bumi', name: 'Bumi Group', meta: '6 villas · $51M tokenized', art: 'linear-gradient(140deg,#1A3A3B,#0B201F)' },
+      { id: 'sawah', name: 'Sawah Partners', meta: '4 villas · $38M tokenized', art: 'linear-gradient(140deg,#1A3A3B,#0B201F)' },
+      { id: 'umasari', name: 'Uma Sari Co.', meta: '4 villas · $29M tokenized', art: 'linear-gradient(140deg,#1A3A3B,#0B201F)' }
     ].map((s) => {
       const on = !!this.state.following[s.id];
       return {
