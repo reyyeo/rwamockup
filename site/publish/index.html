@@ -5,16 +5,20 @@
   <!-- platform figures + the viewer's own position -->
   <section class="stats">
     <div class="panel stat-main">
-      <div class="label">Total investment amount</div>
-      <div class="big" id="invest">$86.21M</div>
-      <div class="muted">capital committed across every villa raise</div>
-      <div class="stat-row">
+      <div class="stat-lead">
+        <div class="label">Total investment amount</div>
+        <div class="big" id="invest">$86.21M</div>
+        <div class="muted">capital committed across every villa raise</div>
+      </div>
+      <div class="stat-col">
         <div><div class="label">Dividends paid out</div><div class="v">$9.31M</div>
           <div class="muted">to holders since the first villa closed</div></div>
         <div><div class="label">Unique investors</div><div class="v" id="investors">34,939</div>
           <div class="muted">distinct wallets holding villa tokens</div></div>
       </div>
+      <div id="feed"></div>
     </div>
+
     <div class="panel pos">
       <div class="label">Your position</div>
       <div class="stat-row" style="margin-top:16px">
@@ -63,7 +67,7 @@
   <section class="panel why">
     <div class="why-body">
       <div class="pill">WHY US?</div>
-      <h2 style="margin:18px 0 0;font-size:24px;letter-spacing:-.03em">Own a villa without buying one</h2>
+      <h2 style="margin:18px 0 0;font-size:24px;letter-spacing:-.03em">Become a real estate owner<br>without paying the full cost.</h2>
       <p style="color:var(--ink-3);line-height:1.7;margin:12px 0 0">
         A Bali villa runs into the hundreds of thousands. A token of one starts at
         $8.90 — same title, same rent, split into shares you can buy and sell whenever you like.</p>
@@ -75,7 +79,10 @@
         <div class="why-item"><div><div class="t">Leave when you want</div>
           <div class="s">Sell your tokens on the DEX instead of waiting years for a sale.</div></div></div>
       </div>
-      <a class="btn btn-primary" style="margin-top:28px" href="market.html">START FROM $8.90</a>
+      <div class="why-cta">
+        <a class="btn btn-primary" href="market.html">START FROM $8.90</a>
+        <span class="mono why-note">no minimum lock-in · settles on Base</span>
+      </div>
     </div>
     <div class="why-art"><img src="img/TEGAL-lg.jpg" alt="" loading="lazy"></div>
   </section>

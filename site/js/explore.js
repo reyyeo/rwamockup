@@ -1,7 +1,10 @@
 import { LISTINGS } from './data.js';
-import { card, img, mount } from './ui.js';
+import { card, feed, img, mount } from './ui.js';
 
 mount('explore');
+
+// the live feed lives inside the stats cluster, not as a banner
+document.getElementById('feed').outerHTML = feed();
 
 // --- trending: most 24h buyers -------------------------------------------
 const trending = [...LISTINGS].sort((a, b) => b.buys - a.buys).slice(0, 10);
@@ -10,6 +13,7 @@ document.getElementById('trending').innerHTML = trending.map((l, i) => `
     <div class="art">
       <span class="tag tag-l mono" ${i === 0 ? 'style="background:var(--accent);color:var(--accent-ink);font-weight:600"' : ''}>#${i + 1}</span>
       <span class="tag tag-r mono">${l.sym}</span>
+      <span class="tag tag-apy mono">${l.apy} APY</span>
       <img src="${img(l.sym)}" alt="${l.name}" loading="lazy">
     </div>
     <div class="card-body">
@@ -17,14 +21,36 @@ document.getElementById('trending').innerHTML = trending.map((l, i) => `
       <div class="card-city">${l.city}</div>
       <div class="bar-row" style="margin-top:12px">
         <span class="up">+${l.buys.toLocaleString('en-US')} buyers</span>
-        <span>${l.watchers.toLocaleString('en-US')} looking</span>
+        <span class="looking">
+          <svg class="eye" width="14" height="14" viewBox="0 0 24 24" fill="none"
+               stroke="var(--accent)" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true">
+            <path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/>
+            <circle cx="12" cy="12" r="2.6" fill="var(--accent)" stroke="none"/>
+          </svg>
+          ${l.watchers.toLocaleString('en-US')} looking now
+        </span>
       </div>
     </div>
   </a>`).join('');
 
 // --- closest to fully funded ---------------------------------------------
 document.getElementById('filled').innerHTML =
-  [...LISTINGS].sort((a, b) => b.pctNum - a.pctNum).slice(0, 3).map(card).join('');
+  [...LISTINGS].sort((a, b) => b.pctNum - a.pctNum).slice(0, 4).map((l) => `
+    <a class="card card-compact" href="property.html?sym=${l.sym}">
+      <img class="compact-art" src="${img(l.sym)}" alt="${l.name}" loading="lazy">
+      <div class="compact-body">
+        <div class="card-name" style="font-size:14px">${l.name}</div>
+        <div class="card-city">${l.city}</div>
+        <span class="apy-inline mono">${l.apy} APY</span>
+        <div class="compact-foot">
+          <div class="bar-row" style="align-items:baseline">
+            <span><b class="pct">${l.pct}</b> funded</span>
+            <span>${l.left} left</span>
+          </div>
+          <div class="bar"><i style="width:${l.pct}"></i></div>
+        </div>
+      </div>
+    </a>`).join('');
 
 // --- movers ---------------------------------------------------------------
 document.getElementById('movers').innerHTML =
