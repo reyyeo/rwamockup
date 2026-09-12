@@ -1,0 +1,1089 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+  <style>
+    body { margin: 0; background:  radial-gradient(58% 44% at 14% 2%, rgba(108,193,198,.11) 0%, transparent 62%),
+      radial-gradient(52% 40% at 88% 6%, rgba(111,166,180,.09) 0%, transparent 62%),
+      radial-gradient(46% 42% at 66% 96%, rgba(108,193,198,.07) 0%, transparent 64%),
+      #05090A; background-attachment: fixed; color: #DCE5E6;
+      font-family: 'Space Grotesk', 'Trebuchet MS', system-ui, sans-serif; }
+    a { color: #6CC1C6; text-decoration: none; } a:hover { color: #6CC1C6; }
+    .mono { font-family: 'IBM Plex Mono', 'DejaVu Sans Mono', ui-monospace, monospace; }
+    .panel { background: rgba(255,255,255,.045); backdrop-filter: blur(26px) saturate(150%);
+      -webkit-backdrop-filter: blur(26px) saturate(150%);
+      border: 1px solid rgba(255,255,255,.11); border-radius: 18px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.10), 0 28px 60px -34px rgba(0,0,0,.9); }
+    .btn { cursor: pointer; border: none; font-family: inherit; }
+    .card { transition: border-color .16s ease, box-shadow .16s ease; }
+    .card:hover { border-color: rgba(108,193,198,.40);
+      box-shadow: 0 0 0 1px rgba(108,193,198,.34), 0 22px 52px -38px rgba(108,193,198,.35); }
+    .row:hover { background: rgba(255,255,255,.045); }
+    .blip { animation: blip 1.6s ease-in-out infinite; }
+    @keyframes blip { 0%, 100% { opacity: 1; } 50% { opacity: .25; } }
+    .scan { background-image: repeating-linear-gradient(0deg, rgba(255,255,255,.045) 0 1px, transparent 1px 4px); }
+    .eye { animation: eyepulse 2.4s ease-in-out infinite; transform-origin: center; }
+    .eye-pupil { animation: pupil 2.4s ease-in-out infinite; transform-origin: center; }
+    @keyframes eyepulse { 0%, 100% { opacity: 1; } 50% { opacity: .45; } }
+    @keyframes pupil { 0%, 100% { r: 2.6px; } 50% { r: 3.4px; } }
+
+    .rail-wrap { overflow: hidden;
+      -webkit-mask-image: linear-gradient(90deg, transparent, #000 2.5%, #000 97.5%, transparent);
+      mask-image: linear-gradient(90deg, transparent, #000 2.5%, #000 97.5%, transparent); }
+    .rail { display: flex; gap: 14px; width: max-content; animation: railrun 52s linear infinite; }
+    .rail-wrap:hover .rail { animation-play-state: paused; }
+    @keyframes railrun { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    .navitem { position: relative; }
+    .navmenu { position: absolute; top: 100%; left: 0; padding-top: 9px; min-width: 232px; z-index: 30;
+      opacity: 0; visibility: hidden; transform: translateY(-5px);
+      transition: opacity .16s ease, transform .16s ease, visibility .16s; }
+    .navitem:hover .navmenu { opacity: 1; visibility: visible; transform: translateY(0); }
+    .navlink { display: flex; align-items: center; gap: 11px; width: 100%; padding: 11px 13px;
+      border: none; border-radius: 11px; background: transparent; font-family: inherit; font-size: 13px;
+      color: #B4C2C4; cursor: pointer; text-align: left; }
+    .navlink:hover { background: rgba(255,255,255,.07); color: #DCE5E6; }
+
+    .vfeed-wrap { height: 102px; overflow: hidden;
+      -webkit-mask-image: linear-gradient(180deg, transparent, #000 9%, #000 91%, transparent);
+      mask-image: linear-gradient(180deg, transparent, #000 9%, #000 91%, transparent); }
+    .vfeed { animation: vfeedpush 26s cubic-bezier(.32,1,.36,1) infinite; }
+    .vfeed-wrap:hover .vfeed { animation-play-state: paused; }
+    .vrow { display: flex; align-items: center; gap: 7px; height: 34px;
+      padding: 0 20px; font-size: 12px; white-space: nowrap; }
+    @keyframes vfeedpush {
+      0% { transform: translateY(0px); }
+      10% { transform: translateY(0px); }
+      12.5% { transform: translateY(-34px); }
+      22.5% { transform: translateY(-34px); }
+      25% { transform: translateY(-68px); }
+      35% { transform: translateY(-68px); }
+      37.5% { transform: translateY(-102px); }
+      47.5% { transform: translateY(-102px); }
+      50% { transform: translateY(-136px); }
+      60% { transform: translateY(-136px); }
+      62.5% { transform: translateY(-170px); }
+      72.5% { transform: translateY(-170px); }
+      75% { transform: translateY(-204px); }
+      85% { transform: translateY(-204px); }
+      87.5% { transform: translateY(-238px); }
+      97.5% { transform: translateY(-238px); }
+      100% { transform: translateY(-272px); }
+    }
+
+    .tickw { display: block; overflow: hidden; }
+    .tickw-lg { height: 66px; }
+    .tickw-sm { height: 32px; }
+    .tick-lg { display: block; animation: ticklg 26s cubic-bezier(.32,1,.36,1) infinite; }
+    .tick-sm { display: block; animation: ticksm 26s cubic-bezier(.32,1,.36,1) infinite; }
+    .tl-lg { display: block; height: 66px; line-height: 66px; }
+    .tl-sm { display: block; height: 32px; line-height: 32px; }
+    @keyframes ticklg {
+      0% { transform: translateY(0px); }
+      10% { transform: translateY(0px); }
+      12.5% { transform: translateY(-66px); }
+      22.5% { transform: translateY(-66px); }
+      25% { transform: translateY(-132px); }
+      35% { transform: translateY(-132px); }
+      37.5% { transform: translateY(-198px); }
+      47.5% { transform: translateY(-198px); }
+      50% { transform: translateY(-264px); }
+      60% { transform: translateY(-264px); }
+      62.5% { transform: translateY(-330px); }
+      72.5% { transform: translateY(-330px); }
+      75% { transform: translateY(-396px); }
+      85% { transform: translateY(-396px); }
+      87.5% { transform: translateY(-462px); }
+      97.5% { transform: translateY(-462px); }
+      100% { transform: translateY(-528px); }
+    }
+    @keyframes ticksm {
+      0% { transform: translateY(0px); }
+      10% { transform: translateY(0px); }
+      12.5% { transform: translateY(-32px); }
+      22.5% { transform: translateY(-32px); }
+      25% { transform: translateY(-64px); }
+      35% { transform: translateY(-64px); }
+      37.5% { transform: translateY(-96px); }
+      47.5% { transform: translateY(-96px); }
+      50% { transform: translateY(-128px); }
+      60% { transform: translateY(-128px); }
+      62.5% { transform: translateY(-160px); }
+      72.5% { transform: translateY(-160px); }
+      75% { transform: translateY(-192px); }
+      85% { transform: translateY(-192px); }
+      87.5% { transform: translateY(-224px); }
+      97.5% { transform: translateY(-224px); }
+      100% { transform: translateY(-256px); }
+    }
+  </style>
+</helmet>
+
+<div style="--a: {{accent}}; position: relative; min-height: 100%; background: transparent;">
+
+  <!-- TOP BAR -->
+  <div style="position: relative; z-index: 20; display: flex; align-items: center; gap: 22px; padding: 0 26px; height: 68px; border-bottom: 1px solid rgba(255,255,255,.085);">
+
+    <div style="display: flex; align-items: center; gap: 10px; flex-shrink: 0;">
+      <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
+        <circle cx="13" cy="13" r="11.2" stroke="#DCE5E6" stroke-width="1.7"/>
+        <path d="M9 18V9h4.6a3.1 3.1 0 0 1 0 6.2H9" stroke="#DCE5E6" stroke-width="1.7" stroke-linejoin="round"/>
+      </svg>
+      <span style="font-size: 17px; font-weight: 700; letter-spacing: -.015em;">PARCEL Fund</span>
+    </div>
+
+    <div style="display: flex; align-items: center; gap: 4px;">
+      <sc-for list="{{nav}}" as="n" hint-placeholder-count="6">
+        <div class="navitem">
+          <button class="btn" onClick="{{n.pick}}" style="{{n.style}}">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="{{n.ink}}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="{{n.icon}}"/>
+            </svg>
+            {{n.label}}
+            <sc-if value="{{n.hasMenu}}" hint-placeholder-val="{{false}}">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="{{n.ink}}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 1px;">
+                <path d="m6 9 6 6 6-6"/>
+              </svg>
+            </sc-if>
+          </button>
+
+          <sc-if value="{{n.hasMenu}}" hint-placeholder-val="{{false}}">
+            <div class="navmenu">
+              <div class="panel" style="padding: 7px; background: rgba(12,20,21,.88); backdrop-filter: blur(30px) saturate(150%); -webkit-backdrop-filter: blur(30px) saturate(150%);">
+                <sc-for list="{{n.menu}}" as="m" hint-placeholder-count="2">
+                  <button class="navlink" onClick="{{n.pick}}">
+                    <span style="display: flex; width: 30px; height: 30px; flex-shrink: 0; align-items: center; justify-content: center; border-radius: 9px; background: rgba(255,255,255,.06);">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#91A0A2" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="{{m.icon}}"/>
+                      </svg>
+                    </span>
+                    <span>
+                      <span style="display: block;">{{m.label}}</span>
+                      <span class="mono" style="display: block; font-size: 10.5px; color: #697577; margin-top: 3px;">{{m.sub}}</span>
+                    </span>
+                  </button>
+                </sc-for>
+              </div>
+            </div>
+          </sc-if>
+        </div>
+      </sc-for>
+    </div>
+
+    <div style="flex-grow: 1;"></div>
+
+    <button class="btn panel" style="display: flex; align-items: center; gap: 10px; padding: 8px 13px; flex-shrink: 0;">
+      <span class="mono" style="font-size: 11px; letter-spacing: .1em; color: #697577;">RENT</span>
+      <span class="mono" style="font-size: 13px; color: #DCE5E6;">$284.19</span>
+      <span class="mono" style="font-size: 11px; padding: 4px 9px; border-radius: 8px; background: {{accent}}; color: #07201F; font-weight: 600; letter-spacing: .06em;">CLAIM</span>
+    </button>
+
+    <button class="btn panel" style="display: flex; align-items: center; gap: 9px; padding: 9px 14px; background: rgba(255,255,255,.075); color: #DCE5E6; font-size: 13px; font-weight: 500; flex-shrink: 0;">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#91A0A2" stroke-width="1.8" stroke-linejoin="round">
+        <rect x="2.5" y="5.5" width="19" height="13" rx="2.5"/><path d="M16.5 12h3"/>
+      </svg>
+      Connect Wallet
+    </button>
+  </div>
+
+    <sc-if value="{{isExplore}}" hint-placeholder-val="{{true}}">
+      <div>
+      <!-- HEADLINE STATS + YOUR POSITION -->
+      <div style="display: grid; grid-template-columns: 2.45fr 1fr; gap: 16px; padding: 26px 26px 30px;">
+
+        <!-- platform, as one instrument cluster -->
+        <div class="panel" style="position: relative; display: flex; align-items: stretch; padding: 24px 26px;">
+          <span style="position: absolute; top: 13px; left: 13px; width: 15px; height: 15px; border-left: 1.6px solid {{accent}}; border-top: 1.6px solid {{accent}}; border-top-left-radius: 5px;"></span>
+          <span style="position: absolute; bottom: 13px; right: 13px; width: 15px; height: 15px; border-right: 1.6px solid {{accent}}; border-bottom: 1.6px solid {{accent}}; border-bottom-right-radius: 5px;"></span>
+
+          <div style="display: flex; flex-direction: column; justify-content: center; padding-right: 34px;">
+            <div class="mono" style="font-size: 10px; letter-spacing: .17em; color: #818F92;">TOTAL INVESTMENT AMOUNT</div>
+            <span class="tickw tickw-lg mono" style="font-size: 62px; letter-spacing: -.05em; margin-top: 14px;">
+              <span class="tick-lg">
+                <sc-for list="{{investTicks}}" as="t" hint-placeholder-count="9">
+                  <span class="tl-lg">{{t}}</span>
+                </sc-for>
+              </span>
+            </span>
+            <div style="font-size: 12.5px; color: #697577; margin-top: 12px;">capital committed across every villa raise</div>
+          </div>
+
+          <div style="width: 1px; background: rgba(255,255,255,.10);"></div>
+
+          <div style="display: flex; flex-direction: column; justify-content: center; gap: 20px; padding: 0 30px; min-width: 228px;">
+            <sc-for list="{{sideStats}}" as="b" hint-placeholder-count="2">
+              <div>
+                <div class="mono" style="font-size: 10px; letter-spacing: .15em; color: #818F92;">{{b.label}}</div>
+                <sc-if value="{{b.ticks}}" hint-placeholder-val="{{false}}">
+                  <span class="tickw tickw-sm mono" style="font-size: 30px; letter-spacing: -.035em; margin-top: 8px;">
+                    <span class="tick-sm">
+                      <sc-for list="{{b.ticks}}" as="t" hint-placeholder-count="9">
+                        <span class="tl-sm">{{t}}</span>
+                      </sc-for>
+                    </span>
+                  </span>
+                </sc-if>
+                <sc-if value="{{b.still}}" hint-placeholder-val="{{true}}">
+                  <div class="mono" style="font-size: 30px; line-height: 1.05; letter-spacing: -.035em; margin-top: 8px;">{{b.value}}</div>
+                </sc-if>
+                <div style="font-size: 11.5px; color: #697577; margin-top: 6px;">{{b.sub}}</div>
+              </div>
+            </sc-for>
+          </div>
+
+          <div style="width: 1px; background: rgba(255,255,255,.10);"></div>
+
+          <div style="flex-grow: 1; min-width: 0; display: flex; flex-direction: column; justify-content: center; padding-left: 30px;">
+            <div style="display: flex; align-items: center; gap: 9px; padding-bottom: 12px;">
+              <span class="blip" style="width: 6px; height: 6px; border-radius: 50%; background: {{accent}};"></span>
+              <span class="mono" style="font-size: 10px; letter-spacing: .17em; color: {{accent}};">LIVE BUYS</span>
+            </div>
+            <div class="vfeed-wrap">
+              <div class="vfeed">
+                <sc-for list="{{feed}}" as="e" hint-placeholder-count="10">
+                  <div class="vrow" style="padding: 0;">
+                    <span class="mono" style="color: #B4C2C4;">{{e.who}}</span>
+                    <span style="color: #697577;">bought</span>
+                    <span class="mono" style="color: #DCE5E6;">{{e.qty}}</span>
+                    <span style="flex-grow: 1;"></span>
+                    <span class="mono" style="color: {{accent}}; font-size: 11.5px;">{{e.prop}}</span>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- the viewer's own position -->
+        <div class="panel" style="position: relative; padding: 24px 26px; overflow: hidden;">
+          <span style="position: absolute; inset: 0 0 auto 0; height: 2px; background: linear-gradient(90deg, {{accent}}, transparent 72%);"></span>
+
+          <div style="display: flex; align-items: center; gap: 9px;">
+            <span class="blip" style="width: 6px; height: 6px; border-radius: 50%; background: {{accent}};"></span>
+            <span class="mono" style="font-size: 10px; letter-spacing: .17em; color: {{accent}};">YOUR POSITION</span>
+            <span style="flex-grow: 1;"></span>
+            <span class="mono" style="font-size: 10.5px; color: #697577;">0x9F2A…C41D</span>
+          </div>
+
+          <div style="display: flex; gap: 24px; margin-top: 20px;">
+            <div>
+              <div class="mono" style="font-size: 36px; line-height: 1; letter-spacing: -.04em;">5</div>
+              <div class="mono" style="font-size: 10px; letter-spacing: .14em; color: #818F92; margin-top: 9px;">VILLAS OWNED</div>
+            </div>
+            <div style="width: 1px; background: rgba(255,255,255,.10);"></div>
+            <div>
+              <div class="mono" style="font-size: 36px; line-height: 1; letter-spacing: -.04em;">$1,284</div>
+              <div class="mono" style="font-size: 10px; letter-spacing: .14em; color: #818F92; margin-top: 9px;">DIVIDENDS EARNED</div>
+            </div>
+          </div>
+
+          <div style="display: flex; align-items: center; gap: 10px; margin-top: 22px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,.085);">
+            <span class="mono" style="font-size: 11.5px; color: #697577;">$284.19 claimable now</span>
+            <span style="flex-grow: 1;"></span>
+            <button class="btn mono" style="height: 36px; padding: 0 17px; border-radius: 11px; background: {{accent}}; color: #07201F; font-size: 11.5px; font-weight: 600; letter-spacing: .07em;">CLAIM</button>
+          </div>
+        </div>
+
+      </div>
+
+    <!-- TRENDING NOW -->
+    <div style="padding: 30px 26px 24px;">
+      <div style="display: flex; align-items: flex-end; gap: 16px;">
+        <div>
+          <h1 style="margin: 0; font-size: 30px; font-weight: 700; letter-spacing: -.03em;">24H Trending</h1>
+          <div class="mono" style="display: flex; align-items: center; gap: 9px; font-size: 11.5px; color: #818F92; margin-top: 8px; letter-spacing: .07em;">
+            <span class="blip" style="width: 6px; height: 6px; border-radius: 50%; background: {{accent}};"></span>
+            RANKED BY PURCHASES · UPDATED 12s AGO
+          </div>
+        </div>
+      </div>
+
+      <div class="rail-wrap" style="margin-top: 20px;">
+        <div class="rail">
+        <sc-for list="{{trending}}" as="t" hint-placeholder-count="10">
+          <div class="card panel" style="width: 268px; flex-shrink: 0; overflow: hidden;">
+            <div class="scan" style="height: 136px; position: relative; background: {{t.bg}};">
+              <span class="mono" style="position: absolute; top: 10px; left: 10px; display: flex; align-items: center; justify-content: center; min-width: 26px; height: 26px; padding: 0 7px; border-radius: 9px; background: {{t.rankBg}}; color: {{t.rankInk}}; font-size: 12px; font-weight: 600;">{{t.rank}}</span>
+              <span class="mono" style="position: absolute; top: 10px; right: 10px; font-size: 10px; letter-spacing: .1em; padding: 4px 8px; border-radius: 9px; background: rgba(5,9,10,.78); color: #B4C2C4;">{{t.sym}}</span>
+<svg viewBox="0 0 300 180" width="100%" height="100%" preserveAspectRatio="xMidYMax slice" style="position: absolute; inset: 0;">
+                <sc-for list="{{t.art.rects}}" as="sh" hint-placeholder-count="30">
+                  <rect x="{{sh.x}}" y="{{sh.y}}" width="{{sh.w}}" height="{{sh.h}}" fill="{{sh.f}}" rx="{{sh.rx}}"></rect>
+                </sc-for>
+                <sc-for list="{{t.art.paths}}" as="ph" hint-placeholder-count="24">
+                  <path d="{{ph.d}}" fill="{{ph.f}}" stroke="{{ph.s}}" stroke-width="{{ph.sw}}" stroke-linecap="round" stroke-linejoin="round"></path>
+                </sc-for>
+              </svg>
+            </div>
+            <div style="padding: 14px 15px 16px;">
+              <div style="font-size: 14.5px; font-weight: 600; letter-spacing: -.01em;">{{t.name}}</div>
+              <div class="mono" style="font-size: 10.5px; color: #697577; margin-top: 5px; letter-spacing: .07em;">{{t.city}}</div>
+
+              <div style="display: flex; align-items: baseline; gap: 8px; margin-top: 16px;">
+                <span class="mono" style="font-size: 28px; letter-spacing: -.03em;">{{t.buys}}</span>
+                <span class="mono" style="font-size: 12px; color: #818F92;">{{t.period}}</span>
+              </div>
+              <div class="mono" style="display: flex; align-items: center; gap: 7px; font-size: 12px; color: #818F92; margin-top: 9px;">
+                <svg class="eye" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="{{accent}}" stroke-width="1.8" stroke-linejoin="round">
+                  <path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/>
+                  <circle class="eye-pupil" cx="12" cy="12" r="2.6" fill="{{accent}}" stroke="none"/>
+                </svg>
+                <span style="color: #B4C2C4;">{{t.interested}}</span> looking now
+              </div>
+            </div>
+          </div>
+        </sc-for>
+        </div>
+      </div>
+    </div>
+
+    <!-- FILLED SOON -->
+    <div style="padding: 6px 26px 26px;">
+      <div style="display: flex; align-items: flex-end; gap: 14px;">
+        <div>
+          <h2 style="margin: 0; font-size: 22px; font-weight: 700; letter-spacing: -.025em;">Filled soon</h2>
+          <div class="mono" style="font-size: 11px; color: #818F92; margin-top: 7px; letter-spacing: .07em;">CLOSEST TO FULLY FUNDED · LAST TOKENS AT THE OFFER PRICE</div>
+        </div>
+        <div style="flex-grow: 1;"></div>
+        <span class="mono" style="font-size: 11.5px; color: #697577; letter-spacing: .06em;">VIEW ALL</span>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin-top: 18px;">
+        <sc-for list="{{filledSoon}}" as="c" hint-placeholder-count="4">
+          <div class="card panel" style="display: flex; gap: 13px; padding: 13px;">
+            <div class="scan" style="width: 74px; flex-shrink: 0; border-radius: 11px; position: relative; overflow: hidden; background: {{c.bg}};">
+              <svg viewBox="0 0 300 180" width="100%" height="100%" preserveAspectRatio="xMidYMax slice" style="position: absolute; inset: 0;">
+                <sc-for list="{{c.art.rects}}" as="sh" hint-placeholder-count="30">
+                  <rect x="{{sh.x}}" y="{{sh.y}}" width="{{sh.w}}" height="{{sh.h}}" fill="{{sh.f}}" rx="{{sh.rx}}"></rect>
+                </sc-for>
+                <sc-for list="{{c.art.paths}}" as="ph" hint-placeholder-count="24">
+                  <path d="{{ph.d}}" fill="{{ph.f}}" stroke="{{ph.s}}" stroke-width="{{ph.sw}}" stroke-linecap="round" stroke-linejoin="round"></path>
+                </sc-for>
+              </svg>
+            </div>
+            <div style="flex-grow: 1; min-width: 0; display: flex; flex-direction: column;">
+              <div style="font-size: 14px; font-weight: 600; letter-spacing: -.01em;">{{c.name}}</div>
+              <div class="mono" style="font-size: 10px; color: #697577; margin-top: 4px; letter-spacing: .07em;">{{c.city}}</div>
+              <div style="flex-grow: 1;"></div>
+              <div style="display: flex; align-items: baseline; gap: 7px; margin-top: 12px;">
+                <span class="mono" style="font-size: 20px; letter-spacing: -.025em;">{{c.pct}}</span>
+                <span class="mono" style="font-size: 10.5px; color: #818F92;">funded</span>
+              </div>
+              <div style="height: 5px; border-radius: 999px; background: rgba(255,255,255,.09); margin-top: 8px; overflow: hidden;">
+                <div style="height: 100%; width: {{c.pct}}; background: {{c.barInk}};"></div>
+              </div>
+              <div class="mono" style="font-size: 11.5px; margin-top: 10px;">
+                <span style="color: {{c.leftInk}};">{{c.left}}</span>
+                <span style="color: #818F92;"> left</span>
+              </div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+
+    <!-- LEADERBOARD -->
+    <div style="padding: 6px 26px 28px;">
+      <div style="display: flex; align-items: flex-end; gap: 14px;">
+        <div>
+          <h2 style="margin: 0; font-size: 22px; font-weight: 700; letter-spacing: -.025em;">Movers</h2>
+          <div class="mono" style="font-size: 11px; color: #818F92; margin-top: 7px; letter-spacing: .07em;">TOP 8 VILLA TOKENS BY 24H PRICE CHANGE · SECONDARY MARKET</div>
+        </div>
+        <div style="flex-grow: 1;"></div>
+        <span class="mono" style="font-size: 11.5px; color: #697577; letter-spacing: .06em;">VIEW ALL TOKENS</span>
+      </div>
+
+      <div class="panel" style="margin-top: 18px;">
+        <div class="mono" style="display: grid; grid-template-columns: 48px 2.2fr 1fr 1.5fr 1fr 1fr; padding: 13px 20px; border-bottom: 1px solid rgba(255,255,255,.11);">
+          <div style="font-size: 10.5px; letter-spacing: .12em; color: #697577;">#</div>
+          <div style="font-size: 10.5px; letter-spacing: .12em; color: #697577;">TOKEN</div>
+          <div style="font-size: 10.5px; letter-spacing: .12em; color: #697577; text-align: right;">PRICE</div>
+          <div style="font-size: 10.5px; letter-spacing: .12em; color: #697577; text-align: right;">24H CHANGE</div>
+          <div style="font-size: 10.5px; letter-spacing: .12em; color: #697577; text-align: right;">24H VOLUME</div>
+          <div style="font-size: 10.5px; letter-spacing: .12em; color: #697577; text-align: right;">HOLDERS</div>
+        </div>
+
+        <sc-for list="{{leaders}}" as="r" hint-placeholder-count="8">
+          <div class="row" style="display: grid; grid-template-columns: 48px 2.2fr 1fr 1.5fr 1fr 1fr; align-items: center; padding: 13px 20px; border-bottom: 1px solid rgba(255,255,255,.07);">
+            <div class="mono" style="font-size: 12.5px; color: #586264;">{{r.rank}}</div>
+
+            <div style="display: flex; align-items: center; gap: 12px; min-width: 0;">
+              <span class="scan" style="width: 34px; height: 34px; flex-shrink: 0; border-radius: 10px; position: relative; overflow: hidden; background: linear-gradient(170deg, #123034 0%, #0C2124 52%, #060C0D 100%);">
+                <svg viewBox="0 0 300 180" width="100%" height="100%" preserveAspectRatio="xMidYMax slice" style="position: absolute; inset: 0;">
+                  <sc-for list="{{r.art.rects}}" as="sh" hint-placeholder-count="30">
+                    <rect x="{{sh.x}}" y="{{sh.y}}" width="{{sh.w}}" height="{{sh.h}}" fill="{{sh.f}}" rx="{{sh.rx}}"></rect>
+                  </sc-for>
+                </svg>
+              </span>
+              <div style="min-width: 0;">
+                <div style="font-size: 14px; font-weight: 500; letter-spacing: -.005em;">{{r.name}}</div>
+                <div class="mono" style="font-size: 10.5px; color: #697577; margin-top: 3px;">{{r.sym}}</div>
+              </div>
+            </div>
+
+            <div class="mono" style="font-size: 13.5px; text-align: right;">{{r.price}}</div>
+
+            <div style="display: flex; align-items: center; justify-content: flex-end; gap: 12px;">
+              <span style="width: 76px; height: 4px; border-radius: 999px; background: rgba(255,255,255,.07); overflow: hidden;">
+                <span style="display: block; height: 100%; width: {{r.barW}}; border-radius: 999px; background: {{r.barInk}};"></span>
+              </span>
+              <span class="mono" style="font-size: 13.5px; color: {{r.changeInk}}; min-width: 56px; text-align: right;">{{r.change}}</span>
+            </div>
+
+            <div class="mono" style="font-size: 13px; color: #B4C2C4; text-align: right;">{{r.vol}}</div>
+            <div class="mono" style="font-size: 13px; color: #B4C2C4; text-align: right;">{{r.holders}}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+
+    <!-- EARLY BIRD SALE -->
+    <div style="display: flex; align-items: flex-end; gap: 14px; padding: 6px 26px 18px;">
+      <div>
+        <h2 style="margin: 0; font-size: 22px; font-weight: 700; letter-spacing: -.025em;">Early bird sale</h2>
+        <div class="mono" style="font-size: 11px; color: #818F92; margin-top: 7px; letter-spacing: .07em;">FIRST TOKENS AT THE LAUNCH PRICE · BEFORE THE PUBLIC RAISE OPENS</div>
+      </div>
+      <div style="flex-grow: 1;"></div>
+      <span class="mono" style="font-size: 11.5px; color: #697577; letter-spacing: .06em;">VIEW ALL</span>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1.52fr 1fr 1fr; gap: 16px; padding: 0 26px 22px; align-items: start;">
+
+      <!-- featured + quick buy -->
+      <div class="card panel" style="padding: 18px;">
+        <div style="display: flex; gap: 18px;">
+          <div class="scan" style="width: 196px; height: 196px; flex-shrink: 0; border-radius: 11px; background-color: #16161B; position: relative; overflow: hidden;">
+            <div style="position: absolute; inset: 0; background: radial-gradient(120% 80% at 30% 0%, rgba(108,193,198,.35), transparent 62%);"></div>
+<svg viewBox="0 0 300 180" width="100%" height="100%" preserveAspectRatio="xMidYMax slice" style="position: absolute; inset: 0;">
+                <sc-for list="{{featured.art.rects}}" as="sh" hint-placeholder-count="30">
+                  <rect x="{{sh.x}}" y="{{sh.y}}" width="{{sh.w}}" height="{{sh.h}}" fill="{{sh.f}}" rx="{{sh.rx}}"></rect>
+                </sc-for>
+                <sc-for list="{{featured.art.paths}}" as="ph" hint-placeholder-count="24">
+                  <path d="{{ph.d}}" fill="{{ph.f}}" stroke="{{ph.s}}" stroke-width="{{ph.sw}}" stroke-linecap="round" stroke-linejoin="round"></path>
+                </sc-for>
+              </svg>
+          </div>
+          <div style="flex-grow: 1; min-width: 0;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <span class="mono" style="font-size: 10.5px; letter-spacing: .12em; padding: 4px 8px; border-radius: 11px; background: rgba(255,255,255,.07); color: #B4C2C4;">OPEN RAISE</span>
+              <span class="mono" style="font-size: 10.5px; letter-spacing: .12em; padding: 4px 8px; border-radius: 11px; background: rgba(255,255,255,.07); color: #B4C2C4;">9.4% NET YIELD</span>
+            </div>
+            <div style="font-size: 25px; font-weight: 700; margin-top: 12px; letter-spacing: -.02em;">Villa Ombak</div>
+            <div class="mono" style="font-size: 12px; color: #818F92; margin-top: 6px; letter-spacing: .04em;">SPONSOR: <span style="color: #B4C2C4;">OMBAK&nbsp;LIVING</span> &nbsp;·&nbsp; CANGGU, BALI &nbsp;·&nbsp; 4 BED · PRIVATE POOL</div>
+            <div style="display: flex; gap: 28px; margin-top: 18px;">
+              <div>
+                <div class="mono" style="font-size: 10px; letter-spacing: .14em; color: #586264;">TOKEN PRICE</div>
+                <div class="mono" style="font-size: 20px; margin-top: 5px;">$14.20</div>
+              </div>
+              <div>
+                <div class="mono" style="font-size: 10px; letter-spacing: .14em; color: #586264;">RAISED</div>
+                <div class="mono" style="font-size: 20px; margin-top: 5px;">$1.6M <span style="color: #697577; font-size: 13px;">/ 2.2M</span></div>
+              </div>
+            </div>
+            <div style="height: 5px; border-radius: 999px; background: rgba(255,255,255,.11); margin-top: 14px; overflow: hidden;">
+              <div style="height: 100%; width: 73%; background: #6CC1C6;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- quick buy -->
+        <div class="panel" style="margin-top: 18px; padding: 14px; background: rgba(255,255,255,.035);">
+          <div style="display: flex; align-items: center; gap: 12px; height: 42px; padding: 0 14px; border: 1px solid rgba(255,255,255,.11); border-radius: 11px; background: rgba(255,255,255,.05);">
+            <span class="mono" style="font-size: 15px; color: {{amtInk}};">{{amount}}</span>
+            <span style="flex-grow: 1;"></span>
+            <span class="mono" style="font-size: 11.5px; color: #818F92;">USDC</span>
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#91A0A2" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7.5v9M9.4 10h5.2M9.4 14h5.2"/></svg>
+          </div>
+          <div style="display: flex; gap: 8px; margin-top: 12px;">
+            <sc-for list="{{presets}}" as="p" hint-placeholder-count="4">
+              <button class="btn mono" onClick="{{p.pick}}" style="{{p.style}}">{{p.label}}</button>
+            </sc-for>
+            <div style="flex-grow: 1;"></div>
+            <div class="mono" style="align-self: center; font-size: 11.5px; color: #818F92;">≈ <span style="color: #DCE5E6;">{{tokens}}</span> tokens · <span style="color: #DCE5E6;">{{ownership}}</span> of deed</div>
+          </div>
+          <button class="btn" style="width: 100%; height: 46px; margin-top: 12px; border-radius: 11px; background: #DCE5E6; color: #07201F; font-size: 14px; font-weight: 700;">Quick Buy</button>
+          <div class="mono" style="font-size: 10.5px; color: #586264; margin-top: 9px; letter-spacing: .05em;">MIN 1 TOKEN · MAX 4.9% PER WALLET · SETTLES ON BASE IN ~1.4s</div>
+        </div>
+      </div>
+
+      <!-- two side cards -->
+      <sc-for list="{{side}}" as="c" hint-placeholder-count="2">
+        <div class="card panel" style="overflow: hidden;">
+          <div class="scan" style="height: 186px; position: relative; background: {{c.bg}};">
+            <span class="mono" style="position: absolute; top: 12px; right: 12px; font-size: 10.5px; letter-spacing: .1em; padding: 4px 8px; border-radius: 11px; background: rgba(10,10,12,.82); color: {{c.tagColor}};">{{c.tag}}</span>
+<svg viewBox="0 0 300 180" width="100%" height="100%" preserveAspectRatio="xMidYMax slice" style="position: absolute; inset: 0;">
+                <sc-for list="{{c.art.rects}}" as="sh" hint-placeholder-count="30">
+                  <rect x="{{sh.x}}" y="{{sh.y}}" width="{{sh.w}}" height="{{sh.h}}" fill="{{sh.f}}" rx="{{sh.rx}}"></rect>
+                </sc-for>
+                <sc-for list="{{c.art.paths}}" as="ph" hint-placeholder-count="24">
+                  <path d="{{ph.d}}" fill="{{ph.f}}" stroke="{{ph.s}}" stroke-width="{{ph.sw}}" stroke-linecap="round" stroke-linejoin="round"></path>
+                </sc-for>
+              </svg>
+          </div>
+          <div style="padding: 15px 16px 17px; border-top: 1px solid rgba(255,255,255,.11);">
+            <div class="mono" style="font-size: 10.5px; letter-spacing: .12em; color: #586264;">SPONSOR: <span style="color: #B4C2C4;">{{c.sponsor}}</span></div>
+            <div style="font-size: 17px; font-weight: 700; margin-top: 8px; letter-spacing: -.01em;">{{c.name}} <span class="mono" style="font-size: 12px; font-weight: 400; color: #697577;">({{c.sym}})</span></div>
+            <div style="font-size: 12.5px; color: #818F92; margin-top: 6px; line-height: 1.5;">{{c.blurb}}</div>
+            <div style="display: flex; justify-content: space-between; align-items: baseline; margin-top: 14px;">
+              <span class="mono" style="font-size: 10.5px; letter-spacing: .12em; color: #586264;">RAISED</span>
+              <span class="mono" style="font-size: 14px;">{{c.raised}}</span>
+            </div>
+            <div style="height: 5px; border-radius: 999px; background: rgba(255,255,255,.11); margin-top: 8px; overflow: hidden;">
+              <div style="height: 100%; width: {{c.pct}}; background: #6CC1C6;"></div>
+            </div>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+
+    <!-- WHY US -->
+    <div style="padding: 10px 26px 34px;">
+      <div class="panel" style="position: relative; overflow: hidden; display: flex; align-items: stretch;">
+
+        <div style="flex-grow: 1; min-width: 0; padding: 38px 40px 36px; max-width: 760px;">
+          <div class="mono" style="font-size: 10.5px; letter-spacing: .18em; color: {{accent}};">WHY US?</div>
+          <h2 style="margin: 16px 0 0; font-size: 40px; line-height: 1.1; letter-spacing: -.035em; font-weight: 700; text-wrap: pretty;">
+            Become a real estate owner<br>without paying the full cost.
+          </h2>
+          <p style="margin: 16px 0 0; font-size: 14.5px; line-height: 1.65; color: #91A0A2; max-width: 520px;">
+            A Bali villa runs into the hundreds of thousands. A token of one starts at $8.60 — same title, same rent, split into shares you can buy and sell whenever you like.
+          </p>
+
+          <div style="display: flex; gap: 30px; margin-top: 28px;">
+            <sc-for list="{{whyUs}}" as="w" hint-placeholder-count="3">
+              <div style="display: flex; gap: 12px; max-width: 210px;">
+                <span style="display: flex; width: 34px; height: 34px; flex-shrink: 0; align-items: center; justify-content: center; border-radius: 10px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.10);">
+                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#91A0A2" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="{{w.icon}}"/>
+                  </svg>
+                </span>
+                <div>
+                  <div style="font-size: 13.5px; font-weight: 600;">{{w.title}}</div>
+                  <div style="font-size: 12px; line-height: 1.5; color: #697577; margin-top: 5px;">{{w.sub}}</div>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+
+          <div style="display: flex; align-items: center; gap: 14px; margin-top: 30px;">
+            <button class="btn mono" style="height: 48px; padding: 0 24px; border-radius: 12px; background: {{accent}}; color: #07201F; font-size: 13px; font-weight: 600; letter-spacing: .05em;">START FROM $8.60</button>
+            <span class="mono" style="font-size: 11.5px; color: #697577;">no minimum lock-in · settles on Base</span>
+          </div>
+        </div>
+
+        <div class="scan" style="width: 42%; flex-shrink: 0; position: relative; background: linear-gradient(170deg, #123034 0%, #0C2124 52%, #060C0D 100%);">
+          <svg viewBox="0 0 300 180" width="100%" height="100%" preserveAspectRatio="xMidYMax slice" style="position: absolute; inset: 0;">
+            <sc-for list="{{whyArt.rects}}" as="sh" hint-placeholder-count="30">
+              <rect x="{{sh.x}}" y="{{sh.y}}" width="{{sh.w}}" height="{{sh.h}}" fill="{{sh.f}}" rx="{{sh.rx}}"></rect>
+            </sc-for>
+            <sc-for list="{{whyArt.paths}}" as="ph" hint-placeholder-count="24">
+              <path d="{{ph.d}}" fill="{{ph.f}}" stroke="{{ph.s}}" stroke-width="{{ph.sw}}" stroke-linecap="round" stroke-linejoin="round"></path>
+            </sc-for>
+          </svg>
+          <div style="position: absolute; inset: 0; background: linear-gradient(90deg, rgba(5,9,10,.92), rgba(5,9,10,.25) 42%, transparent);"></div>
+        </div>
+      </div>
+    </div>
+
+      </div>
+    </sc-if>
+
+    <sc-if value="{{isMarket}}" hint-placeholder-val="{{false}}">
+      <div>
+    <!-- MARKETPLACE: ALL LISTINGS -->
+    <div style="display: flex; align-items: flex-end; gap: 16px; padding: 30px 26px 6px;">
+      <div>
+        <h1 style="margin: 0; font-size: 30px; font-weight: 700; letter-spacing: -.03em;">Marketplace</h1>
+        <div class="mono" style="font-size: 11.5px; color: #818F92; margin-top: 8px; letter-spacing: .07em;">EVERY OPEN LISTING · SETTLES ON BASE IN ~1.4s</div>
+      </div>
+    </div>
+
+    <div style="display: flex; gap: 9px; padding: 18px 26px 4px;">
+      <sc-for list="{{tabs}}" as="t" hint-placeholder-count="5">
+        <button class="btn mono" onClick="{{t.pick}}" style="{{t.style}}">{{t.label}}</button>
+      </sc-for>
+      <div style="flex-grow: 1;"></div>
+      <div class="mono" style="align-self: center; font-size: 11.5px; color: #697577; letter-spacing: .06em;">{{count}} LISTED</div>
+    </div>
+
+    <!-- SEARCH / FILTER -->
+    <div style="display: flex; gap: 12px; padding: 0 26px 20px;">
+      <div class="panel" style="flex-grow: 1; display: flex; align-items: center; gap: 10px; height: 46px; padding: 0 15px;">
+        <span style="color: #5B6769; font-size: 13.5px;">Search property, ticker, city or sponsor…</span>
+        <span style="flex-grow: 1;"></span>
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#818F92" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.6-3.6"/></svg>
+      </div>
+      <button class="btn panel mono" onClick="{{cycleSort}}" style="display: flex; align-items: center; gap: 10px; height: 46px; padding: 0 16px; color: #DCE5E6; font-size: 12.5px;">
+        Sort · {{sortLabel}}
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#818F92" stroke-width="2.2" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg>
+      </button>
+      <button class="btn panel" onClick="{{toggleLive}}" style="display: flex; align-items: center; gap: 10px; height: 46px; padding: 0 16px; color: #DCE5E6; font-size: 13px;">
+        <span style="width: 17px; height: 17px; border-radius: 11px; display: flex; align-items: center; justify-content: center; border: 1.6px solid {{liveEdge}}; background: {{liveFill}};">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="{{liveTick}}" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7"/></svg>
+        </span>
+        Real-time prices
+      </button>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; padding: 0 26px 24px;">
+      <sc-for list="{{listings}}" as="c" hint-placeholder-count="12">
+        <div class="card panel" style="overflow: hidden;">
+          <div class="scan" style="height: 176px; position: relative; background: {{c.bg}};">
+            <svg viewBox="0 0 300 180" width="100%" height="100%" preserveAspectRatio="xMidYMax slice" style="position: absolute; inset: 0;">
+              <sc-for list="{{c.art.rects}}" as="sh" hint-placeholder-count="30">
+                <rect x="{{sh.x}}" y="{{sh.y}}" width="{{sh.w}}" height="{{sh.h}}" fill="{{sh.f}}" rx="{{sh.rx}}"></rect>
+              </sc-for>
+              <sc-for list="{{c.art.paths}}" as="ph" hint-placeholder-count="24">
+                <path d="{{ph.d}}" fill="{{ph.f}}" stroke="{{ph.s}}" stroke-width="{{ph.sw}}" stroke-linecap="round" stroke-linejoin="round"></path>
+              </sc-for>
+            </svg>
+            <span class="mono" style="position: absolute; top: 12px; left: 12px; font-size: 10px; letter-spacing: .1em; padding: 5px 9px; border-radius: 9px; background: rgba(5,9,10,.78); color: #B4C2C4;">{{c.sym}}</span>
+            <span class="mono" style="position: absolute; top: 12px; right: 12px; font-size: 10px; letter-spacing: .1em; padding: 5px 9px; border-radius: 9px; background: rgba(5,9,10,.78); color: #B4C2C4;">{{c.type}}</span>
+          </div>
+          <div style="padding: 16px 17px 18px; border-top: 1px solid rgba(255,255,255,.085);">
+            <div style="font-size: 16px; font-weight: 600; letter-spacing: -.01em;">{{c.name}}</div>
+            <div class="mono" style="font-size: 10.5px; color: #697577; margin-top: 6px; letter-spacing: .07em;">{{c.city}}</div>
+            <div style="display: flex; gap: 26px; margin-top: 16px;">
+              <div>
+                <div class="mono" style="font-size: 10px; letter-spacing: .13em; color: #586264;">PRICE / TOKEN</div>
+                <div class="mono" style="font-size: 18px; margin-top: 5px;">{{c.price}}</div>
+              </div>
+              <div>
+                <div class="mono" style="font-size: 10px; letter-spacing: .13em; color: #586264;">NET YIELD</div>
+                <div class="mono" style="font-size: 18px; margin-top: 5px;">{{c.apy}}</div>
+              </div>
+            </div>
+            <div style="margin-top: 16px;">
+              <div style="display: flex; justify-content: space-between;" class="mono">
+                <span style="font-size: 11px; color: #818F92;">{{c.pct}} funded</span>
+                <span style="font-size: 11px; color: #697577;">{{c.left}} left</span>
+              </div>
+              <div style="height: 5px; border-radius: 999px; background: rgba(255,255,255,.09); margin-top: 8px; overflow: hidden;">
+                <div style="height: 100%; width: {{c.pct}}; background: {{accent}};"></div>
+              </div>
+            </div>
+            <div style="display: flex; gap: 10px; margin-top: 18px;">
+              <button class="btn mono" style="flex-grow: 1; height: 44px; border-radius: 11px; background: {{accent}}; color: #07201F; font-size: 12.5px; font-weight: 600; letter-spacing: .05em;">BUY TOKENS</button>
+              <button class="btn mono" style="height: 44px; padding: 0 16px; border-radius: 11px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.11); color: #DCE5E6; font-size: 12.5px;">Trade</button>
+            </div>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+
+    <sc-if cond="{{hasMore}}">
+      <div style="display: flex; justify-content: center; padding: 0 26px 28px;">
+        <button class="btn panel mono" onClick="{{toggleAll}}" style="height: 46px; padding: 0 26px; color: #DCE5E6; font-size: 12.5px; letter-spacing: .05em;">{{moreLabel}}</button>
+      </div>
+    </sc-if>
+
+    <!-- TABLE -->
+    <div class="panel" style="margin: 0 26px 30px;">
+      <div style="display: grid; grid-template-columns: 2.3fr 1fr 1.1fr 1fr 1.3fr .7fr; padding: 14px 20px; border-bottom: 1px solid rgba(255,255,255,.11);" class="mono">
+        <sc-for list="{{cols}}" as="c" hint-placeholder-count="6">
+          <div style="font-size: 11px; letter-spacing: .12em; color: #697577;">{{c}}</div>
+        </sc-for>
+      </div>
+      <sc-for list="{{rows}}" as="r" hint-placeholder-count="10">
+        <div class="row" style="display: grid; grid-template-columns: 2.3fr 1fr 1.1fr 1fr 1.3fr .7fr; align-items: center; padding: 13px 20px; border-bottom: 1px solid rgba(255,255,255,.07);">
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <span style="width: 30px; height: 30px; border-radius: 11px; background: {{r.swatch}};"></span>
+            <span style="font-size: 14px; font-weight: 500;">{{r.name}}</span>
+            <span class="mono" style="font-size: 11.5px; color: #697577;">({{r.sym}})</span>
+          </div>
+          <div class="mono" style="font-size: 12.5px; color: #91A0A2;">{{r.type}}</div>
+          <div class="mono" style="font-size: 12.5px; color: #91A0A2;">{{r.sponsor}}</div>
+          <div class="mono" style="font-size: 13px;">{{r.price}}</div>
+          <div class="mono" style="font-size: 12.5px; color: {{r.stateColor}}; letter-spacing: .06em;">{{r.state}}</div>
+          <div style="display: flex; gap: 12px; justify-content: flex-end;">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#697577" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3.5 12h17M12 3.2c4.4 5 4.4 12.6 0 17.6-4.4-5-4.4-12.6 0-17.6z"/></svg>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#697577" stroke-width="1.8" stroke-linejoin="round"><path d="M4 11.5 21 4l-6 16-4.2-6.2z"/></svg>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+      </div>
+    </sc-if>
+</div>
+</x-dc>
+
+<script data-dc-script data-props='{
+  "accent": {"editor": "color", "default": "#6CC1C6", "options": ["#6CC1C6", "#6F9FBC", "#9ACBCC", "#529DA3"], "section": "Theme"},
+  "$preview": {"width": 1440, "height": 2460}
+}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { nav: 'explore', amount: 500, sort: 0, live: true, tab: 'all', showAll: false };
+  }
+
+  // Seeded Bali-villa elevation: open pavilions under steep alang-alang roofs,
+  // timber posts, a pool in front, palms. Returns flat shape data for one card.
+  villa(seed, kind, accent) {
+    let t = (seed >>> 0) || 7;
+    const rnd = () => {
+      t = (t + 0x6D2B79F5) >>> 0;
+      let x = Math.imul(t ^ (t >>> 15), 1 | t);
+      x = (x + Math.imul(x ^ (x >>> 7), 61 | x)) ^ x;
+      return ((x ^ (x >>> 14)) >>> 0) / 4294967296;
+    };
+    const ri = (a, b) => Math.floor(a + rnd() * (b - a + 0.999));
+    const rf = (a, b) => a + rnd() * (b - a);
+    const f1 = (v) => +v.toFixed(1);
+
+    const W = 300, H = 180, ground = H - 30;
+    const rects = [], paths = [];
+    const R = (x, y, w, h, f, rx) => rects.push({ x: f1(x), y: f1(y), w: f1(Math.max(w, .4)), h: f1(Math.max(h, .4)), f: f, rx: rx || 0 });
+    const P = (d, f, s, sw) => paths.push({ d: d, f: f || 'none', s: s || 'none', sw: sw || 0 });
+
+    const spec = {
+      villa:  { n: [2, 3], bw: [62, 88], bh: [26, 34], roof: [26, 34], pool: 1 },
+      resort: { n: [3, 4], bw: [46, 66], bh: [22, 30], roof: [22, 28], pool: 1 },
+      estate: { n: [2, 3], bw: [70, 96], bh: [28, 38], roof: [30, 38], pool: 1 },
+      land:   { n: [1, 1], bw: [54, 70], bh: [18, 24], roof: [20, 26], pool: 0 }
+    }[kind] || { n: [2, 3], bw: [62, 88], bh: [26, 34], roof: [26, 34], pool: 1 };
+
+    // terraced ground: rice-paddy steps behind the pavilions
+    for (let i = 0; i < 3; i++) R(0, ground - 4 - i * 7, W, 1, 'rgba(255,255,255,' + (0.05 + i * 0.015) + ')');
+
+    const n = ri(spec.n[0], spec.n[1]);
+    const ws = [];
+    let total = 0;
+    for (let i = 0; i < n; i++) { const w = rf(spec.bw[0], spec.bw[1]); ws.push(w); total += w; }
+    const gap = 9;
+    let x = (W - total - (n - 1) * gap) / 2;
+
+    for (let i = 0; i < n; i++) {
+      const bw = ws[i];
+      const bh = rf(spec.bh[0], spec.bh[1]);
+      const rh = rf(spec.roof[0], spec.roof[1]);
+      const lift = i === 1 ? rf(4, 10) : rf(0, 4);          // stagger the middle pavilion
+      const by = ground - lift - bh;
+      const eave = rf(7, 11);
+
+      R(x - 3, ground - lift - 3, bw + 6, 3.4, 'rgba(255,255,255,.16)', .6);          // stone plinth
+      R(x, by, bw, bh, 'rgba(210,236,238,.10)', .6);                                   // open interior
+      R(x + 2, by + bh * .34, bw - 4, bh * .58, 'rgba(226,244,245,.30)', .6);          // lit room behind posts
+
+      const posts = ri(3, 5);
+      for (let p = 0; p < posts; p++) R(x + 2 + ((bw - 6) / (posts - 1)) * p, by, 2.1, bh, 'rgba(255,255,255,.30)');
+
+      // steep alang-alang roof with deep eaves
+      const apex = by - rh, lx = x - eave, rx2 = x + bw + eave;
+      P('M' + f1(lx) + ' ' + f1(by + 1) + ' L' + f1(x + bw / 2) + ' ' + f1(apex) + ' L' + f1(rx2) + ' ' + f1(by + 1) + ' Z', 'rgba(255,255,255,.20)');
+      P('M' + f1(lx) + ' ' + f1(by + 1) + ' L' + f1(x + bw / 2) + ' ' + f1(apex) + ' L' + f1(x + bw / 2) + ' ' + f1(by + 1) + ' Z', 'rgba(255,255,255,.10)');
+      P('M' + f1(x + bw / 2) + ' ' + f1(apex) + ' L' + f1(x + bw / 2) + ' ' + f1(by + 1), 'none', 'rgba(255,255,255,.34)', 1);
+      for (let s = 1; s <= 3; s++) {                                                    // thatch courses
+        const yy = by + 1 - (rh / 4) * s, half = ((rx2 - lx) / 2) * (1 - s / 4.2);
+        P('M' + f1(x + bw / 2 - half) + ' ' + f1(yy) + ' L' + f1(x + bw / 2 + half) + ' ' + f1(yy), 'none', 'rgba(255,255,255,.13)', 1);
+      }
+      if (rnd() > .45) R(x + bw * .3, by + bh * .2, bw * .18, 2, accent, .6);           // a lit lantern
+      x += bw + gap;
+    }
+
+    // pool + loungers in the foreground
+    if (spec.pool) {
+      const pw = rf(W * .52, W * .72), px = (W - pw) / 2, py = ground + 6, ph = 15;
+      R(px, py, pw, ph, 'rgba(108,193,198,.30)', 2.4);
+      R(px, py, pw, 1.4, 'rgba(226,244,245,.42)', 1);
+      for (let i = 0; i < 3; i++) R(px + rf(6, pw * .6), py + 4 + i * 4, rf(10, 26), .9, 'rgba(226,244,245,.26)', .5);
+      R(px - 16, py + 2, 12, 2.4, 'rgba(255,255,255,.22)', .8);
+      R(px + pw + 4, py + 2, 12, 2.4, 'rgba(255,255,255,.22)', .8);
+    } else {
+      for (let i = 0; i < 5; i++) R(30 + i * 50, ground + 8 + (i % 2) * 5, 34, .9, 'rgba(226,244,245,.20)', .5);
+    }
+
+    // palms
+    const palms = ri(2, 3);
+    for (let i = 0; i < palms; i++) {
+      const pxx = i === 0 ? rf(10, 34) : rf(W - 48, W - 12);
+      const ph2 = rf(46, 74), lean = rf(-5, 5), topY = ground - ph2;
+      P('M' + f1(pxx) + ' ' + f1(ground) + ' Q' + f1(pxx + lean) + ' ' + f1(ground - ph2 * .55) + ' ' + f1(pxx + lean * 2) + ' ' + f1(topY), 'none', 'rgba(255,255,255,.34)', 1.6);
+      const tipX = pxx + lean * 2;
+      for (let fr = 0; fr < 5; fr++) {
+        const ang = -0.5 + fr * 0.5, len = rf(12, 19);
+        P('M' + f1(tipX) + ' ' + f1(topY) + ' Q' + f1(tipX + Math.cos(ang) * len * .6) + ' ' + f1(topY - 6) + ' ' + f1(tipX + Math.cos(ang) * len) + ' ' + f1(topY + Math.sin(Math.abs(ang)) * 7 + 2), 'none', 'rgba(255,255,255,.30)', 1.4);
+      }
+    }
+
+    R(0, ground, W, 1.4, 'rgba(255,255,255,.30)');
+    return { rects: rects, paths: paths };
+  }
+
+  renderVals() {
+    const accent = this.props.accent ?? '#6CC1C6';
+    const amount = this.state.amount;
+
+    const nav = [
+      { id: 'explore', label: 'Explore', icon: 'M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM15.5 8.5l-2 5-5 2 2-5z' },
+      { id: 'market', label: 'Marketplace', icon: 'M3 9l1.6-4.5h14.8L21 9M3 9h18v11H3zM3 9a2.6 2.6 0 0 0 5 0 2.6 2.6 0 0 0 5 0 2.6 2.6 0 0 0 5 0M9.5 20v-6h5v6' },
+      { id: 'trade', label: 'Trade', icon: 'M4 8h13M14 5l3 3-3 3M20 16H7M10 13l-3 3 3 3' },
+      { id: 'insights', label: 'Insights', icon: 'M4 20h16M7 20v-7M12 20V6M17 20v-10' },
+      { id: 'earn', label: 'Earn', icon: 'M12 8.5c-4.4 0-8-1.2-8-2.8S7.6 3 12 3s8 1.2 8 2.7-3.6 2.8-8 2.8zM4 5.7v12.6C4 19.8 7.6 21 12 21s8-1.2 8-2.7V5.7M4 12c0 1.5 3.6 2.7 8 2.7s8-1.2 8-2.7' },
+      { id: 'portfolio', label: 'Portfolio', icon: 'M4 4h7v6H4zM13 4h7v10h-7zM4 12h7v8H4zM13 16h7v4h-7z' },
+      { id: 'list', label: 'List a property', icon: 'M4 20V9l7-5 7 5v4M8 20v-6h5v6M17 16v6M14 19h6' }
+    ].map((n) => {
+      const on = n.id === this.state.nav;
+      const menus = {
+        market: [
+          { label: 'All Properties', sub: 'EVERY OPEN LISTING', icon: 'M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z' },
+          { label: 'Property Managers', sub: 'OPERATORS AND SPONSORS', icon: 'M9 11a3.4 3.4 0 1 0 0-6.8A3.4 3.4 0 0 0 9 11zM2.5 20c1.2-3 3.7-4.5 6.5-4.5s5.3 1.5 6.5 4.5M16.4 5.3a3.4 3.4 0 0 1 0 6.4M18 15.9c2 .7 3.3 2.1 4 4.1' }
+        ]
+      };
+      return {
+        ...n,
+        hasMenu: !!menus[n.id],
+        menu: menus[n.id] || [],
+        pick: () => this.setState({ nav: n.id }),
+        ink: on ? accent : '#697577',
+        style: 'display: flex; align-items: center; gap: 12px; width: 100%; text-align: left;'
+          + ' padding: 11px 10px; border-radius: 11px; font-size: 13.5px; font-family: inherit;'
+          + (on
+            ? ' background: rgba(255,255,255,.075); border: 1px solid rgba(255,255,255,.15); color: #DCE5E6; font-weight: 500;'
+            : ' background: transparent; border: 1px solid transparent; color: #91A0A2;')
+      };
+    });
+
+    // ---- CATALOG -------------------------------------------------------
+    // Real Bali micro-locations; villa, sponsor and wallet names are invented.
+    // buys/watchers drive 24H Trending, chg/vol/holders drive Movers.
+    const catalog = [
+      { sym: 'OMBAK', name: 'Villa Ombak', city: 'CANGGU · BATU BOLONG', kind: 'villa', type: 'VILLA',
+        sponsor: 'Ombak Living', price: '$14.20', apy: '9.4%', pct: '73%', left: '41,850 tokens',
+        buys: 412, watchers: 1840, chg: 5.6, vol: '$412k', holders: '1,482' },
+      { sym: 'BERAWA', name: 'Berawa Pavilions', city: 'CANGGU · BERAWA', kind: 'villa', type: 'VILLA',
+        sponsor: 'Ombak Living', price: '$16.80', apy: '8.7%', pct: '66%', left: '47,600 tokens',
+        buys: 337, watchers: 1512, chg: 4.1, vol: '$298k', holders: '1,204' },
+      { sym: 'BABAKAN', name: 'Babakan Rice House', city: 'CANGGU · BABAKAN', kind: 'villa', type: 'VILLA',
+        sponsor: 'Bumi Group', price: '$11.40', apy: '9.1%', pct: '52%', left: '73,200 tokens',
+        buys: 248, watchers: 1035, chg: 2.4, vol: '$164k', holders: '868' },
+      { sym: 'PERER', name: 'Pererenan Dua', city: 'PERERENAN · MUNGGU', kind: 'villa', type: 'VILLA',
+        sponsor: 'Bumi Group', price: '$18.60', apy: '8.3%', pct: '81%', left: '24,300 tokens',
+        buys: 366, watchers: 1688, chg: 6.9, vol: '$355k', holders: '1,311' },
+      { sym: 'SESEH', name: 'Seseh Black Sand', city: 'SESEH · CEMAGI', kind: 'villa', type: 'VILLA',
+        sponsor: 'Bumi Group', price: '$13.10', apy: '9.8%', pct: '44%', left: '96,800 tokens',
+        buys: 219, watchers: 942, chg: 3.7, vol: '$142k', holders: '702' },
+      { sym: 'KEDUNGU', name: 'Kedungu Point', city: 'KEDUNGU · TABANAN', kind: 'resort', type: 'RESORT',
+        sponsor: 'Sawah Partners', price: '$9.80', apy: '10.2%', pct: '29%', left: '148,400 tokens',
+        buys: 174, watchers: 806, chg: -1.8, vol: '$74k', holders: '496' },
+      { sym: 'NYANYI', name: 'Nyanyi Shorehouse', city: 'NYANYI · TABANAN', kind: 'estate', type: 'ESTATE',
+        sponsor: 'Sawah Partners', price: '$24.40', apy: '7.6%', pct: '37%', left: '118,900 tokens',
+        buys: 141, watchers: 688, chg: -0.6, vol: '$96k', holders: '584' },
+      { sym: 'PETIT', name: 'Banyu Pool Suites', city: 'SEMINYAK · PETITENGET', kind: 'resort', type: 'RESORT',
+        sponsor: 'Ombak Living', price: '$19.75', apy: '10.6%', pct: '94%', left: '8,140 tokens',
+        buys: 196, watchers: 1465, chg: 8.1, vol: '$523k', holders: '1,317' },
+      { sym: 'UMALAS', name: 'Umalas Garden Villas', city: 'UMALAS · KEROBOKAN', kind: 'villa', type: 'VILLA',
+        sponsor: 'Ombak Living', price: '$15.50', apy: '8.9%', pct: '69%', left: '38,900 tokens',
+        buys: 264, watchers: 1178, chg: 1.9, vol: '$211k', holders: '974' },
+      { sym: 'BINGIN', name: 'Karang Cliff Villas', city: 'ULUWATU · BINGIN', kind: 'villa', type: 'VILLA',
+        sponsor: 'Karang Capital', price: '$26.80', apy: '8.1%', pct: '61%', left: '54,600 tokens',
+        buys: 388, watchers: 2210, chg: 12.4, vol: '$688k', holders: '2,104' },
+      { sym: 'PECATU', name: 'Pecatu Ridge Estate', city: 'ULUWATU · PECATU', kind: 'estate', type: 'ESTATE',
+        sponsor: 'Karang Capital', price: '$33.20', apy: '7.0%', pct: '25%', left: '164,200 tokens',
+        buys: 118, watchers: 734, chg: -2.4, vol: '$88k', holders: '449' },
+      { sym: 'BALANG', name: 'Balangan Surf Lodge', city: 'ULUWATU · BALANGAN', kind: 'resort', type: 'RESORT',
+        sponsor: 'Karang Capital', price: '$10.60', apy: '10.9%', pct: '88%', left: '15,700 tokens',
+        buys: 302, watchers: 1596, chg: 9.7, vol: '$441k', holders: '1,388' },
+      { sym: 'BUKIT', name: 'Bukit Teduh Villas', city: 'JIMBARAN · BUKIT', kind: 'villa', type: 'VILLA',
+        sponsor: 'Karang Capital', price: '$17.35', apy: '8.4%', pct: '55%', left: '62,300 tokens',
+        buys: 311, watchers: 1580, chg: 3.2, vol: '$274k', holders: '1,046' },
+      { sym: 'SINDHU', name: 'Sanur Beachwalk Suites', city: 'SANUR · SINDHU', kind: 'resort', type: 'RESORT',
+        sponsor: 'Bumi Group', price: '$12.90', apy: '8.6%', pct: '77%', left: '29,400 tokens',
+        buys: 228, watchers: 1094, chg: 2.8, vol: '$187k', holders: '903' },
+      { sym: 'SAYAN', name: 'Sayan Valley House', city: 'UBUD · SAYAN', kind: 'villa', type: 'VILLA',
+        sponsor: 'Uma Sari Co.', price: '$29.40', apy: '7.4%', pct: '58%', left: '58,100 tokens',
+        buys: 186, watchers: 1022, chg: 1.1, vol: '$158k', holders: '781' },
+      { sym: 'TEGAL', name: 'Uma Sari Estate', city: 'UBUD · TEGALLALANG', kind: 'estate', type: 'ESTATE',
+        sponsor: 'Uma Sari Co.', price: '$31.40', apy: '7.2%', pct: '48%', left: '96,200 tokens',
+        buys: 274, watchers: 1120, chg: -2.1, vol: '$196k', holders: '944' },
+      { sym: 'PENEST', name: 'Penestanan Lofts', city: 'UBUD · PENESTANAN', kind: 'villa', type: 'VILLA',
+        sponsor: 'Uma Sari Co.', price: '$10.90', apy: '8.2%', pct: '91%', left: '11,600 tokens',
+        buys: 259, watchers: 1247, chg: 6.2, vol: '$233k', holders: '1,092' },
+      { sym: 'KELIKI', name: 'Keliki Ridge Parcel', city: 'UBUD · KELIKI', kind: 'land', type: 'LAND',
+        sponsor: 'Sawah Partners', price: '$8.60', apy: '—', pct: '22%', left: '182,900 tokens',
+        buys: 143, watchers: 690, chg: -4.6, vol: '$41k', holders: '288' },
+      { sym: 'SIDEMEN', name: 'Sidemen Terrace Lodge', city: 'SIDEMEN · KARANGASEM', kind: 'resort', type: 'RESORT',
+        sponsor: 'Uma Sari Co.', price: '$9.40', apy: '9.6%', pct: '34%', left: '132,600 tokens',
+        buys: 157, watchers: 764, chg: 0.9, vol: '$63k', holders: '421' },
+      { sym: 'AMED', name: 'Amed Dive House', city: 'AMED · BUNUTAN', kind: 'villa', type: 'VILLA',
+        sponsor: 'Bumi Group', price: '$8.90', apy: '9.2%', pct: '63%', left: '51,800 tokens',
+        buys: 164, watchers: 712, chg: 4.8, vol: '$79k', holders: '538' },
+      { sym: 'MUNDUK', name: 'Munduk Ridge Lodge', city: 'MUNDUK · NORTH BALI', kind: 'resort', type: 'RESORT',
+        sponsor: 'Sawah Partners', price: '$12.10', apy: '9.9%', pct: '38%', left: '118,700 tokens',
+        buys: 168, watchers: 820, chg: -0.8, vol: '$132k', holders: '735' },
+      { sym: 'LEMBO', name: 'Lembongan Cliff Suites', city: 'NUSA LEMBONGAN · MUSHROOM BAY', kind: 'resort', type: 'RESORT',
+        sponsor: 'Karang Capital', price: '$14.75', apy: '10.4%', pct: '71%', left: '36,200 tokens',
+        buys: 241, watchers: 1358, chg: 7.3, vol: '$317k', holders: '1,166' },
+      { sym: 'TANAH', name: 'Tanah Lembut', city: 'PERERENAN · RICE FIELDS', kind: 'estate', type: 'ESTATE',
+        sponsor: 'Bumi Group', price: '$22.90', apy: '8.8%', pct: '73%', left: '30,400 tokens',
+        buys: 233, watchers: 1290, chg: 1.4, vol: '$88k', holders: '612' }
+    ];
+
+    const trending = catalog
+      .slice()
+      .sort((x, y) => y.buys - x.buys)
+      .slice(0, 10)
+      .map((t, i) => ({
+        ...t,
+        count: t.buys,
+        rank: '#' + (i + 1),
+        rankBg: i === 0 ? accent : 'rgba(5,9,10,.78)',
+        rankInk: i === 0 ? '#07201F' : '#B4C2C4',
+        buys: '+' + t.buys.toLocaleString('en-US'),
+        period: 'buyers',
+        interested: t.watchers.toLocaleString('en-US'),
+        bg: 'linear-gradient(170deg, #123034 0%, #0C2124 52%, #060C0D 100%)',
+        art: this.villa(t.sym.length * 977 + t.buys, t.kind, accent)
+      }));
+    const trendingRail = trending.concat(trending);
+
+    const featured = { art: this.villa(20261, 'villa', accent), bg: 'linear-gradient(170deg, #123034 0%, #0C2124 52%, #060C0D 100%)' };
+
+    const events = [
+      { who: '0x9F2A…C41D', qty: '812', prop: 'Villa Ombak', ago: '2s ago' },
+      { who: 'hbhDct.eth', qty: '1,450', prop: 'Karang Cliff Villas', ago: '9s ago' },
+      { who: '0x41B7…9E02', qty: '96', prop: 'Pererenan Dua', ago: '14s ago' },
+      { who: 'vw3roy.eth', qty: '3,200', prop: 'Balangan Surf Lodge', ago: '21s ago' },
+      { who: '0xD108…77A4', qty: '240', prop: 'Penestanan Lofts', ago: '33s ago' },
+      { who: 'casaverde.eth', qty: '5,000', prop: 'Lembongan Cliff Suites', ago: '41s ago' },
+      { who: '0x6C55…1B8F', qty: '118', prop: 'Seseh Black Sand', ago: '55s ago' },
+      { who: 'bukitcap.eth', qty: '640', prop: 'Sanur Beachwalk Suites', ago: '1m ago' },
+      { who: '0x3E71…A0C9', qty: '2,100', prop: 'Berawa Pavilions', ago: '1m ago' },
+      { who: 'atlas-ib.eth', qty: '2,640', prop: 'Banyu Pool Suites', ago: '2m ago' },
+      { who: '0xB44D…2F16', qty: '175', prop: 'Amed Dive House', ago: '2m ago' },
+      { who: 'sawahdao.eth', qty: '4,800', prop: 'Keliki Ridge Parcel', ago: '3m ago' }
+    ];
+    const feed = events.concat(events);
+
+    // the headline figures step once per feed row, then wrap with it
+    const invest = ['$86.21M', '$86.23M', '$86.24M', '$86.26M', '$86.27M', '$86.29M', '$86.31M', '$86.32M', '$86.21M'];
+    const investors = ['34,939', '34,940', '34,941', '34,942', '34,943', '34,944', '34,945', '34,946', '34,939'];
+
+    const tab = this.state.tab;
+    const tabs = [
+      { id: 'all', label: 'All' }, { id: 'villa', label: 'Villas' },
+      { id: 'resort', label: 'Resorts' }, { id: 'estate', label: 'Estates' },
+      { id: 'land', label: 'Land' }
+    ].map((t) => ({
+      ...t,
+      pick: () => this.setState({ tab: t.id }),
+      style: 'height: 38px; padding: 0 17px; border-radius: 11px; font-size: 12.5px; letter-spacing: .04em; font-family: inherit;'
+        + (t.id === tab
+          ? ' background: ' + accent + '; border: 1px solid ' + accent + '; color: #07201F; font-weight: 600;'
+          : ' background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.11); color: #A2B0B2;')
+    }));
+
+    const all = catalog;
+
+    const filledSoon = all
+      .map((c) => ({ ...c, pctNum: parseInt(c.pct, 10) }))
+      .sort((x, y) => y.pctNum - x.pctNum)
+      .slice(0, 4)
+      .map((c) => ({
+        ...c,
+        barInk: c.pctNum >= 90 ? accent : 'rgba(255,255,255,.34)',
+        leftInk: c.pctNum >= 90 ? accent : '#DCE5E6',
+        art: this.villa(c.sym.length * 613 + c.price.length * 71, c.kind, accent),
+        bg: 'linear-gradient(170deg, #123034 0%, #0C2124 52%, #060C0D 100%)'
+      }));
+
+    const leaders = all
+      .map((c) => {
+        const up = c.chg >= 0;
+        return {
+          ...c,
+          up: up,
+          art: this.villa(c.sym.length * 613 + c.price.length * 71, c.kind, accent),
+          change: (up ? '+' : '') + c.chg.toFixed(1) + '%',
+          changeInk: up ? accent : '#818F92',
+          barW: Math.round((Math.abs(c.chg) / 12.4) * 100) + '%',
+          barInk: up ? accent : 'rgba(255,255,255,.22)'
+        };
+      })
+      .sort((x, y) => y.chg - x.chg)
+      .slice(0, 8)
+      .map((c, i) => ({ ...c, rank: String(i + 1).padStart(2, '0') }));
+
+    const matching = all
+      .filter((c) => tab === 'all' || c.kind === tab)
+      .map((c) => ({ ...c, bg: 'linear-gradient(170deg, #123034 0%, #0C2124 52%, #060C0D 100%)', art: this.villa(c.sym.length * 613 + c.price.length * 71, c.kind, accent) }));
+    // the grid opens on the first 12 of the filter; the rest is one tap away
+    const showAll = this.state.showAll;
+    const listings = showAll ? matching : matching.slice(0, 12);
+    const hidden = matching.length - listings.length;
+
+    const tableRows = matching.slice(0, 10).map((c) => ({
+      name: c.name, sym: c.sym, price: c.price, sponsor: c.sponsor,
+      type: c.type.charAt(0) + c.type.slice(1).toLowerCase(),
+      state: parseInt(c.pct, 10) >= 90 ? 'CLOSING · ' + c.pct + ' FUNDED' : 'OPEN · ' + c.pct + ' FUNDED',
+      stateColor: parseInt(c.pct, 10) >= 90 ? accent : '#91A0A2',
+      swatch: 'linear-gradient(140deg,#1A3A3B,#0B201F)'
+    }));
+
+    const presets = [100, 500, 2500, 10000].map((v) => ({
+      label: v >= 1000 ? '$' + (v / 1000) + 'k' : '$' + v,
+      pick: () => this.setState({ amount: v }),
+      style: 'height: 32px; padding: 0 14px; border-radius: 11px; font-size: 12px; letter-spacing: .04em;'
+        + (v === amount
+          ? ' background: ' + accent + '; border: 1px solid ' + accent + '; color: #07201F; font-weight: 600;'
+          : ' background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.11); color: #91A0A2;')
+    }));
+
+    const sorts = ['Net yield', 'Newest', 'Price', 'Funded %'];
+    const tokenCount = Math.floor(amount / 14.2);
+
+    return {
+      accent, nav, presets, trending: trendingRail, featured, listings, tabs, filledSoon, leaders,
+      whyArt: this.villa(7731, 'estate', accent),
+      whyUs: [
+        { title: 'Start at one token', sub: 'Buy $8.60 of a villa or $86,000 — the deed splits either way.',
+          icon: 'M12 3v18M16.5 7.5c-.8-1.4-2.4-2-4.5-2-2.5 0-4 1-4 2.8 0 4 8.5 2 8.5 6 0 1.9-1.7 3-4.5 3-2.2 0-3.8-.7-4.6-2.2' },
+        { title: 'Rent every Friday', sub: 'Net nightly income lands in your wallet weekly, not yearly.',
+          icon: 'M3 7h18v12H3zM3 11h18M8 15h4' },
+        { title: 'Leave when you want', sub: 'Sell your tokens on the DEX instead of waiting years for a sale.',
+          icon: 'M4 8h13M14 5l3 3-3 3M20 16H7M10 13l-3 3 3 3' }
+      ],
+      investTicks: invest,
+      sideStats: [
+        { label: 'DIVIDENDS PAID OUT', value: '$9.31M', sub: 'to holders since the first villa closed', still: true },
+        { label: 'UNIQUE INVESTORS', sub: 'distinct wallets holding villa tokens', ticks: investors }
+      ],
+      isExplore: this.state.nav === 'explore',
+      isMarket: this.state.nav === 'market',
+      count: matching.length,
+      moreLabel: showAll ? 'Show fewer' : 'Show all ' + matching.length + ' listings',
+      hasMore: hidden > 0 || showAll,
+      toggleAll: () => this.setState({ showAll: !showAll }),
+      amount: '$' + amount.toLocaleString('en-US') + '.00',
+      amtInk: amount ? '#DCE5E6' : '#5B6769',
+      tokens: tokenCount.toLocaleString('en-US'),
+      ownership: ((tokenCount / 155000) * 100).toFixed(3) + '%',
+      sortLabel: sorts[this.state.sort],
+      cycleSort: () => this.setState({ sort: (this.state.sort + 1) % sorts.length }),
+      toggleLive: () => this.setState({ live: !this.state.live }),
+      liveEdge: this.state.live ? accent : 'rgba(255,255,255,.22)',
+      liveFill: this.state.live ? accent : 'transparent',
+      liveTick: this.state.live ? '#05090A' : 'transparent',
+
+      feed,
+      side: [
+        { sym: 'TANAH', name: 'Tanah Lembut', sponsor: 'BUMI GROUP', tag: 'HIGH DEMAND', tagColor: '#B4C2C4',
+          blurb: 'Five-bedroom compound two rice fields back from Pererenan beach. Booked 84 percent of nights last season.',
+          raised: '$1.9M / 2.6M', pct: '73%', art: this.villa(4471, 'estate', accent), bg: 'linear-gradient(170deg, #123034 0%, #0C2124 52%, #060C0D 100%)' },
+        { sym: 'BANYU', name: 'Banyu Pool Suites', sponsor: 'OMBAK LIVING', tag: 'CLOSING 48H', tagColor: '#B4C2C4',
+          blurb: 'Twelve pool suites off Petitenget, managed by the operator running three Seminyak properties.',
+          raised: '$3.4M / 3.6M', pct: '94%', art: this.villa(9902, 'resort', accent), bg: 'linear-gradient(170deg, #123034 0%, #0C2124 52%, #060C0D 100%)' }
+      ],
+      cols: ['PROPERTY', 'TYPE', 'SPONSOR', 'TOKEN PRICE', 'STATUS', 'LINKS'],
+      rows: tableRows
+    };
+  }
+}
+</script>
+</body>
+</html>
