@@ -2,21 +2,32 @@
    Muted turquoise is used sparingly: primary actions, active nav, progress
    fills, status dots. Everything else is a neutral ramp on near-black. */
 :root {
+  /* Light theme. Ink ramp and accent-text are contrast-checked against both
+     the page (#f5f7f6) and panels (#fff): ink-4 is the lightest that still
+     passes AA for body copy, ink-5 is UI/large only. The brand turquoise
+     stays a fill — at 1.9:1 on white it can never carry text, so anything
+     written in the accent uses --accent-text. */
   --accent: #6cc1c6;
-  --accent-ink: #07201f;
-  --bg: #05090a;
-  --panel: rgba(255, 255, 255, 0.035);
-  --panel-solid: #0b1416;
-  --line: rgba(255, 255, 255, 0.11);
-  --line-soft: rgba(255, 255, 255, 0.07);
-  --ink: #dce5e6;
-  --ink-2: #b4c2c4;
-  --ink-3: #91a0a2;
-  --ink-4: #697577;
-  --ink-5: #586264;
-  --card-art: linear-gradient(170deg, #123034 0%, #0c2124 52%, #060c0d 100%);
+  --accent-text: #0c6a71;
+  --accent-ink: #06231f;
+  --bg: #f5f7f6;
+  --panel: #ffffff;
+  --panel-solid: #ffffff;
+  --line: rgba(15, 30, 31, 0.13);
+  --line-soft: rgba(15, 30, 31, 0.08);
+  --ink: #0f1e1f;
+  --ink-2: #2b3c3d;
+  --ink-3: #4a5c5d;
+  --ink-4: #5f7172;
+  --ink-5: #7d8d8e;
+  --wash: rgba(15, 30, 31, 0.045);
+  --wash-2: rgba(15, 30, 31, 0.08);
+  /* Pills sitting on photography stay dark whatever the theme — the art is
+     full-bleed daylight and a light chip on it is unreadable. */
+  --scrim: var(--scrim);
+  --card-art: linear-gradient(170deg, #dfeaea 0%, #eef3f2 52%, #f5f7f6 100%);
   --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
-  color-scheme: dark;
+  color-scheme: light;
 }
 
 * { box-sizing: border-box; }
@@ -38,25 +49,25 @@ img { max-width: 100%; display: block; }
   position: sticky; top: 0; z-index: 40;
   display: flex; align-items: center; gap: 28px;
   height: 64px; padding: 0 26px;
-  background: rgba(5, 9, 10, 0.88);
+  background: rgba(245, 247, 246, 0.88);
   backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--line);
 }
 .brand { font-weight: 700; letter-spacing: -0.02em; font-size: 17px; }
-.brand span { color: var(--accent); }
+.brand span { color: var(--accent-text); }
 .nav { display: flex; gap: 4px; }
 .nav a {
   padding: 8px 14px; border-radius: 10px;
   font-size: 13.5px; color: var(--ink-3);
 }
-.nav a:hover { background: rgba(255, 255, 255, 0.06); color: var(--ink); }
+.nav a:hover { background: var(--wash); color: var(--ink); }
 .nav a[aria-current="page"] { background: var(--accent); color: var(--accent-ink); font-weight: 600; }
 .spacer { flex: 1; }
 
 .wallet {
   display: flex; align-items: center; gap: 10px;
   height: 38px; padding: 0 14px; border-radius: 11px;
-  border: 1px solid var(--line); background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--line); background: var(--wash);
   font-family: var(--mono); font-size: 12px; color: var(--ink-2);
 }
 .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); }
@@ -75,11 +86,11 @@ img { max-width: 100%; display: block; }
 .navitem:focus-within .navmenu { opacity: 1; visibility: visible; transform: translateY(0); }
 .navmenu-card {
   padding: 7px; border: 1px solid var(--line); border-radius: 14px;
-  background: rgba(12, 20, 21, 0.92); backdrop-filter: blur(30px) saturate(150%);
-  box-shadow: 0 24px 60px -30px rgba(0, 0, 0, 0.9);
+  background: rgba(255, 255, 255, 0.96); backdrop-filter: blur(30px) saturate(150%);
+  box-shadow: 0 18px 44px -22px rgba(15, 30, 31, 0.22);
 }
 .navlink { display: block; padding: 10px 12px; border-radius: 10px; }
-.navlink:hover { background: rgba(255, 255, 255, 0.07); }
+.navlink:hover { background: var(--wash-2); }
 .navlink-t { display: block; font-size: 13px; color: var(--ink); }
 .navlink-s {
   display: block; margin-top: 3px;
@@ -96,7 +107,7 @@ img { max-width: 100%; display: block; }
   display: flex; align-items: center; gap: 9px; height: 38px; padding: 0 8px 0 13px;
   border: 1px solid var(--line); border-radius: 12px; background: var(--panel);
 }
-.rent-chip:hover { border-color: rgba(108, 193, 198, 0.4); }
+.rent-chip:hover { border-color: rgba(12, 106, 113, 0.4); }
 .rent-label { font-size: 10.5px; letter-spacing: 0.12em; color: var(--ink-4); }
 .rent-v { font-size: 13px; color: var(--ink); }
 .rent-claim {
@@ -113,7 +124,7 @@ img { max-width: 100%; display: block; }
   padding-left: 30px; border-left: 1px solid var(--line-soft);
 }
 .feed-head { display: flex; align-items: center; gap: 9px; padding-bottom: 12px; }
-.feed-head .mono { font-size: 10px; letter-spacing: 0.17em; color: var(--accent); }
+.feed-head .mono { font-size: 10px; letter-spacing: 0.17em; color: var(--accent-text); }
 .feed-wrap {
   height: 102px; overflow: hidden;
   -webkit-mask-image: linear-gradient(180deg, transparent, #000 9%, #000 91%, transparent);
@@ -127,7 +138,7 @@ img { max-width: 100%; display: block; }
 }
 .feed-row b { color: var(--ink-2); font-weight: 500; }
 .feed-row i { font-style: normal; color: var(--ink); }
-.feed-row em { font-style: normal; color: var(--accent); font-size: 11.5px; }
+.feed-row em { font-style: normal; color: var(--accent-text); font-size: 11.5px; }
 .feed-spacer { flex: 1; }
 @keyframes feedpush {
   0%, 10% { transform: translateY(0); }
@@ -157,7 +168,7 @@ main { max-width: 1440px; margin: 0 auto; padding: 0 26px 64px; }
 }
 .sec .spacer { flex: 1; }
 .link { font-family: var(--mono); font-size: 11.5px; color: var(--ink-3); letter-spacing: 0.06em; }
-.link:hover { color: var(--accent); }
+.link:hover { color: var(--accent-text); }
 
 /* ---------- stat header ---------- */
 .stats { display: grid; grid-template-columns: 1.6fr 1fr; gap: 16px; padding-top: 30px; }
@@ -194,17 +205,17 @@ main { max-width: 1440px; margin: 0 auto; padding: 0 26px 64px; }
 .btn-primary { background: var(--accent); color: var(--accent-ink); }
 .btn-primary:hover { filter: brightness(1.08); }
 .btn-ghost {
-  background: rgba(255, 255, 255, 0.06); border-color: var(--line); color: var(--ink);
+  background: var(--wash); border-color: var(--line); color: var(--ink);
   font-weight: 400;
 }
-.btn-ghost:hover { background: rgba(255, 255, 255, 0.1); }
+.btn-ghost:hover { background: var(--wash-2); }
 .btn-sm { height: 36px; padding: 0 14px; font-size: 12px; }
 
 /* ---------- filter chips ---------- */
 .chips { display: flex; gap: 9px; flex-wrap: wrap; align-items: center; }
 .chip {
   height: 38px; padding: 0 17px; border-radius: 11px; cursor: pointer;
-  background: rgba(255, 255, 255, 0.06); border: 1px solid var(--line);
+  background: var(--wash); border: 1px solid var(--line);
   color: var(--ink-3); font: 400 12.5px/1 var(--mono); letter-spacing: 0.04em;
 }
 .chip[aria-pressed="true"] {
@@ -220,19 +231,19 @@ main { max-width: 1440px; margin: 0 auto; padding: 0 26px 64px; }
   border-radius: 16px; overflow: hidden;
   transition: border-color 0.15s, transform 0.15s;
 }
-a.card:hover { border-color: rgba(108, 193, 198, 0.45); transform: translateY(-2px); }
+a.card:hover { border-color: rgba(12, 106, 113, 0.45); transform: translateY(-2px); }
 .art { position: relative; flex-shrink: 0; aspect-ratio: 3 / 2; background: var(--card-art); }
 .art img { width: 100%; height: 100%; object-fit: cover; }
 /* keeps bright daylight photography from overpowering the dark shell */
 .art::after {
   content: ""; position: absolute; inset: 0;
-  background: linear-gradient(180deg, rgba(5, 9, 10, 0.22), transparent 38%, rgba(5, 9, 10, 0.45));
+  background: linear-gradient(180deg, rgba(5, 9, 10, 0.16), transparent 34%, rgba(5, 9, 10, 0.5));
 }
 .tag {
   position: absolute; z-index: 2; top: 12px;
   font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em;
   padding: 5px 9px; border-radius: 9px;
-  background: rgba(5, 9, 10, 0.78); color: var(--ink-2);
+  background: var(--scrim); color: var(--ink-2);
 }
 .tag-l { left: 12px; } .tag-r { right: 12px; }
 /* Yield reads as a property of the building, not a table cell — it sits on
@@ -242,14 +253,14 @@ a.card:hover { border-color: rgba(108, 193, 198, 0.45); transform: translateY(-2
    over a bright beach photo. */
 .tag-apy {
   top: auto; bottom: 12px; left: 12px;
-  background: rgba(5, 9, 10, 0.8); color: var(--accent);
+  background: var(--scrim); color: var(--accent);
   letter-spacing: 0.08em; font-weight: 600;
 }
 /* Cards in a row share a height; the footer sits on the baseline whatever
    the name wraps to — margin-top:auto on the actions does the aligning. */
 .card-body {
   flex: 1; display: flex; flex-direction: column;
-  padding: 16px 17px 18px; border-top: 1px solid rgba(255, 255, 255, 0.085);
+  padding: 16px 17px 18px; border-top: 1px solid var(--line-soft);
 }
 .card-name { font-size: 16px; font-weight: 600; letter-spacing: -0.01em; }
 .card-city {
@@ -263,7 +274,7 @@ a.card:hover { border-color: rgba(108, 193, 198, 0.45); transform: translateY(-2
   font-family: var(--mono); font-size: 11px; color: var(--ink-3); margin-top: 16px;
 }
 .bar {
-  height: 5px; border-radius: 999px; background: rgba(255, 255, 255, 0.09);
+  height: 5px; border-radius: 999px; background: var(--wash-2);
   margin-top: 8px; overflow: hidden;
 }
 .bar i { display: block; height: 100%; background: var(--accent); }
@@ -287,14 +298,14 @@ a.card:hover { border-color: rgba(108, 193, 198, 0.45); transform: translateY(-2
   font-family: var(--mono); font-size: 13px; color: var(--ink-2);
 }
 .table tr:last-child td { border-bottom: 0; }
-.table tbody tr:hover { background: rgba(255, 255, 255, 0.03); }
+.table tbody tr:hover { background: var(--wash); }
 .table .name { font-family: inherit; font-size: 14px; color: var(--ink); font-weight: 500; }
 .swatch {
   width: 34px; height: 34px; border-radius: 10px; object-fit: cover;
   border: 1px solid var(--line);
 }
 .cell { display: flex; align-items: center; gap: 12px; }
-.up { color: var(--accent); }
+.up { color: var(--accent-text); }
 .down { color: var(--ink-3); }
 .num { text-align: right; }
 
@@ -304,13 +315,13 @@ a.card:hover { border-color: rgba(108, 193, 198, 0.45); transform: translateY(-2
 .feature-art img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .feature-art::after {
   content: ""; position: absolute; inset: 0;
-  background: linear-gradient(90deg, transparent 40%, rgba(5, 9, 10, 0.55));
+  background: linear-gradient(90deg, transparent 42%, rgba(255, 255, 255, 0.92));
 }
 .feature-body { padding: 34px 34px 30px; }
 .pill {
   display: inline-flex; align-items: center; gap: 7px; height: 28px; padding: 0 12px;
-  border-radius: 999px; background: rgba(108, 193, 198, 0.14);
-  font: 400 10.5px/1 var(--mono); letter-spacing: 0.12em; color: var(--accent);
+  border-radius: 999px; background: rgba(108, 193, 198, 0.18);
+  font: 400 10.5px/1 var(--mono); letter-spacing: 0.12em; color: var(--accent-text);
 }
 
 /* ---------- detail page ---------- */
@@ -325,7 +336,7 @@ a.card:hover { border-color: rgba(108, 193, 198, 0.45); transform: translateY(-2
 .facts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--line); border-radius: 16px; overflow: hidden; }
 .fact { background: var(--panel-solid); padding: 20px; }
 .fact .v { font-family: var(--mono); font-size: 24px; margin-top: 8px; }
-.prose { padding: 24px; line-height: 1.65; color: rgba(220, 229, 230, 0.82); }
+.prose { padding: 24px; line-height: 1.65; color: var(--ink-2); }
 .specs { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px 28px; padding: 0 24px 24px; }
 .spec-row {
   display: flex; justify-content: space-between; padding: 11px 0;
@@ -337,12 +348,12 @@ a.card:hover { border-color: rgba(108, 193, 198, 0.45); transform: translateY(-2
 .qty { display: flex; align-items: center; gap: 12px; margin-top: 14px; }
 .qty input {
   flex: 1; height: 48px; padding: 0 14px; border-radius: 12px;
-  background: rgba(255, 255, 255, 0.05); border: 1px solid var(--line);
+  background: var(--wash); border: 1px solid var(--line);
   color: var(--ink); font: 400 17px/1 var(--mono);
 }
 .step {
   width: 44px; height: 44px; border-radius: 12px; cursor: pointer;
-  background: rgba(255, 255, 255, 0.06); border: 1px solid var(--line);
+  background: var(--wash); border: 1px solid var(--line);
   color: var(--ink); font-size: 19px;
 }
 .total {
@@ -357,7 +368,7 @@ a.card:hover { border-color: rgba(108, 193, 198, 0.45); transform: translateY(-2
 
 /* rent chart */
 .chart { display: flex; align-items: flex-end; gap: 7px; height: 150px; padding: 24px; }
-.chart div { flex: 1; background: rgba(255, 255, 255, 0.16); border-radius: 3px 3px 0 0; }
+.chart div { flex: 1; background: var(--wash-2); border-radius: 3px 3px 0 0; }
 .chart div:last-child { background: var(--accent); }
 
 /* ---------- portfolio ---------- */
@@ -376,7 +387,7 @@ a.card:hover { border-color: rgba(108, 193, 198, 0.45); transform: translateY(-2
 .why-art img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .why-art::after {
   content: ""; position: absolute; inset: 0;
-  background: linear-gradient(90deg, rgba(5, 9, 10, 0.92), rgba(5, 9, 10, 0.25) 42%, transparent);
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.3) 42%, transparent);
 }
 
 footer {
@@ -421,7 +432,7 @@ footer {
 .apy-inline {
   align-self: flex-start; margin-top: 9px; padding: 4px 8px; border-radius: 8px;
   font-size: 10px; letter-spacing: 0.08em;
-  background: rgba(108, 193, 198, 0.14); color: var(--accent);
+  background: rgba(108, 193, 198, 0.18); color: var(--accent-text);
 }
 /* margin-top:auto keeps the bar on the baseline whatever the name wraps to */
 .compact-foot { margin-top: auto; padding-top: 12px; }

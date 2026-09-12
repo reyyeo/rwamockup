@@ -23,9 +23,9 @@ document.getElementById('trending').innerHTML = trending.map((l, i) => `
         <span class="up">+${l.buys.toLocaleString('en-US')} buyers</span>
         <span class="looking">
           <svg class="eye" width="14" height="14" viewBox="0 0 24 24" fill="none"
-               stroke="var(--accent)" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true">
+               stroke="var(--accent-text)" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true">
             <path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/>
-            <circle cx="12" cy="12" r="2.6" fill="var(--accent)" stroke="none"/>
+            <circle cx="12" cy="12" r="2.6" fill="var(--accent-text)" stroke="none"/>
           </svg>
           ${l.watchers.toLocaleString('en-US')} looking now
         </span>
