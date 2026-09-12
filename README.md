@@ -19,6 +19,17 @@ Live canvas: https://claude.ai/code/artifact/8faf9699-c44c-401f-bd89-8439bc0978f
   HTML/CSS/ES modules, no build step. `cd site && python3 -m http.server
   8000`. See `site/README.md`.
 
+## Working agreement
+
+One shared branch: `claude/web3-real-estate-marketplace-a71x0f`. Both the
+frontend and backend leads commit there — `claude/blissful-curie-euo3b1` is
+merged into it and should not be developed on further.
+
+`site/publish/index.html` is generated from `site/index.html` for the Artifact
+publisher, which supplies its own `<head>`. Regenerate in that direction only:
+rebuilding `site/index.html` from the published page silently drops whatever
+the publisher strips (it has already cost the page its meta description once).
+
 ## Artboards
 
 | File | Screen | Size |
