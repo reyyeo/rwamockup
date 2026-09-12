@@ -138,12 +138,13 @@ main { max-width: 1440px; margin: 0 auto; padding: 0 26px 64px; }
 /* ---------- cards ---------- */
 .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
 .card {
+  display: flex; flex-direction: column;
   background: var(--panel); border: 1px solid var(--line);
   border-radius: 16px; overflow: hidden;
   transition: border-color 0.15s, transform 0.15s;
 }
 a.card:hover { border-color: rgba(108, 193, 198, 0.45); transform: translateY(-2px); }
-.art { position: relative; aspect-ratio: 3 / 2; background: var(--card-art); }
+.art { position: relative; flex-shrink: 0; aspect-ratio: 3 / 2; background: var(--card-art); }
 .art img { width: 100%; height: 100%; object-fit: cover; }
 /* keeps bright daylight photography from overpowering the dark shell */
 .art::after {
@@ -157,7 +158,12 @@ a.card:hover { border-color: rgba(108, 193, 198, 0.45); transform: translateY(-2
   background: rgba(5, 9, 10, 0.78); color: var(--ink-2);
 }
 .tag-l { left: 12px; } .tag-r { right: 12px; }
-.card-body { padding: 16px 17px 18px; border-top: 1px solid rgba(255, 255, 255, 0.085); }
+/* Cards in a row share a height; the footer sits on the baseline whatever
+   the name wraps to — margin-top:auto on the actions does the aligning. */
+.card-body {
+  flex: 1; display: flex; flex-direction: column;
+  padding: 16px 17px 18px; border-top: 1px solid rgba(255, 255, 255, 0.085);
+}
 .card-name { font-size: 16px; font-weight: 600; letter-spacing: -0.01em; }
 .card-city {
   font-family: var(--mono); font-size: 10.5px; color: var(--ink-4);
@@ -174,7 +180,7 @@ a.card:hover { border-color: rgba(108, 193, 198, 0.45); transform: translateY(-2
   margin-top: 8px; overflow: hidden;
 }
 .bar i { display: block; height: 100%; background: var(--accent); }
-.card-actions { display: flex; gap: 10px; margin-top: 18px; }
+.card-actions { display: flex; gap: 10px; margin-top: auto; padding-top: 18px; }
 .card-actions .btn { flex: 1; }
 
 /* horizontal rail (trending) */

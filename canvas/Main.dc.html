@@ -434,7 +434,7 @@
       <span class="mono" style="font-size: 11.5px; color: #697577; letter-spacing: .06em;">VIEW ALL</span>
     </div>
 
-    <div style="display: grid; grid-template-columns: 1.52fr 1fr 1fr; gap: 16px; padding: 0 26px 22px; align-items: start;">
+    <div style="display: grid; grid-template-columns: 1.52fr 1fr 1fr; gap: 16px; padding: 0 26px 22px; align-items: stretch;">
 
       <!-- featured + quick buy -->
       <div class="card panel" style="padding: 18px;">
@@ -449,7 +449,7 @@
               <span class="mono" style="font-size: 10.5px; letter-spacing: .12em; padding: 4px 8px; border-radius: 11px; background: rgba(255,255,255,.07); color: #B4C2C4;">9.4% NET YIELD</span>
             </div>
             <div style="font-size: 25px; font-weight: 700; margin-top: 12px; letter-spacing: -.02em;">Villa Ombak</div>
-            <div class="mono" style="font-size: 12px; color: #818F92; margin-top: 6px; letter-spacing: .04em;">SPONSOR: <span style="color: #B4C2C4;">OMBAK&nbsp;LIVING</span> &nbsp;·&nbsp; CANGGU, BALI &nbsp;·&nbsp; 4 BED · PRIVATE POOL</div>
+            <div class="mono" style="font-size: 12px; color: #818F92; margin-top: 6px; letter-spacing: .04em;">SPONSOR: <span style="color: #B4C2C4;">OMBAK LIVING</span>  ·  CANGGU, BALI  ·  4 BED · PRIVATE POOL</div>
             <div style="display: flex; gap: 28px; margin-top: 18px;">
               <div>
                 <div class="mono" style="font-size: 10px; letter-spacing: .14em; color: #586264;">TOKEN PRICE</div>
@@ -488,16 +488,16 @@
 
       <!-- two side cards -->
       <sc-for list="{{side}}" as="c" hint-placeholder-count="2">
-        <div class="card panel" style="overflow: hidden;">
-          <div class="scan" style="height: 186px; position: relative; background: {{c.bg}};">
+        <div class="card panel" style="overflow: hidden; display: flex; flex-direction: column;">
+          <div class="scan" style="height: 186px; flex-shrink: 0; position: relative; background: {{c.bg}};">
             <span class="mono" style="position: absolute; top: 12px; right: 12px; font-size: 10.5px; letter-spacing: .1em; padding: 4px 8px; border-radius: 11px; background: rgba(10,10,12,.82); color: {{c.tagColor}};">{{c.tag}}</span>
 <img src="{{c.photo}}" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block;">
           </div>
-          <div style="padding: 15px 16px 17px; border-top: 1px solid rgba(255,255,255,.11);">
+          <div style="flex-grow: 1; display: flex; flex-direction: column; padding: 15px 16px 17px; border-top: 1px solid rgba(255,255,255,.11);">
             <div class="mono" style="font-size: 10.5px; letter-spacing: .12em; color: #586264;">SPONSOR: <span style="color: #B4C2C4;">{{c.sponsor}}</span></div>
             <div style="font-size: 17px; font-weight: 700; margin-top: 8px; letter-spacing: -.01em;">{{c.name}} <span class="mono" style="font-size: 12px; font-weight: 400; color: #697577;">({{c.sym}})</span></div>
             <div style="font-size: 12.5px; color: #818F92; margin-top: 6px; line-height: 1.5;">{{c.blurb}}</div>
-            <div style="display: flex; justify-content: space-between; align-items: baseline; margin-top: 14px;">
+            <div style="display: flex; justify-content: space-between; align-items: baseline; margin-top: auto; padding-top: 14px;">
               <span class="mono" style="font-size: 10.5px; letter-spacing: .12em; color: #586264;">RAISED</span>
               <span class="mono" style="font-size: 14px;">{{c.raised}}</span>
             </div>
