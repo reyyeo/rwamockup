@@ -309,6 +309,7 @@
         <sc-for list="{{trending}}" as="t" hint-placeholder-count="10">
           <div class="card panel" style="width: 268px; flex-shrink: 0; overflow: hidden;">
             <div class="scan" style="height: 136px; position: relative; background: {{t.bg}};">
+              <span class="mono" style="position: absolute; bottom: 10px; left: 10px; display: flex; align-items: center; gap: 5px; font-size: 10.5px; letter-spacing: .08em; padding: 5px 9px; border-radius: 9px; background: rgba(5,9,10,.78); color: {{{{accent}}}};"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="{{{{accent}}}}" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17 11 10l4 4 5-6"/><path d="M15 8h5v5"/></svg>{{{{t}.apy}}} APY</span>
               <span class="mono" style="position: absolute; top: 10px; left: 10px; display: flex; align-items: center; justify-content: center; min-width: 26px; height: 26px; padding: 0 7px; border-radius: 9px; background: {{t.rankBg}}; color: {{t.rankInk}}; font-size: 12px; font-weight: 600;">{{t.rank}}</span>
               <span class="mono" style="position: absolute; top: 10px; right: 10px; font-size: 10px; letter-spacing: .1em; padding: 4px 8px; border-radius: 9px; background: rgba(5,9,10,.78); color: #B4C2C4;">{{t.sym}}</span>
 <img src="{{t.photo}}" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block;">
@@ -355,6 +356,7 @@
             <div style="flex-grow: 1; min-width: 0; display: flex; flex-direction: column;">
               <div style="font-size: 14px; font-weight: 600; letter-spacing: -.01em;">{{c.name}}</div>
               <div class="mono" style="font-size: 10px; color: #697577; margin-top: 4px; letter-spacing: .07em;">{{c.city}}</div>
+              <span class="mono" style="align-self: flex-start; margin-top: 9px; font-size: 10px; letter-spacing: .08em; padding: 4px 8px; border-radius: 8px; background: rgba(108,193,198,.14); color: {{accent}};">{{c.apy}} APY</span>
               <div style="flex-grow: 1;"></div>
               <div style="display: flex; align-items: baseline; gap: 7px; margin-top: 12px;">
                 <span class="mono" style="font-size: 20px; letter-spacing: -.025em;">{{c.pct}}</span>
@@ -446,7 +448,7 @@
           <div style="flex-grow: 1; min-width: 0;">
             <div style="display: flex; align-items: center; gap: 10px;">
               <span class="mono" style="font-size: 10.5px; letter-spacing: .12em; padding: 4px 8px; border-radius: 11px; background: rgba(255,255,255,.07); color: #B4C2C4;">OPEN RAISE</span>
-              <span class="mono" style="font-size: 10.5px; letter-spacing: .12em; padding: 4px 8px; border-radius: 11px; background: rgba(255,255,255,.07); color: #B4C2C4;">9.4% NET YIELD</span>
+              <span class="mono" style="font-size: 10.5px; letter-spacing: .12em; padding: 4px 8px; border-radius: 11px; background: rgba(108,193,198,.14); color: {{accent}};">{{featured.apy}} APY</span>
             </div>
             <div style="font-size: 25px; font-weight: 700; margin-top: 12px; letter-spacing: -.02em;">Villa Ombak</div>
             <div class="mono" style="font-size: 12px; color: #818F92; margin-top: 6px; letter-spacing: .04em;">SPONSOR: <span style="color: #B4C2C4;">OMBAK LIVING</span>  ·  CANGGU, BALI  ·  4 BED · PRIVATE POOL</div>
@@ -490,6 +492,7 @@
       <sc-for list="{{side}}" as="c" hint-placeholder-count="2">
         <div class="card panel" style="overflow: hidden; display: flex; flex-direction: column;">
           <div class="scan" style="height: 186px; flex-shrink: 0; position: relative; background: {{c.bg}};">
+            <span class="mono" style="position: absolute; bottom: 12px; left: 12px; display: flex; align-items: center; gap: 5px; font-size: 10.5px; letter-spacing: .08em; padding: 5px 9px; border-radius: 9px; background: rgba(5,9,10,.78); color: {{{{accent}}}};"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="{{{{accent}}}}" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17 11 10l4 4 5-6"/><path d="M15 8h5v5"/></svg>{{{{c}.apy}}} APY</span>
             <span class="mono" style="position: absolute; top: 12px; right: 12px; font-size: 10.5px; letter-spacing: .1em; padding: 4px 8px; border-radius: 11px; background: rgba(10,10,12,.82); color: {{c.tagColor}};">{{c.tag}}</span>
 <img src="{{c.photo}}" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block;">
           </div>
@@ -595,6 +598,7 @@
       <sc-for list="{{listings}}" as="c" hint-placeholder-count="12">
         <div class="card panel" style="overflow: hidden;">
           <div class="scan" style="height: 176px; position: relative; background: {{c.bg}};">
+            <span class="mono" style="position: absolute; bottom: 12px; left: 12px; display: flex; align-items: center; gap: 5px; font-size: 10.5px; letter-spacing: .08em; padding: 5px 9px; border-radius: 9px; background: rgba(5,9,10,.78); color: {{{{accent}}}};"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="{{{{accent}}}}" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17 11 10l4 4 5-6"/><path d="M15 8h5v5"/></svg>{{{{c}.apy}}} APY</span>
             <img src="{{c.photo}}" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block;">
             <span class="mono" style="position: absolute; top: 12px; left: 12px; font-size: 10px; letter-spacing: .1em; padding: 5px 9px; border-radius: 9px; background: rgba(5,9,10,.78); color: #B4C2C4;">{{c.sym}}</span>
             <span class="mono" style="position: absolute; top: 12px; right: 12px; font-size: 10px; letter-spacing: .1em; padding: 5px 9px; border-radius: 9px; background: rgba(5,9,10,.78); color: #B4C2C4;">{{c.type}}</span>
@@ -607,10 +611,7 @@
                 <div class="mono" style="font-size: 10px; letter-spacing: .13em; color: #586264;">PRICE / TOKEN</div>
                 <div class="mono" style="font-size: 18px; margin-top: 5px;">{{c.price}}</div>
               </div>
-              <div>
-                <div class="mono" style="font-size: 10px; letter-spacing: .13em; color: #586264;">NET YIELD</div>
-                <div class="mono" style="font-size: 18px; margin-top: 5px;">{{c.apy}}</div>
-              </div>
+
             </div>
             <div style="margin-top: 16px;">
               <div style="display: flex; justify-content: space-between;" class="mono">
@@ -836,7 +837,7 @@ class Component extends DCLogic {
       }));
     const trendingRail = trending.concat(trending);
 
-    const featured = { photo: HERO.OMBAK, bg: 'linear-gradient(170deg, #123034 0%, #0C2124 52%, #060C0D 100%)' };
+    const featured = { ...catalog.find((c) => c.sym === 'OMBAK'), photo: HERO.OMBAK, bg: 'linear-gradient(170deg, #123034 0%, #0C2124 52%, #060C0D 100%)' };
 
     const events = [
       { who: '0x9F2A…C41D', qty: '812', prop: 'Villa Ombak', ago: '2s ago' },
@@ -965,10 +966,12 @@ class Component extends DCLogic {
 
       feed,
       side: [
-        { sym: 'TANAH', name: 'Tanah Lembut', sponsor: 'BUMI GROUP', tag: 'HIGH DEMAND', tagColor: '#B4C2C4',
+        { ...(catalog.find((c) => c.sym === 'TANAH') || {}),
+          sym: 'TANAH', name: 'Tanah Lembut', sponsor: 'BUMI GROUP', tag: 'HIGH DEMAND', tagColor: '#B4C2C4',
           blurb: 'Five-bedroom compound two rice fields back from Pererenan beach. Booked 84 percent of nights last season.',
           raised: '$1.9M / 2.6M', pct: '73%', photo: PHOTO.TANAH, bg: 'linear-gradient(170deg, #123034 0%, #0C2124 52%, #060C0D 100%)' },
-        { sym: 'BANYU', name: 'Banyu Pool Suites', sponsor: 'OMBAK LIVING', tag: 'CLOSING 48H', tagColor: '#B4C2C4',
+        { ...(catalog.find((c) => c.sym === 'PETIT') || {}),
+          sym: 'BANYU', name: 'Banyu Pool Suites', sponsor: 'OMBAK LIVING', tag: 'CLOSING 48H', tagColor: '#B4C2C4',
           blurb: 'Twelve pool suites off Petitenget, managed by the operator running three Seminyak properties.',
           raised: '$3.4M / 3.6M', pct: '94%', photo: PHOTO.PETIT, bg: 'linear-gradient(170deg, #123034 0%, #0C2124 52%, #060C0D 100%)' }
       ],

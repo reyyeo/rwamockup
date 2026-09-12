@@ -16,6 +16,7 @@ export function card(l) {
       <div class="art">
         <span class="tag tag-l mono">${l.sym}</span>
         <span class="tag tag-r mono">${l.type}</span>
+        <span class="tag tag-apy mono">${l.apy} APY</span>
         <img src="${img(l.sym)}" alt="${l.name}" loading="lazy" width="800" height="533">
       </div>
       <div class="card-body">
@@ -23,7 +24,6 @@ export function card(l) {
         <div class="card-city">${l.city}</div>
         <div class="kv">
           <div><div class="label">Price / token</div><div class="v">${l.price}</div></div>
-          <div><div class="label">Net yield</div><div class="v">${l.apy}</div></div>
         </div>
         <div class="bar-row"><span>${l.pct} funded</span><span>${l.left} left</span></div>
         <div class="bar"><i style="width:${l.pct}"></i></div>
